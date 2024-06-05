@@ -14,4 +14,36 @@ public class Order {
         this.quanity = quanity;
         this.price = price;
     }
+
+    public String getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
+    }
+
+    public String getBookcode() {
+        return bookcode;
+    }
+
+    public void setBookcode(String bookcode) {
+        this.bookcode = bookcode;
+    }
+
+    public int getQuanity() {
+        return quanity;
+    }
+
+    public void setQuanity(int quanity) {
+        this.quanity = quanity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
