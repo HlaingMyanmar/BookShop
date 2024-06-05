@@ -7,4 +7,6 @@ module sspd.bookshop.bookshop {
     exports sspd.bookshop.models;
     exports sspd.bookshop.controllers;
     opens sspd.bookshop.controllers to javafx.fxml;
+    exports sspd.bookshop.DAO;
+    opens sspd.bookshop.DAO to javafx.fxml;
 }

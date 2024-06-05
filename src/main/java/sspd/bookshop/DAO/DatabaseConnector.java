@@ -1,4 +1,4 @@
-package sspd.bookshop.models;
+package sspd.bookshop.DAO;
 
 
 public class DatabaseConnector {
