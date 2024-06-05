@@ -21,7 +21,9 @@ public class Sale {
     }
 
     public int getCuname(){
-
+        return cuname;
     }
+
+    public void setCuname(String )
 
 }
