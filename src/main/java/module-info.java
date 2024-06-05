@@ -10,4 +10,6 @@ module sspd.bookshop.bookshop {
     opens sspd.bookshop.controllers to javafx.fxml;
     exports sspd.bookshop.DAO;
     opens sspd.bookshop.DAO to javafx.fxml;
+    exports sspd.bookshop.Launch;
+    opens sspd.bookshop.Launch to javafx.fxml;
 }

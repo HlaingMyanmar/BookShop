@@ -3,7 +3,6 @@ package sspd.bookshop.databases;
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Book;
-
 import java.sql.Connection;
 import java.util.List;
 
