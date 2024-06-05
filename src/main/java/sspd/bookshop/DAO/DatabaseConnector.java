@@ -14,6 +14,9 @@ public class DatabaseConnector {
 
     private static Connection con =null;
 
+    // using Singleton Design Pattern
+    // place Constructor private modifier
+
     private DatabaseConnector(){
 
         try {
@@ -49,19 +52,24 @@ public class DatabaseConnector {
 
     }
 
+    // using to get DatabaseConnector instance Object
     public static DatabaseConnector getDatabaseConnector(){
 
         if(instance==null){
+
             instance = new DatabaseConnector();
         }
         return instance;
     }
 
+    // using to get Database Connection
     public static Connection getConnect() {
 
         return con;
     }
 
+    // Method Overloading
+    // using to Close Database Connection and PreparedStatement
     public static void getCloseConnection(Connection con,PreparedStatement stmt ){
 
         if(con!=null) {
@@ -69,7 +77,7 @@ public class DatabaseConnector {
             try {
                 con.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
 
@@ -80,11 +88,13 @@ public class DatabaseConnector {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
         }
     }
+
+    // using to Close Database Connection , PreparedStatement and ResultSet
     public static void getCloseConnection(Connection con, PreparedStatement stmt , ResultSet set){
 
         if(con!=null) {
