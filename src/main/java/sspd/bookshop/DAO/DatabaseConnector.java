@@ -12,7 +12,7 @@ public class DatabaseConnector {
 
     private static DatabaseConnector instance = null;
 
-    private Connection con =null;
+    private static Connection con =null;
 
     private DatabaseConnector(){
 
@@ -49,12 +49,17 @@ public class DatabaseConnector {
 
     }
 
-    public DatabaseConnector getDatabaseConnector(){
+    public static DatabaseConnector getDatabaseConnector(){
 
         if(instance==null){
             instance = new DatabaseConnector();
         }
         return instance;
+    }
+
+    public static Connection getConnect() {
+
+        return con;
     }
 
     public static void getCloseConnection(Connection con,PreparedStatement stmt ){
