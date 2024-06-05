@@ -1,3 +1,4 @@
 Bookshop Project 
 JavaFX with PHPAdmin database
-Azul 22
+JDK Azul 22
+Jaspersoft Report System
