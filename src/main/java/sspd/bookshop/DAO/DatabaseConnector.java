@@ -21,9 +21,8 @@ public class DatabaseConnector {
 
         try {
 
-            Class.forName(DB_DRIVER);
 
-            con = DriverManager.getConnection(DB_URL, DB_USER, DB_DRIVER);
+            con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
             if(con!=null) {
 
@@ -35,12 +34,6 @@ public class DatabaseConnector {
 
                 System.out.println("Connetion Not successful");
             }
-
-
-
-        } catch (ClassNotFoundException e) {
-
-            System.out.println("ClassNotFound Error");
 
 
         } catch (SQLException e) {
@@ -58,7 +51,9 @@ public class DatabaseConnector {
         if(instance==null){
 
             instance = new DatabaseConnector();
+
         }
+
         return instance;
     }
 
