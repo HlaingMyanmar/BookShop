@@ -7,6 +7,7 @@ public class Book {
     private int quantity;
     private int price;
 
+
     public Book(String bookname,String bookid,int quantity,int price){
 
         this.bookname = bookname;
