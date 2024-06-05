@@ -6,8 +6,9 @@ public interface DataAccessObject<V> {
 
     List<V> getList();
 
-    void update(V object);
-    void create(V object);
+    void update(V v);
+    void create(V v);
+    void delete(V v);
 
 
 }
