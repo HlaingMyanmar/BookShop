@@ -1,6 +1,7 @@
 module sspd.bookshop.bookshop {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens sspd.bookshop.models to javafx.fxml;
