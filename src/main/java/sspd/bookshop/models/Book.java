@@ -8,7 +8,8 @@ public class Book {
     private int price;
 
 
-    public Book(String bookname,String bookid,int quantity,int price){
+
+    public Book(String bookname, String bookid, int quantity, int price){
 
         this.bookname = bookname;
         this.bookid = bookid;
@@ -48,6 +49,16 @@ public class Book {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookname='" + bookname + '\'' +
+                ", bookid='" + bookid + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 
 

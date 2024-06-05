@@ -6,7 +6,7 @@ import java.sql.*;
 public class DatabaseConnector {
 
     private static final String DB_DRIVER = "con.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/studb";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/bookdb";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
 
