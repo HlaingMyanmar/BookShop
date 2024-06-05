@@ -68,7 +68,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>sspd.bookshop.bookshop/sspd.bookshop.Launch.Launch</mainClass>
+              <mainClass>sspd.bookshop.bookshop/sspd.bookshop.launch.Launch</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

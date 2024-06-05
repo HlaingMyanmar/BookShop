@@ -1,11 +1,13 @@
-package sspd.bookshop.Launch;
+package sspd.bookshop.launch;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sspd.bookshop.DAO.DatabaseConnector;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class Launch extends Application {
     @Override
@@ -18,6 +20,9 @@ public class Launch extends Application {
     }
 
     public static void main(String[] args) {
+
+
+
         launch();
     }
 }
