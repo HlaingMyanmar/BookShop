@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="600.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
@@ -23,17 +24,23 @@
                       <TableColumn prefWidth="148.0" text="Author Name" />
                     </columns>
                   </TableView>
-                  <VBox layoutX="284.0" layoutY="14.0" prefHeight="193.0" prefWidth="304.0" styleClass="pane" stylesheets="@../css/pane1.css">
+                  <VBox layoutX="280.0" layoutY="15.0" prefHeight="193.0" prefWidth="304.0" styleClass="pane" stylesheets="@../css/pane1.css">
                      <children>
                         <TextField editable="false" prefHeight="60.0" prefWidth="282.0" promptText="Author ID">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Pyidaungsu" size="12.0" />
+                           </font>
                         </TextField>
                         <TextField layoutX="11.0" layoutY="11.0" prefHeight="60.0" prefWidth="282.0" promptText="Author Name">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Pyidaungsu" size="12.0" />
+                           </font>
                         </TextField>
                         <HBox prefHeight="74.0" prefWidth="282.0">
                            <VBox.margin>
@@ -64,7 +71,51 @@
     </Tab>
     <Tab text="Category">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="194.0" prefWidth="256.0">
+                     <columns>
+                        <TableColumn prefWidth="111.0" text="Category ID" />
+                        <TableColumn prefWidth="148.0" text="Category Name" />
+                     </columns>
+                  </TableView>
+                  <VBox layoutX="279.0" layoutY="16.0" prefHeight="193.0" prefWidth="304.0" styleClass="pane" stylesheets="@../css/pane1.css">
+                     <children>
+                        <TextField editable="false" prefHeight="60.0" prefWidth="282.0" promptText="Category ID">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField layoutX="11.0" layoutY="11.0" prefHeight="60.0" prefWidth="282.0" promptText="Category Name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox prefHeight="74.0" prefWidth="282.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="87.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Save">
+                                 <HBox.margin>
+                                    <Insets top="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="87.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="117.0" layoutY="25.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="87.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Refresh">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
       </content>
     </Tab>
   </tabs>
