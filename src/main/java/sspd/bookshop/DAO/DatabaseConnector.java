@@ -6,7 +6,7 @@ import java.sql.*;
 public class DatabaseConnector {
 
     private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/bookdb";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/bookshop_db";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
 
@@ -66,7 +66,7 @@ public class DatabaseConnector {
 
         return con;
     }
-    public static void colseConn(Connection con,PreparedStatement stmt ){
+    public static void getCloseConnection(Connection con,PreparedStatement stmt ){
 
         if(con!=null) {
 
@@ -89,7 +89,30 @@ public class DatabaseConnector {
             }
         }
     }
-    public static void colseConn(Connection con,PreparedStatement stmt , ResultSet set){
+    public static void getCloseConnection(Connection con,ResultSet set ){
+
+        if(con!=null) {
+
+            try {
+                con.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+        if(set!=null) {
+            try {
+                set.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    public static void getCloseConnection(Connection con,PreparedStatement stmt , ResultSet set){
 
         if(con!=null) {
 

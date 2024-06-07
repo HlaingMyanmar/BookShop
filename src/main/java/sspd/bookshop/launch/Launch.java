@@ -1,12 +1,8 @@
 package sspd.bookshop.launch;
 
 
-
-
 import javafx.application.Application;
-import sspd.bookshop.DAO.DatabaseConnector;
 
-import java.sql.Connection;
 
 
 
