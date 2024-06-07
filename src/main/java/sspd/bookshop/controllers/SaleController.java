@@ -88,7 +88,7 @@ public class SaleController  implements Initializable {
     private TableView  suppliertable;
 
     @FXML
-    private TextField susearch;
+    private TextField suSearch;
 
 
 
@@ -157,6 +157,56 @@ public class SaleController  implements Initializable {
         suid.setText(getSupplierID());
 
         getFindLoadSupplierData();
+
+        suppliertable.setEditable(true);
+
+        suName.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        suName.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setS_name(value);
+
+                getSupplierRowUpdate();
+
+            }
+
+        });
+
+        suPhone.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        suPhone.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setS_phone(value);
+
+                getSupplierRowUpdate();
+
+            }
+
+        });
+
+        suAddress.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        suAddress.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setS_address(value);
+
+                getSupplierRowUpdate();
+
+            }
+
+        });
 
 
 
@@ -466,6 +516,8 @@ public class SaleController  implements Initializable {
             suid.setText(getSupplierID());
 
             suname.setText("");
+            suphone.setText("");
+            suaddress.setText("");
         }
 
 
@@ -496,7 +548,7 @@ public class SaleController  implements Initializable {
         }
         else {
 
-            return "#ca"+ Integer.toString(supplierList  .size()+1);
+            return "#su"+ Integer.toString(supplierList  .size()+1);
 
         }
 
@@ -524,7 +576,7 @@ public class SaleController  implements Initializable {
         FilteredList<Supplier> filteredData = new FilteredList<>(observableList, b -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
-        susearch.textProperty().addListener((observable, oldValue, newValue) -> {
+        suSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(filter -> {
                 // If filter text is empty, display all persons.
 

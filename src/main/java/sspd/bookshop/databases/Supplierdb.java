@@ -2,7 +2,6 @@ package sspd.bookshop.databases;
 
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
-import sspd.bookshop.models.Category;
 import sspd.bookshop.models.Supplier;
 
 import javax.swing.*;
@@ -88,7 +87,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
             pst.setString(1,supplier.getS_id());
             pst.setString(2,supplier.getS_name());
             pst.setString(3,supplier.getS_phone());
-            pst.setString(4,supplier.getS_address());
+            pst.setString(4,supplier.getS_address().toString());
 
             pst.executeUpdate();
 
