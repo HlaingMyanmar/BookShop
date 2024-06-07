@@ -1,4 +1,4 @@
 package sspd.bookshop.controllers;
 
-public class AuthorController {
+public class SaleController {
 }
