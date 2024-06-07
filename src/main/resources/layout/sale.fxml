@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="822.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="1081.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
   <tabs>
     <Tab text="Sale Lists">
       <content>
@@ -152,8 +152,8 @@
                   </AnchorPane>
                   <TableView layoutX="6.0" layoutY="236.0" prefHeight="290.0" prefWidth="784.0" stylesheets="@../css/table.css">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Item Code" />
-                      <TableColumn prefWidth="238.0" text="Description" />
+                      <TableColumn prefWidth="95.0" text="Item Code" />
+                      <TableColumn prefWidth="218.0" text="Description" />
                         <TableColumn prefWidth="158.0" text="Category" />
                         <TableColumn prefWidth="122.0" text="Author" />
                         <TableColumn prefWidth="40.0" text="Qty" />
@@ -290,8 +290,8 @@
                   </AnchorPane>
                   <TableView layoutX="6.0" layoutY="236.0" prefHeight="300.0" prefWidth="784.0" stylesheets="@../css/table.css">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Item Code" />
-                        <TableColumn prefWidth="238.0" text="Description" />
+                        <TableColumn prefWidth="90.0" text="Item Code" />
+                        <TableColumn prefWidth="223.0" text="Description" />
                         <TableColumn prefWidth="158.0" text="Category" />
                         <TableColumn prefWidth="122.0" text="Author" />
                         <TableColumn prefWidth="40.0" text="Qty" />
@@ -443,130 +443,146 @@
       </Tab>
       <Tab text="Category &amp; Authors &amp; Purchars">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="822.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="625.0" prefWidth="864.0">
                <children>
-                  <TableView fx:id="authortable" layoutX="5.0" layoutY="290.0" prefHeight="205.0" prefWidth="283.0" stylesheets="@../css/PatientMainFormDesign.css">
-                     <columns>
-                        <TableColumn fx:id="auID" prefWidth="72.0" text="Author ID" />
-                        <TableColumn fx:id="auName" prefWidth="210.0" text="Author Name" />
-                     </columns>
-                  </TableView>
-                  <TableView layoutX="321.0" layoutY="229.0" prefHeight="190.0" prefWidth="215.0" stylesheets="@../css/table.css">
-                     <columns>
-                        <TableColumn text="Category ID" />
-                        <TableColumn prefWidth="134.0" text="Category Name" />
-                     </columns>
-                  </TableView>
-                  <HBox layoutX="4.0" layoutY="547.0" prefHeight="55.0" prefWidth="287.0" styleClass="pane" stylesheets="@../css/pane1.css">
-                     <children>
-                        <TextField fx:id="auid" editable="false" prefHeight="32.0" prefWidth="108.0" promptText="Author ID">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <TextField fx:id="auname" prefHeight="32.0" prefWidth="154.0" promptText="Author Name">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <Button layoutX="60.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#savenewAuthor" prefHeight="33.0" prefWidth="56.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Save" />
-                  <Button layoutX="135.0" layoutY="504.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="55.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit" />
-                  <TableView layoutX="3.0" layoutY="2.0" prefHeight="199.0" prefWidth="809.0" stylesheets="@../css/table.css">
-                     <columns>
-                        <TableColumn prefWidth="118.0" text="ID" />
-                        <TableColumn prefWidth="177.0" text="Name" />
-                        <TableColumn prefWidth="154.0" text="Phone" />
-                        <TableColumn prefWidth="359.0" text="Address" />
-                     </columns>
-                  </TableView>
-                  <Separator layoutX="293.0" layoutY="228.0" orientation="VERTICAL" prefHeight="310.0" prefWidth="8.0" />
-                  <HBox layoutX="304.0" layoutY="483.0" prefHeight="55.0" prefWidth="240.0" styleClass="pane" stylesheets="@../css/pane1.css">
-                     <children>
-                        <TextField editable="false" prefHeight="32.0" prefWidth="108.0" promptText="Author ID">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <TextField prefHeight="32.0" prefWidth="166.0" promptText="Author Name">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <Button layoutX="355.0" layoutY="430.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="54.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Save" />
-                  <Button layoutX="424.0" layoutY="430.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="51.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit" />
-                  <VBox layoutX="570.0" layoutY="226.0" prefHeight="314.0" prefWidth="238.0" styleClass="pane" stylesheets="@../css/pane1.css">
-                     <children>
-                        <TextField promptText="Supplier ID">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <TextField layoutX="11.0" layoutY="11.0" promptText="Supplier Name">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <TextField layoutX="11.0" layoutY="36.0" promptText="Phone No.">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <TextArea prefHeight="72.0" prefWidth="216.0" promptText="Address ..  ... ....">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextArea>
-                        <HBox prefHeight="42.0" prefWidth="216.0">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Save">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <Separator layoutX="552.0" layoutY="247.0" orientation="VERTICAL" prefHeight="289.0" prefWidth="6.0" />
-                  <Line endX="709.0" layoutX="104.0" layoutY="221.0" startX="-100.0" />
-                  <TextField fx:id="authorSearch" layoutX="4.0" layoutY="247.0" prefHeight="32.0" prefWidth="286.0" promptText="Search ......">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
+                  <TabPane layoutY="-3.0" prefHeight="628.0" prefWidth="1081.0" stylesheets="@../css/subtabpane.css" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Supplier">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutX="6.0" layoutY="69.0" prefHeight="470.0" prefWidth="590.0" stylesheets="@../css/table.css">
+                                       <columns>
+                                          <TableColumn prefWidth="71.0" text="ID" />
+                                          <TableColumn prefWidth="140.0" text="Name" />
+                                          <TableColumn prefWidth="138.0" text="Phone" />
+                                          <TableColumn prefWidth="225.0" text="Address" />
+                                       </columns>
+                                    </TableView>
+                                    <VBox layoutX="606.0" layoutY="14.0" prefHeight="539.0" prefWidth="238.0" styleClass="pane" stylesheets="@../css/pane1.css">
+                                       <children>
+                                          <TextField promptText="Supplier ID">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="Pyidaungsu" size="12.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="11.0" layoutY="11.0" promptText="Supplier Name">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="Pyidaungsu" size="12.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="11.0" layoutY="36.0" promptText="Phone No.">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="Pyidaungsu" size="12.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextArea prefHeight="210.0" prefWidth="216.0" promptText="Address ..  ... ....">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                          <HBox prefHeight="42.0" prefWidth="216.0">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Save">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit">
+                                                   <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <TextField fx:id="authorSearch1" layoutX="8.0" layoutY="14.0" prefHeight="34.0" prefWidth="581.0" promptText="Search ......" style="-fx-border-color: #0078D7; -fx-border-radius: 10; -fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Pyidaungsu" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Authors &amp; Category">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="871.0">
+                                 <children>
+                                    <TableView fx:id="authortable" layoutX="32.0" layoutY="49.0" prefHeight="334.0" prefWidth="455.0" stylesheets="@../css/table.css">
+                                       <columns>
+                                          <TableColumn fx:id="auID" prefWidth="93.0" text="Author ID" />
+                                          <TableColumn fx:id="auName" prefWidth="361.0" text="Author Name" />
+                                       </columns>
+                                    </TableView>
+                                    <TextField fx:id="authorSearch" layoutX="34.0" layoutY="8.0" prefHeight="43.0" prefWidth="454.0" promptText="Search ......" style="-fx-border-color: #0078D7; -fx-border-radius: 10; -fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Pyidaungsu" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button layoutX="35.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#savenewAuthor" prefHeight="39.0" prefWidth="174.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Author " />
+                                    <TextField fx:id="auid" editable="false" layoutX="37.0" layoutY="398.0" prefHeight="51.0" prefWidth="141.0" promptText="Author ID" styleClass="id" stylesheets="@../css/id.css">
+                                       <font>
+                                          <Font name="Pyidaungsu Bold" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="auname" layoutX="38.0" layoutY="460.0" prefHeight="39.0" prefWidth="444.0" promptText="Author Name">
+                                       <font>
+                                          <Font name="Pyidaungsu" size="13.0" />
+                                       </font>
+                                    </TextField>
+                                    <TableView layoutX="613.0" layoutY="50.0" prefHeight="314.0" prefWidth="455.0" stylesheets="@../css/table.css">
+                                       <columns>
+                                          <TableColumn prefWidth="98.0" text="Category ID" />
+                                          <TableColumn prefWidth="349.0" text="Category Name" />
+                                       </columns>
+                                    </TableView>
+                                    <TextField fx:id="categorySearch" layoutX="613.0" layoutY="8.0" prefHeight="42.0" prefWidth="454.0" promptText="Search ......" styleClass="search" stylesheets="@../css/search.css">
+                                       <font>
+                                          <Font name="Pyidaungsu" size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button layoutX="613.0" layoutY="509.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="175.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Category" />
+                                    <TextField editable="false" layoutX="613.0" layoutY="398.0" prefHeight="51.0" prefWidth="141.0" promptText="Category ID" styleClass="id" stylesheets="@../css/id.css">
+                                       <font>
+                                          <Font name="Pyidaungsu Bold" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField layoutX="613.0" layoutY="459.0" prefHeight="41.0" prefWidth="350.0" promptText="Category Name">
+                                       <font>
+                                          <Font name="Pyidaungsu" size="13.0" />
+                                       </font>
+                                    </TextField>
+                                    <Separator layoutX="552.0" layoutY="8.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="12.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
                </children>
             </AnchorPane>
          </content>
@@ -647,8 +663,8 @@
                   </AnchorPane>
                   <TableView layoutX="6.0" layoutY="236.0" prefHeight="292.0" prefWidth="784.0" stylesheets="@../css/table.css">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Item Code" />
-                        <TableColumn prefWidth="238.0" text="Description" />
+                        <TableColumn prefWidth="83.0" text="Item Code" />
+                        <TableColumn prefWidth="230.0" text="Description" />
                         <TableColumn prefWidth="158.0" text="Category" />
                         <TableColumn prefWidth="122.0" text="Author" />
                         <TableColumn prefWidth="40.0" text="Qty" />

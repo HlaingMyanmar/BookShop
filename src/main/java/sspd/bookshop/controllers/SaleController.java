@@ -47,7 +47,8 @@ public class SaleController  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        // Author
+       // ->>> Author Set <<<<<-
+
        auid.setText(getAuthorID());
 
        getIniAuthorTable();
@@ -72,7 +73,12 @@ public class SaleController  implements Initializable {
         });
 
 
+       // ->>> Author Set Close <<<<-
+
+
     }
+
+    // ->>> Author Set <<<-
 
     @FXML
     void savenewAuthor(MouseEvent event) {
@@ -213,4 +219,9 @@ public class SaleController  implements Initializable {
         // 5. Add sorted (and filtered) data to the table.
         authortable.setItems(sortedData);
     }
+
+    // ->>> Author Set Close <<<-
+
+
+
 }
