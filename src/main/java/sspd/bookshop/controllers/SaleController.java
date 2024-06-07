@@ -1,7 +1,5 @@
 package sspd.bookshop.controllers;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,23 +10,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 import sspd.bookshop.databases.Authordb;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.databases.Supplierdb;
 import sspd.bookshop.models.Author;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Category;
 import sspd.bookshop.models.Supplier;
+import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SaleController  implements Initializable {
+public class SaleController extends Deliver implements Initializable  {
 
 
     @FXML
@@ -101,6 +100,51 @@ public class SaleController  implements Initializable {
 
     @FXML
     private TableView  booktable;
+
+    @FXML
+    private TableColumn<Book, String> bAuthor;
+
+    @FXML
+    private TableColumn<Book, String> bCategory;
+
+    @FXML
+    private TableColumn<Book, String> bCode;
+
+    @FXML
+    private TableColumn<Book, String> bDescription;
+
+    @FXML
+    private TableColumn<Book, String> bPrice;
+
+    @FXML
+    private TableColumn<Book, String> bQty;
+
+    @FXML
+    private ComboBox<String> bauthor;
+
+    @FXML
+    private ComboBox<String> bcategory;
+
+    @FXML
+    private ComboBox<String> searchAuthor;
+
+    @FXML
+    private ComboBox<String> searchCategory;
+
+    @FXML
+    private TextField bcode;
+
+    @FXML
+    private TextField bdescription;
+
+    @FXML
+    private TextField bprice;
+
+    @FXML
+    private TextField bqty;
+
+    @FXML
+    private ImageView filter;
 
 
 
@@ -252,6 +296,13 @@ public class SaleController  implements Initializable {
         });
 
         // HidePane Close <<<<<<<
+
+
+
+        bcategory.setItems(getCategoryNameList());
+
+        searchCategory.setItems(getCategoryNameList());
+
 
 
 
@@ -677,6 +728,19 @@ public class SaleController  implements Initializable {
         supplierdb.update(supplierupate);
 
     }
+
+
+    @FXML
+    void filterAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void saveNewBook(KeyEvent event) {
+
+    }
+
+
 
 
 

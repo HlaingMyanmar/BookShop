@@ -350,16 +350,16 @@
                <children>
                   <TableView fx:id="booktable" layoutX="13.0" layoutY="47.0" prefHeight="398.0" prefWidth="1047.0" stylesheets="@../css/table.css">
                      <columns>
-                        <TableColumn prefWidth="110.0" text="Item Code" />
-                        <TableColumn prefWidth="424.0" text="Description" />
-                        <TableColumn prefWidth="141.0" text="Category" />
-                        <TableColumn prefWidth="158.0" text="Author" />
-                        <TableColumn prefWidth="76.0" text="Qty" />
-                        <TableColumn prefWidth="134.0" text="Price" />
+                        <TableColumn fx:id="bCode" prefWidth="110.0" text="Item Code" />
+                        <TableColumn fx:id="bDescription" prefWidth="424.0" text="Description" />
+                        <TableColumn fx:id="bCategory" prefWidth="141.0" text="Category" />
+                        <TableColumn fx:id="bAuthor" prefWidth="158.0" text="Author" />
+                        <TableColumn fx:id="bQty" prefWidth="76.0" text="Qty" />
+                        <TableColumn fx:id="bPrice" prefWidth="134.0" text="Price" />
                      </columns>
                   </TableView>
-                  <ComboBox layoutX="13.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Category" />
-                  <TextField layoutX="474.0" layoutY="10.0" prefHeight="32.0" prefWidth="270.0" promptText="Search . ..................................">
+                  <ComboBox fx:id="searchCategory" layoutX="13.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Category" />
+                  <TextField fx:id="searchBox" layoutX="474.0" layoutY="10.0" prefHeight="32.0" prefWidth="270.0" promptText="Search . ..................................">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
@@ -369,15 +369,15 @@
                         <Image url="@../image/find.png" />
                      </image>
                   </ImageView>
-                  <ComboBox layoutX="223.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" />
-                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="430.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                  <ComboBox fx:id="searchAuthor" layoutX="223.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" />
+                  <ImageView fx:id="filter" fitHeight="38.0" fitWidth="54.0" layoutX="430.0" layoutY="7.0" onMouseClicked="#filterAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
                   <AnchorPane fx:id="hidePane" layoutX="11.0" layoutY="476.0" prefHeight="137.0" prefWidth="1055.0" styleClass="pane" stylesheets="@../css/pane1.css">
                      <children>
-                        <TextField layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="106.0" promptText="Item Code" styleClass="id" stylesheets="@../css/id.css">
+                        <TextField fx:id="bcode" layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="106.0" promptText="Item Code" styleClass="id" stylesheets="@../css/id.css">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
@@ -387,12 +387,12 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="503.0" layoutY="33.0" prefHeight="32.0" prefWidth="291.0" promptText="Description">
+                        <TextField fx:id="bdescription" layoutX="503.0" layoutY="33.0" prefHeight="32.0" prefWidth="291.0" promptText="Description">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="881.0" layoutY="31.0" prefHeight="32.0" prefWidth="89.0" promptText="Price">
+                        <TextField fx:id="bprice" layoutX="881.0" layoutY="31.0" prefHeight="32.0" prefWidth="89.0" promptText="Price">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
@@ -417,7 +417,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="804.0" layoutY="32.0" prefHeight="32.0" prefWidth="66.0" promptText="Qty">
+                        <TextField fx:id="bqty" layoutX="804.0" layoutY="32.0" prefHeight="32.0" prefWidth="66.0" promptText="Qty">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
@@ -427,12 +427,12 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="124.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Category" />
-                        <ComboBox layoutX="314.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Authors" />
-                        <Button layoutX="9.0" layoutY="88.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="97.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
+                        <ComboBox fx:id="bcategory" layoutX="124.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Category" />
+                        <ComboBox fx:id="bauthor" layoutX="314.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Authors" />
+                        <Button layoutX="9.0" layoutY="88.0" mnemonicParsing="false" onKeyPressed="#saveNewBook" prefHeight="31.0" prefWidth="97.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
                      </children>
                   </AnchorPane>
-                  <Button fx:id="showAction" layoutX="828.0" layoutY="11.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Show" />
+                  <Button fx:id="showAction" layoutX="828.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="232.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Book" />
                </children>
             </AnchorPane>
          </content>
