@@ -339,7 +339,8 @@ public class SaleController extends Deliver implements Initializable  {
 
         authordb.create(author);
 
-        getLoadAuthorData();
+        getFindLoadAuthorData();
+
         auid.setText(getAuthorID());
 
         auname.setText("");
@@ -347,16 +348,7 @@ public class SaleController extends Deliver implements Initializable  {
 
     }
 
-    private void getLoadAuthorData(){
 
-        Authordb authordb = new Authordb();
-        List<Author> authorList = authordb.getList();
-
-        authortable.getItems().setAll(authorList);
-
-
-
-    }
 
     private void getauthorRowUpdate(){
 
@@ -393,6 +385,7 @@ public class SaleController extends Deliver implements Initializable  {
 
             }
             else {
+
 
                 return "#au"+ Integer.toString(authorList.size()+1);
 
@@ -596,6 +589,9 @@ public class SaleController extends Deliver implements Initializable  {
 
     // ->>>> Category Set Close <<<<-
 
+
+    // ->>>> Supplier Set Open <<<<<
+
     @FXML
     void savenewSupplier(MouseEvent event) {
 
@@ -732,6 +728,32 @@ public class SaleController extends Deliver implements Initializable  {
         Supplierdb supplierdb = new Supplierdb();
 
         supplierdb.update(supplierupate);
+
+    }
+
+
+
+    // ->>>> Supplier Set Close <<<<<
+
+    private String getBookID(){
+
+        String defaultid = "#bo1";
+
+        Supplierdb supplierdb  = new Supplierdb();
+        List<Supplier> supplierList = supplierdb .getList();
+
+        if(supplierList  .size()==0){
+
+            return defaultid;
+
+        }
+        else {
+
+            return "#su"+ Integer.toString(supplierList  .size()+1);
+
+        }
+
+
 
     }
 

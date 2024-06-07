@@ -14,4 +14,6 @@ public interface GenerateResult {
     String getAuthorCode(String item);
 
 
+
+
 }

@@ -26,7 +26,7 @@ public class Authordb implements DataAccessObject<Author> {
 
         Connection con = DatabaseConnector.getInstance().getConn();
 
-        String sql = "SELECT * FROM author ORDER by aid desc ";
+        String sql = "SELECT * FROM `author` ORDER BY cast(SubString(aid,4) as UNSIGNED) DESC ";
 
         ResultSet rs = null;
 

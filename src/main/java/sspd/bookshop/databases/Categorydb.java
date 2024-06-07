@@ -19,7 +19,7 @@ public class Categorydb implements DataAccessObject<Category> {
     @Override
     public List<Category> getList() {
 
-        String sql = "SELECT * FROM category ORDER by cid desc ";
+        String sql = "SELECT * FROM category ORDER by cast(SubString(cid,4) as UNSIGNED) DESC ";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 

@@ -20,7 +20,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
     public List<Supplier> getList() {
 
 
-        String sql = "SELECT * FROM supplier order BY  suid desc";
+        String sql = "SELECT * FROM supplier ORDER by cast(SubString(suid,4) as UNSIGNED) DESC";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
