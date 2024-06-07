@@ -7,7 +7,11 @@ public interface GenerateResult {
 
     ObservableList<String> getCategoryNameList();
 
+    String getCategoryCode(String item);
+
     ObservableList<String> getAuthorNameList();
+
+    String getAuthorCode(String item);
 
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public  class Deliver implements GenerateResult {
 
-
+    @Override
     public ObservableList<String> getCategoryNameList(){
 
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -31,6 +31,23 @@ public  class Deliver implements GenerateResult {
 
     }
 
+    @Override
+    public String getCategoryCode(String itemname) {
+
+
+        Categorydb categorydb = new Categorydb();
+
+        List<Category> cList = categorydb.getList();
+
+
+        return cList.stream()
+                .filter(c -> c.getCategory_name().equals(itemname))
+                .map(Category::getCategory_id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
     public ObservableList<String> getAuthorNameList(){
 
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -48,6 +65,21 @@ public  class Deliver implements GenerateResult {
         return list;
 
 
+    }
+
+    @Override
+    public String getAuthorCode(String authorname) {
+
+        Authordb db = new Authordb();
+
+        List<Author> cList = db.getList();
+
+
+        return cList.stream()
+                .filter(c -> c.getAuthor_name().equals(authorname))
+                .map(Author::getAuthor_id)
+                .findFirst()
+                .orElse(null);
     }
 
 

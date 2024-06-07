@@ -298,10 +298,16 @@ public class SaleController extends Deliver implements Initializable  {
         // HidePane Close <<<<<<<
 
 
+        // Set Combox Box
 
         bcategory.setItems(getCategoryNameList());
 
         searchCategory.setItems(getCategoryNameList());
+
+        searchAuthor.setItems(getAuthorNameList());
+
+        bauthor.setItems(getAuthorNameList());
+
 
 
 
