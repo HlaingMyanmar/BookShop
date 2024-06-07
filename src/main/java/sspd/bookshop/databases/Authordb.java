@@ -1,5 +1,7 @@
-package sspd.bookshop.DAO;
+package sspd.bookshop.databases;
 
+import sspd.bookshop.DAO.DataAccessObject;
+import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Author;
 
 import javax.swing.*;

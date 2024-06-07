@@ -11,9 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import sspd.bookshop.DAO.Authordb;
+import sspd.bookshop.databases.Authordb;
 import sspd.bookshop.models.Author;
 
 import javax.swing.*;
@@ -221,6 +220,9 @@ public class SaleController  implements Initializable {
     }
 
     // ->>> Author Set Close <<<-
+
+
+
 
 
 
