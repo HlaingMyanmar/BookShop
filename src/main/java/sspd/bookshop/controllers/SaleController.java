@@ -271,23 +271,26 @@ public class SaleController extends Deliver implements Initializable  {
         // HidePane
 
         hidePane.setVisible(false);
-        booktable.setPrefHeight(572);
-        booktable.setPrefWidth(1047);
+        booktable.setLayoutY(57);
+
 
         showAction.setOnAction(actionEvent -> {
 
             if(hidePane.isVisible()){
 
                 hidePane.setVisible(false);
-                booktable.setPrefHeight(572);
-                booktable.setPrefWidth(1047);
+
+                booktable.setLayoutY(57);
+
+
             }
             else
             {
 
                 hidePane.setVisible(true);
-                booktable.setPrefHeight(400);
-                booktable.setPrefWidth(1047);
+                booktable.setLayoutY(213);
+
+
 
             }
 
