@@ -1,14 +1,15 @@
 package sspd.bookshop.models;
 
 public class Supplier {
-    private String s_name;
+
     private String s_id;
+    private String s_name;
     private String s_phone;
     private String s_address;
 
-    public Supplier(String s_name, String s_id, String s_phone, String s_address) {
-        this.s_name = s_name;
+    public Supplier(String s_id, String s_name, String s_phone, String s_address) {
         this.s_id = s_id;
+        this.s_name = s_name;
         this.s_phone = s_phone;
         this.s_address = s_address;
     }

@@ -19,7 +19,7 @@ public class Categorydb implements DataAccessObject<Category> {
     @Override
     public List<Category> getList() {
 
-        String sql = "SELECT * FROM category ORDER by aid desc ";
+        String sql = "SELECT * FROM category ORDER by cid desc ";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -56,7 +56,7 @@ public class Categorydb implements DataAccessObject<Category> {
     public void update(Category category) {
 
 
-        String sql = "UPDATE author SET aname =? WHERE aid=?";
+        String sql = "UPDATE category SET cname=? WHERE cid=?";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -79,7 +79,7 @@ public class Categorydb implements DataAccessObject<Category> {
     @Override
     public void create(Category category) {
 
-        String sql = "INSERT INTO author(aid, aname) VALUES (?,?)";
+        String sql = "INSERT INTO category(cid, cname) VALUES (?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
