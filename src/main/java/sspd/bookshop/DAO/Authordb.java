@@ -17,7 +17,7 @@ public class Authordb implements DataAccessObject<Author> {
 
 
 
-
+    Connection con = DatabaseConnector.getInstance().getConn();
 
     @Override
     public List<Author> getList() {
@@ -66,7 +66,21 @@ public class Authordb implements DataAccessObject<Author> {
     @Override
     public void update(Author author) {
 
-        String sql = "Update ";
+        String sql = "UPDATE author SET aname=? WHERE aid=?";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1,author.getAuthor_name());
+            pst.setString(2,author.getAuthor_id());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Update Successful");
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
 
     }
 

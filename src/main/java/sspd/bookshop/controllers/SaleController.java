@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import sspd.bookshop.DAO.Authordb;
 import sspd.bookshop.models.Author;
@@ -37,10 +38,43 @@ public class SaleController  implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+        // Author
        auid.setText(getAuthorID());
 
        getIniAuthorTable();
        getLoadAuthorData();
+
+       authortable.setEditable(true);
+
+       auName.setCellFactory(TextFieldTableCell.forTableColumn());
+
+       auName.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setAuthor_name(value);
+
+                getauthorRowUpdate();
+
+            }
+
+        });
+
+
+    }
+    private void getauthorRowUpdate(){
+
+        Author author = (Author ) authortable.getSelectionModel().getSelectedItem();
+
+
+        Author authorupate = new  Author(author.getAuthor_id(),author.getAuthor_name());
+
+        Authordb authordb = new Authordb();
+
+        authordb.update(authorupate);
 
     }
 

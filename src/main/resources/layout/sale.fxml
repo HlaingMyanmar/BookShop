@@ -457,7 +457,7 @@
                         <TableColumn prefWidth="134.0" text="Category Name" />
                      </columns>
                   </TableView>
-                  <HBox layoutY="483.0" prefHeight="55.0" prefWidth="287.0" styleClass="pane" stylesheets="@../css/pane1.css">
+                  <HBox layoutX="4.0" layoutY="483.0" prefHeight="55.0" prefWidth="287.0" styleClass="pane" stylesheets="@../css/pane1.css">
                      <children>
                         <TextField fx:id="auid" editable="false" prefHeight="32.0" prefWidth="108.0" promptText="Author ID">
                            <font>
