@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class DatabaseConnector {
 
-    private static final String DB_DRIVER = "con.mysql.jdbc.Driver";
+    private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/bookdb";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
@@ -17,63 +17,63 @@ public class DatabaseConnector {
     // using Singleton Design Pattern
     // place Constructor private modifier
 
-    private DatabaseConnector(){
+
+    private DatabaseConnector() {
+
 
         try {
 
             Class.forName(DB_DRIVER);
-            con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
-            if(con!=null) {
+            con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
 
-                System.out.println("Connetion successful");
+            if(con==null) {
+                System.out.println("Can't Connect");
+            }
+            else {
+                System.out.println("Connection Successfully");
             }
 
-            else
-            {
-
-                System.out.println("Connetion Not successful");
-            }
-
-
-        } catch (SQLException e) {
-
-            System.out.println("SQLException Error");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
 
     }
 
-    // using to get DatabaseConnector instance Object
-    public static DatabaseConnector getDatabaseConnector(){
+    public static DatabaseConnector getInstance() {
 
-        if(instance==null){
+        try {
 
-            instance = new DatabaseConnector();
+            if(instance==null) {
 
+                instance = new DatabaseConnector();
+
+            }
+        } catch (Exception e) {
+
+
+            e.printStackTrace();
         }
 
         return instance;
     }
 
-    // using to get Database Connection
-    public static Connection getConnect() {
+    public static Connection getConn() {
 
         return con;
     }
-
-    // Method Overloading
-    // using to Close Database Connection and PreparedStatement
-    public static void getCloseConnection(Connection con,PreparedStatement stmt ){
+    public static void colseConn(Connection con,PreparedStatement stmt ){
 
         if(con!=null) {
 
             try {
                 con.close();
             } catch (SQLException e) {
-
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -84,21 +84,19 @@ public class DatabaseConnector {
             try {
                 stmt.close();
             } catch (SQLException e) {
-
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
     }
-
-    // using to Close Database Connection , PreparedStatement and ResultSet
-    public static void getCloseConnection(Connection con, PreparedStatement stmt , ResultSet set){
+    public static void colseConn(Connection con,PreparedStatement stmt , ResultSet set){
 
         if(con!=null) {
 
             try {
                 con.close();
             } catch (SQLException e) {
-
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -107,25 +105,18 @@ public class DatabaseConnector {
         if(stmt!=null) {
 
             try {
-
                 stmt.close();
-
             } catch (SQLException e) {
-
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
 
         if(set!=null) {
-
             try {
-
                 set.close();
-
             } catch (SQLException e) {
-
-
-
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -134,4 +125,6 @@ public class DatabaseConnector {
 
 
     }
+
+
 }
