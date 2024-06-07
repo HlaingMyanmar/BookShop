@@ -74,6 +74,11 @@ public class SaleController  implements Initializable {
 
        // ->>> Author Set Close <<<<-
 
+        // ->>> Category Set Open <<<<-
+
+
+
+
 
     }
 
@@ -222,6 +227,7 @@ public class SaleController  implements Initializable {
     // ->>> Author Set Close <<<-
 
 
+    // ->>>> Category Set <<<<-
 
 
 

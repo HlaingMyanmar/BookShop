@@ -73,7 +73,7 @@ public class DatabaseConnector {
             try {
                 con.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
 
@@ -84,7 +84,7 @@ public class DatabaseConnector {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
         }
