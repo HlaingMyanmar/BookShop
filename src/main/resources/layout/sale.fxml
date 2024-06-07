@@ -348,9 +348,36 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="732.0">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="6.0" prefHeight="74.0" prefWidth="802.0" styleClass="pane" stylesheets="@../css/pane1.css">
+                  <TableView fx:id="booktable" layoutX="13.0" layoutY="47.0" prefHeight="398.0" prefWidth="1047.0" stylesheets="@../css/table.css">
+                     <columns>
+                        <TableColumn prefWidth="110.0" text="Item Code" />
+                        <TableColumn prefWidth="424.0" text="Description" />
+                        <TableColumn prefWidth="141.0" text="Category" />
+                        <TableColumn prefWidth="158.0" text="Author" />
+                        <TableColumn prefWidth="76.0" text="Qty" />
+                        <TableColumn prefWidth="134.0" text="Price" />
+                     </columns>
+                  </TableView>
+                  <ComboBox layoutX="13.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Category" />
+                  <TextField layoutX="474.0" layoutY="10.0" prefHeight="32.0" prefWidth="270.0" promptText="Search . ..................................">
+                     <font>
+                        <Font name="Pyidaungsu" size="12.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="753.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/find.png" />
+                     </image>
+                  </ImageView>
+                  <ComboBox layoutX="223.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" />
+                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="430.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/filter.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane fx:id="hidePane" layoutX="11.0" layoutY="476.0" prefHeight="137.0" prefWidth="1055.0" styleClass="pane" stylesheets="@../css/pane1.css">
                      <children>
-                        <TextField layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="106.0" promptText="Item Code">
+                        <TextField layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="106.0" promptText="Item Code" styleClass="id" stylesheets="@../css/id.css">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
@@ -360,85 +387,57 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="124.0" layoutY="27.0" prefHeight="32.0" prefWidth="227.0" promptText="Description">
+                        <TextField layoutX="503.0" layoutY="33.0" prefHeight="32.0" prefWidth="291.0" promptText="Description">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="713.0" layoutY="27.0" prefHeight="32.0" prefWidth="81.0" promptText="Price">
+                        <TextField layoutX="881.0" layoutY="31.0" prefHeight="32.0" prefWidth="89.0" promptText="Price">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="124.0" layoutY="4.0" text="Description :">
+                        <Label layoutX="503.0" layoutY="10.0" text="Description :">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="712.0" layoutY="5.0" text="Price :">
+                        <Label layoutX="882.0" layoutY="9.0" text="Price :">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="360.0" layoutY="5.0" text="Category :">
+                        <Label layoutX="124.0" layoutY="12.0" text="Category :">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="511.0" layoutY="4.0" text="Authors :">
+                        <Label layoutX="316.0" layoutY="11.0" text="Authors :">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="659.0" layoutY="27.0" prefHeight="32.0" prefWidth="48.0" promptText="Qty">
+                        <TextField layoutX="804.0" layoutY="32.0" prefHeight="32.0" prefWidth="66.0" promptText="Qty">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="658.0" layoutY="5.0" text="Qty : ">
+                        <Label layoutX="803.0" layoutY="10.0" text="Qty : ">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="360.0" layoutY="25.0" prefHeight="34.0" prefWidth="143.0" promptText="Select Category" />
-                        <ComboBox layoutX="509.0" layoutY="25.0" prefHeight="34.0" prefWidth="143.0" promptText="Select Authors" />
+                        <ComboBox layoutX="124.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Category" />
+                        <ComboBox layoutX="314.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Authors" />
+                        <Button layoutX="9.0" layoutY="88.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="97.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
                      </children>
                   </AnchorPane>
-                  <TableView layoutX="13.0" layoutY="175.0" prefHeight="359.0" prefWidth="797.0" stylesheets="@../css/table.css">
-                     <columns>
-                        <TableColumn prefWidth="110.0" text="Item Code" />
-                        <TableColumn prefWidth="222.0" text="Description" />
-                        <TableColumn prefWidth="158.0" text="Category" />
-                        <TableColumn prefWidth="145.0" text="Author" />
-                        <TableColumn prefWidth="49.0" text="Qty" />
-                        <TableColumn prefWidth="99.0" text="Price" />
-                     </columns>
-                  </TableView>
-                  <ComboBox layoutX="13.0" layoutY="138.0" prefHeight="32.0" prefWidth="200.0" promptText="Category" />
-                  <TextField layoutX="474.0" layoutY="138.0" prefHeight="32.0" prefWidth="270.0" promptText="Search . ..................................">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="753.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/find.png" />
-                     </image>
-                  </ImageView>
-                  <ComboBox layoutX="223.0" layoutY="138.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" />
-                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="430.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/filter.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="14.0" layoutY="89.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="97.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
-                  <Button layoutX="124.0" layoutY="89.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit" />
-                  <Separator layoutX="13.0" layoutY="129.0" prefHeight="3.0" prefWidth="803.0" />
+                  <Button fx:id="showAction" layoutX="828.0" layoutY="11.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Show" />
                </children>
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Category &amp; Authors &amp; Purchars">
+      <Tab text="Category &amp; Authors &amp; Supplier">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="625.0" prefWidth="864.0">
                <children>
@@ -550,16 +549,6 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                        <Tab text="Untitled Tab 2">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                           </content>
-                        </Tab>
-                        <Tab text="Untitled Tab 2">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                           </content>
-                        </Tab>
                     </tabs>
                   </TabPane>
                </children>

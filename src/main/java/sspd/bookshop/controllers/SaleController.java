@@ -1,18 +1,21 @@
 package sspd.bookshop.controllers;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import sspd.bookshop.databases.Authordb;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.databases.Supplierdb;
@@ -89,6 +92,17 @@ public class SaleController  implements Initializable {
 
     @FXML
     private TextField suSearch;
+
+    @FXML
+    private Button showAction;
+
+    @FXML
+    private AnchorPane hidePane;
+
+    @FXML
+    private TableView  booktable;
+
+
 
 
 
@@ -207,6 +221,39 @@ public class SaleController  implements Initializable {
             }
 
         });
+
+        // ->>> Supplier Set Close<<<<-
+
+        // HidePane
+
+        hidePane.setVisible(false);
+        booktable.setPrefHeight(572);
+        booktable.setPrefWidth(1047);
+
+        showAction.setOnAction(actionEvent -> {
+
+            if(hidePane.isVisible()){
+
+                hidePane.setVisible(false);
+                booktable.setPrefHeight(572);
+                booktable.setPrefWidth(1047);
+            }
+            else
+            {
+
+                hidePane.setVisible(true);
+                booktable.setPrefHeight(400);
+                booktable.setPrefWidth(1047);
+
+            }
+
+
+
+        });
+
+        // HidePane Close <<<<<<<
+
+
 
 
 
