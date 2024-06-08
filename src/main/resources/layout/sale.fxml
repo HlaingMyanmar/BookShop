@@ -348,7 +348,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="732.0">
                <children>
-                  <TableView fx:id="booktable" layoutX="17.0" layoutY="213.0" onMouseClicked="#bookrefreshAction" prefHeight="398.0" prefWidth="1047.0" stylesheets="@../css/table.css">
+                  <TableView fx:id="booktable" layoutX="17.0" layoutY="213.0" onMouseClicked="#bookrefreshAction" prefHeight="398.0" prefWidth="1047.0" stylesheets="@../css/table.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
                      <columns>
                         <TableColumn fx:id="bcodeCol" prefWidth="110.0" text="Item Code" />
                         <TableColumn fx:id="bnameCol" prefWidth="424.0" text="Description" />
@@ -363,13 +363,13 @@
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <ImageView fx:id="filter2" fitHeight="38.0" fitWidth="54.0" layoutX="413.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="filter2" fitHeight="38.0" fitWidth="54.0" layoutX="413.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="413.0" AnchorPane.rightAnchor="630.0">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="showAction" layoutX="944.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="124.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Book" />
-                  <AnchorPane fx:id="hidePane" layoutX="13.0" layoutY="54.0" prefHeight="125.0" prefWidth="1055.0" styleClass="pane" stylesheets="@../css/pane1.css">
+                  <Button fx:id="showAction" layoutX="944.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="124.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Book" AnchorPane.rightAnchor="13.0" />
+                  <AnchorPane fx:id="hidePane" layoutX="13.0" layoutY="54.0" prefHeight="125.0" prefWidth="1055.0" styleClass="pane" stylesheets="@../css/pane1.css" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0">
                      <children>
                         <TextField fx:id="bcode" layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="106.0" promptText="Item Code" styleClass="id" stylesheets="@../css/id.css">
                            <font>
@@ -386,7 +386,7 @@
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="bprice" layoutX="881.0" layoutY="31.0" prefHeight="32.0" prefWidth="89.0" promptText="Price">
+                        <TextField fx:id="bprice" layoutX="881.0" layoutY="31.0" prefHeight="32.0" prefWidth="89.0" promptText="Price" AnchorPane.leftAnchor="880.0" AnchorPane.rightAnchor="85.0">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
@@ -436,7 +436,7 @@
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="814.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#bookrefreshAction" prefHeight="41.0" prefWidth="124.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Clear" />
+                  <Button layoutX="815.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#bookrefreshAction" prefHeight="41.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Clear" AnchorPane.rightAnchor="143.0" />
                </children>
             </AnchorPane>
          </content>
@@ -451,7 +451,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="1081.0">
                                  <children>
-                                    <TableView fx:id="suppliertable" layoutX="8.0" layoutY="48.0" prefHeight="314.0" prefWidth="1066.0" stylesheets="@../css/table.css">
+                                    <TableView fx:id="suppliertable" layoutX="8.0" layoutY="48.0" prefHeight="314.0" prefWidth="1066.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="48.0">
                                        <columns>
                                           <TableColumn fx:id="suID" prefWidth="65.0" text="ID" />
                                           <TableColumn fx:id="suName" prefWidth="224.0" text="Name" />
@@ -504,7 +504,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="871.0">
                                  <children>
-                                    <TableView fx:id="authortable" layoutX="32.0" layoutY="49.0" prefHeight="334.0" prefWidth="455.0" stylesheets="@../css/table.css">
+                                    <TableView fx:id="authortable" layoutX="32.0" layoutY="49.0" prefHeight="334.0" prefWidth="455.0" stylesheets="@../css/table.css" AnchorPane.leftAnchor="32.0">
                                        <columns>
                                           <TableColumn fx:id="auID" prefWidth="93.0" text="Author ID" />
                                           <TableColumn fx:id="auName" prefWidth="361.0" text="Author Name" />
