@@ -14,12 +14,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sspd.bookshop.databases.Authordb;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.databases.Supplierdb;
-import sspd.bookshop.models.Author;
-import sspd.bookshop.models.Book;
-import sspd.bookshop.models.Category;
-import sspd.bookshop.models.Supplier;
+import sspd.bookshop.models.*;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
@@ -130,6 +128,28 @@ public class SaleController extends Deliver implements Initializable  {
 
     @FXML
     private ComboBox<String> searchCategory;
+
+    @FXML
+    private TableColumn<Book, String> bauthorCol;
+
+    @FXML
+    private TableColumn<Book, String> bcategoryCol;
+
+    @FXML
+    private TableColumn<Book, String> bcodeCol;
+
+    @FXML
+    private TableColumn<Book, String> bnameCol;
+
+    @FXML
+    private TableColumn<Book, String> bpriceCol;
+
+    @FXML
+    private TableColumn<Book, String> bqtyCol;
+
+    @FXML
+    private TextField searchBox;
+
 
     @FXML
     private TextField bcode;
@@ -301,7 +321,7 @@ public class SaleController extends Deliver implements Initializable  {
         // HidePane Close <<<<<<<
 
 
-        // Set Combox Box
+        // Set  Book Set Open
 
         bcategory.setItems(getCategoryNameList());
 
@@ -310,6 +330,31 @@ public class SaleController extends Deliver implements Initializable  {
         searchAuthor.setItems(getAuthorNameList());
 
         bauthor.setItems(getAuthorNameList());
+
+
+        bcode.setText(getBookID());
+
+        getIniBookTable();
+
+        getFindLoadBookData();
+
+        booktable.setEditable(true);
+
+        bnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        bnameCol.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setBookname(value);
+
+                getBookRowUpdate();
+
+            }
+
+        });
 
 
 
@@ -738,25 +783,115 @@ public class SaleController extends Deliver implements Initializable  {
 
     // ->>>> Supplier Set Close <<<<<
 
+
+    // ->>>> Book Set Open <<<<<
+
     private String getBookID(){
 
         String defaultid = "#bo1";
 
-        Supplierdb supplierdb  = new Supplierdb();
-        List<Supplier> supplierList = supplierdb .getList();
+        Bookdb bookdb = new Bookdb();
+        List<Book> bookList = bookdb.getList();
 
-        if(supplierList  .size()==0){
+        if(bookList .size()==0){
 
             return defaultid;
 
         }
         else {
 
-            return "#su"+ Integer.toString(supplierList  .size()+1);
+            return "#bo"+ Integer.toString(bookList .size()+1);
 
         }
 
 
+
+    }
+
+    private void getIniBookTable(){
+
+        bcodeCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookid"));
+        bnameCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookname"));
+        bcategoryCol.setCellValueFactory(new PropertyValueFactory<Book,String>("cid"));
+        bauthorCol.setCellValueFactory(new PropertyValueFactory<Book,String>("aid"));
+        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book,String>("quantity"));
+        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book,String>("price"));
+
+
+
+    }
+
+    private void getFindLoadBookData() {
+
+        ObservableList<Book> observableList = FXCollections.observableArrayList();
+
+        Bookdb bookdb = new Bookdb();
+
+        List<Book> bookList= null;
+
+        bookList = bookdb.getList();
+
+        for(Book m :bookList ){
+
+            observableList.add(m);
+        }
+
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Book> filteredData = new FilteredList<>(observableList, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(filter -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (filter.getBookid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                    return true; // Filter matches first name.
+                }
+                else if (filter.getBookname().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+
+                else
+                    return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Book> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(booktable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        booktable.setItems(sortedData);
+    }
+
+    private void getBookRowUpdate(){
+
+      Book book = (Book) booktable.getSelectionModel().getSelectedItem();
+
+      Book book1 = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
+
+      Bookdb bookdb = new Bookdb();
+
+      bookdb.update(book1);
 
     }
 
@@ -767,7 +902,72 @@ public class SaleController extends Deliver implements Initializable  {
     }
 
     @FXML
-    void saveNewBook(KeyEvent event) {
+    void saveNewBook(MouseEvent event) {
+
+
+
+        if(bcode.getText().isEmpty() || bcategory.getValue().isEmpty() || bauthor.getValue().isEmpty() || bdescription.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
+
+        }
+
+        else {
+
+
+
+            Bookdb bookdb = new Bookdb();
+
+            String authorcode = getAuthorCode(bauthor.getValue());
+
+            String categorycode =getCategoryCode(bcategory.getValue());
+
+            int qty;
+
+            if(bqty.getText().equals("")){
+
+                 qty = 0;
+            }
+            else
+            {
+                qty = Integer.parseInt(bqty.getText());
+
+            }
+
+
+
+            int price ;
+
+            if(bprice.getText().equals("")){
+
+                price = 0;
+            }
+            else
+            {
+               price = Integer.parseInt(bprice.getText());
+            }
+
+
+
+            Book book =new Book(bcode.getText(),bdescription.getText(),qty,price, authorcode,categorycode);
+
+            bookdb.create(book);
+
+            getFindLoadBookData();
+
+            bcode.setText(getBookID());
+
+            bdescription.setText("");
+            bqty.setText("");
+            bprice.setText("");
+            bauthor.setValue("");
+            bcategory.setValue("");
+        }
+
+
+
+
+
 
     }
 

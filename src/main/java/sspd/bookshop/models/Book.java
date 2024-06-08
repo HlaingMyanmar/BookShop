@@ -6,15 +6,35 @@ public class Book {
     private String bookid;
     private int quantity;
     private int price;
+    private String aid;
+    private String cid;
 
-    public Book(String bookname, String bookid, int quantity, int price){
+    public Book( String bookid,String bookname, int quantity, int price,String aid,String cid){
 
         this.bookname = bookname;
         this.bookid = bookid;
         this.quantity = quantity;
         this.price = price;
+        this.aid = aid;
+        this.cid = cid;
 
 
+    }
+
+    public String getAid() {
+        return aid;
+    }
+
+    public void setAid(String aid) {
+        this.aid = aid;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
     public String getBookname() {
