@@ -80,7 +80,11 @@ public class Bookdb implements DataAccessObject<Book> {
             JOptionPane.showMessageDialog(null,"Update Successful");
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+
+            JOptionPane.showMessageDialog(null,"Error");
+
+
         }
     }
 

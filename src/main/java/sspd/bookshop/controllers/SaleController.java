@@ -194,6 +194,7 @@ public class SaleController extends Deliver implements Initializable  {
                 event.getRowValue().setAuthor_name(value);
 
                 getauthorRowUpdate();
+                getUpdateData();
 
             }
 
@@ -356,6 +357,38 @@ public class SaleController extends Deliver implements Initializable  {
 
         });
 
+        bcategoryCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        bcategoryCol.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setCid(value);
+
+                getBookRowUpdate();
+
+            }
+
+        });
+
+        bauthorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        bauthorCol.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setAid(value);
+
+                getBookRowUpdate();
+
+            }
+
+        });
+
 
 
 
@@ -392,6 +425,9 @@ public class SaleController extends Deliver implements Initializable  {
         auid.setText(getAuthorID());
 
         auname.setText("");
+
+            getUpdateData();
+
         }
 
     }
@@ -408,6 +444,8 @@ public class SaleController extends Deliver implements Initializable  {
         Authordb authordb = new Authordb();
 
         authordb.update(authorupate);
+
+        getUpdateData();
 
     }
 
@@ -499,6 +537,8 @@ public class SaleController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         authortable.setItems(sortedData);
+
+        getUpdateData();
     }
 
     // ->>> Author Set Close <<<-
@@ -529,6 +569,8 @@ public class SaleController extends Deliver implements Initializable  {
             caid.setText(getCategoryID());
 
             caname.setText("");
+
+            getUpdateData();
         }
 
     }
@@ -611,6 +653,8 @@ public class SaleController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         categorytable.setItems(sortedData);
+
+        getUpdateData();
     }
 
     private void getIniCategoryTable(){
@@ -632,6 +676,9 @@ public class SaleController extends Deliver implements Initializable  {
         Categorydb categorydb = new Categorydb();
 
         categorydb.update(categoryupate);
+
+        getUpdateData();
+
 
     }
 
@@ -666,6 +713,8 @@ public class SaleController extends Deliver implements Initializable  {
             suname.setText("");
             suphone.setText("");
             suaddress.setText("");
+
+            getUpdateData();
         }
 
 
@@ -764,6 +813,8 @@ public class SaleController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         suppliertable.setItems(sortedData);
+
+        getUpdateData();
     }
 
     private void getSupplierRowUpdate(){
@@ -776,6 +827,7 @@ public class SaleController extends Deliver implements Initializable  {
         Supplierdb supplierdb = new Supplierdb();
 
         supplierdb.update(supplierupate);
+        getUpdateData();
 
     }
 
@@ -823,6 +875,8 @@ public class SaleController extends Deliver implements Initializable  {
 
     private void getFindLoadBookData() {
 
+
+
         ObservableList<Book> observableList = FXCollections.observableArrayList();
 
         Bookdb bookdb = new Bookdb();
@@ -841,6 +895,7 @@ public class SaleController extends Deliver implements Initializable  {
         FilteredList<Book> filteredData = new FilteredList<>(observableList, b -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
+
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(filter -> {
                 // If filter text is empty, display all persons.
@@ -881,7 +936,10 @@ public class SaleController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         booktable.setItems(sortedData);
+
+
     }
+
 
     private void getBookRowUpdate(){
 
@@ -892,6 +950,7 @@ public class SaleController extends Deliver implements Initializable  {
       Bookdb bookdb = new Bookdb();
 
       bookdb.update(book1);
+        getUpdateData();
 
     }
 
@@ -962,11 +1021,30 @@ public class SaleController extends Deliver implements Initializable  {
             bprice.setText("");
             bauthor.setValue("");
             bcategory.setValue("");
+
+            getUpdateData();
         }
 
 
 
 
+
+
+    }
+
+
+
+    private void getUpdateData(){
+
+
+        bcategory.setItems(getCategoryNameList());
+
+        searchCategory.setItems(getCategoryNameList());
+
+        searchAuthor.setItems(getAuthorNameList());
+
+        bauthor.setItems(getAuthorNameList());
+        getFindLoadBookData();
 
 
     }
