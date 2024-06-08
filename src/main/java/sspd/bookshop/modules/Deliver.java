@@ -4,15 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.databases.Authordb;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.models.Author;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Category;
 
 
+import javax.swing.text.TableView;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
-public  class Deliver implements GenerateResult{
+public  class Deliver implements GenerateResult,GenerateResult.Filter {
 
 
     @Override
@@ -88,6 +92,21 @@ public  class Deliver implements GenerateResult{
     }
 
     @Override
+    public String getCategoryName(String code) {
+
+        Categorydb categorydb = new Categorydb();
+
+        List<Category> cList = categorydb.getList();
+
+
+        return cList.stream()
+                .filter(c -> c.getCategory_id().equals(code))
+                .map(Category::getCategory_name)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
     public ObservableList<String> getAuthorNameList(){
 
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -122,7 +141,43 @@ public  class Deliver implements GenerateResult{
                 .orElse(null);
     }
 
+    @Override
+    public String getAuthorName(String code) {
+
+
+        Authordb db = new Authordb();
+
+        List<Author> cList = db.getList();
+
+
+        return cList.stream()
+                .filter(c -> c.getAuthor_id().equals(code))
+                .map(Author::getAuthor_name)
+                .findFirst()
+                .orElse(null);
+    }
+
+
+    @Override
+    public ObservableList<Book> getAuthorFilter(String categoryName) {
+
+        Bookdb db = new Bookdb();
+
+        ObservableList<Book> list = FXCollections.observableArrayList();
+
+        List<Book> bookList = db.getFindByCategory(getCategoryCode(categoryName));
 
 
 
+        for(Book b :bookList){
+
+           list.add(new Book(b.getBookid(),b.getBookname(),b.getQuantity(),b.getPrice(),getAuthorName(b.getAid()),getCategoryName(b.getCid())));
+
+        }
+
+
+        return list;
+
+
+    }
 }

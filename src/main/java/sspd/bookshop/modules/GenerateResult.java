@@ -2,7 +2,10 @@ package sspd.bookshop.modules;
 
 import javafx.collections.ObservableList;
 import sspd.bookshop.DAO.DataAccessObject;
+import sspd.bookshop.models.Book;
 
+import javax.swing.text.TableView;
+import java.util.List;
 
 
 public interface GenerateResult {
@@ -16,9 +19,24 @@ public interface GenerateResult {
 
     String getCategoryCode(String item);
 
+    String getCategoryName(String code);
+
     ObservableList<String> getAuthorNameList();
 
     String getAuthorCode(String item);
+
+    String getAuthorName(String code);
+
+
+    interface Filter{
+
+        List<Book> getAuthorFilter(String categoryName);
+
+
+
+
+    }
+
 
 
 

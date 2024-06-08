@@ -22,6 +22,7 @@ import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -99,23 +100,7 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     private TableView  booktable;
 
-    @FXML
-    private TableColumn<Book, String> bAuthor;
 
-    @FXML
-    private TableColumn<Book, String> bCategory;
-
-    @FXML
-    private TableColumn<Book, String> bCode;
-
-    @FXML
-    private TableColumn<Book, String> bDescription;
-
-    @FXML
-    private TableColumn<Book, String> bPrice;
-
-    @FXML
-    private TableColumn<Book, String> bQty;
 
     @FXML
     private ComboBox<String> bauthor;
@@ -149,6 +134,8 @@ public class SaleController extends Deliver implements Initializable  {
 
     @FXML
     private TextField searchBox;
+    @FXML
+    private TextField searchBox1;
 
 
     @FXML
@@ -172,6 +159,7 @@ public class SaleController extends Deliver implements Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
 
        // ->>> Author Set <<<<<-
@@ -957,6 +945,17 @@ public class SaleController extends Deliver implements Initializable  {
 
     @FXML
     void filterAction(MouseEvent event) {
+
+        ObservableList<Book> bookList = getAuthorFilter(searchCategory.getValue());
+
+        booktable.setItems(bookList);
+
+
+
+
+
+
+
 
     }
 

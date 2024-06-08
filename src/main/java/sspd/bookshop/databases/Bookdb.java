@@ -125,6 +125,44 @@ public class Bookdb implements DataAccessObject<Book> {
 
     }
 
+    public List<Book> getFindByCategory(String category){
+
+        String sql = "SELECT * FROM `book` WHERE cid=?ORDER by cast(SubString(bcode,4) as UNSIGNED) asc";
+
+        ResultSet rs = null;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)){
+
+            pst.setString(1,category);
+
+            List<Book> booklist  = new ArrayList<>();
+
+            rs = pst.executeQuery();
+
+            while (rs.next()){
+
+                String bcode = rs.getString("bcode");
+                String bname = rs.getString("name");
+                int qty = rs.getInt("qty");
+                int price = rs.getInt("price");
+                String aid = rs.getString("aid");
+                String cid = rs.getString("cid");
+
+                Book b =new Book(bcode,bname,qty,price,aid,cid);
+
+                booklist.add(b);
+
+            }
+            return booklist;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
 
 
