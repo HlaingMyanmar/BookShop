@@ -4,6 +4,10 @@
 
 .table-view{
     -fx-background-color: transparent;
+
+     -fx-font-family: "Pyidaungsu";
+
+
 }
 
 .table-view:focused{
@@ -60,6 +64,7 @@
     -fx-border-color: #CCCCCC; /* Set border color */
     -fx-border-width: 0 0 1 0; /* Set border width (bottom border only) */
 }
+
 
 
 

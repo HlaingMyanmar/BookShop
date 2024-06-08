@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sspd.bookshop.databases.Authordb;
@@ -142,6 +144,12 @@ public class SaleController extends Deliver implements Initializable  {
 
     @FXML
     private TextField bqty;
+
+    @FXML
+    private ImageView filter1;
+
+    @FXML
+    private ImageView filter2;
 
 
 
@@ -956,9 +964,6 @@ public class SaleController extends Deliver implements Initializable  {
             p++;
         }
 
-        for(Book b: updateList){
-            System.out.println(b.getBookname());
-        }
         // Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<Book> filteredData = new FilteredList<>(updateList, b -> true);
 
@@ -1092,17 +1097,44 @@ public class SaleController extends Deliver implements Initializable  {
 
             searchBox1.setEditable(false);
 
+
+            JOptionPane.showMessageDialog(null,"Please First Start , start filter box","Notice",0);
+
+            searchBox.setStyle("-fx-border-color:red;");
+
+
+
+            searchBox.setPromptText("Please Fill Filter check!!!");
+
+
         }
         else {
+
+            searchBox.setStyle("");
+
+
             searchBox1.setEditable(true);
 
             booktable.getSelectionModel().selectAll();
 
             setFilter();
 
+
         }
 
 
+
+
+
+    }
+
+    @FXML
+    void bookrefreshAction(MouseEvent event) {
+
+        getFindLoadBookData();
+        searchBox.setText("");
+        searchBox.setPromptText("Start Search . ..................................");
+        searchBox1.setText("");
 
 
 

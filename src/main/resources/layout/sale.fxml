@@ -348,7 +348,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="732.0">
                <children>
-                  <TableView fx:id="booktable" layoutX="17.0" layoutY="213.0" prefHeight="398.0" prefWidth="1047.0" stylesheets="@../css/table.css">
+                  <TableView fx:id="booktable" layoutX="17.0" layoutY="213.0" onMouseClicked="#bookrefreshAction" prefHeight="398.0" prefWidth="1047.0" stylesheets="@../css/table.css">
                      <columns>
                         <TableColumn fx:id="bcodeCol" prefWidth="110.0" text="Item Code" />
                         <TableColumn fx:id="bnameCol" prefWidth="424.0" text="Description" />
@@ -363,12 +363,12 @@
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="413.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="filter2" fitHeight="38.0" fitWidth="54.0" layoutX="413.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="showAction" layoutX="828.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="232.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Book" />
+                  <Button fx:id="showAction" layoutX="944.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="124.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Book" />
                   <AnchorPane fx:id="hidePane" layoutX="13.0" layoutY="54.0" prefHeight="125.0" prefWidth="1055.0" styleClass="pane" stylesheets="@../css/pane1.css">
                      <children>
                         <TextField fx:id="bcode" layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="106.0" promptText="Item Code" styleClass="id" stylesheets="@../css/id.css">
@@ -431,11 +431,12 @@
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="12.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="filter1" fitHeight="38.0" fitWidth="54.0" layoutX="12.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
+                  <Button layoutX="814.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#bookrefreshAction" prefHeight="41.0" prefWidth="124.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Clear" />
                </children>
             </AnchorPane>
          </content>
