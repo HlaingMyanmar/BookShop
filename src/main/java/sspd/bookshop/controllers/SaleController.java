@@ -160,7 +160,7 @@ public class SaleController extends Deliver implements Initializable  {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+        booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
        // ->>> Author Set <<<<<-
 
@@ -946,9 +946,29 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     void filterAction(MouseEvent event) {
 
-        ObservableList<Book> bookList = getAuthorFilter(searchCategory.getValue());
+//        ObservableList<Book> bookList = getAuthorFilter(searchCategory.getValue());
+//
+//        booktable.setItems(bookList);
 
-        booktable.setItems(bookList);
+
+        ObservableList i = booktable.getSelectionModel().getSelectedItems();
+
+        Book book = (Book) i.get(1);
+
+
+
+
+
+        System.out.println(book.getBookname());
+
+
+
+
+
+
+
+
+
 
 
 
