@@ -953,13 +953,28 @@ public class SaleController extends Deliver implements Initializable  {
 
         ObservableList i = booktable.getSelectionModel().getSelectedItems();
 
-        Book book = (Book) i.get(1);
+        ObservableList<Book> updateList= FXCollections.observableArrayList();
+
+        int p=0;
+
+        for(Object z: i){
+
+            Book book = (Book) i.get(p);
+            updateList.add(book);
+            p++;
+        }
+
+        for(Book b: updateList){
+            System.out.println(b.getBookname());
+        }
 
 
 
 
 
-        System.out.println(book.getBookname());
+
+
+        //System.out.println(book.getBookname());
 
 
 
