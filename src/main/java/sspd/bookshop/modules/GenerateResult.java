@@ -28,14 +28,7 @@ public interface GenerateResult {
     String getAuthorName(String code);
 
 
-    interface Filter{
 
-        List<Book> getAuthorFilter(String categoryName);
-
-
-
-
-    }
 
 
 

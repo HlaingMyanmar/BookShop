@@ -358,19 +358,12 @@
                         <TableColumn fx:id="bpriceCol" prefWidth="134.0" text="Price" />
                      </columns>
                   </TableView>
-                  <ComboBox fx:id="searchCategory" editable="true" layoutX="13.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Category" />
-                  <TextField fx:id="searchBox" layoutX="474.0" layoutY="10.0" prefHeight="32.0" prefWidth="270.0" promptText="Search . ..................................">
+                  <TextField fx:id="searchBox" layoutX="57.0" layoutY="14.0" prefHeight="32.0" prefWidth="350.0" promptText="Start Search . ..................................">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="753.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/find.png" />
-                     </image>
-                  </ImageView>
-                  <ComboBox fx:id="searchAuthor" editable="true" layoutX="223.0" layoutY="10.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" />
-                  <ImageView fx:id="filter" fitHeight="38.0" fitWidth="54.0" layoutX="430.0" layoutY="7.0" onMouseClicked="#filterAction" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="413.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
@@ -431,13 +424,18 @@
                         <ComboBox fx:id="bcategory" editable="true" layoutX="124.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Category" />
                         <ComboBox fx:id="bauthor" editable="true" layoutX="314.0" layoutY="32.0" prefHeight="34.0" prefWidth="179.0" promptText="Select Authors" />
                         <Button layoutX="9.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#saveNewBook" prefHeight="31.0" prefWidth="97.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
-                        <TextField fx:id="searchBox1" layoutX="451.0" layoutY="82.0" prefHeight="32.0" prefWidth="270.0" promptText="Search . ..................................">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
                      </children>
                   </AnchorPane>
+                  <TextField fx:id="searchBox1" layoutX="458.0" layoutY="14.0" onMouseClicked="#noticeAction" prefHeight="32.0" prefWidth="350.0" promptText=" Next Search . ..................................">
+                     <font>
+                        <Font name="Pyidaungsu" size="12.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="38.0" fitWidth="54.0" layoutX="12.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/filter.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </content>

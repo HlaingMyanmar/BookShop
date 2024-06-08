@@ -9,8 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sspd.bookshop.databases.Authordb;
@@ -22,7 +20,6 @@ import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -108,11 +105,7 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     private ComboBox<String> bcategory;
 
-    @FXML
-    private ComboBox<String> searchAuthor;
 
-    @FXML
-    private ComboBox<String> searchCategory;
 
     @FXML
     private TableColumn<Book, String> bauthorCol;
@@ -150,8 +143,7 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     private TextField bqty;
 
-    @FXML
-    private ImageView filter;
+
 
 
 
@@ -314,9 +306,7 @@ public class SaleController extends Deliver implements Initializable  {
 
         bcategory.setItems(getCategoryNameList());
 
-        searchCategory.setItems(getCategoryNameList());
 
-        searchAuthor.setItems(getAuthorNameList());
 
         bauthor.setItems(getAuthorNameList());
 
@@ -376,6 +366,11 @@ public class SaleController extends Deliver implements Initializable  {
             }
 
         });
+
+
+        if(searchBox.getText().equals("")){
+            searchBox1.setEditable(false);
+        }
 
 
 
@@ -931,6 +926,8 @@ public class SaleController extends Deliver implements Initializable  {
 
     private void getBookRowUpdate(){
 
+
+
       Book book = (Book) booktable.getSelectionModel().getSelectedItem();
 
       Book book1 = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
@@ -943,14 +940,9 @@ public class SaleController extends Deliver implements Initializable  {
     }
 
 
-    @FXML
-    void filterAction(MouseEvent event) {
-
-//        ObservableList<Book> bookList = getAuthorFilter(searchCategory.getValue());
-//
-//        booktable.setItems(bookList);
 
 
+    private void setFilter(){
         ObservableList i = booktable.getSelectionModel().getSelectedItems();
 
         ObservableList<Book> updateList= FXCollections.observableArrayList();
@@ -967,32 +959,56 @@ public class SaleController extends Deliver implements Initializable  {
         for(Book b: updateList){
             System.out.println(b.getBookname());
         }
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Book> filteredData = new FilteredList<>(updateList, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+
+        searchBox1.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(filter -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (filter.getBookid().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                else if (filter.getBookname().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getAid().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (filter.getCid().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
 
 
+                else
+                    return false; // Does not match.
+            });
+        });
 
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Book> sortedData = new SortedList<>(filteredData);
 
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
-
+        // 5. Add sorted (and filtered) data to the table.
+        booktable.setItems(sortedData);
 
         //System.out.println(book.getBookname());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+
 
     @FXML
     void saveNewBook(MouseEvent event) {
@@ -1066,16 +1082,37 @@ public class SaleController extends Deliver implements Initializable  {
 
     }
 
+    @FXML
+    void noticeAction(MouseEvent event) {
+
+
+
+
+        if(searchBox.getText().equals("")){
+
+            searchBox1.setEditable(false);
+
+        }
+        else {
+            searchBox1.setEditable(true);
+
+            booktable.getSelectionModel().selectAll();
+
+            setFilter();
+
+        }
+
+
+
+
+
+    }
+
 
 
     private void getUpdateData(){
 
-
         bcategory.setItems(getCategoryNameList());
-
-        searchCategory.setItems(getCategoryNameList());
-
-        searchAuthor.setItems(getAuthorNameList());
 
         bauthor.setItems(getAuthorNameList());
         getFindLoadBookData();

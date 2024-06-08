@@ -16,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public  class Deliver implements GenerateResult,GenerateResult.Filter {
+public  class Deliver implements GenerateResult {
 
 
     @Override
@@ -158,26 +158,5 @@ public  class Deliver implements GenerateResult,GenerateResult.Filter {
     }
 
 
-    @Override
-    public ObservableList<Book> getAuthorFilter(String categoryName) {
 
-        Bookdb db = new Bookdb();
-
-        ObservableList<Book> list = FXCollections.observableArrayList();
-
-        List<Book> bookList = db.getFindByCategory(getCategoryCode(categoryName));
-
-
-
-        for(Book b :bookList){
-
-           list.add(new Book(b.getBookid(),b.getBookname(),b.getQuantity(),b.getPrice(),getAuthorName(b.getAid()),getCategoryName(b.getCid())));
-
-        }
-
-
-        return list;
-
-
-    }
 }
