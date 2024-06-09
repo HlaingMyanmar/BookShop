@@ -27,6 +27,10 @@ public interface GenerateResult {
 
     String getAuthorName(String code);
 
+    String getSupplierName(String suppliercode);
+
+    ObservableList<String>getSupplierNameList();
+
 
 
 

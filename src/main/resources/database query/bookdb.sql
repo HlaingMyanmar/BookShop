@@ -25,7 +25,7 @@ create table supplier(
     suphone varchar(20),
     suaddress varchar(30));
 
-create table stockin(
+create table purchase(
     stockinid varchar(15) not null,
     stockdate Date not null,
     bookcode varchar(15),

@@ -82,13 +82,13 @@
       </AnchorPane>
       <TableView fx:id="purchasetable" layoutX="12.0" layoutY="263.0" prefHeight="385.0" prefWidth="1067.0" stylesheets="@../css/table.css">
          <columns>
-            <TableColumn prefWidth="83.0" text="Item Code" />
-            <TableColumn prefWidth="230.0" text="Description" />
-            <TableColumn prefWidth="158.0" text="Category" />
-            <TableColumn prefWidth="122.0" text="Author" />
-            <TableColumn prefWidth="40.0" text="Qty" />
-            <TableColumn prefWidth="70.0" text="Price" />
-            <TableColumn prefWidth="79.0" text="Total" />
+            <TableColumn fx:id="codeCol" prefWidth="83.0" text="Item Code" />
+            <TableColumn fx:id="nameCol" prefWidth="415.1999816894531" text="Description" />
+            <TableColumn fx:id="categroyCol" prefWidth="165.60000610351562" text="Category" />
+            <TableColumn fx:id="authorCol" prefWidth="175.20001220703125" text="Author" />
+            <TableColumn fx:id="qtyCol" prefWidth="40.79998779296875" text="Qty" />
+            <TableColumn fx:id="priceCol" prefWidth="79.9998779296875" text="Price" />
+            <TableColumn fx:id="totalCol" prefWidth="111.2000732421875" text="Total" />
          </columns>
       </TableView>
       <TextField fx:id="stockid" layoutX="91.0" layoutY="28.0" prefHeight="32.0" prefWidth="166.0" promptText="ID">
@@ -122,7 +122,7 @@
          </font>
       </Label>
       <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="70.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
-      <ComboBox fx:id="supplierid" editable="true" layoutX="874.0" layoutY="27.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
+      <ComboBox fx:id="supplierid" editable="true" layoutX="874.0" layoutY="27.0" onMouseClicked="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
       <Button layoutX="269.0" layoutY="69.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="102.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
       <Button layoutX="385.0" layoutY="68.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Supplier" />
    </children>

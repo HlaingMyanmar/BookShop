@@ -3,17 +3,13 @@ package sspd.bookshop.modules;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sspd.bookshop.DAO.DataAccessObject;
-import sspd.bookshop.databases.Authordb;
-import sspd.bookshop.databases.Bookdb;
-import sspd.bookshop.databases.Categorydb;
-import sspd.bookshop.models.Author;
-import sspd.bookshop.models.Book;
-import sspd.bookshop.models.Category;
+import sspd.bookshop.databases.*;
+import sspd.bookshop.models.*;
 
 
-import javax.swing.text.TableView;
+
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public  class Deliver implements GenerateResult {
@@ -157,6 +153,39 @@ public  class Deliver implements GenerateResult {
                 .orElse(null);
     }
 
+    @Override
+    public String getSupplierName(String code) {
+
+
+        Supplierdb supplierdb = new Supplierdb();
+
+        List<Supplier> cList =supplierdb.getList();
+
+
+        return cList.stream()
+                .filter(c -> c.getS_id().equals(code))
+                .map(Supplier::getS_name)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public ObservableList<String> getSupplierNameList() {
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        Supplierdb supplierdb = new Supplierdb();
+
+        List<Author> cList = db.getList();
+
+        for(Author c:cList){
+
+            list.add(c.getAuthor_name());
+
+        }
+
+        return list;
+    }
 
 
 }
