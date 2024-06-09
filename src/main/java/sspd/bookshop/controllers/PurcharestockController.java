@@ -92,8 +92,7 @@ public class PurcharestockController extends Deliver implements Initializable {
     @FXML
     private ComboBox<String> suppliername;
 
-    @FXML
-    private TableColumn<String ,String> totalCol;
+
 
     ObservableList<Book> predataList = FXCollections.observableArrayList();
 
@@ -134,6 +133,36 @@ public class PurcharestockController extends Deliver implements Initializable {
 
     @FXML
     void confirmItem(MouseEvent event) {
+
+
+//        String puid = stockid.getText();
+//        Date pudate = Date.valueOf(stockdate.getText());
+//        String sid = supplierid.getValue();
+
+        int size = purchasetable.getItems().size();
+
+
+
+        for(int i = 0;i<size;i++){
+
+            Book book = (Book)  purchasetable.getItems().get(i);
+
+            System.out.println("Book Code : "+book.getBookid()+" Book Name : "+book.getBookname());
+
+        }
+
+
+
+
+    //    System.out.println(  purchasetable.getItems().size());
+
+
+
+
+
+
+
+
 
     }
     @FXML
@@ -265,7 +294,7 @@ public class PurcharestockController extends Deliver implements Initializable {
         authorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
 
     }
 
@@ -339,15 +368,25 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         });
         qtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-
         qtyCol.setOnEditCommit(event -> {
-            Integer value = event.getNewValue(); // This will be an Integer now
+            Integer value = event.getNewValue();
 
             if (value != null) {
-                // Update the row's quantity
+
                 event.getRowValue().setQuantity(value);
             }
         });
+        priceCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        priceCol.setOnEditCommit(event -> {
+            Integer value = event.getNewValue();
+
+            if (value != null) {
+
+                event.getRowValue().setPrice(value);
+
+            }
+        });
+
 
 
     }
@@ -430,7 +469,30 @@ public class PurcharestockController extends Deliver implements Initializable {
     }
 
     @FXML
-    void test(MouseEvent event) {
+    void removeAction(MouseEvent event) {
+
+      int selectedIndex = purchasetable.getSelectionModel().getSelectedIndex();
+
+        if (selectedIndex >= 0) {
+            purchasetable.getItems().remove(selectedIndex);
+        } else {
+            // Handle case where no item is selected (optional)
+            System.out.println("No item selected");
+        }
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private void getBookRowUpdate(){
 
         purchasetable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -453,37 +515,6 @@ public class PurcharestockController extends Deliver implements Initializable {
 
             System.out.println(b.getBookname());
         }
-    }
-
-    private void getBookRowUpdate(){
-
-
-
-        ObservableList i = purchasetable.getSelectionModel().getSelectedItems();
-
-        ObservableList<Book> bookList= FXCollections.observableArrayList();
-
-        int p=0;
-
-        for(Object z: i){
-
-
-            Book book = (Book) i.get(p);
-            bookList.add(book);
-            p++;
-        }
-
-        for(Book b :bookList){
-
-            System.out.println();
-        }
-
-
-
-
-        Bookdb bookdb = new Bookdb();
-
-       // bookdb.update(book);
 
     }
 

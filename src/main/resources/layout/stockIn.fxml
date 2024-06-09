@@ -79,7 +79,7 @@
             <ComboBox fx:id="itemcategory" editable="true" layoutX="802.0" layoutY="25.0" prefHeight="34.0" prefWidth="244.0" promptText="Please Choose Category" />
             <ComboBox fx:id="itemauthor" editable="true" layoutX="582.0" layoutY="26.0" prefHeight="34.0" prefWidth="208.0" promptText="Please Choose Category" />
             <Button layoutX="579.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
-            <Button layoutX="678.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#test" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit" />
+            <Button layoutX="678.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
             <Button layoutX="777.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
          </children>
       </AnchorPane>
@@ -91,7 +91,6 @@
             <TableColumn fx:id="authorCol" prefWidth="175.20001220703125" text="Author" />
             <TableColumn fx:id="qtyCol" prefWidth="40.79998779296875" text="Qty" />
             <TableColumn fx:id="priceCol" prefWidth="79.9998779296875" text="Price" />
-            <TableColumn fx:id="totalCol" prefWidth="111.2000732421875" text="Total" />
          </columns>
       </TableView>
       <TextField fx:id="stockid" editable="false" layoutX="91.0" layoutY="38.0" prefHeight="32.0" prefWidth="166.0" promptText="ID">

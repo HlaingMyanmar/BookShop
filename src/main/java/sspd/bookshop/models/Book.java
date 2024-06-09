@@ -1,21 +1,23 @@
 package sspd.bookshop.models;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Book {
 
     private String bookname;
     private String bookid;
-    private int quantity;
-    private int price;
+    private SimpleIntegerProperty quantity;
+    private SimpleIntegerProperty price;
     private String aid;
     private String cid;
-    private int total;
+    private SimpleIntegerProperty total;
 
     public Book( String bookid,String bookname, int quantity, int price,String aid,String cid){
 
         this.bookname = bookname;
         this.bookid = bookid;
-        this.quantity = quantity;
-        this.price = price;
+        this.quantity = new SimpleIntegerProperty(quantity);
+        this.price = new SimpleIntegerProperty(price);
         this.aid = aid;
         this.cid = cid;
 
@@ -25,38 +27,15 @@ public class Book {
 
         this.bookname = bookname;
         this.bookid = bookid;
-        this.quantity = quantity;
-        this.price = price;
+        this.quantity = new SimpleIntegerProperty(quantity);
+        this.price = new SimpleIntegerProperty(price);
         this.aid = aid;
         this.cid = cid;
-        this.total =total;
+        this.total = new SimpleIntegerProperty(quantity * price);
 
 
     }
 
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public String getAid() {
-        return aid;
-    }
-
-    public void setAid(String aid) {
-        this.aid = aid;
-    }
-
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
 
     public String getBookname() {
         return bookname;
@@ -75,31 +54,54 @@ public class Book {
     }
 
     public int getQuantity() {
+        return quantity.get();
+    }
+
+    public SimpleIntegerProperty quantityProperty() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        this.quantity.set(quantity);
     }
 
     public int getPrice() {
+        return price.get();
+    }
+
+    public SimpleIntegerProperty priceProperty() {
         return price;
     }
 
     public void setPrice(int price) {
-        this.price = price;
+        this.price.set(price);
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookname='" + bookname + '\'' +
-                ", bookid='" + bookid + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                '}';
+    public String getAid() {
+        return aid;
     }
 
+    public void setAid(String aid) {
+        this.aid = aid;
+    }
 
+    public String getCid() {
+        return cid;
+    }
 
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
+    public int getTotal() {
+        return total.get();
+    }
+
+    public SimpleIntegerProperty totalProperty() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total.set(total);
+    }
 }
