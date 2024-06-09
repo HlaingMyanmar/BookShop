@@ -1,19 +1,28 @@
 package sspd.bookshop.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Purchasedb;
 
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -21,13 +30,13 @@ import java.util.ResourceBundle;
 public class PurcharestockController extends Deliver implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> authorCol;
+    private TableColumn<Book, String> authorCol;
 
     @FXML
-    private TableColumn<?, ?> categroyCol;
+    private TableColumn<Book, String> categroyCol;
 
     @FXML
-    private TableColumn<?, ?> codeCol;
+    private TableColumn<Book, String> codeCol;
 
     @FXML
     private ComboBox<String> itemauthor;
@@ -51,16 +60,16 @@ public class PurcharestockController extends Deliver implements Initializable {
     private TextField itemtotal;
 
     @FXML
-    private TableColumn<?, ?> nameCol;
+    private TableColumn<Book, String> nameCol;
 
     @FXML
-    private TableColumn<?, ?> priceCol;
+    private TableColumn<Book, String> priceCol;
 
     @FXML
-    private TableView<?> purchasetable;
+    private TableView purchasetable;
 
     @FXML
-    private TableColumn<?, ?> qtyCol;
+    private TableColumn<Book, String> qtyCol;
 
     @FXML
     private TextField stockdate;
@@ -75,10 +84,25 @@ public class PurcharestockController extends Deliver implements Initializable {
     private ComboBox<String> suppliername;
 
     @FXML
-    private TableColumn<?, ?> totalCol;
+    private TableColumn<String ,String> totalCol;
+
+    ObservableList<Book> predataList = FXCollections.observableArrayList();
 
     @FXML
     void addItem(MouseEvent event) {
+
+        String itemcodee = itemcode.getText();
+        String itemnamee =itemname.getText();
+        int  itemqtyy = Integer.parseInt(itemqty.getText());
+        int itempricee =Integer.parseInt(itemprice.getText());
+        String itemautho= itemauthor.getValue();
+        String itemca=itemcategory.getValue();
+
+        Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca);
+
+        predataList .add(book);
+
+        purchasetable.setItems( predataList);
 
     }
 
@@ -88,10 +112,26 @@ public class PurcharestockController extends Deliver implements Initializable {
     }
 
     @FXML
+    void itemcodeKeyAction(KeyEvent event) {
+
+
+        if(event.getCode()== KeyCode.ENTER){
+            getDataList(itemcode.getText());
+        }
+
+
+
+
+
+
+    }
+
+    @FXML
     void findSupplierIDAction(MouseEvent event) {
 
-        supplierid.setValue(getSupplierName(suppliername.getValue()));
+        supplierid.setValue(getSupplierCode(suppliername.getValue()));
     }
+
 
     private String getID(){
 
@@ -115,6 +155,18 @@ public class PurcharestockController extends Deliver implements Initializable {
 
     }
 
+    private void getIniPurchaseTable(){
+
+        codeCol.setCellValueFactory(new PropertyValueFactory<>("bookid"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("bookname"));
+        categroyCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -122,6 +174,10 @@ public class PurcharestockController extends Deliver implements Initializable {
         stockid.setText(getID());
 
         suppliername.setItems(getSupplierNameList());
+
+        stockdate.setText(String.valueOf(LocalDate.now()));
+
+        getIniPurchaseTable();
 
 
     }

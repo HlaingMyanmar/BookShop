@@ -13,7 +13,7 @@
    <children>
       <AnchorPane layoutX="7.0" layoutY="114.0" prefHeight="135.0" prefWidth="1069.0" styleClass="pane" stylesheets="@../css/pane1.css">
          <children>
-            <TextField fx:id="itemcode" layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="132.0" promptText="Customer Name" AnchorPane.leftAnchor="10.0">
+            <TextField fx:id="itemcode" layoutX="10.0" layoutY="27.0" onKeyPressed="#itemcodeKeyAction" prefHeight="32.0" prefWidth="132.0" promptText="Customer Name" AnchorPane.leftAnchor="10.0">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="itemtotal" editable="false" layoutX="342.0" layoutY="82.0" prefHeight="32.0" prefWidth="226.0" promptText="Total">
+            <TextField fx:id="itemtotal" layoutX="342.0" layoutY="82.0" prefHeight="32.0" prefWidth="226.0" promptText="Total">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -91,7 +91,7 @@
             <TableColumn fx:id="totalCol" prefWidth="111.2000732421875" text="Total" />
          </columns>
       </TableView>
-      <TextField fx:id="stockid" layoutX="91.0" layoutY="28.0" prefHeight="32.0" prefWidth="166.0" promptText="ID">
+      <TextField fx:id="stockid" editable="false" layoutX="91.0" layoutY="28.0" prefHeight="32.0" prefWidth="166.0" promptText="ID">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -101,7 +101,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="stockdate" layoutX="90.0" layoutY="69.0" prefHeight="32.0" prefWidth="167.0" promptText="Date">
+      <TextField fx:id="stockdate" editable="false" layoutX="90.0" layoutY="69.0" prefHeight="32.0" prefWidth="167.0" promptText="Date">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -121,8 +121,8 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="70.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
-      <ComboBox fx:id="supplierid" editable="true" layoutX="874.0" layoutY="27.0" onMouseClicked="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
+      <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="70.0" onMouseExited="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
+      <ComboBox fx:id="supplierid" layoutX="874.0" layoutY="27.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
       <Button layoutX="269.0" layoutY="69.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="102.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
       <Button layoutX="385.0" layoutY="68.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Supplier" />
    </children>

@@ -8,6 +8,7 @@ public class Book {
     private int price;
     private String aid;
     private String cid;
+    private int total;
 
     public Book( String bookid,String bookname, int quantity, int price,String aid,String cid){
 
@@ -19,6 +20,26 @@ public class Book {
         this.cid = cid;
 
 
+    }
+    public Book( String bookid,String bookname, int quantity, int price,String aid,String cid,int total){
+
+        this.bookname = bookname;
+        this.bookid = bookid;
+        this.quantity = quantity;
+        this.price = price;
+        this.aid = aid;
+        this.cid = cid;
+        this.total =total;
+
+
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public String getAid() {

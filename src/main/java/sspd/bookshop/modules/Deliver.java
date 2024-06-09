@@ -154,7 +154,7 @@ public  class Deliver implements GenerateResult {
     }
 
     @Override
-    public String getSupplierName(String code) {
+    public String getSupplierCode(String code) {
 
 
         Supplierdb supplierdb = new Supplierdb();
@@ -163,8 +163,8 @@ public  class Deliver implements GenerateResult {
 
 
         return cList.stream()
-                .filter(c -> c.getS_id().equals(code))
-                .map(Supplier::getS_name)
+                .filter(c -> c.getS_name().equals(code))
+                .map(Supplier::getS_id)
                 .findFirst()
                 .orElse(null);
     }
@@ -185,6 +185,20 @@ public  class Deliver implements GenerateResult {
         }
 
         return list;
+    }
+
+    @Override
+    public Book getDataList(String bookCode) {
+
+
+        Bookdb bookdb = new Bookdb();
+
+        List<Book> bookList = bookdb.getList();
+
+        return bookList.stream()
+                .filter(c -> c.getBookid().equals(bookCode))
+                .findFirst()
+                .orElse(null);
     }
 
 
