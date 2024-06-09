@@ -165,10 +165,26 @@ public class Bookdb implements DataAccessObject<Book> {
 
     }
 
-    public void subQty(Book book){
+    public void sumQty(Book book){
 
-        String sql = " UPDATE book SET qty = qty - 2  WHERE bcode = '#bo11'";
+        String sql = " UPDATE book SET qty = qty + ?  WHERE bcode = ?";
 
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,book.getQuantity());
+            pst.setString(2,book.getBookid());
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Book Sub Successful");
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
 
 
     }

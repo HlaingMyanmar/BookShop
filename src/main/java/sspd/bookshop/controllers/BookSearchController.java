@@ -281,7 +281,7 @@ public class BookSearchController extends Deliver implements Initializable {
 
             Book book =  (Book) booktable.getSelectionModel().getSelectedItem();
 
-            if(book.getQuantity()!=0){
+
 
                 _book  =  (Book) booktable.getSelectionModel().getSelectedItem();
                 Stage mainStage = (Stage) booktable.getScene().getWindow();
@@ -289,9 +289,7 @@ public class BookSearchController extends Deliver implements Initializable {
                 mainStage.close();
 
             }
-            else {
-                JOptionPane.showMessageDialog(null,"This Item No have.");
-            }
+
 
 
 
@@ -300,4 +298,4 @@ public class BookSearchController extends Deliver implements Initializable {
         }
     }
 
-}
+

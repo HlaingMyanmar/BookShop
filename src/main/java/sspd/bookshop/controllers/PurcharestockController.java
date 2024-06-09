@@ -109,64 +109,12 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         Bookdb bookdb = new Bookdb();
 
-        bookdb.update(book);
+
 
         predataList .add(book);
 
 
 
-
-        if(itemcode.getText().equals(getBookID())){
-
-
-
-        if(itemcode.getText().isEmpty() || itemcategory.getValue().equals("") || itemauthor.getValue().equals("")|| itemname.getText().isEmpty()){
-
-            JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
-
-        }
-
-        else {
-
-
-
-
-
-            String authorcode = getAuthorCode(itemauthor.getValue());
-
-            String categorycode =getCategoryCode(itemcategory.getValue());
-
-            int qty;
-
-            if(itemqty.getText().equals("")){
-
-                qty = 0;
-            }
-            else
-            {
-                qty = Integer.parseInt(itemqty.getText());
-
-            }
-
-
-
-            int price ;
-
-            if(itemprice.getText().equals("")){
-
-                price = 0;
-            }
-            else
-            {
-                price = Integer.parseInt(itemprice.getText());
-            }
-
-
-
-            Book book1 =new Book(itemcode.getText(),itemname.getText(),qty,price, authorcode,categorycode);
-
-            bookdb.create(book1);
-
             purchasetable.setItems( predataList);
 
 
@@ -176,24 +124,6 @@ public class PurcharestockController extends Deliver implements Initializable {
             itemqty.setText("");
             itemprice.setText("");
             itemtotal.setText("");
-
-        }
-
-        }
-        else {
-
-            purchasetable.setItems( predataList);
-
-
-            itemname.setText("");
-            itemauthor.setValue("");
-            itemcategory.setValue("");
-            itemqty.setText("");
-            itemprice.setText("");
-            itemtotal.setText("");
-
-
-        }
 
 
         itemcode.setText(getBookID());
@@ -492,6 +422,66 @@ public class PurcharestockController extends Deliver implements Initializable {
        // bookdb.update(book);
 
     }
+
+//
+//     if(itemcode.getText().isEmpty() || itemcategory.getValue().equals("") || itemauthor.getValue().equals("")|| itemname.getText().isEmpty()){
+//
+//        JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
+//
+//    }
+//
+//        else {
+//
+//
+//
+//
+//
+//        String authorcode = getAuthorCode(itemauthor.getValue());
+//
+//        String categorycode =getCategoryCode(itemcategory.getValue());
+//
+//        int qty;
+//
+//        if(itemqty.getText().equals("")){
+//
+//            qty = 0;
+//        }
+//        else
+//        {
+//            qty = Integer.parseInt(itemqty.getText());
+//
+//        }
+//
+//
+//
+//        int price ;
+//
+//        if(itemprice.getText().equals("")){
+//
+//            price = 0;
+//        }
+//        else
+//        {
+//            price = Integer.parseInt(itemprice.getText());
+//        }
+//
+//
+//
+//        Book book1 =new Book(itemcode.getText(),itemname.getText(),qty,price, authorcode,categorycode);
+//
+//        bookdb.create(book1);
+//
+//        purchasetable.setItems( predataList);
+//
+//
+//        itemname.setText("");
+//        itemauthor.setValue("");
+//        itemcategory.setValue("");
+//        itemqty.setText("");
+//        itemprice.setText("");
+//        itemtotal.setText("");
+//
+//    }
 
 
 }
