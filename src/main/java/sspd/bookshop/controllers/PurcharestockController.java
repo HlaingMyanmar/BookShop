@@ -129,6 +129,8 @@ public class PurcharestockController extends Deliver implements Initializable {
             itemtotal.setText("");
 
 
+        itemcodee =getBookID();
+
         String id = itemcodee;
 
         itemcode.setText("#bo"+(Integer.parseInt(id.substring(3))+1));
@@ -205,9 +207,6 @@ public class PurcharestockController extends Deliver implements Initializable {
 
             Purchasedb purchasedb = new Purchasedb();
 
-
-
-
             if(!book.getBookid().equals( getBookID())){
 
 //                Purchasedb purchasedb = new Purchasedb();
@@ -254,13 +253,21 @@ public class PurcharestockController extends Deliver implements Initializable {
 
     void getTotal(KeyEvent event){
 
-        if(event.getCode()== KeyCode.ENTER || event.getCode()==KeyCode.TAB){
+        try {
 
-            int qty = Integer.parseInt(itemqty.getText());
-            int price = Integer.parseInt(itemprice.getText());
-            itemtotal.setText(String.valueOf(qty*price));
+            if(event.getCode()== KeyCode.ENTER || event.getCode()==KeyCode.TAB){
+
+                int qty = Integer.parseInt(itemqty.getText());
+                int price = Integer.parseInt(itemprice.getText());
+                itemtotal.setText(String.valueOf(qty*price));
+
+            }
+
+        }catch (NumberFormatException e){
 
         }
+
+
 
     }
 

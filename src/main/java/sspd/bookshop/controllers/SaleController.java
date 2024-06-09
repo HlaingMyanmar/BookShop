@@ -17,10 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sspd.bookshop.databases.Authordb;
-import sspd.bookshop.databases.Bookdb;
-import sspd.bookshop.databases.Categorydb;
-import sspd.bookshop.databases.Supplierdb;
+import sspd.bookshop.databases.*;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.*;
 import sspd.bookshop.modules.Deliver;
@@ -28,6 +25,7 @@ import sspd.bookshop.modules.Deliver;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -156,6 +154,39 @@ public class SaleController extends Deliver implements Initializable  {
 
     @FXML
     private ImageView filter2;
+
+    @FXML
+    private TableColumn<Purchase, String> pauthorCol;
+
+    @FXML
+    private TableColumn<Purchase, String> pcategoryCol;
+
+    @FXML
+    private TableColumn<Purchase, String> pcodeCol;
+
+    @FXML
+    private TableColumn<Purchase, Date> pdateCol;
+
+    @FXML
+    private TableColumn<Purchase, String> pnameCol;
+
+    @FXML
+    private TableColumn<Purchase, Integer> ppriceCol;
+
+    @FXML
+    private TableColumn<Purchase, Integer> pqtyCol;
+
+    @FXML
+    private TableColumn<Purchase, String> psupplierCol;
+
+    @FXML
+    private TableColumn<Purchase, Integer> ptotalCol;
+
+    @FXML
+    private TableView purchasetable;
+
+    @FXML
+    private TextField psearch;
 
 
 
@@ -393,6 +424,11 @@ public class SaleController extends Deliver implements Initializable  {
         if(searchBox.getText().equals("")){
             searchBox1.setEditable(false);
         }
+
+
+        getIniPurchaseTable();
+
+        getFindLoadPurchaseData();
 
 
 
@@ -1204,5 +1240,88 @@ public class SaleController extends Deliver implements Initializable  {
 
 
     }
+
+    private void getIniPurchaseTable(){
+
+       pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase,String>("puid"));
+        pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase,Date>("pudate"));
+        pnameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
+        pcategoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
+        pauthorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
+        psupplierCol.setCellValueFactory(new PropertyValueFactory<>("sid"));
+        pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+
+
+    }
+
+    private void getFindLoadPurchaseData() {
+
+        ObservableList<Purchase> observableList = FXCollections.observableArrayList();
+
+        Purchasedb purchasedb = new Purchasedb();
+
+        List<Purchase> purchaseList = null;
+
+        purchaseList  = purchasedb.getList();
+
+        for(Purchase m :purchaseList ){
+
+            observableList.add(m);
+        }
+
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Purchase> filteredData = new FilteredList<>(observableList, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        psearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(filter -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                    return true; // Filter matches first name.
+                }
+                else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+
+                else
+                    return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Purchase> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(suppliertable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        purchasetable.setItems(sortedData);
+
+
+    }
+
+
+
 
 }
