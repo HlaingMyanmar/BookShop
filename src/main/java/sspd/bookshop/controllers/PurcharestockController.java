@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.converter.IntegerStringConverter;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Purchasedb;
 
@@ -68,13 +70,13 @@ public class PurcharestockController extends Deliver implements Initializable {
     private TableColumn<Book, String> nameCol;
 
     @FXML
-    private TableColumn<Book, String> priceCol;
+    private TableColumn<Book, Integer> priceCol;
 
     @FXML
     private TableView purchasetable;
 
     @FXML
-    private TableColumn<Book, String> qtyCol;
+    private TableColumn<Book, Integer> qtyCol;
 
     @FXML
     private TextField stockdate;
@@ -284,6 +286,68 @@ public class PurcharestockController extends Deliver implements Initializable {
         itemauthor.setItems(getAuthorNameList());
 
         itemcategory.setItems(getCategoryNameList());
+
+
+
+        purchasetable.setEditable(true);
+
+        nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        nameCol.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setBookname(value);
+
+
+
+            }
+
+        });
+
+        categroyCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        categroyCol.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setCid(value);
+
+
+
+            }
+
+        });
+
+        authorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        authorCol.setOnEditCommit(event -> {
+
+            String value = event.getNewValue();
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setAid(value);
+
+                getBookRowUpdate();
+
+            }
+
+        });
+        qtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+        qtyCol.setOnEditCommit(event -> {
+            Integer value = event.getNewValue(); // This will be an Integer now
+
+            if (value != null) {
+                // Update the row's quantity
+                event.getRowValue().setQuantity(value);
+            }
+        });
 
 
     }
