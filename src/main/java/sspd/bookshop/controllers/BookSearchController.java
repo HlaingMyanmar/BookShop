@@ -15,15 +15,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.models.Book;
+import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BookSearchController implements Initializable {
+public class BookSearchController extends Deliver implements Initializable {
 
     @FXML
     private TableColumn<Book, String> bauthorCol;
@@ -38,10 +40,10 @@ public class BookSearchController implements Initializable {
     private TableColumn<Book, String> bnameCol;
 
     @FXML
-    private TableColumn<Book, String> bpriceCol;
+    private TableColumn<Book, Integer> bpriceCol;
 
     @FXML
-    private TableColumn<Book, String> bqtyCol;
+    private TableColumn<Book, Integer> bqtyCol;
 
     @FXML
     private TextField searchBox;
@@ -59,14 +61,17 @@ public class BookSearchController implements Initializable {
 
 
 
+
+
+
     private void getIniBookTable(){
 
         bcodeCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookid"));
         bnameCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookname"));
         bcategoryCol.setCellValueFactory(new PropertyValueFactory<Book,String>("cid"));
         bauthorCol.setCellValueFactory(new PropertyValueFactory<Book,String>("aid"));
-        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book,String>("quantity"));
-        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book,String>("price"));
+        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("quantity"));
+        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("price"));
 
 
 
@@ -267,6 +272,21 @@ public class BookSearchController implements Initializable {
 
 
 
+    }
+
+    @FXML
+    void searchtableClick(MouseEvent event) {
+
+        if (event.getClickCount() == 2) {
+
+            _book  =  (Book) booktable.getSelectionModel().getSelectedItem();
+
+
+            Stage mainStage = (Stage) booktable.getScene().getWindow();
+
+            mainStage.close();
+
+        }
     }
 
 }

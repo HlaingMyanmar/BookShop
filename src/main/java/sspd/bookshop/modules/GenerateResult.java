@@ -12,6 +12,11 @@ public interface GenerateResult {
 
 
 
+
+
+
+
+
     ObservableList<String>getDataList(Class<? extends DataAccessObject> dbClass);
 
 

@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -84,6 +81,8 @@ public class PurcharestockController extends Deliver implements Initializable {
 
     @FXML
     private TextField stockid;
+    @FXML
+    private Button btnGet;
 
     @FXML
     private ComboBox<String> supplierid;
@@ -110,7 +109,88 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         predataList .add(book);
 
-        purchasetable.setItems( predataList);
+
+        if(itemcode.getText().equals(getBookID())){
+
+
+
+        if(itemcode.getText().isEmpty() || itemcategory.getValue().equals("") || itemauthor.getValue().equals("")|| itemname.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
+
+        }
+
+        else {
+
+
+
+            Bookdb bookdb = new Bookdb();
+
+            String authorcode = getAuthorCode(itemauthor.getValue());
+
+            String categorycode =getCategoryCode(itemcategory.getValue());
+
+            int qty;
+
+            if(itemqty.getText().equals("")){
+
+                qty = 0;
+            }
+            else
+            {
+                qty = Integer.parseInt(itemqty.getText());
+
+            }
+
+
+
+            int price ;
+
+            if(itemprice.getText().equals("")){
+
+                price = 0;
+            }
+            else
+            {
+                price = Integer.parseInt(itemprice.getText());
+            }
+
+
+
+            Book book1 =new Book(itemcode.getText(),itemname.getText(),qty,price, authorcode,categorycode);
+
+            bookdb.create(book1);
+
+            purchasetable.setItems( predataList);
+
+
+            itemname.setText("");
+            itemauthor.setValue("");
+            itemcategory.setValue("");
+            itemqty.setText("");
+            itemprice.setText("");
+            itemtotal.setText("");
+
+        }
+
+        }
+        else {
+
+            purchasetable.setItems( predataList);
+
+
+            itemname.setText("");
+            itemauthor.setValue("");
+            itemcategory.setValue("");
+            itemqty.setText("");
+            itemprice.setText("");
+            itemtotal.setText("");
+
+
+        }
+
+
+        itemcode.setText(getBookID());
 
     }
 
@@ -265,6 +345,10 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         itemcode.setText(getBookID());
 
+        itemauthor.setItems(getAuthorNameList());
+
+        itemcategory.setItems(getCategoryNameList());
+
 
     }
 
@@ -300,6 +384,48 @@ public class PurcharestockController extends Deliver implements Initializable {
 
 
         }
+
+    }
+
+    @FXML
+    void getFilterData(MouseEvent event) {
+
+        try {
+
+
+
+        itemcode.setText(_book.getBookid());
+        itemname.setText(_book.getBookname());
+        itemauthor.setValue(_book.getAid());
+        itemcategory.setValue(_book.getCid());
+        itemprice.setText(String.valueOf(_book.getPrice()));
+        itemtotal.setText(String.valueOf(_book.getPrice()*_book.getQuantity()));
+
+        _book =null;
+        btnGet.setText("Get New Item");
+        btnGet.setStyle("-fx-background-color:#FC4035;");
+
+
+        }catch (NullPointerException e){
+
+            itemcode.setText(getBookID());
+            itemname.setText("");
+            itemauthor.setValue("");
+            itemcategory.setValue("");
+            itemqty.setText("");
+            itemprice.setText("");
+            itemtotal.setText("");
+            btnGet.setText("Get");
+            btnGet.setStyle("-fx-background-color:#0072CD;");
+
+
+        }
+
+
+
+
+
+
 
     }
 

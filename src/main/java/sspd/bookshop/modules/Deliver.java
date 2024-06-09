@@ -15,6 +15,9 @@ import java.util.List;
 public  class Deliver implements GenerateResult {
 
 
+    protected static Book _book =null;
+
+
     @Override
     public ObservableList<String> getDataList(Class<? extends DataAccessObject> dbClass) {
 

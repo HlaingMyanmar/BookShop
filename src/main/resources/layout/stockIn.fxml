@@ -137,5 +137,6 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Button fx:id="btnGet" layoutX="529.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#getFilterData" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Get" />
    </children>
 </AnchorPane>
