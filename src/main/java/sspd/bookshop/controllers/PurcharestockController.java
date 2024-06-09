@@ -260,4 +260,15 @@ public class PurcharestockController extends Deliver implements Initializable {
 
 
     }
+
+    @FXML
+    void helpAction(KeyEvent event) {
+
+        if(event.getCode()== KeyCode.F1){
+
+            JOptionPane.showMessageDialog(null,"Help Box");
+
+        }
+
+    }
 }
