@@ -31,11 +31,24 @@
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="itemprice" layoutX="151.0" layoutY="83.0" prefHeight="32.0" prefWidth="161.0" promptText="Price">
+            <ComboBox fx:id="itemauthor" editable="true" layoutX="582.0" layoutY="26.0" prefHeight="34.0" prefWidth="208.0" promptText="Please Choose Category" />
+            <ComboBox fx:id="itemcategory" editable="true" layoutX="802.0" layoutY="25.0" prefHeight="34.0" prefWidth="244.0" promptText="Please Choose Category" />
+            <TextField fx:id="itemqty" layoutX="12.0" layoutY="83.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="128.0" promptText="Qty">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
+            <TextField fx:id="itemprice" layoutX="151.0" layoutY="83.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="161.0" promptText="Price">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="itemtotal" editable="false" layoutX="342.0" layoutY="82.0" prefHeight="32.0" prefWidth="226.0" promptText="Total">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Button layoutX="579.0" layoutY="83.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
             <Label layoutX="150.0" layoutY="4.0" text="Description :">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -56,29 +69,16 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="itemqty" layoutX="12.0" layoutY="83.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="128.0" promptText="Qty">
-               <font>
-                  <Font name="Pyidaungsu" size="12.0" />
-               </font>
-            </TextField>
             <Label layoutX="11.0" layoutY="61.0" text="Qty : ">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="itemtotal" editable="false" layoutX="342.0" layoutY="82.0" prefHeight="32.0" prefWidth="226.0" promptText="Total">
-               <font>
-                  <Font name="Pyidaungsu" size="12.0" />
-               </font>
-            </TextField>
             <Label layoutX="344.0" layoutY="60.0" text="Total">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ComboBox fx:id="itemcategory" editable="true" layoutX="802.0" layoutY="25.0" prefHeight="34.0" prefWidth="244.0" promptText="Please Choose Category" />
-            <ComboBox fx:id="itemauthor" editable="true" layoutX="582.0" layoutY="26.0" prefHeight="34.0" prefWidth="208.0" promptText="Please Choose Category" />
-            <Button layoutX="579.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
             <Button layoutX="678.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
             <Button layoutX="777.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
          </children>
@@ -123,9 +123,8 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="80.0" onMouseExited="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
+      <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="80.0" onKeyPressed="#findSupplierID" onMouseExited="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
       <ComboBox fx:id="supplierid" layoutX="874.0" layoutY="37.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
-      <Button layoutX="269.0" layoutY="79.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="102.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Item" />
       <Button layoutX="385.0" layoutY="78.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Supplier" />
       <MenuBar prefHeight="26.0" prefWidth="1079.0">
         <menus>

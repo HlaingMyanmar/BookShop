@@ -99,6 +99,8 @@ public class PurcharestockController extends Deliver implements Initializable {
     @FXML
     void addItem(MouseEvent event) {
 
+
+
         String itemcodee = itemcode.getText();
         String itemnamee =itemname.getText();
         int  itemqtyy = Integer.parseInt(itemqty.getText());
@@ -127,7 +129,62 @@ public class PurcharestockController extends Deliver implements Initializable {
             itemtotal.setText("");
 
 
-        itemcode.setText(getBookID());
+        String id = itemcodee;
+
+        itemcode.setText("#bo"+(Integer.parseInt(id.substring(3))+1));
+
+    }
+    @FXML
+    void addlistItem(KeyEvent event) {
+
+        if(event.getCode()==KeyCode.ENTER){
+
+
+            String itemcodee = itemcode.getText();
+            String itemnamee =itemname.getText();
+            int  itemqtyy = Integer.parseInt(itemqty.getText());
+            int itempricee =Integer.parseInt(itemprice.getText());
+            String itemautho= itemauthor.getValue();
+            String itemca=itemcategory.getValue();
+
+            Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca);
+
+            Bookdb bookdb = new Bookdb();
+
+
+
+            predataList .add(book);
+
+
+
+            purchasetable.setItems( predataList);
+
+
+            itemname.setText("");
+            itemauthor.setValue("");
+            itemcategory.setValue("");
+            itemqty.setText("");
+            itemprice.setText("");
+            itemtotal.setText("");
+
+
+            String id = itemcodee;
+
+            itemcode.setText("#bo"+(Integer.parseInt(id.substring(3))+1));
+
+        }
+
+    }
+    @FXML
+    void findSupplierID(KeyEvent event) {
+
+        if(event.getCode()==KeyCode.ENTER){
+
+            supplierid.setValue(getSupplierCode(suppliername.getValue()));
+
+
+        }
+
 
     }
 
@@ -140,33 +197,45 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         int size = purchasetable.getItems().size();
 
+
         for(int i = 0;i<size;i++){
 
             Book book = (Book)  purchasetable.getItems().get(i);
             Bookdb bookdb = new Bookdb();
 
+            Purchasedb purchasedb = new Purchasedb();
+
+
+
+
             if(!book.getBookid().equals( getBookID())){
 
-                Purchasedb purchasedb = new Purchasedb();
-
-                Purchase p = new Purchase(puid,pudate,book.getBookid(),book.getCid(),book.getAid(),sid,book.getQuantity(),book.getPrice());
-                purchasedb.create(p);
-
+//                Purchasedb purchasedb = new Purchasedb();
+//
+//                Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
+//                purchasedb.create(p);
+//
                 bookdb.sumQty(book);
 
             }
             else {
 
-                bookdb.create(book);
+                System.out.println(book.getCid());
+
+                Book newBook = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
+
+                bookdb.create(newBook);
 
 
 
             }
 
+            Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
+            purchasedb.create(p);
+
 
 
         }
-
 
 
 
@@ -185,7 +254,7 @@ public class PurcharestockController extends Deliver implements Initializable {
 
     void getTotal(KeyEvent event){
 
-        if(event.getCode()== KeyCode.ENTER){
+        if(event.getCode()== KeyCode.ENTER || event.getCode()==KeyCode.TAB){
 
             int qty = Integer.parseInt(itemqty.getText());
             int price = Integer.parseInt(itemprice.getText());
