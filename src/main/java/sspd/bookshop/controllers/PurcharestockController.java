@@ -3,7 +3,9 @@ package sspd.bookshop.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,14 +15,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Purchasedb;
 
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -169,7 +176,7 @@ public class PurcharestockController extends Deliver implements Initializable {
 
 
 
-           // Book book =  getDataList(itemcode.getText());
+            // Book book =  getDataList(itemcode.getText());
 
 
         }
@@ -266,9 +273,35 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         if(event.getCode()== KeyCode.F1){
 
-            JOptionPane.showMessageDialog(null,"Help Box");
+            Stage stage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/booksearch.fxml"));
+            Scene scene = null;
+
+
+            try {
+
+
+                scene = new Scene(fxmlLoader.load());
+
+
+            } catch (IOException e) {
+
+                throw new RuntimeException(e);
+
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) itemauthor.getScene().getWindow();
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
+
+
 
         }
 
     }
+
 }
+
