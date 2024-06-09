@@ -279,12 +279,23 @@ public class BookSearchController extends Deliver implements Initializable {
 
         if (event.getClickCount() == 2) {
 
-            _book  =  (Book) booktable.getSelectionModel().getSelectedItem();
+            Book book =  (Book) booktable.getSelectionModel().getSelectedItem();
+
+            if(book.getQuantity()!=0){
+
+                _book  =  (Book) booktable.getSelectionModel().getSelectedItem();
+                Stage mainStage = (Stage) booktable.getScene().getWindow();
+
+                mainStage.close();
+
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"This Item No have.");
+            }
 
 
-            Stage mainStage = (Stage) booktable.getScene().getWindow();
 
-            mainStage.close();
+
 
         }
     }

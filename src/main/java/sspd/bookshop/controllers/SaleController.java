@@ -171,7 +171,7 @@ public class SaleController extends Deliver implements Initializable  {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-      //  booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
 

@@ -81,6 +81,8 @@ public class Bookdb implements DataAccessObject<Book> {
 
         } catch (SQLException e) {
 
+            e.printStackTrace();
+
 
             JOptionPane.showMessageDialog(null,"Error");
 
@@ -159,6 +161,14 @@ public class Bookdb implements DataAccessObject<Book> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
+    }
+
+    public void subQty(Book book){
+
+        String sql = " UPDATE book SET qty = qty - 2  WHERE bcode = '#bo11'";
+
 
 
     }

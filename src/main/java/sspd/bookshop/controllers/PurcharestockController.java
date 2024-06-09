@@ -107,7 +107,13 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca);
 
+        Bookdb bookdb = new Bookdb();
+
+        bookdb.update(book);
+
         predataList .add(book);
+
+
 
 
         if(itemcode.getText().equals(getBookID())){
@@ -124,7 +130,7 @@ public class PurcharestockController extends Deliver implements Initializable {
 
 
 
-            Bookdb bookdb = new Bookdb();
+
 
             String authorcode = getAuthorCode(itemauthor.getValue());
 
@@ -428,6 +434,65 @@ public class PurcharestockController extends Deliver implements Initializable {
 
 
     }
+
+    @FXML
+    void test(MouseEvent event) {
+
+        purchasetable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        purchasetable.getSelectionModel().selectAll();
+        ObservableList i = purchasetable.getSelectionModel().getSelectedItems();
+
+        ObservableList<Book> bookList= FXCollections.observableArrayList();
+
+        int p=0;
+
+        for(Object z: i){
+
+
+            Book book = (Book) i.get(p);
+            bookList.add(book);
+            p++;
+        }
+
+        for(Book b :bookList){
+
+            System.out.println(b.getBookname());
+        }
+    }
+
+    private void getBookRowUpdate(){
+
+
+
+        ObservableList i = purchasetable.getSelectionModel().getSelectedItems();
+
+        ObservableList<Book> bookList= FXCollections.observableArrayList();
+
+        int p=0;
+
+        for(Object z: i){
+
+
+            Book book = (Book) i.get(p);
+            bookList.add(book);
+            p++;
+        }
+
+        for(Book b :bookList){
+
+            System.out.println();
+        }
+
+
+
+
+        Bookdb bookdb = new Bookdb();
+
+       // bookdb.update(book);
+
+    }
+
 
 }
 
