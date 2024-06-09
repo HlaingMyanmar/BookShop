@@ -26,6 +26,16 @@ public class Purchase {
         this.total = total;
     }
 
+    public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price) {
+        this.puid = puid;
+        this.price = price;
+        this.qty = qty;
+        this.sid = sid;
+        this.aid = aid;
+        this.cid = cid;
+        this.bcode = bcode;
+        this.pudate = pudate;
+    }
 
     public String getPuid() {
         return puid;

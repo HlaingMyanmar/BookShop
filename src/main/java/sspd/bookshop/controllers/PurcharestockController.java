@@ -134,27 +134,43 @@ public class PurcharestockController extends Deliver implements Initializable {
     @FXML
     void confirmItem(MouseEvent event) {
 
-
-//        String puid = stockid.getText();
-//        Date pudate = Date.valueOf(stockdate.getText());
-//        String sid = supplierid.getValue();
+        String puid = stockid.getText();
+        Date pudate = Date.valueOf(stockdate.getText());
+        String sid = supplierid.getValue();
 
         int size = purchasetable.getItems().size();
-
-
 
         for(int i = 0;i<size;i++){
 
             Book book = (Book)  purchasetable.getItems().get(i);
+            Bookdb bookdb = new Bookdb();
 
-            System.out.println("Book Code : "+book.getBookid()+" Book Name : "+book.getBookname());
+            if(!book.getBookid().equals( getBookID())){
+
+                Purchasedb purchasedb = new Purchasedb();
+
+                Purchase p = new Purchase(puid,pudate,book.getBookid(),book.getCid(),book.getAid(),sid,book.getQuantity(),book.getPrice());
+                purchasedb.create(p);
+
+                bookdb.sumQty(book);
+
+            }
+            else {
+
+                bookdb.create(book);
+
+
+
+            }
+
+
 
         }
 
 
 
 
-    //    System.out.println(  purchasetable.getItems().size());
+
 
 
 
