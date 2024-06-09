@@ -176,11 +176,11 @@ public  class Deliver implements GenerateResult {
 
         Supplierdb supplierdb = new Supplierdb();
 
-        List<Author> cList = db.getList();
+        List<Supplier> cList = supplierdb.getList();
 
-        for(Author c:cList){
+        for(Supplier c:cList){
 
-            list.add(c.getAuthor_name());
+            list.add(c.getS_name());
 
         }
 

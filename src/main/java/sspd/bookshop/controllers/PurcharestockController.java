@@ -121,6 +121,8 @@ public class PurcharestockController extends Deliver implements Initializable {
 
         stockid.setText(getID());
 
+        suppliername.setItems(getSupplierNameList());
+
 
     }
 }
