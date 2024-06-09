@@ -162,6 +162,8 @@ public class SaleController extends Deliver implements Initializable  {
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+
+
        // ->>> Author Set <<<<<-
 
        auid.setText(getAuthorID());
@@ -938,6 +940,8 @@ public class SaleController extends Deliver implements Initializable  {
 
       Book book = (Book) booktable.getSelectionModel().getSelectedItem();
 
+      int i = booktable.getSelectionModel().getSelectedIndex();
+
       Book book1 = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
 
       Bookdb bookdb = new Bookdb();
@@ -1020,7 +1024,7 @@ public class SaleController extends Deliver implements Initializable  {
 
 
 
-        if(bcode.getText().isEmpty() || bcategory.getValue().isEmpty() || bauthor.getValue().isEmpty() || bdescription.getText().isEmpty()){
+        if(bcode.getText().isEmpty() || bcategory.getValue().equals("") || bauthor.getValue().equals("")|| bdescription.getText().isEmpty()){
 
             JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
 
@@ -1117,6 +1121,7 @@ public class SaleController extends Deliver implements Initializable  {
 
             booktable.getSelectionModel().selectAll();
 
+
             setFilter();
 
 
@@ -1141,6 +1146,11 @@ public class SaleController extends Deliver implements Initializable  {
     }
 
 
+    @FXML
+    public void printsaveNewBook(MouseEvent mouseEvent) {
+    }
+
+
 
     private void getUpdateData(){
 
@@ -1151,10 +1161,5 @@ public class SaleController extends Deliver implements Initializable  {
 
 
     }
-
-
-
-
-
 
 }

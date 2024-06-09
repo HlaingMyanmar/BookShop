@@ -6,7 +6,7 @@
 }
 
 .tab-header-area .tab-header-background {
- 	-fx-background-color: #222E42;
+ 	-fx-background-color: #4CAF50;
 }
 .tab-pane .tab:selected {
 	-fx-background-color: #4BC08F;
