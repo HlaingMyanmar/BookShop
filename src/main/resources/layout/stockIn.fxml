@@ -53,7 +53,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="itemqty" layoutX="12.0" layoutY="83.0" prefHeight="32.0" prefWidth="128.0" promptText="Qty">
+            <TextField fx:id="itemqty" layoutX="12.0" layoutY="83.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="128.0" promptText="Qty">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="itemtotal" layoutX="342.0" layoutY="82.0" prefHeight="32.0" prefWidth="226.0" promptText="Total">
+            <TextField fx:id="itemtotal" editable="false" layoutX="342.0" layoutY="82.0" prefHeight="32.0" prefWidth="226.0" promptText="Total">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>

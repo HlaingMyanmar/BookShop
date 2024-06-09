@@ -20,6 +20,7 @@ import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -110,17 +111,93 @@ public class PurcharestockController extends Deliver implements Initializable {
     void confirmItem(MouseEvent event) {
 
     }
+    @FXML
+
+    void getTotal(KeyEvent event){
+
+        if(event.getCode()== KeyCode.ENTER){
+
+            int qty = Integer.parseInt(itemqty.getText());
+            int price = Integer.parseInt(itemprice.getText());
+            itemtotal.setText(String.valueOf(qty*price));
+
+        }
+
+    }
 
     @FXML
     void itemcodeKeyAction(KeyEvent event) {
 
 
         if(event.getCode()== KeyCode.ENTER){
-            getDataList(itemcode.getText());
+
+            Book book =  getDataList(itemcode.getText());
+
+
+            try{
+
+                if(itemcode.getText().equals(getBookID())){
+
+                    JOptionPane.showMessageDialog(null,"This is New ID");
+                    itemname.setText("");
+                    itemauthor.setValue("");
+                    itemcategory.setValue("");
+                    itemprice.setText("");
+                    itemtotal.setText("");
+                }
+                else {
+
+                    itemname.setText(book.getBookname());
+                    itemauthor.setValue(book.getAid());
+                    itemcategory.setValue(book.getCid());
+                    itemprice.setText(String.valueOf(book.getPrice()));
+                    itemtotal.setText(String.valueOf(book.getPrice()*book.getQuantity()));
+
+
+                }
+
+
+
+
+
+
+            }catch (NullPointerException e){
+
+                JOptionPane.showMessageDialog(null,"Error");
+
+            }
+
+
+
+           // Book book =  getDataList(itemcode.getText());
+
+
         }
 
 
 
+
+
+
+    }
+
+    private String getBookID(){
+
+        String defaultid = "#bo1";
+
+        Bookdb bookdb = new Bookdb();
+        List<Book> bookList = bookdb.getList();
+
+        if(bookList .size()==0){
+
+            return defaultid;
+
+        }
+        else {
+
+            return "#bo"+ Integer.toString(bookList .size()+1);
+
+        }
 
 
 
@@ -178,6 +255,8 @@ public class PurcharestockController extends Deliver implements Initializable {
         stockdate.setText(String.valueOf(LocalDate.now()));
 
         getIniPurchaseTable();
+
+        itemcode.setText(getBookID());
 
 
     }
