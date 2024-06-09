@@ -5,22 +5,28 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sspd.bookshop.databases.Authordb;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.databases.Supplierdb;
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.*;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -157,10 +163,16 @@ public class SaleController extends Deliver implements Initializable  {
 
 
 
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 
 
 
@@ -1158,6 +1170,37 @@ public class SaleController extends Deliver implements Initializable  {
 
         bauthor.setItems(getAuthorNameList());
         getFindLoadBookData();
+
+
+    }
+
+    @FXML
+    void newPurchareAction(MouseEvent event) {
+
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/stockIn.fxml"));
+        Scene scene = null;
+
+
+        try {
+
+
+            scene = new Scene(fxmlLoader.load());
+
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        }
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) booktable.getScene().getWindow();
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
+
 
 
     }
