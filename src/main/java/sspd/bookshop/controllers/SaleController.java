@@ -1178,6 +1178,9 @@ public class SaleController extends Deliver implements Initializable  {
                 else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
                 }
+                else if (filter.getSid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
 
                 else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
@@ -1321,6 +1324,9 @@ public class SaleController extends Deliver implements Initializable  {
                 else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
                 }
+                else if (filter.getSid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
 
                 else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
@@ -1339,7 +1345,7 @@ public class SaleController extends Deliver implements Initializable  {
         sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
-        booktable.setItems(sortedData);
+        purchasetable.setItems(sortedData);
     }
 
 
