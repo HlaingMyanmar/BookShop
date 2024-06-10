@@ -1121,7 +1121,7 @@ public class SaleController extends Deliver implements Initializable  {
 
     private void getIniPurchaseTable(){
 
-       pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase,String>("puid"));
+        pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase,String>("puid"));
         pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase,Date>("pudate"));
         pnameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
         pcategoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
@@ -1346,6 +1346,39 @@ public class SaleController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         purchasetable.setItems(sortedData);
+    }
+
+
+    @FXML
+    void getPurchaseSelectPrint(MouseEvent event) {
+
+
+
+
+
+        ObservableList<Purchase> i =purchasetable.getSelectionModel().getSelectedItems();
+
+
+
+        ObservableList<Purchase> updateList= FXCollections.observableArrayList();
+
+
+
+        int p=0;
+
+        for(Object z: i){
+
+           // i.get(1).toString();
+
+            Purchase report = (Purchase) i.get(p);
+            updateList.add(report);
+            p++;
+        }
+
+
+
+
+
     }
 
 
