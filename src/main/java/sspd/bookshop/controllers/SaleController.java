@@ -100,23 +100,9 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     private TextField suSearch;
 
-    @FXML
-    private Button showAction;
-
-    @FXML
-    private AnchorPane hidePane;
 
     @FXML
     private TableView  booktable;
-
-
-
-    @FXML
-    private ComboBox<String> bauthor;
-
-    @FXML
-    private ComboBox<String> bcategory;
-
 
 
     @FXML
@@ -146,23 +132,7 @@ public class SaleController extends Deliver implements Initializable  {
     private TextField searchBox1;
 
 
-    @FXML
-    private TextField bcode;
 
-    @FXML
-    private TextField bdescription;
-
-    @FXML
-    private TextField bprice;
-
-    @FXML
-    private TextField bqty;
-
-    @FXML
-    private ImageView filter1;
-
-    @FXML
-    private ImageView filter2;
 
     @FXML
     private TableColumn<Purchase, String> pauthorCol;
@@ -201,27 +171,10 @@ public class SaleController extends Deliver implements Initializable  {
     public static int checkPoint = 0;
 
 
-
-
-
-
-
-
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-
-
-
-
-
-
 
 
        // ->>> Author Set <<<<<-
@@ -341,47 +294,17 @@ public class SaleController extends Deliver implements Initializable  {
 
         // HidePane
 
-        hidePane.setVisible(false);
-        booktable.setLayoutY(57);
-
-
-        showAction.setOnAction(actionEvent -> {
-
-            if(hidePane.isVisible()){
-
-                hidePane.setVisible(false);
-
-                booktable.setLayoutY(57);
-
-
-            }
-            else
-            {
-
-                hidePane.setVisible(true);
-                booktable.setLayoutY(213);
 
 
 
-            }
 
-
-
-        });
 
         // HidePane Close <<<<<<<
 
 
         // Set  Book Set Open
 
-        bcategory.setItems(getCategoryNameList());
 
-
-
-        bauthor.setItems(getAuthorNameList());
-
-
-        bcode.setText(getBookID());
 
         getIniBookTable();
 
@@ -1085,77 +1008,7 @@ public class SaleController extends Deliver implements Initializable  {
 
 
 
-    @FXML
-    void saveNewBook(MouseEvent event) {
 
-
-
-        if(bcode.getText().isEmpty() || bcategory.getValue().equals("") || bauthor.getValue().equals("")|| bdescription.getText().isEmpty()){
-
-            JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
-
-        }
-
-        else {
-
-
-
-            Bookdb bookdb = new Bookdb();
-
-            String authorcode = getAuthorCode(bauthor.getValue());
-
-            String categorycode =getCategoryCode(bcategory.getValue());
-
-            int qty;
-
-            if(bqty.getText().equals("")){
-
-                 qty = 0;
-            }
-            else
-            {
-                qty = Integer.parseInt(bqty.getText());
-
-            }
-
-
-
-            int price ;
-
-            if(bprice.getText().equals("")){
-
-                price = 0;
-            }
-            else
-            {
-               price = Integer.parseInt(bprice.getText());
-            }
-
-
-
-            Book book =new Book(bcode.getText(),bdescription.getText(),qty,price, authorcode,categorycode);
-
-            bookdb.create(book);
-
-            getFindLoadBookData();
-
-            bcode.setText(getBookID());
-
-            bdescription.setText("");
-            bqty.setText("");
-            bprice.setText("");
-            bauthor.setValue("");
-            bcategory.setValue("");
-
-            getUpdateData();
-        }
-
-
-
-
-
-
-    }
 
     @FXML
     void noticeAction(MouseEvent event) {
@@ -1220,9 +1073,6 @@ public class SaleController extends Deliver implements Initializable  {
 
     private void getUpdateData(){
 
-        bcategory.setItems(getCategoryNameList());
-
-        bauthor.setItems(getAuthorNameList());
         getFindLoadBookData();
 
 
