@@ -157,7 +157,11 @@ public class PurcharestockController extends Deliver implements Initializable {
                     .anyMatch(b -> b.getBookid().equals(itemcode.getText()));
 
             if (isDuplicate) {
+
+
                 JOptionPane.showMessageDialog(null, "Your Book ID Duplicate? "+"\nPlease Check this ID ...."+"\nYou decide New Book Insert or Old Book Duplicate","Duplicate Data",0);
+
+
             } else {
                 predataList.add(book);
                 purchasetable.setItems(FXCollections.observableList(predataList));
@@ -666,17 +670,32 @@ public class PurcharestockController extends Deliver implements Initializable {
         try {
 
 
+           int b = JOptionPane.showConfirmDialog(null,"What Do you want?, You want Book List Data ,\nYouClick Ok");
 
-        itemcode.setText(_book.getBookid());
-        itemname.setText(_book.getBookname());
-        itemauthor.setValue(_book.getAid());
-        itemcategory.setValue(_book.getCid());
-        itemprice.setText(String.valueOf(_book.getPrice()));
-        itemtotal.setText(String.valueOf(_book.getPrice()*_book.getQuantity()));
+           if(b==0){
 
-        _book =null;
-        btnGet.setText("Get New Item");
-        btnGet.setStyle("-fx-background-color:#FC4035;");
+               itemcode.setText(_book.getBookid());
+               itemname.setText(_book.getBookname());
+               itemauthor.setValue(_book.getAid());
+               itemcategory.setValue(_book.getCid());
+               itemprice.setText(String.valueOf(_book.getPrice()));
+               itemtotal.setText(String.valueOf(_book.getPrice()*_book.getQuantity()));
+
+               _book =null;
+
+
+           }
+           else {
+
+               itemcode.setText(getBookID());
+
+
+           }
+
+
+
+            btnGet.setText("Get New Item");
+            btnGet.setStyle("-fx-background-color:#FC4035;");
 
 
         }catch (NullPointerException e){
