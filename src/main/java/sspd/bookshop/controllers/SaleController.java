@@ -1162,6 +1162,9 @@ public class SaleController extends Deliver implements Initializable  {
                 if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
                     return true; // Filter matches first name.
                 }
+                else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
                 else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
                 }
@@ -1172,7 +1175,6 @@ public class SaleController extends Deliver implements Initializable  {
                 else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
                 }
-
 
                 else
                     return false; // Does not match.
