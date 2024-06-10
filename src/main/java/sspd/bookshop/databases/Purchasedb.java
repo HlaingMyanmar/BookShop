@@ -118,6 +118,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
             pst.setInt(7,purchase.getQty());
             pst.setInt(8,purchase.getPrice());
 
+
             pst.executeUpdate();
 
 
@@ -126,6 +127,9 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
         } catch (SQLException e) {
+
+            e.printStackTrace();
+            e.getErrorCode();
 
 
 
@@ -155,6 +159,9 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
             pst.executeUpdate();
+
+
+
 
 
 

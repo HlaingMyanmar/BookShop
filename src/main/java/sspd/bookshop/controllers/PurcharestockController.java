@@ -103,10 +103,14 @@ public class PurcharestockController extends Deliver implements Initializable {
 
     ObservableList<Book> predataList = FXCollections.observableArrayList();
 
+    private  boolean check = false;
+
     @FXML
     void addItem(MouseEvent event) {
 
 
+
+        try{
 
         String itemcodee = itemcode.getText();
         String itemnamee =itemname.getText();
@@ -115,52 +119,12 @@ public class PurcharestockController extends Deliver implements Initializable {
         String itemautho= itemauthor.getValue();
         String itemca=itemcategory.getValue();
 
+
+
         Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca);
 
-        Bookdb bookdb = new Bookdb();
 
-
-
-        predataList .add(book);
-
-
-
-            purchasetable.setItems( predataList);
-
-
-            itemname.setText("");
-            itemauthor.setValue("");
-            itemcategory.setValue("");
-            itemqty.setText("");
-            itemprice.setText("");
-            itemtotal.setText("");
-
-
-        itemcodee =getBookID();
-
-        String id = itemcodee;
-
-        itemcode.setText("#bo"+(Integer.parseInt(id.substring(3))+1));
-
-    }
-    @FXML
-    void addlistItem(KeyEvent event) {
-
-        if(event.getCode()==KeyCode.ENTER){
-
-
-            String itemcodee = itemcode.getText();
-            String itemnamee =itemname.getText();
-            int  itemqtyy = Integer.parseInt(itemqty.getText());
-            int itempricee =Integer.parseInt(itemprice.getText());
-            String itemautho= itemauthor.getValue();
-            String itemca=itemcategory.getValue();
-
-            Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca);
-
-            Bookdb bookdb = new Bookdb();
-
-
+        if(!check){
 
             predataList .add(book);
 
@@ -177,9 +141,139 @@ public class PurcharestockController extends Deliver implements Initializable {
             itemtotal.setText("");
 
 
+            itemcodee =getBookID();
+
             String id = itemcodee;
 
-            itemcode.setText("#bo"+(Integer.parseInt(id.substring(3))+1));
+
+
+            check=true;
+
+
+        }
+        else {
+
+            boolean isDuplicate = predataList.stream()
+                    .anyMatch(b -> b.getBookid().equals(itemcode.getText()));
+
+            if (isDuplicate) {
+                JOptionPane.showMessageDialog(null, "Your Book ID Duplicate? "+"\nPlease Check this ID ...."+"\nYou decide New Book Insert or Old Book Duplicate","Duplicate Data",0);
+            } else {
+                predataList.add(book);
+                purchasetable.setItems(FXCollections.observableList(predataList));
+
+                itemname.setText("");
+                itemauthor.setValue("");
+                itemcategory.setValue("");
+                itemqty.setText("");
+                itemprice.setText("");
+                itemtotal.setText("");
+
+                itemcodee = getBookID();
+                String id = itemcodee;
+
+
+                check = true;
+
+
+           }
+        }
+
+
+
+        }catch (NumberFormatException e){
+
+            JOptionPane.showMessageDialog(null,"Please Fill Required Data ....");
+
+        }
+
+
+
+    }
+    @FXML
+    void addlistItem(KeyEvent event) {
+
+        if(event.getCode()==KeyCode.ENTER){
+
+
+            try{
+
+                String itemcodee = itemcode.getText();
+                String itemnamee =itemname.getText();
+                int  itemqtyy = Integer.parseInt(itemqty.getText());
+                int itempricee =Integer.parseInt(itemprice.getText());
+                String itemautho= itemauthor.getValue();
+                String itemca=itemcategory.getValue();
+
+
+
+                Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca);
+
+
+                if(!check){
+
+                    predataList .add(book);
+
+
+
+                    purchasetable.setItems( predataList);
+
+
+                    itemname.setText("");
+                    itemauthor.setValue("");
+                    itemcategory.setValue("");
+                    itemqty.setText("");
+                    itemprice.setText("");
+                    itemtotal.setText("");
+
+
+                    itemcodee =getBookID();
+
+                    String id = itemcodee;
+
+
+
+                    check=true;
+
+
+                }
+                else {
+
+                    boolean isDuplicate = predataList.stream()
+                            .anyMatch(b -> b.getBookid().equals(itemcode.getText()));
+
+                    if (isDuplicate) {
+                        JOptionPane.showMessageDialog(null, "Your Book ID Duplicate? "+"\nPlease Check this ID ...."+"\nYou decide New Book Insert or Old Book Duplicate","Duplicate Data",0);
+                    } else {
+                        predataList.add(book);
+                        purchasetable.setItems(FXCollections.observableList(predataList));
+
+                        itemname.setText("");
+                        itemauthor.setValue("");
+                        itemcategory.setValue("");
+                        itemqty.setText("");
+                        itemprice.setText("");
+                        itemtotal.setText("");
+
+                        itemcodee = getBookID();
+                        String id = itemcodee;
+
+
+                        check = true;
+
+
+                    }
+                }
+
+
+
+            }catch (NumberFormatException e){
+
+                JOptionPane.showMessageDialog(null,"Please Fill Required Data ....");
+
+            }
+
+
 
         }
 
@@ -257,10 +351,11 @@ public class PurcharestockController extends Deliver implements Initializable {
                 Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
                 purchasedb.create(p);
 
-                JOptionPane.showMessageDialog(null,"Insert Successful");
+
 
 
             }
+            JOptionPane.showMessageDialog(null,"Insert Successful");
 
             Stage subStage = (Stage) purchasetable.getScene().getWindow();
 
