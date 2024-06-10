@@ -167,6 +167,9 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     private TextField psearch;
 
+    @FXML
+    private TextField psearch1;
+
 
     public static int checkPoint = 0;
 
@@ -175,6 +178,8 @@ public class SaleController extends Deliver implements Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        purchasetable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
        // ->>> Author Set <<<<<-
@@ -944,6 +949,8 @@ public class SaleController extends Deliver implements Initializable  {
 
 
     private void setFilter(){
+
+
         ObservableList i = booktable.getSelectionModel().getSelectedItems();
 
         ObservableList<Book> updateList= FXCollections.observableArrayList();
@@ -1231,7 +1238,111 @@ public class SaleController extends Deliver implements Initializable  {
         getFindLoadBookData();
 
 
+
+
+
+
     }
+    @FXML
+    void searchpurchareAction(MouseEvent event){
+
+        if(psearch.getText().equals("")){
+
+            psearch1.setEditable(false);
+
+
+            JOptionPane.showMessageDialog(null,"Please First Start , start filter box","Notice",0);
+
+            psearch.setStyle("-fx-border-color:red;");
+
+
+
+            psearch.setPromptText("Please Fill Filter check!!!");
+
+
+        }
+        else {
+
+            psearch.setStyle("");
+
+
+            psearch1.setEditable(true);
+
+            purchasetable.getSelectionModel().selectAll();
+
+
+            setPurchaseFilter();
+
+
+        }
+
+    }
+
+    private void setPurchaseFilter(){
+
+        ObservableList i = purchasetable.getSelectionModel().getSelectedItems();
+
+        ObservableList<Purchase> updateList= FXCollections.observableArrayList();
+
+        int p=0;
+
+        for(Object z: i){
+
+            Purchase  purchase = (Purchase) i.get(p);
+            updateList.add(purchase);
+            p++;
+        }
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Purchase> filteredData = new FilteredList<>(updateList, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+
+        psearch1.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(filter -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                    return true; // Filter matches first name.
+                }
+                else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else
+                    return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Purchase> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(booktable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        booktable.setItems(sortedData);
+    }
+
+
 
 
 
