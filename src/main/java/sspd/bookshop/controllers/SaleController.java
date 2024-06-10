@@ -19,16 +19,23 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.databases.*;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.*;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -1350,7 +1357,7 @@ public class SaleController extends Deliver implements Initializable  {
 
 
     @FXML
-    void getPurchaseSelectPrint(MouseEvent event) {
+    void getPurchaseSelectPrint(MouseEvent event) throws FileNotFoundException, JRException {
 
 
 
@@ -1374,6 +1381,23 @@ public class SaleController extends Deliver implements Initializable  {
             updateList.add(report);
             p++;
         }
+
+
+        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(updateList);
+
+        Map<String,Object> parameters = new HashMap<>();
+        parameters.put("Parameter1",itemsJRBean);
+
+
+        InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\MyReports\\PurchaseReport.jrxml"));
+        JasperDesign jasperDesign = JRXmlLoader.load(input);
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
+
+
+        JasperViewer.viewReport(jasperPrint);
 
 
 

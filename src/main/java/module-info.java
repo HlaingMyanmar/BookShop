@@ -5,6 +5,7 @@ module sspd.bookshop.bookshop {
     requires javafx.graphics;
     requires javafx.base;
     requires java.desktop;
+    requires jasperreports;
 
 
     opens sspd.bookshop.models to javafx.fxml;
