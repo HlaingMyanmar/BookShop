@@ -47,7 +47,8 @@ public class Bookdb implements DataAccessObject<Book> {
                 String aid = rs.getString("aname");
                 String cid = rs.getString("cname");
 
-                Book b =new Book(bcode,bname,qty,price,aid,cid);
+
+                Book b =new Book(bcode,bname,qty,price,aid,cid,(qty*price));
 
                 booklist.add(b);
 

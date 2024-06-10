@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="sgerg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="1081.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
+<TabPane fx:id="sgerg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1360.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
   <tabs>
     <Tab text="Sale Lists">
       <content>
@@ -351,11 +351,12 @@
                   <TableView fx:id="booktable" layoutX="17.0" layoutY="213.0" prefHeight="407.0" prefWidth="1048.0" stylesheets="@../css/table.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
                      <columns>
                         <TableColumn fx:id="bcodeCol" prefWidth="110.0" text="Item Code" />
-                        <TableColumn fx:id="bnameCol" prefWidth="424.0" text="Description" />
-                        <TableColumn fx:id="bcategoryCol" prefWidth="141.0" text="Category" />
-                        <TableColumn fx:id="bauthorCol" prefWidth="158.0" text="Author" />
-                        <TableColumn fx:id="bqtyCol" prefWidth="76.0" text="Qty" />
-                        <TableColumn fx:id="bpriceCol" prefWidth="134.0" text="Price" />
+                        <TableColumn fx:id="bnameCol" prefWidth="433.6000061035156" text="Description" />
+                        <TableColumn fx:id="bcategoryCol" prefWidth="229.06671142578125" text="Category" />
+                        <TableColumn fx:id="bauthorCol" prefWidth="225.3333740234375" text="Author" />
+                        <TableColumn fx:id="bqtyCol" prefWidth="97.33331298828125" text="Qty" />
+                        <TableColumn fx:id="bpriceCol" prefWidth="107.20001220703125" text="Price" />
+                        <TableColumn fx:id="btotalCol" prefWidth="130.1334228515625" text="Total" />
                      </columns>
                   </TableView>
                   <TextField fx:id="searchBox" layoutX="57.0" layoutY="14.0" prefHeight="32.0" prefWidth="350.0" promptText="Start Search . ..................................">
@@ -564,7 +565,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="psearch" layoutX="401.0" layoutY="42.0" prefHeight="35.0" prefWidth="309.0" promptText="Search">
+                  <TextField fx:id="psearch" layoutX="401.0" layoutY="42.0" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="309.0" promptText="Search">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
@@ -574,17 +575,17 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="purchasetable" layoutX="17.0" layoutY="97.0" prefHeight="514.0" prefWidth="1057.0" stylesheets="@../css/table.css">
+                  <TableView fx:id="purchasetable" layoutX="17.0" layoutY="97.0" onMouseClicked="#purchasetableClickAction" prefHeight="582.0" prefWidth="1334.0" stylesheets="@../css/table.css">
                      <columns>
-                        <TableColumn fx:id="pcodeCol" prefWidth="94.93334579467773" text="P Code" />
-                        <TableColumn fx:id="pdateCol" prefWidth="97.59996032714844" text="P Date" />
-                        <TableColumn fx:id="pnameCol" prefWidth="250.9333038330078" text="Description" />
-                        <TableColumn fx:id="pcategoryCol" prefWidth="129.60000610351562" text="Category" />
-                        <TableColumn fx:id="pauthorCol" prefWidth="136.0" text="Author" />
                         <TableColumn fx:id="psupplierCol" prefWidth="120.0" text="Supplier Name" />
-                        <TableColumn fx:id="pqtyCol" prefWidth="64.7999267578125" text="Qty" />
-                        <TableColumn fx:id="ppriceCol" prefWidth="79.9998779296875" text="Price" />
-                        <TableColumn fx:id="ptotalCol" prefWidth="79.9998779296875" text="Total" />
+                        <TableColumn fx:id="pcodeCol" prefWidth="69.60005569458008" text="P Code" />
+                        <TableColumn fx:id="pdateCol" prefWidth="92.79996490478516" text="P Date" />
+                        <TableColumn fx:id="pnameCol" prefWidth="313.86669921875" text="Description" />
+                        <TableColumn fx:id="pcategoryCol" prefWidth="236.5333251953125" text="Category" />
+                        <TableColumn fx:id="pauthorCol" prefWidth="241.59991455078125" text="Author" />
+                        <TableColumn fx:id="pqtyCol" prefWidth="73.86651611328125" text="Qty" />
+                        <TableColumn fx:id="ppriceCol" prefWidth="98.1334228515625" text="Price" />
+                        <TableColumn fx:id="ptotalCol" prefWidth="86.933349609375" text="Total" />
                      </columns>
                   </TableView>
                   <DatePicker layoutX="182.0" layoutY="41.0" prefHeight="38.0" prefWidth="150.0" />
@@ -604,13 +605,13 @@
                         <Image url="@../image/find.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="1028.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="1309.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/printer.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="924.0" layoutY="19.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
-                  <Button layoutX="924.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="25.0" prefWidth="94.0" text="New Purchase" />
+                  <Button layoutX="1205.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
+                  <Button layoutX="1205.0" layoutY="62.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="25.0" prefWidth="94.0" text="New Purchase" />
                </children>
             </AnchorPane>
          </content>

@@ -2,6 +2,8 @@ package sspd.bookshop.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,8 +35,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static sspd.bookshop.controllers.SaleController.checkPoint;
+
 
 public class PurcharestockController extends Deliver implements Initializable {
+
+
+
 
     @FXML
     private TableColumn<Book, String> authorCol;
@@ -193,46 +200,67 @@ public class PurcharestockController extends Deliver implements Initializable {
     @FXML
     void confirmItem(MouseEvent event) {
 
+
+
         String puid = stockid.getText();
         Date pudate = Date.valueOf(stockdate.getText());
         String sid = supplierid.getValue();
 
-        int size = purchasetable.getItems().size();
+
+        if(supplierid.getValue() == null ||stockid.getText().equals("") || stockdate.getText().equals("")){
+
+            JOptionPane.showMessageDialog(null,"Please Insert Supplier ID");
+
+        }
+
+        else {
 
 
-        for(int i = 0;i<size;i++){
+            int size = purchasetable.getItems().size();
 
-            Book book = (Book)  purchasetable.getItems().get(i);
-            Bookdb bookdb = new Bookdb();
 
-            Purchasedb purchasedb = new Purchasedb();
+            for(int i = 0;i<size;i++){
 
-            if(!book.getBookid().equals( getBookID())){
+                Book book = (Book)  purchasetable.getItems().get(i);
+                Bookdb bookdb = new Bookdb();
+
+                Purchasedb purchasedb = new Purchasedb();
+
+                if(!book.getBookid().equals( getBookID())){
 
 //                Purchasedb purchasedb = new Purchasedb();
 //
 //                Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
 //                purchasedb.create(p);
 //
-                bookdb.sumQty(book);
+                    bookdb.sumQty(book);
+
+                }
+                else {
+
+
+
+                    Book newBook = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
+
+                    bookdb.create(newBook);
+
+
+
+                }
+
+                Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
+                purchasedb.create(p);
+
 
             }
-            else {
 
-                System.out.println(book.getCid());
-
-                Book newBook = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
-
-                bookdb.create(newBook);
+            Stage subStage = (Stage) purchasetable.getScene().getWindow();
 
 
 
-            }
+            checkPoint = 1;
 
-            Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
-            purchasedb.create(p);
-
-
+            subStage.close();
 
         }
 
@@ -248,7 +276,10 @@ public class PurcharestockController extends Deliver implements Initializable {
 
 
 
+
+
     }
+
     @FXML
 
     void getTotal(KeyEvent event){
@@ -356,21 +387,29 @@ public class PurcharestockController extends Deliver implements Initializable {
     }
 
 
-    private String getID(){
+    private String getPurchaseID(){
 
         String defaultid = "#it1";
 
         Purchasedb pd = new Purchasedb();
         List<Purchase> purchaseList = pd.getList();
 
-        if(purchaseList .size()==0){
+
+
+        if(purchaseList.isEmpty()){
 
             return defaultid;
 
         }
         else {
 
-            return "#it"+ Integer.toString(purchaseList .size()+1);
+            String id = purchaseList.getFirst().getPuid();
+
+            String subid = id.substring(3);
+
+
+            return "#it"+ (Integer.parseInt(subid)+1);
+
 
         }
 
@@ -394,7 +433,7 @@ public class PurcharestockController extends Deliver implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        stockid.setText(getID());
+        stockid.setText(getPurchaseID());
 
         suppliername.setItems(getSupplierNameList());
 

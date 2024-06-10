@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -28,6 +30,10 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class SaleController extends Deliver implements Initializable  {
 
@@ -126,10 +132,13 @@ public class SaleController extends Deliver implements Initializable  {
     private TableColumn<Book, String> bnameCol;
 
     @FXML
-    private TableColumn<Book, String> bpriceCol;
+    private TableColumn<Book, Integer> bpriceCol;
 
     @FXML
-    private TableColumn<Book, String> bqtyCol;
+    private TableColumn<Book, Integer> bqtyCol;
+
+    @FXML
+    private TableColumn<Book, Integer> btotalCol;
 
     @FXML
     private TextField searchBox;
@@ -189,6 +198,9 @@ public class SaleController extends Deliver implements Initializable  {
     private TextField psearch;
 
 
+    public static int checkPoint = 0;
+
+
 
 
 
@@ -203,6 +215,11 @@ public class SaleController extends Deliver implements Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
+
+
+
 
 
 
@@ -907,14 +924,15 @@ public class SaleController extends Deliver implements Initializable  {
         bnameCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookname"));
         bcategoryCol.setCellValueFactory(new PropertyValueFactory<Book,String>("cid"));
         bauthorCol.setCellValueFactory(new PropertyValueFactory<Book,String>("aid"));
-        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book,String>("quantity"));
-        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book,String>("price"));
+        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("quantity"));
+        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("price"));
+        btotalCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("total"));
 
 
 
     }
 
-    private void getFindLoadBookData() {
+    public  void getFindLoadBookData() {
 
 
 
@@ -1222,7 +1240,10 @@ public class SaleController extends Deliver implements Initializable  {
         try {
 
 
+
             scene = new Scene(fxmlLoader.load());
+
+
 
 
         } catch (IOException e) {
@@ -1257,7 +1278,7 @@ public class SaleController extends Deliver implements Initializable  {
 
     }
 
-    private void getFindLoadPurchaseData() {
+    public void getFindLoadPurchaseData() {
 
         ObservableList<Purchase> observableList = FXCollections.observableArrayList();
 
@@ -1320,6 +1341,46 @@ public class SaleController extends Deliver implements Initializable  {
 
 
     }
+
+    private void getAutoRunning(){
+
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+        executor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+
+                getFindLoadPurchaseData();
+
+
+            }
+        },0,5, TimeUnit.SECONDS);
+    }
+
+    @FXML
+    void purchasetableClickAction(MouseEvent event) {
+
+        if(event.getClickCount()==1 && checkPoint==1){
+
+            getFindLoadPurchaseData();
+
+            checkPoint = 0;
+
+        }
+
+
+
+    }
+
+    @FXML
+    void searchPurchareBookAction(MouseEvent event){
+
+        getFindLoadPurchaseData();
+        getFindLoadBookData();
+
+
+    }
+
 
 
 
