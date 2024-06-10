@@ -93,6 +93,8 @@ public class Bookdb implements DataAccessObject<Book> {
 
     @Override
     public void create(Book b) {
+
+
         String sql = "INSERT INTO book(bcode, name, qty, price, cid, aid) VALUES (?,?,?,?,?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {

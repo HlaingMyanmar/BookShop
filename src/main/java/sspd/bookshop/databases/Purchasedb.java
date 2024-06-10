@@ -2,6 +2,7 @@ package sspd.bookshop.databases;
 
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 
 import javax.swing.*;
@@ -137,4 +138,70 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     public void delete(Purchase purchase) {
 
     }
+
+    public void createBook(Book b) {
+
+
+        String sql = "INSERT INTO book(bcode, name, qty, price, cid, aid) VALUES (?,?,?,?,?,?)";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1,b.getBookid());
+            pst.setString(2,b.getBookname());
+            pst.setInt(3,b.getQuantity());
+            pst.setInt(4,b.getPrice());
+            pst.setString(5,b.getCid());
+            pst.setString(6,b.getAid());
+
+
+            pst.executeUpdate();
+
+
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+
+
+        }
+
+    }
+
+    public void sumBookQty(Book book){
+
+        String sql = " UPDATE book SET qty = qty + ?, price = ?  WHERE bcode = ?";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,book.getQuantity());
+            pst.setInt(2,book.getPrice());
+            pst.setString(3,book.getBookid());
+            pst.executeUpdate();
+
+
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
 }

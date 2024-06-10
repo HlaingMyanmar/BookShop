@@ -218,13 +218,15 @@ public class PurcharestockController extends Deliver implements Initializable {
 
             int size = purchasetable.getItems().size();
 
+            Bookdb bookdb = new Bookdb();
+
+            Purchasedb purchasedb = new Purchasedb();
+
 
             for(int i = 0;i<size;i++){
 
                 Book book = (Book)  purchasetable.getItems().get(i);
-                Bookdb bookdb = new Bookdb();
 
-                Purchasedb purchasedb = new Purchasedb();
 
                 if(!book.getBookid().equals( getBookID())){
 
@@ -233,7 +235,9 @@ public class PurcharestockController extends Deliver implements Initializable {
 //                Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
 //                purchasedb.create(p);
 //
-                    bookdb.sumQty(book);
+                   // bookdb.sumQty(book);
+
+                    purchasedb.sumBookQty(book);
 
                 }
                 else {
@@ -242,7 +246,9 @@ public class PurcharestockController extends Deliver implements Initializable {
 
                     Book newBook = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
 
-                    bookdb.create(newBook);
+                   // bookdb.create(newBook);
+
+                    purchasedb.createBook(newBook);
 
 
 

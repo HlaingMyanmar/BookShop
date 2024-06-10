@@ -125,7 +125,6 @@
       </Label>
       <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="80.0" onKeyPressed="#findSupplierID" onMouseExited="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
       <ComboBox fx:id="supplierid" layoutX="874.0" layoutY="37.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
-      <Button layoutX="385.0" layoutY="78.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Supplier" />
       <MenuBar prefHeight="26.0" prefWidth="1079.0">
         <menus>
           <Menu mnemonicParsing="false" text="Help (F1)">
@@ -135,6 +134,6 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="btnGet" layoutX="529.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#getFilterData" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Get" />
+      <Button fx:id="btnGet" layoutX="263.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#getFilterData" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Get" />
    </children>
 </AnchorPane>
