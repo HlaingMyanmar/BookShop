@@ -18,7 +18,17 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     public List<Purchase> getList() {
 
 
-       String sql = "SELECT * FROM `purchase` ORDER BY cast(SubString(puid,4) as UNSIGNED) DESC";
+        String sql = """
+                
+                SELECT p.pudate,s.suname,b.name,c.cname,a.aname,p.puid,p.qty,p.price
+                FROM purchase p
+                inner join book b on b.bcode=p.bcode
+                inner join category c on c.cid = p.bcategory
+                inner join author a on a.aid = p.bauthor
+                inner join supplier s on s.suid = p.sid
+                ORDER BY cast(SubString(p.puid,4) as UNSIGNED) DESC
+         
+                """;
 
        try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -30,10 +40,10 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
                 String puid = rs.getString("puid");
                 Date pudate = rs.getDate("pudate");
-                String bcode = rs.getString("bcode");
-                String bcategory = rs.getString("bcategory");
-                String bauthor = rs.getString("bauthor");
-                String sid = rs.getString("sid");
+                String bcode = rs.getString("name");
+                String bcategory = rs.getString("cname");
+                String bauthor = rs.getString("aname");
+                String sid = rs.getString("suname");
                 int qty = rs.getInt("qty");
                 int price  = rs.getInt("price");
 
