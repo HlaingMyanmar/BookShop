@@ -218,7 +218,7 @@ public class PurcharestockController extends Deliver implements Initializable {
 
             int size = purchasetable.getItems().size();
 
-            Bookdb bookdb = new Bookdb();
+           // Bookdb bookdb = new Bookdb();
 
             Purchasedb purchasedb = new Purchasedb();
 
@@ -256,6 +256,8 @@ public class PurcharestockController extends Deliver implements Initializable {
 
                 Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
                 purchasedb.create(p);
+
+                JOptionPane.showMessageDialog(null,"Insert Successful");
 
 
             }

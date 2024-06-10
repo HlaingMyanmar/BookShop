@@ -120,7 +120,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Insert Successful");
+
 
 
 
@@ -129,7 +129,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
 
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,"Insert Purchase DB Error");
         }
 
     }
