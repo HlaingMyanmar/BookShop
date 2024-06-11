@@ -1,61 +1,92 @@
-create database bookshop_db;
-use bookshop_db;
+-- Create the database
+CREATE DATABASE IF NOT EXISTS bookshop_db;
+USE bookshop_db;
 
-create table category(
-cid varchar(15) Primary key not null,
-cname varchar(20));
+-- Table: category
+CREATE TABLE category (
+    cid VARCHAR(15) PRIMARY KEY NOT NULL,
+    cname VARCHAR(20) NOT NULL
+);
 
-create table author(
-aid varchar(15) Primary key not null,
-aname varchar(20));
+-- Table: author
+CREATE TABLE author (
+    aid VARCHAR(15) PRIMARY KEY NOT NULL,
+    aname VARCHAR(20) NOT NULL
+);
 
-create table book(
- bcode varchar(15)Primary key not null,
- name varchar(30) not null,
- qty int,
- price int not null,
- cid varchar(15) not null,
- aid varchar(15) not null,
- FOREIGN KEY (cid) references category(cid),
- FOREIGN KEY (aid) references author(aid));
+-- Table: book
+CREATE TABLE book (
+    bcode VARCHAR(15) PRIMARY KEY NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    qty INT,
+    price INT NOT NULL,
+    cid VARCHAR(15) NOT NULL,
+    aid VARCHAR(15) NOT NULL,
+    FOREIGN KEY (cid) REFERENCES category(cid),
+    FOREIGN KEY (aid) REFERENCES author(aid)
+);
 
-create table supplier(
-    suid varchar(15) Primary key not null,
-    suname varchar(45),
-    suphone varchar(20),
-    suaddress varchar(30));
+-- Table: supplier
+CREATE TABLE supplier (
+    sid VARCHAR(15) PRIMARY KEY NOT NULL,
+    suname VARCHAR(45),
+    suphone VARCHAR(20),
+    suaddress VARCHAR(30)
+);
 
-create table purchase(
-    stockinid varchar(15) not null,
-    stockdate Date not null,
-    bookcode varchar(15),
-    bookcategory varchar(15),
-    bookauthor varchar(15),
-    supplierid varchar(15),
-    qty int,
-    price int,
-    Primary key(stockinid,bookcode,supplierid),
-  FOREIGN KEY (bookcode) references book(bcode),
-  FOREIGN KEY (supplierid) references supplier(suid));
+-- Table: purchase
+CREATE TABLE purchase (
+    puid VARCHAR(15) NOT NULL,
+    pudate DATE NOT NULL,
+    bcode VARCHAR(15),
+    sid VARCHAR(15),
+    qty INT,
+    price INT,
+    PRIMARY KEY (puid, bcode, sid),
+    FOREIGN KEY (bcode) REFERENCES book(bcode),
+    FOREIGN KEY (sid) REFERENCES supplier(sid)
+);
 
-create table order(
+-- Table: PurchaseReturn
+CREATE TABLE PurchaseReturn (
+    rid INT PRIMARY KEY AUTO_INCREMENT,
+    puid VARCHAR(15) NOT NULL,
+    rdate DATE NOT NULL,
+    FOREIGN KEY (puid) REFERENCES purchase(puid)
+);
 
-orid varchar(15) Primary key not null,
-ordate date not null,
-cuname varchar(20),
-cuphone varchar(20));
+-- Table: PurchaseReturnDetails
+CREATE TABLE PurchaseReturnDetails (
+    rdid VARCHAR(15) NOT NULL,
+    rid INT NOT NULL,
+    bcode VARCHAR(15),
+    qty INT NOT NULL,
+    amount INT NOT NULL,
+    returnReason VARCHAR(255),
+    PRIMARY KEY (rdid, rid, bcode),
+    FOREIGN KEY (bcode) REFERENCES book(bcode),
+    FOREIGN KEY (rid) REFERENCES PurchaseReturn(rid)
+);
 
-create table sale(
+-- Table: order
+CREATE TABLE orders (
+    orid VARCHAR(15) PRIMARY KEY NOT NULL,
+    ordate DATE NOT NULL,
+    cuname VARCHAR(20),
+    cuphone VARCHAR(20)
+);
 
-orid varchar(15) not null,
-bcode varchar(15) not null,
-cid varchar(15) not null,
-aid varchar(15) not null,
-qty int,
-price int,
-Primary key(orid,bcode,cid,aid),
-FOREIGN KEY (bcode) references book(bcode),
-FOREIGN KEY (orid) references order(orid),
-FOREIGN KEY (cid) references book(cid),
-FOREIGN KEY (aid) references book(aid)
+-- Table: sale
+CREATE TABLE sale (
+    orid VARCHAR(15) NOT NULL,
+    bcode VARCHAR(15) NOT NULL,
+    cid VARCHAR(15) NOT NULL,
+    aid VARCHAR(15) NOT NULL,
+    qty INT,
+    price INT,
+    PRIMARY KEY (orid, bcode, cid, aid),
+    FOREIGN KEY (bcode) REFERENCES book(bcode),
+    FOREIGN KEY (orid) REFERENCES orders(orid),
+    FOREIGN KEY (cid) REFERENCES category(cid),
+    FOREIGN KEY (aid) REFERENCES author(aid)
 );

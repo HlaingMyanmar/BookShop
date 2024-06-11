@@ -1,137 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#helpAction" prefHeight="695.0" prefWidth="1079.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.PurchaseController">
+<AnchorPane onKeyPressed="#helpAction" prefHeight="417.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.PurchaseController">
    <children>
-      <AnchorPane layoutX="7.0" layoutY="87.0" prefHeight="197.0" prefWidth="1069.0" styleClass="pane" stylesheets="@../css/pane1.css">
+      <AnchorPane layoutX="6.0" layoutY="77.0" prefHeight="271.0" prefWidth="342.0" styleClass="pane" stylesheets="@../css/pane1.css">
          <children>
-            <TextField fx:id="itemcode" layoutX="10.0" layoutY="27.0" onKeyPressed="#itemcodeKeyAction" prefHeight="32.0" prefWidth="132.0" promptText="Customer Name" AnchorPane.leftAnchor="10.0">
+            <TextField fx:id="itemtotal" editable="false" layoutX="159.0" layoutY="99.0" prefHeight="32.0" prefWidth="166.0" promptText="Total">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <Label layoutX="9.0" layoutY="5.0" text="Item  Code :">
+            <Label layoutX="161.0" layoutY="77.0" text="Amount :">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="itemname" layoutX="151.20000000000002" layoutY="27.0" prefHeight="32.0" prefWidth="420.0" promptText="Description">
+            <Label layoutX="18.0" layoutY="140.0" text="Reason : ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="premark" layoutX="18.0" layoutY="163.0" prefHeight="92.0" prefWidth="304.0" />
+            <TextField fx:id="itemcode" layoutX="16.0" layoutY="37.0" onKeyPressed="#itemcodeKeyAction" prefHeight="32.0" prefWidth="132.0" promptText="Purchase ID" AnchorPane.leftAnchor="16.0">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="itemauthor" editable="true" layoutX="582.0" layoutY="26.0" prefHeight="32.0" prefWidth="208.0" promptText="Please Choose Category" />
-            <ComboBox fx:id="itemcategory" editable="true" layoutX="802.0" layoutY="25.0" prefHeight="32.0" prefWidth="244.0" promptText="Please Choose Category" />
-            <TextField fx:id="itemqty" layoutX="10.0" layoutY="88.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="132.0" promptText="Qty">
+            <Label layoutX="17.0" layoutY="15.0" text="Purchase ID :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="14.0" text="Book Code">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="stockdate1" editable="false" layoutX="159.0" layoutY="37.0" prefHeight="32.0" prefWidth="166.0" promptText="Book Code">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="itemprice" layoutX="9.0" layoutY="147.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="132.0" promptText="Price">
+            <TextField fx:id="itemqty" layoutX="17.0" layoutY="99.0" onKeyPressed="#getTotal" prefHeight="32.0" prefWidth="132.0" promptText="Qty">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="itemtotal" editable="false" layoutX="428.0" layoutY="89.0" prefHeight="32.0" prefWidth="180.0" promptText="Total">
-               <font>
-                  <Font name="Pyidaungsu" size="12.0" />
-               </font>
-            </TextField>
-            <Button layoutX="429.0" layoutY="148.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
-            <Label layoutX="150.0" layoutY="4.0" text="Description :">
+            <Label layoutX="16.0" layoutY="77.0" text="Qty : ">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="9.0" layoutY="125.0" text="Price :">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="803.0" layoutY="6.0" text="Category :">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="582.0" layoutY="6.0" text="Authors :">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="9.0" layoutY="66.0" text="Qty : ">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="430.0" layoutY="67.0" text="Total">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Button layoutX="528.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
-            <Button layoutX="627.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
-            <Label layoutX="152.0" layoutY="65.0" text="Remarks :">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="premark" layoutX="152.0" layoutY="88.0" prefHeight="92.0" prefWidth="263.0" />
          </children>
       </AnchorPane>
-      <TableView fx:id="purchasetable" layoutX="12.0" layoutY="317.0" prefHeight="369.0" prefWidth="1067.0" stylesheets="@../css/table.css">
-         <columns>
-            <TableColumn fx:id="codeCol" prefWidth="83.0" text="Item Code" />
-            <TableColumn fx:id="nameCol" prefWidth="415.1999816894531" text="Description" />
-            <TableColumn fx:id="categroyCol" prefWidth="165.60000610351562" text="Category" />
-            <TableColumn fx:id="authorCol" prefWidth="175.20001220703125" text="Author" />
-            <TableColumn fx:id="qtyCol" prefWidth="40.79998779296875" text="Qty" />
-            <TableColumn fx:id="priceCol" prefWidth="79.9998779296875" text="Price" />
-            <TableColumn fx:id="remarkCol" prefWidth="104.0" text="Remark" />
-         </columns>
-      </TableView>
-      <TextField fx:id="stockid" editable="false" layoutX="91.0" layoutY="6.0" prefHeight="32.0" prefWidth="166.0" promptText="ID">
+      <TextField fx:id="stockdate" editable="false" layoutX="186.0" layoutY="37.0" prefHeight="32.0" prefWidth="166.0" promptText="Date">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
       </TextField>
-      <Label layoutX="8.0" layoutY="13.0" text="StockIn ID:">
+      <Label layoutX="186.0" layoutY="16.0" text="Return Date :">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="stockdate" editable="false" layoutX="90.0" layoutY="47.0" prefHeight="32.0" prefWidth="167.0" promptText="Date">
+      <Label layoutX="9.0" layoutY="14.0" text="Return ID: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="stockid1" editable="false" layoutX="9.0" layoutY="37.0" prefHeight="32.0" prefWidth="166.0" promptText="Return Detail ID">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
       </TextField>
-      <Label layoutX="8.0" layoutY="54.0" text="StockIn Date:">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="787.0" layoutY="13.0" text="Supplier ID :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="769.0" layoutY="56.0" text="Supplier Name:">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="suppliername" editable="true" layoutX="874.0" layoutY="48.0" onKeyPressed="#findSupplierID" onMouseExited="#findSupplierIDAction" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose  Name" />
-      <ComboBox fx:id="supplierid" layoutX="874.0" layoutY="5.0" prefHeight="34.0" prefWidth="189.0" promptText="Please Choose Supplier ID" />
-      <Button fx:id="btnGet" layoutX="263.0" layoutY="49.0" mnemonicParsing="false" onMouseClicked="#getFilterData" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Get" />
-      <JFXButton layoutX="405.0" layoutY="50.0" prefHeight="31.0" prefWidth="132.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Net Profit" />
+      <Button layoutX="26.0" layoutY="365.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
+      <Button layoutX="125.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
+      <Button layoutX="224.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
    </children>
 </AnchorPane>
