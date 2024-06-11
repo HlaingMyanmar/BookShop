@@ -11,19 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.databases.*;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.*;
@@ -33,11 +27,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.sql.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.concurrent.Executor;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -1107,7 +1097,7 @@ public class SaleController extends Deliver implements Initializable  {
 
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/stockIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/purchase.fxml"));
         Scene scene = null;
 
 
@@ -1379,50 +1369,6 @@ public class SaleController extends Deliver implements Initializable  {
     @FXML
     void getPurchaseSelectPrint(MouseEvent event) throws FileNotFoundException, JRException {
 
-
-
-
-
-        ObservableList<Purchase> i =purchasetable.getSelectionModel().getSelectedItems();
-
-
-
-        ObservableList<Purchase> updateList= FXCollections.observableArrayList();
-
-
-
-        int p=0;
-
-        for(Object z: i){
-
-           // i.get(1).toString();
-
-            Purchase report = (Purchase) i.get(p);
-            updateList.add(report);
-            p++;
-        }
-
-
-        try {
-
-
-            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(updateList);
-
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("CollectionBeanParam", itemsJRBean);
-
-            InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\MyReports\\PurchaseReport.jrxml"));
-            JasperDesign jasperDesign = JRXmlLoader.load(input);
-
-            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
-
-            JasperViewer.viewReport(jasperPrint, false);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
 

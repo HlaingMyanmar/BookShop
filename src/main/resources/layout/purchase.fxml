@@ -49,7 +49,7 @@
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <Button layoutX="579.0" layoutY="83.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
+            <Button layoutX="582.0" layoutY="84.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
             <Label layoutX="150.0" layoutY="4.0" text="Description :">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -80,8 +80,8 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="678.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
-            <Button layoutX="777.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
+            <Button layoutX="681.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
+            <Button layoutX="780.0" layoutY="84.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
          </children>
       </AnchorPane>
       <TableView fx:id="purchasetable" layoutX="12.0" layoutY="274.0" prefHeight="369.0" prefWidth="1067.0" stylesheets="@../css/table.css">
@@ -136,6 +136,6 @@
         </menus>
       </MenuBar>
       <Button fx:id="btnGet" layoutX="263.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#getFilterData" prefHeight="31.0" prefWidth="130.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Get" />
-      <JFXButton layoutX="405.0" layoutY="84.0" prefHeight="31.0" prefWidth="132.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Net Profit" />
+      <JFXButton layoutX="405.0" layoutY="82.0" prefHeight="31.0" prefWidth="132.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Net Profit" />
    </children>
 </AnchorPane>

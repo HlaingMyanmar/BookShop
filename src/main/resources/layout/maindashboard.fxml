@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -18,21 +17,11 @@
 
 <TabPane fx:id="sgerg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1350.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
   <tabs>
-    <Tab text="Sale Lists">
+    <Tab text="Orders">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="772.0">
                <children>
-                  <TextField layoutX="395.0" layoutY="35.0" prefHeight="35.0" prefWidth="309.0" promptText="Search">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="14.0" layoutY="7.0" text="Start Date">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TableView layoutX="14.0" layoutY="100.0" prefHeight="396.0" prefWidth="797.0" stylesheets="@../css/table.css">
+                  <TableView layoutX="277.0" layoutY="233.0" prefHeight="396.0" prefWidth="797.0" stylesheets="@../css/table.css">
                      <columns>
                         <TableColumn prefWidth="131.0" text="Order Date" />
                         <TableColumn prefWidth="144.0" text="Order ID" />
@@ -41,168 +30,14 @@
                         <TableColumn prefWidth="126.0" text="Total Amount" />
                      </columns>
                   </TableView>
-                  <DatePicker layoutX="14.0" layoutY="32.0" prefHeight="38.0" prefWidth="150.0" />
-                  <Label layoutX="175.0" layoutY="7.0" text="End Date">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <DatePicker layoutX="173.0" layoutY="32.0" prefHeight="38.0" prefWidth="150.0" />
-                  <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="334.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/filter.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="722.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/find.png" />
-                     </image>
-                  </ImageView>
-                  <Line endX="681.0" layoutX="115.0" layoutY="91.0" startX="-100.0" />
-                  <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="12.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+                  <Line endX="681.0" layoutX="378.0" layoutY="224.0" startX="-100.0" />
+                  <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="1194.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/printer.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="52.0" layoutY="512.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Sale">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <AnchorPane layoutX="7.0" layoutY="86.0" prefHeight="135.0" prefWidth="572.0" styleClass="pane" stylesheets="@../css/pane1.css" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="243.0">
-                     <children>
-                        <TextField layoutX="10.0" layoutY="27.0" prefHeight="32.0" prefWidth="132.0" promptText="Customer Name" AnchorPane.leftAnchor="10.0">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="9.0" layoutY="5.0" text="Item  Code :">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField layoutX="153.0" layoutY="26.0" prefHeight="32.0" prefWidth="237.0" promptText="Description" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="179.0">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <TextField layoutX="253.0" layoutY="88.0" prefHeight="32.0" prefWidth="136.0" promptText="Price">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="150.0" layoutY="4.0" text="Description :">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="255.0" layoutY="66.0" text="Price :">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" layoutX="399.0" layoutY="26.0" prefHeight="32.0" prefWidth="154.0" promptText="Category">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="398.0" layoutY="4.0" text="Category :">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField layoutX="10.0" layoutY="88.0" prefHeight="32.0" prefWidth="131.0" promptText="Author Name" AnchorPane.leftAnchor="10.0">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="9.0" layoutY="66.0" text="Authors :">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField layoutX="152.0" layoutY="88.0" prefHeight="32.0" prefWidth="90.0" promptText="Qty">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="151.0" layoutY="66.0" text="Qty : ">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" layoutX="399.0" layoutY="88.0" prefHeight="32.0" prefWidth="156.0" promptText="Total">
-                           <font>
-                              <Font name="Pyidaungsu" size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="401.0" layoutY="66.0" text="Total">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <TableView layoutX="6.0" layoutY="236.0" prefHeight="290.0" prefWidth="784.0" stylesheets="@../css/table.css">
-                    <columns>
-                      <TableColumn prefWidth="95.0" text="Item Code" />
-                      <TableColumn prefWidth="218.0" text="Description" />
-                        <TableColumn prefWidth="158.0" text="Category" />
-                        <TableColumn prefWidth="122.0" text="Author" />
-                        <TableColumn prefWidth="40.0" text="Qty" />
-                        <TableColumn prefWidth="70.0" text="Price" />
-                        <TableColumn prefWidth="79.0" text="Total" />
-                    </columns>
-                  </TableView>
-                  <TextField layoutX="76.0" layoutY="7.0" prefHeight="32.0" prefWidth="128.0" promptText="Order ID" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="606.0">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="6.0" layoutY="14.0" text="Order ID:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="76.0" layoutY="46.0" prefHeight="32.0" prefWidth="127.0" promptText="Order Date">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="6.0" layoutY="53.0" text="Order Date:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="614.0" layoutY="7.0" prefHeight="22.0" prefWidth="173.0" promptText="Customer Name">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="514.0" layoutY="14.0" text="Customer Name:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="513.0" layoutY="53.0" text="Customer Phone:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="614.0" layoutY="46.0" prefHeight="22.0" prefWidth="173.0" promptText="Customer Phone">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Button layoutX="590.0" layoutY="89.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
-                  <Button layoutX="590.0" layoutY="135.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Edit" />
-                  <Button layoutX="590.0" layoutY="181.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
-                  <Button layoutX="701.0" layoutY="135.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Pay" />
-                  <Button layoutX="701.0" layoutY="181.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
-                  <Button layoutX="701.0" layoutY="89.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Clear" />
+                  <Button layoutX="1234.0" layoutY="84.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
+                  <Button layoutX="1234.0" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -557,6 +392,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
+                  <Button layoutX="1017.0" layoutY="56.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="141.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Purchase Return" />
                </children>
             </AnchorPane>
          </content>

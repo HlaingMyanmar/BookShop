@@ -38,21 +38,24 @@ create table purchase(
   FOREIGN KEY (bookcode) references book(bcode),
   FOREIGN KEY (supplierid) references supplier(suid));
 
-create table sale(
+create table order(
 
 orid varchar(15) Primary key not null,
 ordate date not null,
 cuname varchar(20),
-cuphone varchar(20),
-total int);
+cuphone varchar(20));
 
-create table stockout(
+create table sale(
 
 orid varchar(15) not null,
 bcode varchar(15) not null,
+cid varchar(15) not null,
+aid varchar(15) not null,
 qty int,
 price int,
-Primary key(orid,bcode),
+Primary key(orid,bcode,cid,aid),
 FOREIGN KEY (bcode) references book(bcode),
-FOREIGN KEY (orid) references sale(orid)
+FOREIGN KEY (orid) references order(orid),
+FOREIGN KEY (cid) references book(cid),
+FOREIGN KEY (aid) references book(aid)
 );
