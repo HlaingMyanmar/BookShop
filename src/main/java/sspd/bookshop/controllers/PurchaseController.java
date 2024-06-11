@@ -2,8 +2,6 @@ package sspd.bookshop.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,10 +33,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static sspd.bookshop.controllers.SaleController.checkPoint;
+import static sspd.bookshop.controllers.DashboardController.checkPoint;
 
 
-public class PurcharestockController extends Deliver implements Initializable {
+public class PurchaseController extends Deliver implements Initializable {
 
 
 

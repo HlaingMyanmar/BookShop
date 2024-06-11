@@ -32,7 +32,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SaleController extends Deliver implements Initializable  {
+public class DashboardController extends Deliver implements Initializable  {
 
 
     @FXML
