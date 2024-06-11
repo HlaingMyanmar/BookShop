@@ -51,6 +51,9 @@ public class PurchaseController extends Deliver implements Initializable {
     private TableColumn<Book, String> codeCol;
 
     @FXML
+    private TableColumn<Purchase, String> remarkCol;
+
+    @FXML
     private ComboBox<String> itemauthor;
 
     @FXML
@@ -97,6 +100,9 @@ public class PurchaseController extends Deliver implements Initializable {
     @FXML
     private ComboBox<String> suppliername;
 
+    @FXML
+    private TextArea premark;
+
 
 
     ObservableList<Book> predataList = FXCollections.observableArrayList();
@@ -105,6 +111,8 @@ public class PurchaseController extends Deliver implements Initializable {
 
     @FXML
     void addItem(MouseEvent event) {
+
+
 
 
 
@@ -302,6 +310,12 @@ public class PurchaseController extends Deliver implements Initializable {
         Date pudate = Date.valueOf(stockdate.getText());
         String sid = supplierid.getValue();
 
+        String remarks =premark.getText();
+
+
+
+
+
 
         if(supplierid.getValue() == null ||stockid.getText().equals("") || stockdate.getText().equals("")){
 
@@ -310,6 +324,8 @@ public class PurchaseController extends Deliver implements Initializable {
         }
 
         else {
+
+
 
 
             int size = purchasetable.getItems().size();
@@ -350,7 +366,7 @@ public class PurchaseController extends Deliver implements Initializable {
 
                 }
 
-                Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice());
+                Purchase p = new Purchase(puid,pudate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),sid,book.getQuantity(),book.getPrice(),remarks);
                 purchasedb.create(p);
 
 
@@ -530,6 +546,8 @@ public class PurchaseController extends Deliver implements Initializable {
         authorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
 
 
     }

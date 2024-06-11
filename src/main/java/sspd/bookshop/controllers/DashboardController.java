@@ -1,5 +1,6 @@
 package sspd.bookshop.controllers;
 
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -127,6 +128,12 @@ public class DashboardController extends Deliver implements Initializable  {
     private TextField searchBox;
     @FXML
     private TextField searchBox1;
+
+    @FXML
+    private JFXCheckBox purchaseCb;
+
+    @FXML
+    private JFXCheckBox purchasereturnCb;
 
 
 
@@ -378,6 +385,12 @@ public class DashboardController extends Deliver implements Initializable  {
         getIniPurchaseTable();
 
         getFindLoadPurchaseData();
+
+
+
+
+
+
 
 
 
@@ -1409,6 +1422,36 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
+    @FXML
+    void purchasecheckBoxAction(MouseEvent event) {
+
+
+        if(purchaseCb.isSelected()){
+
+            purchasereturnCb.setSelected(false);
+
+        }
+        else {
+            purchasereturnCb.setSelected(true);
+        }
+
+    }
+
+
+    @FXML
+    void purchasereturncheckBoxAction(MouseEvent event) {
+
+
+        if(purchasereturnCb.isSelected()){
+
+            purchaseCb.setSelected(false);
+
+        }
+        else {
+            purchaseCb.setSelected(true);
+        }
+
+    }
 
 
 

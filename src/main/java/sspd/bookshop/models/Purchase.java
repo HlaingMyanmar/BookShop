@@ -13,6 +13,8 @@ public class Purchase {
     private int qty;
     private int price;
     private int total;
+    private String remark;
+
 
     public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price, int total) {
         this.puid = puid;
@@ -26,7 +28,7 @@ public class Purchase {
         this.total = total;
     }
 
-    public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price) {
+    public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price,String remark) {
         this.puid = puid;
         this.price = price;
         this.qty = qty;
@@ -35,6 +37,15 @@ public class Purchase {
         this.cid = cid;
         this.bcode = bcode;
         this.pudate = pudate;
+        this.remark = remark;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     @Override
@@ -49,6 +60,7 @@ public class Purchase {
                 ", qty=" + qty +
                 ", price=" + price +
                 ", total=" + total +
+                ", remark='" + remark + '\'' +
                 '}';
     }
 

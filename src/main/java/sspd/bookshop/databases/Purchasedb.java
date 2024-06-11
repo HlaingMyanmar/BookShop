@@ -105,7 +105,8 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     public void create(Purchase purchase) {
 
 
-        String sql = "INSERT INTO `purchase`(`puid`, `pudate`, `bcode`, `bcategory`, `bauthor`, `sid`, `qty`, `price`) VALUES (?,?,?,?,?,?,?,?)";
+
+        String sql = "INSERT INTO `purchase`(`puid`, `pudate`, `bcode`, `bcategory`, `bauthor`, `sid`, `qty`, `price`,`remark`) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -117,6 +118,9 @@ public class Purchasedb implements DataAccessObject<Purchase> {
             pst.setString(6,purchase.getSid());
             pst.setInt(7,purchase.getQty());
             pst.setInt(8,purchase.getPrice());
+            pst.setString(9,purchase.getRemark());
+
+            System.out.println(purchase.getRemark());
 
 
             pst.executeUpdate();
