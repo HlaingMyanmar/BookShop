@@ -178,6 +178,13 @@ public class SaleController extends Deliver implements Initializable  {
     private TextField psearch1;
 
 
+    @FXML
+    private Label totalPrice;
+
+    @FXML
+    private Label totalQty;
+
+
     public static int checkPoint = 0;
 
 
@@ -381,6 +388,9 @@ public class SaleController extends Deliver implements Initializable  {
         getIniPurchaseTable();
 
         getFindLoadPurchaseData();
+
+
+
 
 
 
@@ -1209,6 +1219,10 @@ public class SaleController extends Deliver implements Initializable  {
         purchasetable.setItems(sortedData);
 
 
+
+        getTotalSelectList(sortedData,totalQty,totalPrice);
+
+
     }
 
     private void getAutoRunning(){
@@ -1233,9 +1247,14 @@ public class SaleController extends Deliver implements Initializable  {
 
             getFindLoadPurchaseData();
 
-            checkPoint = 0;
+            checkPoint = 2;
 
         }
+
+
+
+
+
 
 
 
@@ -1353,6 +1372,7 @@ public class SaleController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         purchasetable.setItems(sortedData);
+        getTotalSelectList(sortedData,totalQty,totalPrice);
     }
 
 
@@ -1383,24 +1403,62 @@ public class SaleController extends Deliver implements Initializable  {
         }
 
 
-        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(updateList);
-
-        Map<String,Object> parameters = new HashMap<>();
-        parameters.put("Parameter1",itemsJRBean);
+        try {
 
 
-        InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\MyReports\\PurchaseReport.jrxml"));
-        JasperDesign jasperDesign = JRXmlLoader.load(input);
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(updateList);
 
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", itemsJRBean);
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
+            InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\MyReports\\PurchaseReport.jrxml"));
+            JasperDesign jasperDesign = JRXmlLoader.load(input);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-        JasperViewer.viewReport(jasperPrint);
 
 
 
+    }
+
+    @FXML
+    void getQtyPrice(KeyEvent event) {
+
+        if(event.getCode() == KeyCode.ENTER){
+
+            purchasetable.getSelectionModel().selectAll();
+
+            setPurchaseFilter();
+
+
+        }
+
+
+
+    }
+
+    private void getTotalSelectList(ObservableList<Purchase> observableList,Label qtyLabel,Label priceLabel){
+
+       qtyLabel.setText("Item : "+ observableList.size());
+
+       int total = 0;
+
+       for(Purchase p : observableList){
+
+           total+=p.getTotal();
+
+       }
+
+       priceLabel.setText("Total Amount : "+ total+" MMK");
 
 
     }

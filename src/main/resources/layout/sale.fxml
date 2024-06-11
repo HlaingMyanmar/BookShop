@@ -537,27 +537,26 @@
                   <Button layoutX="1175.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
                   <Button layoutX="1175.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase" />
                   <Separator layoutX="7.0" layoutY="95.0" prefHeight="2.0" prefWidth="1333.0" />
-                  <TextField fx:id="psearch" layoutX="71.0" layoutY="28.0" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="422.0" promptText="Search">
+                  <TextField fx:id="psearch" layoutX="71.0" layoutY="28.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="422.0" promptText="Search">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="psearch1" layoutX="567.0" layoutY="28.0" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="432.0" promptText="Search">
+                  <TextField fx:id="psearch1" layoutX="567.0" layoutY="28.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="432.0" promptText="Search">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="1271.0" layoutY="107.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="totalPrice" layoutX="1138.0" layoutY="109.0" text="End Date" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1097.0" layoutY="108.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="totalQty" layoutX="1009.0" layoutY="109.0" text="End Date" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutX="1071.0" layoutY="34.0" mnemonicParsing="false" text="Button" />
                </children>
             </AnchorPane>
          </content>

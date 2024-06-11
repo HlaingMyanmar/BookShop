@@ -37,6 +37,21 @@ public class Purchase {
         this.pudate = pudate;
     }
 
+    @Override
+    public String toString() {
+        return "Purchase{" +
+                "puid='" + puid + '\'' +
+                ", pudate=" + pudate +
+                ", bcode='" + bcode + '\'' +
+                ", cid='" + cid + '\'' +
+                ", aid='" + aid + '\'' +
+                ", sid='" + sid + '\'' +
+                ", qty=" + qty +
+                ", price=" + price +
+                ", total=" + total +
+                '}';
+    }
+
     public String getPuid() {
         return puid;
     }
