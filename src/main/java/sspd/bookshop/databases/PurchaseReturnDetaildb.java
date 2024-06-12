@@ -1,22 +1,68 @@
 package sspd.bookshop.databases;
 
 import sspd.bookshop.DAO.DatabaseConnector;
-import sspd.bookshop.models.PurchaseReturn;
+
 import sspd.bookshop.models.PurchaseReturnDetail;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
     Connection con = DatabaseConnector.getInstance().getConn();
 
-    public List<PurchaseReturn> getdetailList() {
+    public List<PurchaseReturnDetail> getdetailList() {
 
-        return List.of();
+        String sql = """
+                
+                select pr.rid,prd.rdid,pr.rdate,p.puid,b.name,s.suname,prd.qty,prd.amount,prd.returnReason from purchasereturndetails prd
+                inner join purchasereturn pr on pr.rid = prd.rid
+                inner join purchase p on p.puid = pr.puid
+                LEFT join book b on b.bcode = p.bcode
+                inner join supplier s on s.suid = p.sid
+                """;
+
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            ResultSet rs = pst.executeQuery();
+
+            List<PurchaseReturnDetail> purchaseReturnDetails = new ArrayList<>();
+
+            while(rs.next()){
+
+                int  rid = rs.getInt("rid");
+                String rdid = rs.getString("rdid");
+                Date rdate = rs.getDate("rdate");
+                String puid = rs.getString("puid");
+                String bname = rs.getString("name");
+                String sname = rs.getString("suname");
+                int qty = rs.getInt("qty");
+                int amount = rs.getInt("amount");
+                String reason = rs.getString("returnReason");
+
+                PurchaseReturnDetail returnDetail = new PurchaseReturnDetail(rid,puid,rdate,rdid,bname,sname, qty,amount,reason);
+
+                purchaseReturnDetails.add(returnDetail);
+
+
+
+            }
+
+            return purchaseReturnDetails;
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
+
+
 
 
     }

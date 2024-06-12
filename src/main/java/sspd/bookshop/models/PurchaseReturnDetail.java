@@ -8,6 +8,7 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
 
     private String rdid;
     private String bcode;
+    private String sid;
     private int qty;
     private int amount;
     private String returnReason;
@@ -19,10 +20,11 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
 
     }
 
-    public PurchaseReturnDetail(int rid, String puid, Date rdate, String rdid, String bcode, int qty, int amount, String returnReason) {
+    public PurchaseReturnDetail(int rid, String puid, Date rdate, String rdid, String bcode, String sid, int qty, int amount, String returnReason) {
         super(rid, puid, rdate);
         this.rdid = rdid;
         this.bcode = bcode;
+        this.sid = sid;
         this.qty = qty;
         this.amount = amount;
         this.returnReason = returnReason;
