@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -87,21 +88,37 @@ public class PurchasereturnController extends Deliver implements Initializable {
     @FXML
     void addItem(MouseEvent event) {
 
+        try{
 
-       String id  =  pid.getText();
-       String code = (String) bookList.getValue();
 
-       int qty = Integer.parseInt(rqty.getText());
+            String id  =  pid.getText();
+            String code = (String) bookList.getValue();
 
-       int amount = Integer.parseInt(ramount.getText());
+            int qty = Integer.parseInt(rqty.getText());
 
-       String remark = rreason.getText();
+            int amount = Integer.parseInt(ramount.getText());
 
-       Purchase p = new Purchase(id,code,qty,amount,remark);
+            String remark = rreason.getText();
 
-       predataList.add(p);
+            Purchase p = new Purchase(id,code,qty,amount,remark);
 
-       returntable.setItems(predataList);
+            predataList.add(p);
+
+            returntable.setItems(predataList);
+
+            pid.setText("");
+            bookList.setValue("");
+            rqty.setText("");
+            ramount.setText("");
+            rreason.setText("");
+
+
+        }catch (NumberFormatException e){
+
+        }
+
+
+
 
 
 
@@ -123,6 +140,35 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
     @FXML
     void getTotal(KeyEvent event) {
+
+        if(event.getCode()== KeyCode.ENTER){
+
+           String bname = (String) bookList.getValue();
+
+           int total = 0;
+
+           int  qty = Integer.parseInt(rqty.getText());
+
+            Purchasedb p = new Purchasedb();
+
+            List<Purchase> pList = p.getList();
+
+            for(Purchase pu : pList){
+
+                if(pu.getBcode().equals(bname)){
+
+                   total=  pu.getPrice()* qty;
+
+                    ramount.setText(Integer.toString(total));
+
+                }
+
+            }
+
+
+        }
+
+
 
     }
 
@@ -223,9 +269,23 @@ public class PurchasereturnController extends Deliver implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        iniTable();
+
         rdid.setText(getPurchaseReturnID());
 
         rdate.setText(String.valueOf(LocalDate.now()));
+
+
+    }
+
+    private  void iniTable(){
+
+        pidCol.setCellValueFactory(new PropertyValueFactory<>("puid"));
+        bcodeCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
+        qttCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+        remarkCol.setCellValueFactory(new PropertyValueFactory<>("remark"));
+
 
 
     }
