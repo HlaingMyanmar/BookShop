@@ -204,5 +204,20 @@ public  class Deliver implements GenerateResult {
                 .orElse(null);
     }
 
+    @Override
+    public String getBookName(String code) {
+
+        Bookdb bookdb = new Bookdb();
+
+        List<Book> cList = bookdb.getList();
+
+
+        return cList.stream()
+                .filter(c -> c.getBookid().equals(code))
+                .map(Book::getBookname)
+                .findFirst()
+                .orElse(null);
+    }
+
 
 }

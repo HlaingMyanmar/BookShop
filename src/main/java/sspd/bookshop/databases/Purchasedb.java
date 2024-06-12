@@ -207,6 +207,45 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
     }
 
+    public List<Purchase> getFindId(String id){
+
+        String sql = "SELECT bcode ,price FROM `purchase` WHERE puid=?";
+
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1,id);
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Purchase> purchaseList = new ArrayList<>();
+
+            while (rs.next()){
+
+                String bcode = rs.getString("bcode");
+
+                int price = rs.getInt("price");
+
+                Purchase p = new Purchase(price,bcode);
+
+                purchaseList.add(p);
+
+
+            }
+
+            return purchaseList;
+
+
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
 
 

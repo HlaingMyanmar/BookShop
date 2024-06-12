@@ -38,6 +38,8 @@ public interface GenerateResult {
 
     Book getDataList(String bookCode);
 
+    String getBookName(String code);
+
 
 
 

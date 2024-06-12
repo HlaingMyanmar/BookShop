@@ -16,6 +16,14 @@ public class Purchase {
     private String remark;
 
 
+    public Purchase(String puid, String bcode, int qty, int total, String remark) {
+        this.puid = puid;
+        this.bcode = bcode;
+        this.qty = qty;
+        this.total = total;
+        this.remark = remark;
+    }
+
     public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price, int total) {
         this.puid = puid;
         this.pudate = pudate;
@@ -28,7 +36,13 @@ public class Purchase {
         this.total = total;
     }
 
-    public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price,String remark) {
+
+    public Purchase(int price, String bcode) {
+        this.price = price;
+        this.bcode = bcode;
+    }
+
+    public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price, String remark) {
         this.puid = puid;
         this.price = price;
         this.qty = qty;

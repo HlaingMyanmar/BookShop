@@ -22,6 +22,8 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
                 inner join purchase p on p.puid = pr.puid
                 LEFT join book b on b.bcode = p.bcode
                 inner join supplier s on s.suid = p.sid
+                ORDER BY cast(SubString(prd.rdid,5) as UNSIGNED) DESC
+                 
                 """;
 
 
