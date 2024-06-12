@@ -8,9 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import sspd.bookshop.databases.Bookdb;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.PurchaseReturnDetail;
 
 import java.sql.Date;
+import java.util.List;
 
 public class PurchasereturnController {
 
@@ -91,6 +94,28 @@ public class PurchasereturnController {
 
     @FXML
     void removeAction(MouseEvent event) {
+
+    }
+
+    private String getPurchaseReturnID(){
+
+        String defaultid = "#ret1";
+
+        Bookdb bookdb = new Bookdb();
+        List<Book> bookList = bookdb.getList();
+
+        if(bookList .size()==0){
+
+            return defaultid;
+
+        }
+        else {
+
+            return "#bo"+ Integer.toString(bookList .size()+1);
+
+        }
+
+
 
     }
 }
