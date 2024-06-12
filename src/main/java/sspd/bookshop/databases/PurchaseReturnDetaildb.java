@@ -27,6 +27,23 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
         String sql = "UPDATE `purchasereturndetails` SET `rid`=?,`bcode`=?,`qty`=?,`amount`=?,`returnReason`=? WHERE `rdid`=?";
 
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,purchaseReturnDetail.getRid());
+            pst.setString(2,purchaseReturnDetail.getBcode());
+            pst.setInt(3,purchaseReturnDetail.getQty());
+            pst.setInt(4,purchaseReturnDetail.getAmount());
+            pst.setString(5,purchaseReturnDetail.getReturnReason());
+
+            JOptionPane.showMessageDialog(null,"Return Item Update Successful");
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
+
     }
 
 
