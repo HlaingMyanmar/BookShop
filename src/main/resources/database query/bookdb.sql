@@ -47,37 +47,18 @@ CREATE TABLE purchase (
     FOREIGN KEY (sid) REFERENCES supplier(sid)
 );
 
--- Table: PurchaseReturn
-CREATE TABLE PurchaseReturn (
-    rid INT PRIMARY KEY AUTO_INCREMENT,
-    puid VARCHAR(15) NOT NULL,
-    rdate DATE NOT NULL,
-    FOREIGN KEY (puid) REFERENCES purchase(puid)
-);
 
--- Table: PurchaseReturnDetails
-CREATE TABLE PurchaseReturnDetails (
-    rdid VARCHAR(15) NOT NULL,
-    rid INT NOT NULL,
-    bcode VARCHAR(15),
-    qty INT NOT NULL,
-    amount INT NOT NULL,
-    returnReason VARCHAR(255),
-    PRIMARY KEY (rdid, rid, bcode),
-    FOREIGN KEY (bcode) REFERENCES book(bcode),
-    FOREIGN KEY (rid) REFERENCES PurchaseReturn(rid)
-);
 
 -- Create PurchaseReturn table
 CREATE TABLE PurchaseReturn (
-    rdate DATE NOT NULL PRIMARY KEY,
+    rdate TIMESTAMP NOT NULL PRIMARY KEY,
     puid VARCHAR(15) NOT NULL,
     FOREIGN KEY (puid) REFERENCES purchase(puid)
 );
 
 -- Create PurchaseReturnDetails table
 CREATE TABLE PurchaseReturnDetails (
-    rdate DATE NOT NULL,
+    rdate TIMESTAMP NOT NULL,
     bcode VARCHAR(15),
     qty INT NOT NULL,
     amount INT NOT NULL,
@@ -86,6 +67,7 @@ CREATE TABLE PurchaseReturnDetails (
     FOREIGN KEY (bcode) REFERENCES book(bcode),
     FOREIGN KEY (rdate) REFERENCES PurchaseReturn(rdate)
 );
+
 
 -- Table: order
 CREATE TABLE orders (

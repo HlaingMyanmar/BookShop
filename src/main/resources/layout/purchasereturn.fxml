@@ -75,26 +75,16 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TextField fx:id="rdate" editable="false" layoutX="972.0" layoutY="37.0" prefHeight="32.0" prefWidth="166.0" promptText="Date">
+      <TextField fx:id="rdate" editable="false" layoutX="794.0" layoutY="48.0" prefHeight="32.0" prefWidth="392.0" promptText="Date">
          <font>
-            <Font name="Pyidaungsu" size="12.0" />
+            <Font name="Pyidaungsu Bold" size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="972.0" layoutY="16.0" text="Return Date :">
+      <Label layoutX="794.0" layoutY="27.0" text="Return Date :">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="793.0" layoutY="14.0" text="Return ID: ">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="rdid" editable="false" layoutX="793.0" layoutY="37.0" prefHeight="32.0" prefWidth="166.0" promptText="Return Detail ID">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
       <Button layoutX="791.0" layoutY="404.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
       <Button layoutX="890.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#removeAction" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
       <Button layoutX="989.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#confirmItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Confirm" />
