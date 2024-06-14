@@ -36,6 +36,12 @@ public class Book {
 
     }
 
+    public Book(String bookid, SimpleIntegerProperty quantity) {
+        this.bookid = bookid;
+        this.quantity = quantity;
+    }
+
+
 
     public String getBookname() {
         return bookname;

@@ -42,6 +42,8 @@ public class Purchase {
         this.bcode = bcode;
     }
 
+
+
     public Purchase(String puid, Date pudate, String bcode, String cid, String aid, String sid, int qty, int price, String remark) {
         this.puid = puid;
         this.price = price;

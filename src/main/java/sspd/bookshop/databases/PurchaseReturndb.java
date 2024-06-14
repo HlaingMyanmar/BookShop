@@ -92,7 +92,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Save");
+           // JOptionPane.showMessageDialog(null,"Save");
 
 
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package sspd.bookshop.controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -155,11 +156,15 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
             for(int i = 0;i<size;i++){
 
-               PurchaseReturnDetail  prd = (PurchaseReturnDetail) returntable.getItems().get(i);
+
+
+               Purchase prd = (Purchase) returntable.getItems().get(i);
+
+
 
                PurchaseReturnDetaildb db = new PurchaseReturnDetaildb();
 
-               PurchaseReturn pr = new PurchaseReturn(prd.getPuid(),prd.getRdate());
+               PurchaseReturn pr = new PurchaseReturn(prd.getPuid(),retrundate);
 
                db.create(pr);
 
@@ -169,11 +174,17 @@ public class PurchasereturnController extends Deliver implements Initializable {
                 PurchaseReturndb rdb = new PurchaseReturndb();
                 int id  = rdb.getList().getFirst().getRid();
 
-                getBookCode(prd.getBcode());
 
-                PurchaseReturnDetail prd1 = new PurchaseReturnDetail(id,prd.getPuid(),retrundate,returncode,getBookCode(prd.getBcode()),prd.getQty(),prd.getAmount(),prd.getReturnReason());
+
+                PurchaseReturnDetail prd1 = new PurchaseReturnDetail(id,prd.getPuid(),retrundate,returncode,getBookCode(prd.getBcode()),prd.getQty(),prd.getTotal(),prd.getRemark());
 
                 db.insert(prd1);
+
+                SimpleIntegerProperty qty = new SimpleIntegerProperty(prd.getQty());
+
+                Book b = new Book(getBookCode(prd.getBcode()),qty);
+
+                db.subBookQty(b);
 
 
 
@@ -182,6 +193,9 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
 
         }
+
+       Stage stage = (Stage) returntable.getScene().getWindow();
+       stage.close();
 
     }
 

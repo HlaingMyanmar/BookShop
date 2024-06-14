@@ -2,6 +2,7 @@ package sspd.bookshop.databases;
 
 import sspd.bookshop.DAO.DatabaseConnector;
 
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.PurchaseReturnDetail;
 
 import javax.swing.*;
@@ -110,7 +111,7 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Return Item Insert Successful!");
+            //JOptionPane.showMessageDialog(null,"Return Item Insert Successful!");
 
 
 
@@ -126,6 +127,32 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
     public void delete(PurchaseReturnDetail purchaseReturnDetail) {
 
+
+
+    }
+
+    public void subBookQty(Book book){
+
+        String sql = " UPDATE book SET qty = qty - ?  WHERE bcode = ?";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,book.getQuantity());
+            pst.setString(2,book.getBookid());
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Successful Sub Book");
+
+
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
 
 
     }

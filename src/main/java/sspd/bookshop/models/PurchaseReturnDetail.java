@@ -49,6 +49,8 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
         this.returnReason = returnReason;
     }
 
+
+
     public String getRdid() {
         return rdid;
     }

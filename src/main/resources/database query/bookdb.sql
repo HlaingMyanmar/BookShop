@@ -68,6 +68,25 @@ CREATE TABLE PurchaseReturnDetails (
     FOREIGN KEY (rid) REFERENCES PurchaseReturn(rid)
 );
 
+-- Create PurchaseReturn table
+CREATE TABLE PurchaseReturn (
+    rdate DATE NOT NULL PRIMARY KEY,
+    puid VARCHAR(15) NOT NULL,
+    FOREIGN KEY (puid) REFERENCES purchase(puid)
+);
+
+-- Create PurchaseReturnDetails table
+CREATE TABLE PurchaseReturnDetails (
+    rdate DATE NOT NULL,
+    bcode VARCHAR(15),
+    qty INT NOT NULL,
+    amount INT NOT NULL,
+    returnReason VARCHAR(255),
+    PRIMARY KEY (rdate, bcode),
+    FOREIGN KEY (bcode) REFERENCES book(bcode),
+    FOREIGN KEY (rdate) REFERENCES PurchaseReturn(rdate)
+);
+
 -- Table: order
 CREATE TABLE orders (
     orid VARCHAR(15) PRIMARY KEY NOT NULL,
