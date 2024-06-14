@@ -14,7 +14,7 @@
    <children>
       <AnchorPane fx:id="purchasePane" prefHeight="618.0" prefWidth="1350.0">
          <children>
-            <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
+            <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onKeyPressed="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                <columns>
                   <TableColumn fx:id="dateCol" prefWidth="154.0" text="Date" />
                   <TableColumn fx:id="purchaseIDCol" prefWidth="112.0" text="Purchase ID" />

@@ -132,36 +132,77 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
     public void delete(PurchaseReturnDetail purchaseReturnDetail) {
 
 
-    String sql =  """
-            
-           START TRANSACTION;
-                                     
-            DELETE prd FROM PurchaseReturnDetails prd
-            INNER JOIN PurchaseReturn pr ON prd.rdate = pr.rdate\s
-            WHERE prd.rdate = ?;
-            DELETE pr FROM PurchaseReturn pr
-            WHERE pr.rdate = ?;
-            COMMIT;
-                                                                
+        String updateSql = """
+        UPDATE book AS b
+        JOIN purchasereturndetails AS b2 ON b.bcode = b2.bcode
+        SET b.qty = b.qty + b2.qty
+        WHERE b2.rdate = ?;
         """;
 
+        String deleteDetailsSql = """
+        DELETE prd FROM PurchaseReturnDetails prd
+        INNER JOIN PurchaseReturn pr ON prd.rdate = pr.rdate
+        WHERE prd.rdate = ?;
+        """;
 
-    try(PreparedStatement pst = con.prepareStatement(sql)) {
+        String deleteReturnSql = """
+        DELETE FROM PurchaseReturn
+        WHERE rdate = ?;
+        """;
 
-        pst.setTimestamp(1,purchaseReturnDetail.getRdate());
-        pst.setTimestamp(2,purchaseReturnDetail.getRdate());
-
-        pst.executeUpdate();
-
-        JOptionPane.showMessageDialog(null,"Delete Successful");
-
+        try {
+            con.setAutoCommit(false); // Start transaction
 
 
-    } catch (SQLException e) {
+            try (PreparedStatement updatePst = con.prepareStatement(updateSql)) {
+                updatePst.setTimestamp(1, purchaseReturnDetail.getRdate());
+                updatePst.executeUpdate();
+            }
 
 
-        throw new RuntimeException(e);
-    }
+            try (PreparedStatement deleteDetailsPst = con.prepareStatement(deleteDetailsSql)) {
+                deleteDetailsPst.setTimestamp(1, purchaseReturnDetail.getRdate());
+                deleteDetailsPst.executeUpdate();
+            }
+
+
+            try (PreparedStatement deleteReturnPst = con.prepareStatement(deleteReturnSql)) {
+                deleteReturnPst.setTimestamp(1, purchaseReturnDetail.getRdate());
+                deleteReturnPst.executeUpdate();
+            }
+
+            con.commit();
+
+            JOptionPane.showMessageDialog(null, "Delete Successful");
+
+        } catch (SQLException e) {
+
+            try {
+
+                con.rollback(); //
+
+
+            } catch (SQLException rollbackException) {
+
+                throw new RuntimeException("Failed to rollback transaction", rollbackException);
+
+            }
+
+            throw new RuntimeException("Failed to delete purchase return detail", e);
+
+        } finally {
+
+            try {
+
+                con.setAutoCommit(true);
+
+
+            } catch (SQLException setAutoCommitException) {
+
+                throw new RuntimeException("Failed to restore auto-commit mode", setAutoCommitException);
+
+            }
+        }
 
 
     }

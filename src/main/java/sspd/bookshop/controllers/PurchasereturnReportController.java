@@ -135,7 +135,22 @@ public class PurchasereturnReportController implements Initializable {
     }
 
     @FXML
-    void purchasetableClickAction(MouseEvent event) {
+    void purchasetableClickAction(KeyEvent event) {
+
+
+        if(event.getCode() == KeyCode.DELETE){
+
+            PurchaseReturnDetail p = (PurchaseReturnDetail) purchasetable.getSelectionModel().getSelectedItem();
+
+
+            PurchaseReturnDetaildb prddb = new PurchaseReturnDetaildb();
+
+
+              prddb.delete(p);
+
+        }
+
+
 
 
 
