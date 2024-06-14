@@ -15,13 +15,16 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
     private String returnReason;
 
 
+
+
     public PurchaseReturnDetail( String puid, Timestamp rdate) {
 
         super( puid, rdate);
 
     }
 
-    public PurchaseReturnDetail( String puid, Timestamp rdate, String bcode, String sid, int qty, int amount, String returnReason) {
+
+    public PurchaseReturnDetail(String puid, Timestamp rdate, String bcode, String sid, int qty, int amount, String returnReason) {
         super( puid, rdate);
         this.bcode = bcode;
         this.sid = sid;
@@ -41,6 +44,13 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
 
 
 
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
 
     public String getBcode() {
         return bcode;

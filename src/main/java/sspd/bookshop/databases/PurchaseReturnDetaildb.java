@@ -47,6 +47,8 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
                 PurchaseReturnDetail returnDetail = new PurchaseReturnDetail(puid,rdate,bname,sname, qty,amount,reason);
 
+
+
                 purchaseReturnDetails.add(returnDetail);
 
 
