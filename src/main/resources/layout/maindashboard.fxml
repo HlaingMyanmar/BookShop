@@ -13,34 +13,71 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <TabPane fx:id="sgerg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1350.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.DashboardController">
   <tabs>
     <Tab text="Orders">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="772.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="277.0" layoutY="233.0" prefHeight="396.0" prefWidth="797.0" stylesheets="@../css/table.css">
+                  <TableView fx:id="purchasetable1" layoutX="7.0" layoutY="91.0" onMouseClicked="#purchasetableClickAction" prefHeight="522.0" prefWidth="1333.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="91.0">
                      <columns>
-                        <TableColumn prefWidth="131.0" text="Order Date" />
-                        <TableColumn prefWidth="144.0" text="Order ID" />
-                        <TableColumn prefWidth="232.0" text="Customer Name" />
-                        <TableColumn prefWidth="163.0" text="Phone No." />
-                        <TableColumn prefWidth="126.0" text="Total Amount" />
+                        <TableColumn fx:id="oidCol" prefWidth="72.0" text="Order ID" />
+                        <TableColumn fx:id="odateCol" prefWidth="140.0" text="Order Date" />
+                        <TableColumn fx:id="ocnameCol" prefWidth="201.0" text="Customer Name" />
+                        <TableColumn fx:id="ocphoneCol" prefWidth="210.0" text="Customer Phone" />
+                        <TableColumn fx:id="obnameCol" prefWidth="373.0" text="Book Name" />
+                        <TableColumn fx:id="oqtyCol" prefWidth="71.0" text="Quantity" />
+                        <TableColumn fx:id="opriceCol" prefWidth="132.0" text="Price" />
+                        <TableColumn fx:id="ototalCol" prefWidth="133.0" text="Total" />
                      </columns>
                   </TableView>
-                  <Line endX="681.0" layoutX="378.0" layoutY="224.0" startX="-100.0" />
-                  <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="1194.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="281.0" layoutY="618.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/printer.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="1234.0" layoutY="84.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
-                  <Button layoutX="1234.0" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Print" />
-               </children></AnchorPane>
-      </content>
+                  <Button layoutX="150.0" layoutY="620.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+                  <Button layoutX="16.0" layoutY="620.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Order">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Separator layoutX="7.0" layoutY="84.0" prefHeight="2.0" prefWidth="1333.0" />
+                  <TextField fx:id="orders1" layoutX="16.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="Search">
+                     <font>
+                        <Font name="Pyidaungsu" size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="orders2" layoutX="638.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="Search">
+                     <font>
+                        <Font name="Pyidaungsu" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="totalPrice1" layoutX="1134.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalQty1" layoutX="1005.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <JFXCheckBox fx:id="ordercb1" layoutX="562.0" layoutY="55.0" onMouseClicked="#purchasecheckBoxAction" selected="true" text="Order" textFill="#1d00ff">
+                     <font>
+                        <Font name="Pyidaungsu Bold" size="15.0" />
+                     </font>
+                  </JFXCheckBox>
+                  <JFXCheckBox fx:id="ordercb2" layoutX="637.0" layoutY="55.0" onMouseClicked="#purchasereturncheckBoxAction" text="Order Return" textFill="#1d00ff">
+                     <font>
+                        <Font name="Pyidaungsu Bold" size="15.0" />
+                     </font>
+                  </JFXCheckBox>
+               </children>
+            </AnchorPane>
+         </content>
     </Tab>
       <Tab text="Sale Edit">
          <content>

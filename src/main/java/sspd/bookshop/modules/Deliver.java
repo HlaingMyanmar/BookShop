@@ -211,10 +211,39 @@ public  class Deliver implements GenerateResult {
 
         List<Book> cList = bookdb.getList();
 
+        String name = null;
 
-        return cList.stream()
+        for(Book b :cList){
+
+            if(b.getBookid().equals(code)){
+
+               name =  b.getBookid();
+            }
+
+        }
+
+
+        return  cList.stream()
                 .filter(c -> c.getBookid().equals(code))
                 .map(Book::getBookname)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public String getBookCode(String namee) {
+
+        Bookdb bookdb = new Bookdb();
+
+        List<Book> cList = bookdb.getList();
+
+        String code = null;
+
+
+
+        return  cList.stream()
+                .filter(c -> c.getBookname().equals(namee))
+                .map(Book::getBookid)
                 .findFirst()
                 .orElse(null);
     }

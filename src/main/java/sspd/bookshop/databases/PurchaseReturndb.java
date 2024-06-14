@@ -6,9 +6,8 @@ import sspd.bookshop.models.PurchaseReturn;
 
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
@@ -19,7 +18,40 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
     @Override
     public List<PurchaseReturn> getList() {
-        return List.of();
+
+        String sql = "SELECT * FROM `purchasereturn` order by rid desc";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            ResultSet rs = pst.executeQuery();
+
+            List<PurchaseReturn> prList = new ArrayList<>();
+
+            while(rs.next()){
+
+                int code = rs.getInt("rid");
+                String pid = rs.getString("puid");
+                Date date = rs.getDate("rdate");
+
+                PurchaseReturn pr = new PurchaseReturn(code,pid,date);
+
+                prList.add(pr);
+
+
+            }
+
+            return  prList;
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+
+        }
+
+
+
     }
 
     @Override

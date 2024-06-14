@@ -14,6 +14,11 @@ public class PurchaseReturn {
         this.rdate = rdate;
     }
 
+    public PurchaseReturn(String puid, Date rdate) {
+        this.puid = puid;
+        this.rdate = rdate;
+    }
+
     public int getRid() {
         return rid;
     }

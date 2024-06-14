@@ -24,7 +24,7 @@ public class Authordb implements DataAccessObject<Author> {
     @Override
     public List<Author> getList() {
 
-        Connection con = DatabaseConnector.getInstance().getConn();
+
 
         String sql = "SELECT * FROM `author` ORDER BY cast(SubString(aid,4) as UNSIGNED) DESC ";
 

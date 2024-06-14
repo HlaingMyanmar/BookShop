@@ -17,13 +17,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.PurchaseReturnDetaildb;
+import sspd.bookshop.databases.PurchaseReturndb;
 import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
+import sspd.bookshop.models.PurchaseReturn;
 import sspd.bookshop.models.PurchaseReturnDetail;
 import sspd.bookshop.modules.Deliver;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -135,6 +138,50 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
     @FXML
     void confirmItem(MouseEvent event) {
+
+
+        String returncode = rdid.getText();
+        Date retrundate = Date.valueOf(rdate.getText());
+
+        if (rdid.getText().equals("") || rdate.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Please Insert Return ID and Return Date");
+
+        } else {
+
+            int size = returntable.getItems().size();
+
+
+
+            for(int i = 0;i<size;i++){
+
+               PurchaseReturnDetail  prd = (PurchaseReturnDetail) returntable.getItems().get(i);
+
+               PurchaseReturnDetaildb db = new PurchaseReturnDetaildb();
+
+               PurchaseReturn pr = new PurchaseReturn(prd.getPuid(),prd.getRdate());
+
+               db.create(pr);
+
+
+               /// Purchase Return Detail Insert
+
+                PurchaseReturndb rdb = new PurchaseReturndb();
+                int id  = rdb.getList().getFirst().getRid();
+
+                getBookCode(prd.getBcode());
+
+                PurchaseReturnDetail prd1 = new PurchaseReturnDetail(id,prd.getPuid(),retrundate,returncode,getBookCode(prd.getBcode()),prd.getQty(),prd.getAmount(),prd.getReturnReason());
+
+                db.insert(prd1);
+
+
+
+            }
+
+
+
+        }
 
     }
 

@@ -1429,7 +1429,7 @@ public class DashboardController extends Deliver implements Initializable  {
         if(purchaseCb.isSelected()){
 
             purchasereturnCb.setSelected(false);
-
+//.
         }
         else {
             purchasereturnCb.setSelected(true);
@@ -1452,6 +1452,14 @@ public class DashboardController extends Deliver implements Initializable  {
         }
 
     }
+
+
+    //OrderTab controller
+
+
+
+
+
 
 
 

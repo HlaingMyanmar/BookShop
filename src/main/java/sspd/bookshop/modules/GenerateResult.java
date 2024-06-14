@@ -12,11 +12,6 @@ public interface GenerateResult {
 
 
 
-
-
-
-
-
     ObservableList<String>getDataList(Class<? extends DataAccessObject> dbClass);
 
 
@@ -39,6 +34,8 @@ public interface GenerateResult {
     Book getDataList(String bookCode);
 
     String getBookName(String code);
+
+    String getBookCode(String name);
 
 
 
