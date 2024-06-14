@@ -19,7 +19,7 @@
   <tabs>
     <Tab text="Orders">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="561.0" prefWidth="1350.0">
                <children>
                   <TableView fx:id="purchasetable1" layoutX="7.0" layoutY="91.0" onMouseClicked="#purchasetableClickAction" prefHeight="522.0" prefWidth="1333.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="91.0">
                      <columns>
@@ -420,7 +420,7 @@
                         <Font name="Pyidaungsu Bold" size="15.0" />
                      </font>
                   </JFXCheckBox>
-                  <AnchorPane fx:id="purchasePane" layoutY="96.0" prefHeight="567.0" prefWidth="1350.0">
+                  <AnchorPane fx:id="purchasePane" layoutY="96.0" prefHeight="564.0" prefWidth="1350.0">
                      <children>
                         <TableView fx:id="purchasetable" layoutX="2.0" onMouseClicked="#purchasetableClickAction" prefHeight="501.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
                            <columns>
