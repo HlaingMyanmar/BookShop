@@ -15,6 +15,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -181,12 +182,18 @@ public class DashboardController extends Deliver implements Initializable  {
     @FXML
     private Label totalQty;
 
+    @FXML
+    private AnchorPane purchasePane;
+
 
     public static int checkPoint = 0;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -1429,6 +1436,7 @@ public class DashboardController extends Deliver implements Initializable  {
         if(purchaseCb.isSelected()){
 
             purchasereturnCb.setSelected(false);
+            purchasePane.setVisible(true);
 //.
         }
         else {
@@ -1443,6 +1451,8 @@ public class DashboardController extends Deliver implements Initializable  {
 
 
         if(purchasereturnCb.isSelected()){
+
+            purchasePane.setVisible(false);
 
             purchaseCb.setSelected(false);
 
