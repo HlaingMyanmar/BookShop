@@ -1144,6 +1144,7 @@ public class DashboardController extends Deliver implements Initializable  {
         stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.WINDOW_MODAL);
         Stage mainStage = (Stage) booktable.getScene().getWindow();
+        stage.setTitle("New Purchase");
         stage.initOwner(mainStage);
         stage.setScene(scene);
         stage.show();

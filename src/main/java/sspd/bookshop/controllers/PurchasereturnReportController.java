@@ -6,21 +6,27 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sspd.bookshop.databases.PurchaseReturnDetaildb;
 
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Purchase;
 
 import sspd.bookshop.models.PurchaseReturnDetail;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 
@@ -78,10 +84,42 @@ public class PurchasereturnReportController implements Initializable {
     @FXML
     void getQtyPrice(KeyEvent event) {
 
+
+
+
+
     }
 
     @FXML
     void newPurchareAction(MouseEvent event) {
+
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/purchasereturn.fxml"));
+        Scene scene = null;
+
+
+        try {
+
+
+
+            scene = new Scene(fxmlLoader.load());
+
+
+
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        }
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) purchasetable.getScene().getWindow();
+        stage.setTitle("New Purchase Return");
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -98,14 +136,72 @@ public class PurchasereturnReportController implements Initializable {
     @FXML
     void searchpurchareAction(MouseEvent event) {
 
+
+        if(psearch.getText().equals("")){
+
+            psearch1.setEditable(false);
+
+
+            JOptionPane.showMessageDialog(null,"Please First Start , start filter box","Notice",0);
+
+            psearch.setStyle("-fx-border-color:red;");
+
+
+
+            psearch.setPromptText("Please Fill Filter check!!!");
+
+
+        }
+        else {
+
+            psearch.setStyle("");
+
+
+            psearch1.setEditable(true);
+
+            purchasetable.getSelectionModel().selectAll();
+
+
+            setPurchaseFilter();
+
+
+        }
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         getIniPurchaseTable();
+        purchasetable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         getFindLoadPurchaseData();
 
     }
+
+    private void getTotalSelectList(ObservableList<PurchaseReturnDetail> observableList,Label qtyLabel,Label priceLabel){
+
+        qtyLabel.setText("Item : "+ observableList.size());
+
+        int total = 0;
+
+        for(PurchaseReturnDetail p : observableList){
+
+            total+=p.getAmount();
+
+        }
+
+        priceLabel.setText("Total Amount : "+ total+" MMK");
+
+
+    }
+
+    private void getQtySelectList(ObservableList<PurchaseReturnDetail> observableList,Label qtyLabel){
+
+
+        qtyLabel.setText(observableList.size()+" item");
+
+
+    }
+
 
 
     private void getIniPurchaseTable(){
@@ -184,6 +280,10 @@ public class PurchasereturnReportController implements Initializable {
         // 5. Add sorted (and filtered) data to the table.
         purchasetable.setItems(sortedData);
 
+        getTotalSelectList(sortedData,totalQty,totalPrice);
+
+        getQtySelectList(sortedData,totalQty);
+
     }
 
     public void getFindLoadPurchaseData() {
@@ -248,6 +348,8 @@ public class PurchasereturnReportController implements Initializable {
 
         // 5. Add sorted (and filtered) data to the table.
         purchasetable.setItems(sortedData);
+        getQtySelectList(sortedData,totalQty);
+        getTotalSelectList(sortedData,totalQty,totalPrice);
 
 
 
