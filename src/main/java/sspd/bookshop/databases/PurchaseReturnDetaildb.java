@@ -132,6 +132,37 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
     public void delete(PurchaseReturnDetail purchaseReturnDetail) {
 
 
+    String sql =  """
+            
+           START TRANSACTION;
+                                     
+            DELETE prd FROM PurchaseReturnDetails prd
+            INNER JOIN PurchaseReturn pr ON prd.rdate = pr.rdate\s
+            WHERE prd.rdate = ?;
+            DELETE pr FROM PurchaseReturn pr
+            WHERE pr.rdate = ?;
+            COMMIT;
+                                                                
+        """;
+
+
+    try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+        pst.setTimestamp(1,purchaseReturnDetail.getRdate());
+        pst.setTimestamp(2,purchaseReturnDetail.getRdate());
+
+        pst.executeUpdate();
+
+        JOptionPane.showMessageDialog(null,"Delete Successful");
+
+
+
+    } catch (SQLException e) {
+
+
+        throw new RuntimeException(e);
+    }
+
 
     }
 

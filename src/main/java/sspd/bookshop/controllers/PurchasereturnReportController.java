@@ -137,6 +137,11 @@ public class PurchasereturnReportController implements Initializable {
     @FXML
     void purchasetableClickAction(MouseEvent event) {
 
+
+
+
+
+
     }
 
     @FXML
