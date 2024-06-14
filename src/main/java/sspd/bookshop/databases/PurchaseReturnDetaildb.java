@@ -37,7 +37,7 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
             while(rs.next()){
 
 
-                Date rdate = rs.getDate("rdate");
+                Timestamp rdate = rs.getTimestamp("rdate");
                 String puid = rs.getString("puid");
                 String bname = rs.getString("name");
                 String sname = rs.getString("suname");
@@ -83,7 +83,7 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
             pst.setInt(2,purchaseReturnDetail.getQty());
             pst.setInt(3,purchaseReturnDetail.getAmount());
             pst.setString(4,purchaseReturnDetail.getReturnReason());
-            pst.setDate(5,purchaseReturnDetail.getRdate());
+            pst.setTimestamp(5,purchaseReturnDetail.getRdate());
 
             JOptionPane.showMessageDialog(null,"Return Item Update Successful");
 
@@ -105,7 +105,7 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setDate(1,purchaseReturnDetail.getRdate());
+            pst.setTimestamp(1,purchaseReturnDetail.getRdate());
             pst.setString(2,purchaseReturnDetail.getBcode());
             pst.setInt(3,purchaseReturnDetail.getQty());
             pst.setInt(4,purchaseReturnDetail.getAmount());
