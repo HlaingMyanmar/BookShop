@@ -2,36 +2,35 @@ package sspd.bookshop.controllers;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import sspd.bookshop.models.Purchase;
 
-public class PurchasereturnReportController {
+import java.net.URL;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ResourceBundle;
 
-    @FXML
-    private TableColumn<?, ?> pauthorCol;
-
-    @FXML
-    private TableColumn<?, ?> pcategoryCol;
-
-    @FXML
-    private TableColumn<?, ?> pcodeCol;
+public class PurchasereturnReportController implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> pdateCol;
+    private TableColumn<Purchase, String> booknameCol;
 
     @FXML
-    private TableColumn<?, ?> pnameCol;
+    private TableColumn<Purchase, Date> dateCol;
 
     @FXML
-    private TableColumn<?, ?> ppriceCol;
+    private TableColumn<Purchase, Integer> ppriceCol;
 
     @FXML
-    private TableColumn<?, ?> pqtyCol;
+    private TableColumn<Purchase, Integer> pqtyCol;
 
     @FXML
     private TextField psearch;
@@ -40,16 +39,22 @@ public class PurchasereturnReportController {
     private TextField psearch1;
 
     @FXML
-    private TableColumn<?, ?> psupplierCol;
+    private TableColumn<Purchase, Integer> ptotalCol;
 
     @FXML
-    private TableColumn<?, ?> ptotalCol;
+    private TableColumn<Purchase, String> purchaseID;
 
     @FXML
     private AnchorPane purchasePane;
 
     @FXML
-    private TableView<?> purchasetable;
+    private TableView purchasetable;
+
+    @FXML
+    private TableColumn<Purchase, String> reasonCol;
+
+    @FXML
+    private TableColumn<Purchase, String> suppliernameCol;
 
     @FXML
     private Label totalPrice;
@@ -87,4 +92,24 @@ public class PurchasereturnReportController {
 
     }
 
+    private void getIniPurchaseTable(){
+
+        dateCol.setCellValueFactory(new PropertyValueFactory<Purchase,Date>("pudate"));
+        booknameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
+        reasonCol.setCellValueFactory(new PropertyValueFactory<>("remark"));
+        suppliernameCol.setCellValueFactory(new PropertyValueFactory<>("sid"));
+        pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        getIniPurchaseTable();
+
+    }
 }

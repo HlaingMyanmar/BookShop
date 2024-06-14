@@ -16,15 +16,14 @@
          <children>
             <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                <columns>
-                  <TableColumn fx:id="psupplierCol" prefWidth="140.0" text="Supplier Name" />
-                  <TableColumn fx:id="pcodeCol" prefWidth="73.0" text="P Code" />
-                  <TableColumn fx:id="pdateCol" prefWidth="97.33331298828125" text="P Date" />
-                  <TableColumn fx:id="pnameCol" prefWidth="290.66668701171875" text="Description" />
-                  <TableColumn fx:id="pcategoryCol" prefWidth="236.5333251953125" text="Category" />
-                  <TableColumn fx:id="pauthorCol" prefWidth="227.73345947265625" text="Author" />
-                  <TableColumn fx:id="pqtyCol" prefWidth="72.7999267578125" text="Qty" />
-                  <TableColumn fx:id="ppriceCol" prefWidth="90.9332275390625" text="Price" />
-                  <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="Total" />
+                  <TableColumn fx:id="dateCol" prefWidth="154.0" text="Date" />
+                  <TableColumn fx:id="purchaseID" prefWidth="112.0" text="Purchase ID" />
+                  <TableColumn fx:id="booknameCol" prefWidth="459.0" text="Book Name" />
+                  <TableColumn fx:id="suppliernameCol" prefWidth="176.0" text="Supplier Name" />
+                  <TableColumn fx:id="pqtyCol" prefWidth="46.0" text="Qty" />
+                  <TableColumn fx:id="ppriceCol" prefWidth="71.0" text="Price" />
+                  <TableColumn fx:id="ptotalCol" prefWidth="103.0" text="Total" />
+                  <TableColumn fx:id="reasonCol" prefWidth="221.0" text="Reason" />
                </columns>
             </TableView>
             <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
@@ -33,7 +32,7 @@
                </image>
             </ImageView>
             <Button layoutX="148.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
-            <Button layoutX="14.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase">
+            <Button layoutX="14.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Return">
                <font>
                   <Font size="10.0" />
                </font>

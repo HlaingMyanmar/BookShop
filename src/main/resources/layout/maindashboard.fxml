@@ -402,7 +402,7 @@
                      </font>
                   </JFXCheckBox>
                   <Pane fx:id="switchPane" layoutX="7.0" layoutY="39.0" prefHeight="622.0" prefWidth="1350.0" />
-                  <AnchorPane fx:id="purchasePane" layoutX="10.0" layoutY="52.0" prefHeight="618.0" prefWidth="1350.0">
+                  <AnchorPane fx:id="purchasePane" layoutX="10.0" layoutY="40.0" prefHeight="592.0" prefWidth="1350.0">
                      <children>
                         <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                            <columns>

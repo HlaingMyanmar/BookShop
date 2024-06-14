@@ -19,11 +19,11 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
         String sql = """
                 
                 select pr.rdate,p.puid,b.name,s.suname,prd.qty,prd.amount,prd.returnReason from purchasereturndetails prd
-                inner join purchasereturn pr on pr.rid = prd.rid
+                inner join purchasereturn pr on pr.rdate = prd.rdate
                 inner join purchase p on p.puid = pr.puid
                 LEFT join book b on b.bcode = p.bcode
                 inner join supplier s on s.suid = p.sid
-                ORDER BY cast(SubString(prd.rdid,5) as UNSIGNED) DESC
+                ORDER BY  rdate  desc
                  
                 """;
 
