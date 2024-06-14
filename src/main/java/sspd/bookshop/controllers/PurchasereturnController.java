@@ -96,28 +96,41 @@ public class PurchasereturnController extends Deliver implements Initializable {
     void addItem(MouseEvent event) {
 
         try{
+            if(predataList.isEmpty()){
 
 
-            String id  =  pid.getText();
-            String code = (String) bookList.getValue();
+                String id  =  pid.getText();
+                String code = (String) bookList.getValue();
 
-            int qty = Integer.parseInt(rqty.getText());
+                int qty = Integer.parseInt(rqty.getText());
 
-            int amount = Integer.parseInt(ramount.getText());
+                int amount = Integer.parseInt(ramount.getText());
 
-            String remark = rreason.getText();
+                String remark = rreason.getText();
 
-            Purchase p = new Purchase(id,code,qty,amount,remark);
+                Purchase p = new Purchase(id,code,qty,amount,remark);
 
-            predataList.add(p);
+                predataList.add(p);
 
-            returntable.setItems(predataList);
 
-            pid.setText("");
-            bookList.setValue("");
-            rqty.setText("");
-            ramount.setText("");
-            rreason.setText("");
+
+
+                returntable.setItems(predataList);
+
+                pid.setText("");
+                bookList.setValue("");
+                rqty.setText("");
+                ramount.setText("");
+                rreason.setText("");
+
+            }
+
+            else {
+                JOptionPane.showMessageDialog(null, "Can't not Insert 2 Items","Notice Option",0);
+            }
+
+
+
 
 
         }catch (NumberFormatException e){
@@ -156,42 +169,33 @@ public class PurchasereturnController extends Deliver implements Initializable {
             int size = returntable.getItems().size();
 
 
-
-            for(int i = 0;i<size;i++){
-
-
-
-               Purchase prd = (Purchase) returntable.getItems().get(i);
+            Purchase prd = (Purchase) returntable.getItems().get(0);
 
 
 
-               PurchaseReturnDetaildb db = new PurchaseReturnDetaildb();
+            PurchaseReturnDetaildb db = new PurchaseReturnDetaildb();
 
-               PurchaseReturn pr = new PurchaseReturn(prd.getPuid(),retrundate);
+            PurchaseReturn pr = new PurchaseReturn(prd.getPuid(),retrundate);
 
-               db.create(pr);
-
-
-               /// Purchase Return Detail Insert
-
-                PurchaseReturndb rdb = new PurchaseReturndb();
-                Timestamp date  = rdb.getList().getFirst().getRdate();
+            db.create(pr);
 
 
+            /// Purchase Return Detail Insert
 
-                PurchaseReturnDetail prd1 = new PurchaseReturnDetail(prd.getPuid(),date,getBookCode(prd.getBcode()),prd.getQty(),prd.getTotal(),prd.getRemark());
-
-                db.insert(prd1);
-
-                SimpleIntegerProperty qty = new SimpleIntegerProperty(prd.getQty());
-
-                Book b = new Book(getBookCode(prd.getBcode()),qty);
-
-                db.subBookQty(b);
+            PurchaseReturndb rdb = new PurchaseReturndb();
+            Timestamp date  = rdb.getList().getFirst().getRdate();
 
 
 
-            }
+            PurchaseReturnDetail prd1 = new PurchaseReturnDetail(prd.getPuid(),date,getBookCode(prd.getBcode()),prd.getQty(),prd.getTotal(),prd.getRemark());
+
+            db.insert(prd1);
+
+            SimpleIntegerProperty qty = new SimpleIntegerProperty(prd.getQty());
+
+            Book b = new Book(getBookCode(prd.getBcode()),qty);
+
+            db.subBookQty(b);
 
 
 
