@@ -84,6 +84,17 @@ public class PurchasereturnReportController implements Initializable {
     @FXML
     void getQtyPrice(KeyEvent event) {
 
+        if(event.getCode()==KeyCode.ENTER){
+
+            purchasetable.getSelectionModel().selectAll();
+
+            ObservableList p  =  purchasetable.getSelectionModel().getSelectedItems();
+
+            getQtySelectList(p,totalQty);
+
+            getTotalSelectList(p,totalQty,totalPrice);
+        }
+
 
 
 
