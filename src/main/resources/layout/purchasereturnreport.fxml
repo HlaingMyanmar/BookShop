@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="564.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="layout.Purchasereturnreport">
+<AnchorPane prefHeight="564.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.PurchasereturnReportController">
    <children>
       <AnchorPane fx:id="purchasePane" prefHeight="564.0" prefWidth="1355.0">
          <children>

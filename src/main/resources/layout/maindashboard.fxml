@@ -389,40 +389,20 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Separator layoutX="7.0" layoutY="84.0" prefHeight="2.0" prefWidth="1333.0" />
-                  <TextField fx:id="psearch" layoutX="16.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="Search">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="psearch1" layoutX="638.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="Search">
-                     <font>
-                        <Font name="Pyidaungsu" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label fx:id="totalPrice" layoutX="1134.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="totalQty" layoutX="1005.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <JFXCheckBox fx:id="purchaseCb" layoutX="539.0" layoutY="55.0" onMouseClicked="#purchasecheckBoxAction" selected="true" text="Purchase" textFill="#1d00ff">
+                  <Separator layoutX="7.0" layoutY="36.0" prefHeight="2.0" prefWidth="1333.0" />
+                  <JFXCheckBox fx:id="purchaseCb" layoutX="539.0" layoutY="5.0" onMouseClicked="#purchasecheckBoxAction" selected="true" text="Purchase" textFill="#1d00ff">
                      <font>
                         <Font name="Pyidaungsu Bold" size="15.0" />
                      </font>
                   </JFXCheckBox>
-                  <JFXCheckBox fx:id="purchasereturnCb" layoutX="637.0" layoutY="55.0" onMouseClicked="#purchasereturncheckBoxAction" text="Purchase Return" textFill="#1d00ff">
+                  <JFXCheckBox fx:id="purchasereturnCb" layoutX="637.0" layoutY="5.0" onMouseClicked="#purchasereturncheckBoxAction" text="Purchase Return" textFill="#1d00ff">
                      <font>
                         <Font name="Pyidaungsu Bold" size="15.0" />
                      </font>
                   </JFXCheckBox>
-                  <AnchorPane fx:id="purchasePane" layoutY="96.0" prefHeight="564.0" prefWidth="1350.0">
+                  <AnchorPane fx:id="purchasePane" layoutY="42.0" prefHeight="618.0" prefWidth="1350.0">
                      <children>
-                        <TableView fx:id="purchasetable" layoutX="2.0" onMouseClicked="#purchasetableClickAction" prefHeight="501.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="479.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                            <columns>
                               <TableColumn fx:id="psupplierCol" prefWidth="140.0" text="Supplier Name" />
                               <TableColumn fx:id="pcodeCol" prefWidth="73.0" text="P Code" />
@@ -435,17 +415,37 @@
                               <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="Total" />
                            </columns>
                         </TableView>
-                        <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/printer.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="148.0" layoutY="518.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
-                        <Button layoutX="14.0" layoutY="518.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase">
+                        <Button layoutX="148.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+                        <Button layoutX="14.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </Button>
+                        <TextField fx:id="psearch" layoutX="14.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="Search">
+                           <font>
+                              <Font name="Pyidaungsu" size="12.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="psearch1" layoutX="636.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="Search">
+                           <font>
+                              <Font name="Pyidaungsu" size="12.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="totalPrice" layoutX="1132.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="totalQty" layoutX="1003.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
