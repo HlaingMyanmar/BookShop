@@ -141,12 +141,12 @@ public class PurchasereturnController extends Deliver implements Initializable {
     void confirmItem(MouseEvent event) {
 
 
-        String returncode = rdid.getText();
+
         Date retrundate = Date.valueOf(rdate.getText());
 
-        if (rdid.getText().equals("") || rdate.getText().equals("")) {
+        if (rdate.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(null, "Please Insert Return ID and Return Date");
+            JOptionPane.showMessageDialog(null, "Please Insert Return Date");
 
         } else {
 
@@ -172,11 +172,11 @@ public class PurchasereturnController extends Deliver implements Initializable {
                /// Purchase Return Detail Insert
 
                 PurchaseReturndb rdb = new PurchaseReturndb();
-                int id  = rdb.getList().getFirst().getRid();
+                Date date  = rdb.getList().getFirst().getRdate();
 
 
 
-                PurchaseReturnDetail prd1 = new PurchaseReturnDetail(id,prd.getPuid(),retrundate,returncode,getBookCode(prd.getBcode()),prd.getQty(),prd.getTotal(),prd.getRemark());
+                PurchaseReturnDetail prd1 = new PurchaseReturnDetail(prd.getPuid(),date,getBookCode(prd.getBcode()),prd.getQty(),prd.getTotal(),prd.getRemark());
 
                 db.insert(prd1);
 
@@ -332,7 +332,7 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
         iniTable();
 
-        rdid.setText(getPurchaseReturnID());
+      //  rdid.setText(getPurchaseReturnID());
 
         rdate.setText(String.valueOf(LocalDate.now()));
 

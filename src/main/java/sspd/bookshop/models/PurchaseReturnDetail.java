@@ -6,7 +6,7 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
 
 
 
-    private String rdid;
+
     private String bcode;
     private String sid;
     private int qty;
@@ -14,15 +14,14 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
     private String returnReason;
 
 
-    public PurchaseReturnDetail(int rid, String puid, Date rdate) {
+    public PurchaseReturnDetail( String puid, Date rdate) {
 
-        super(rid, puid, rdate);
+        super( puid, rdate);
 
     }
 
-    public PurchaseReturnDetail(int rid, String puid, Date rdate, String rdid, String bcode, String sid, int qty, int amount, String returnReason) {
-        super(rid, puid, rdate);
-        this.rdid = rdid;
+    public PurchaseReturnDetail( String puid, Date rdate, String bcode, String sid, int qty, int amount, String returnReason) {
+        super( puid, rdate);
         this.bcode = bcode;
         this.sid = sid;
         this.qty = qty;
@@ -30,19 +29,8 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
         this.returnReason = returnReason;
     }
 
-    public PurchaseReturnDetail(String puid, Date rdate, String rdid, String bcode, String sid, int qty, int amount, String returnReason) {
-        super(puid, rdate);
-        this.rdid = rdid;
-        this.bcode = bcode;
-        this.sid = sid;
-        this.qty = qty;
-        this.amount = amount;
-        this.returnReason = returnReason;
-    }
-
-    public PurchaseReturnDetail(int rid, String puid, Date rdate, String rdid, String bcode, int qty, int amount, String returnReason) {
-        super(rid, puid, rdate);
-        this.rdid = rdid;
+    public PurchaseReturnDetail( String puid, Date rdate, String bcode, int qty, int amount, String returnReason) {
+        super( puid, rdate);
         this.bcode = bcode;
         this.qty = qty;
         this.amount = amount;
@@ -51,13 +39,7 @@ public class PurchaseReturnDetail extends  PurchaseReturn{
 
 
 
-    public String getRdid() {
-        return rdid;
-    }
 
-    public void setRdid(String rdid) {
-        this.rdid = rdid;
-    }
 
     public String getBcode() {
         return bcode;

@@ -19,7 +19,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
     @Override
     public List<PurchaseReturn> getList() {
 
-        String sql = "SELECT * FROM `purchasereturn` order by rid desc";
+        String sql = "SELECT * FROM `purchasereturn` order by rdate desc";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -29,11 +29,11 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
             while(rs.next()){
 
-                int code = rs.getInt("rid");
+
                 String pid = rs.getString("puid");
                 Date date = rs.getDate("rdate");
 
-                PurchaseReturn pr = new PurchaseReturn(code,pid,date);
+                PurchaseReturn pr = new PurchaseReturn(pid,date);
 
                 prList.add(pr);
 
@@ -57,13 +57,14 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
     @Override
     public void update(PurchaseReturn purchaseReturn) {
 
-        String sql = "UPDATE `purchasereturn` SET `puid`=?,`rdate`=? WHERE `rid`=?";
+        String sql = "UPDATE `purchasereturn` SET `puid`=? WHERE `rdate`=?";
+
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setString(1,purchaseReturn.getPuid());
-            pst.setDate(2,purchaseReturn.getRdate());
-            pst.setInt(3,purchaseReturn.getRid());
+
+            pst.setDate(1,purchaseReturn.getRdate());
+
 
             pst.executeUpdate();
 
@@ -82,17 +83,17 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
     @Override
     public void create(PurchaseReturn purchaseReturn) {
 
-        String sql = "INSERT INTO `purchasereturn`(`rid`, `puid`, `rdate`) VALUES (?,?,?)";
+        String sql = "INSERT INTO `purchasereturn`( `rdate`, `puid`) VALUES (?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setInt(1,purchaseReturn.getRid());
+            pst.setDate(1,purchaseReturn.getRdate());
             pst.setString(2,purchaseReturn.getPuid());
-            pst.setDate(3,purchaseReturn.getRdate());
+
 
             pst.executeUpdate();
 
-           // JOptionPane.showMessageDialog(null,"Save");
+            JOptionPane.showMessageDialog(null,"Save");
 
 
         } catch (SQLException e) {

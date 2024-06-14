@@ -74,15 +74,17 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
     public void update(PurchaseReturnDetail purchaseReturnDetail) {
 
 
-        String sql = "UPDATE `purchasereturndetails` SET `rid`=?,`bcode`=?,`qty`=?,`amount`=?,`returnReason`=? WHERE `rdid`=?";
+
+        String sql = "UPDATE `purchasereturndetails` SET `bcode`=?,`qty`=?,`amount`=?,`returnReason`=? WHERE `rdate`=?";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setInt(1,purchaseReturnDetail.getRid());
-            pst.setString(2,purchaseReturnDetail.getBcode());
-            pst.setInt(3,purchaseReturnDetail.getQty());
-            pst.setInt(4,purchaseReturnDetail.getAmount());
-            pst.setString(5,purchaseReturnDetail.getReturnReason());
+
+            pst.setString(1,purchaseReturnDetail.getBcode());
+            pst.setInt(2,purchaseReturnDetail.getQty());
+            pst.setInt(3,purchaseReturnDetail.getAmount());
+            pst.setString(4,purchaseReturnDetail.getReturnReason());
+            pst.setDate(5,purchaseReturnDetail.getRdate());
 
             JOptionPane.showMessageDialog(null,"Return Item Update Successful");
 
@@ -98,16 +100,17 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
     public void insert(PurchaseReturnDetail purchaseReturnDetail) {
 
-        String sql = "INSERT INTO `purchasereturndetails`(`rdid`, `rid`, `bcode`, `qty`, `amount`, `returnReason`) VALUES (?,?,?,?,?,?)";
+
+
+        String sql = "INSERT INTO `purchasereturndetails`(`rdate`, `bcode`, `qty`, `amount`, `returnReason`) VALUES (?,?,?,?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setString(1,purchaseReturnDetail.getRdid());
-            pst.setInt(2,purchaseReturnDetail.getRid());
-            pst.setString(3,purchaseReturnDetail.getBcode());
-            pst.setInt(4,purchaseReturnDetail.getQty());
-            pst.setInt(5,purchaseReturnDetail.getAmount());
-            pst.setString(6,purchaseReturnDetail.getReturnReason());
+            pst.setDate(1,purchaseReturnDetail.getRdate());
+            pst.setString(2,purchaseReturnDetail.getBcode());
+            pst.setInt(3,purchaseReturnDetail.getQty());
+            pst.setInt(4,purchaseReturnDetail.getAmount());
+            pst.setString(5,purchaseReturnDetail.getReturnReason());
 
             pst.executeUpdate();
 
