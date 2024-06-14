@@ -1,14 +1,15 @@
 package sspd.bookshop.models;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PurchaseReturn {
 
 
     private String puid;
-    private Date rdate;
+    private Timestamp rdate;
 
-    public PurchaseReturn( String puid, Date rdate) {
+    public PurchaseReturn( String puid, Timestamp rdate) {
         this.puid = puid;
         this.rdate = rdate;
     }
@@ -24,11 +25,11 @@ public class PurchaseReturn {
         this.puid = puid;
     }
 
-    public Date getRdate() {
+    public Timestamp getRdate() {
         return rdate;
     }
 
-    public void setRdate(Date rdate) {
+    public void setRdate(Timestamp rdate) {
         this.rdate = rdate;
     }
 

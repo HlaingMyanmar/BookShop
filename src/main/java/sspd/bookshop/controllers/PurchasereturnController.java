@@ -31,7 +31,10 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -142,7 +145,7 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
 
 
-        Date retrundate = Date.valueOf(rdate.getText());
+        Timestamp retrundate = Timestamp.valueOf(rdate.getText());
 
         if (rdate.getText().equals("")) {
 
@@ -172,7 +175,7 @@ public class PurchasereturnController extends Deliver implements Initializable {
                /// Purchase Return Detail Insert
 
                 PurchaseReturndb rdb = new PurchaseReturndb();
-                Date date  = rdb.getList().getFirst().getRdate();
+                Timestamp date  = rdb.getList().getFirst().getRdate();
 
 
 
@@ -334,7 +337,11 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
       //  rdid.setText(getPurchaseReturnID());
 
-        rdate.setText(String.valueOf(LocalDate.now()));
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedNow = now.format(formatter);
+
+        rdate.setText(String.valueOf(formattedNow));
 
 
     }

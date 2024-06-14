@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Bookshop extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/maindashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/purchasereturn.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Sale Report");
         stage.setScene(scene);

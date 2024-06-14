@@ -31,7 +31,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
 
                 String pid = rs.getString("puid");
-                Date date = rs.getDate("rdate");
+                Timestamp date = rs.getTimestamp("rdate");
 
                 PurchaseReturn pr = new PurchaseReturn(pid,date);
 
@@ -63,7 +63,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
 
-            pst.setDate(1,purchaseReturn.getRdate());
+            pst.setTimestamp(1,purchaseReturn.getRdate());
 
 
             pst.executeUpdate();
@@ -87,7 +87,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setDate(1,purchaseReturn.getRdate());
+            pst.setTimestamp(1,purchaseReturn.getRdate());
             pst.setString(2,purchaseReturn.getPuid());
 
 
