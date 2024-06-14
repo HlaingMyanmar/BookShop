@@ -240,7 +240,7 @@ public class PurchasereturnReportController implements Initializable {
         dateCol.setCellValueFactory(new PropertyValueFactory<>("rdate"));
         booknameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
         reasonCol.setCellValueFactory(new PropertyValueFactory<>("returnReason"));
-        suppliernameCol.setCellValueFactory(new PropertyValueFactory<>("sid"));
+
         pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         ptotalCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         purchaseIDCol.setCellValueFactory(new PropertyValueFactory<>("puid"));

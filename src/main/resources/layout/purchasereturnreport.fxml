@@ -19,10 +19,9 @@
                   <TableColumn fx:id="dateCol" prefWidth="154.0" text="Date" />
                   <TableColumn fx:id="purchaseIDCol" prefWidth="112.0" text="Purchase ID" />
                   <TableColumn fx:id="booknameCol" prefWidth="459.0" text="Book Name" />
-                  <TableColumn fx:id="suppliernameCol" prefWidth="176.0" text="Supplier Name" />
                   <TableColumn fx:id="pqtyCol" prefWidth="46.0" text="Qty" />
                   <TableColumn fx:id="ptotalCol" prefWidth="103.0" text="Total" />
-                  <TableColumn fx:id="reasonCol" prefWidth="292.0" text="Reason" />
+                  <TableColumn fx:id="reasonCol" prefWidth="468.0" text="Reason" />
                </columns>
             </TableView>
             <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">

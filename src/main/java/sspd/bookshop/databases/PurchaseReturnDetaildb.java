@@ -18,12 +18,11 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
 
         String sql = """
                 
-                select pr.rdate,p.puid,b.name,s.suname,prd.qty,prd.amount,prd.returnReason from purchasereturndetails prd
-                inner join purchasereturn pr on pr.rdate = prd.rdate
-                inner join purchase p on p.puid = pr.puid
-                LEFT join book b on b.bcode = p.bcode
-                inner join supplier s on s.suid = p.sid
-                ORDER BY  rdate  desc
+                    SELECT prd.rdate, pr.puid, b.name, prd.qty, prd.amount, prd.returnReason
+                                         FROM purchasereturndetails prd
+                                         INNER JOIN purchasereturn pr ON pr.rdate = prd.rdate
+                                         INNER JOIN book b ON b.bcode = prd.bcode
+                                         ORDER BY prd.rdate DESC;
                  
                 """;
 
@@ -40,12 +39,12 @@ public class PurchaseReturnDetaildb  extends PurchaseReturndb  {
                 Timestamp rdate = rs.getTimestamp("rdate");
                 String puid = rs.getString("puid");
                 String bname = rs.getString("name");
-                String sname = rs.getString("suname");
+
                 int qty = rs.getInt("qty");
                 int amount = rs.getInt("amount");
                 String reason = rs.getString("returnReason");
 
-                PurchaseReturnDetail returnDetail = new PurchaseReturnDetail(puid,rdate,bname,sname, qty,amount,reason);
+                PurchaseReturnDetail returnDetail = new PurchaseReturnDetail(puid,rdate,bname, qty,amount,reason);
 
 
 

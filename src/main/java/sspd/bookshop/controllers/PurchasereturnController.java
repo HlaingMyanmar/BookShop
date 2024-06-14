@@ -169,7 +169,7 @@ public class PurchasereturnController extends Deliver implements Initializable {
             int size = returntable.getItems().size();
 
 
-            Purchase prd = (Purchase) returntable.getItems().get(0);
+            Purchase prd = (Purchase) returntable.getItems().getFirst();
 
 
 
