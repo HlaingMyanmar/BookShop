@@ -8,6 +8,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -135,6 +137,10 @@ public class DashboardController extends Deliver implements Initializable  {
 
     @FXML
     private JFXCheckBox purchasereturnCb;
+
+
+    @FXML
+    private Pane switchPane;
 
 
 
@@ -1435,6 +1441,8 @@ public class DashboardController extends Deliver implements Initializable  {
 
         if(purchaseCb.isSelected()){
 
+            switchPane.getChildren().clear();
+
             purchasereturnCb.setSelected(false);
             purchasePane.setVisible(true);
 //.
@@ -1454,7 +1462,28 @@ public class DashboardController extends Deliver implements Initializable  {
 
             purchasePane.setVisible(false);
 
+
             purchaseCb.setSelected(false);
+
+
+
+            FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/purchasereturnreport.fxml"));
+            Node node2 = null;
+
+            try {
+
+                node2 = fxmlLoader2.load();
+                switchPane.getChildren().add(node2);
+
+            } catch (IOException e) {
+
+                throw new RuntimeException(e);
+            }
+
+
+
+
+
 
         }
         else {
