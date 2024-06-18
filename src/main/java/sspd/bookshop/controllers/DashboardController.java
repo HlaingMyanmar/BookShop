@@ -38,6 +38,8 @@ import java.util.concurrent.TimeUnit;
 
 public class DashboardController extends Deliver implements Initializable  {
 
+    
+
 
     @FXML
     private TableColumn<Author, String> auID;
@@ -143,6 +145,10 @@ public class DashboardController extends Deliver implements Initializable  {
     private Pane switchPane;
 
 
+    @FXML
+    private Button newPurchasebtn;
+
+
 
 
     @FXML
@@ -190,6 +196,18 @@ public class DashboardController extends Deliver implements Initializable  {
 
     @FXML
     private AnchorPane purchasePane;
+
+    @FXML
+    private TableView saletable;
+
+    @FXML
+    private TableView saledetailtable;
+
+    @FXML
+    private CheckBox saleCheck;
+
+    @FXML
+    private  CheckBox salereturnCheck;
 
 
     public static int checkPoint = 0;
@@ -1118,8 +1136,13 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
+
     @FXML
     void newPurchareAction(MouseEvent event) {
+
+
+
+
 
         Stage stage = new Stage();
 
@@ -1148,6 +1171,7 @@ public class DashboardController extends Deliver implements Initializable  {
         stage.initOwner(mainStage);
         stage.setScene(scene);
         stage.show();
+
 
 
 
@@ -1492,6 +1516,8 @@ public class DashboardController extends Deliver implements Initializable  {
         }
 
     }
+
+
 
 
     //OrderTab controller

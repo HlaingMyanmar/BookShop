@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import java.util.List;
 
-public  class Deliver implements GenerateResult {
+public  class Deliver extends  Thread implements GenerateResult {
 
 
     protected static Book _book =null;
