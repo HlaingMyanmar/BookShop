@@ -15,7 +15,7 @@ import java.util.List;
 public  class Deliver extends  Thread implements GenerateResult {
 
 
-    protected static Book _book =null;
+    public static Book _book =null;
 
 
     @Override

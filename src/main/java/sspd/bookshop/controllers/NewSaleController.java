@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
@@ -29,6 +28,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static sspd.bookshop.modules.Deliver._book;
 
 public class NewSaleController implements Initializable {
 
@@ -89,7 +90,7 @@ public class NewSaleController implements Initializable {
     @FXML
     private TableColumn<Sale, Integer> totalCol;
 
-    ObservableList<Sale> oList = FXCollections.observableArrayList();
+    ObservableList<Book> oList = FXCollections.observableArrayList();
 
     @FXML
     void addItem(MouseEvent event) {
@@ -103,9 +104,9 @@ public class NewSaleController implements Initializable {
     int quantity = Integer.parseInt(qtytxt.getText());
     int price    = Integer.parseInt(ptxt.getText());
 
-    Sale sale = new Sale(oid.getText(),date,cname.getText(),cphone.getText(),bookcode,bookname,category,author,quantity,price,(quantity*price));
+   // Sale sale = new Sale(oid.getText(),date,cname.getText(),cphone.getText(),bookcode,bookname,category,author,quantity,price,(quantity*price));
 
-    oList.add(sale);
+   // oList.add(sale);
 
 
 
@@ -133,31 +134,13 @@ public class NewSaleController implements Initializable {
 
     @FXML
     void helpAction(KeyEvent event) {
+
         if(event.getCode()== KeyCode.F1){
 
-            Stage stage = new Stage();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/booksearch.fxml"));
-            Scene scene = null;
+            getChildbookTable();
 
 
-            try {
-
-
-                scene = new Scene(fxmlLoader.load());
-
-
-            } catch (IOException e) {
-
-                throw new RuntimeException(e);
-
-            }
-            stage.initStyle(StageStyle.UTILITY);
-            stage.initModality(Modality.WINDOW_MODAL);
-            Stage mainStage = (Stage) otable.getScene().getWindow();
-            stage.initOwner(mainStage);
-            stage.setScene(scene);
-            stage.show();
 
         }
     }
@@ -174,6 +157,17 @@ public class NewSaleController implements Initializable {
     void remove(MouseEvent event) {
 
     }
+
+    @FXML
+    void getDataAction(MouseEvent event) {
+
+        bcode.setText(_book.getBookid());
+        bname.setText(_book.getBookname());
+
+
+    }
+
+
 
 
 
@@ -226,6 +220,33 @@ public class NewSaleController implements Initializable {
 
 
 
+    }
+
+    private void getChildbookTable(){
+
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/booksearch.fxml"));
+        Scene scene = null;
+
+
+        try {
+
+
+            scene = new Scene(fxmlLoader.load());
+
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        }
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) otable.getScene().getWindow();
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
