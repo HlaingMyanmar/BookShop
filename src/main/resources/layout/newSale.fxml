@@ -137,7 +137,7 @@
       <Button layoutX="489.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
       <Button layoutX="586.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#comfirm" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
       <Button layoutX="682.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#print" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
-      <Pane layoutX="160.0" layoutY="7.0" prefHeight="114.0" prefWidth="530.0" styleClass="pane" stylesheets="@../css/pane1.css">
+      <Pane layoutX="160.0" layoutY="7.0" prefHeight="114.0" prefWidth="530.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" stylesheets="@../css/pane1.css">
          <children>
             <Label fx:id="pcslb" layoutX="23.0" layoutY="11.0" prefHeight="89.0" prefWidth="215.0" text="122212 pcs" textFill="#1500ff">
                <font>

@@ -14,7 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
+import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
@@ -194,6 +196,59 @@ public class NewSaleController extends Deliver implements Initializable {
     @FXML
     void comfirm(MouseEvent event) {
 
+        String orderID = oid.getText();
+
+        Date date = Date.valueOf(odate.getText());
+
+        String customerName = cname.getText();
+
+        String customerPhone = cphone.getText();
+
+
+
+        Bookdb bookdb = new Bookdb();
+
+        Orderdb orderdb = new Orderdb();
+
+        Saledb saledb = new Saledb();
+
+        otable. getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        otable.getSelectionModel().selectAll();
+
+        int size  =  otable.getSelectionModel().getSelectedItems().size();
+
+        Order order = new Order(orderID,date,customerName,customerPhone);
+
+        orderdb.create(order);
+
+
+
+        for(int i = 0;i<size;i++){
+
+            Book book = (Book)  otable.getItems().get(i);
+
+
+
+            Sale sale = new Sale(orderID,date,customerName,customerPhone,book.getBookid(),book.getBookname(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),book.getQuantity(),book.getPrice(),book.getTotal());
+
+            bookdb.subQty(book);
+
+
+
+            saledb.create(sale);
+
+            getClear();
+
+        }
+
+
+
+
+
+
+
+
     }
 
     @FXML
@@ -332,7 +387,7 @@ public class NewSaleController extends Deliver implements Initializable {
         }
         else {
 
-            return "#bo"+ Integer.toString(orderList .size()+1);
+            return "#Or"+ Integer.toString(orderList .size()+1);
 
         }
 
