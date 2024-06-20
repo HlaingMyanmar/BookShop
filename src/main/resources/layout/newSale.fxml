@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane onKeyPressed="#helpAction" prefHeight="522.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSaleController">
@@ -13,9 +15,9 @@
       <TableView fx:id="otable" layoutX="14.0" layoutY="132.0" prefHeight="244.0" prefWidth="863.0">
         <columns>
           <TableColumn fx:id="bookcodeCol" prefWidth="70.0" text="Book Code" />
-            <TableColumn fx:id="booknameCol" prefWidth="329.0" text="Book Name" />
-          <TableColumn fx:id="categoryCol" prefWidth="132.0" text="Category" />
-            <TableColumn fx:id="authorCol" prefWidth="143.0" text="Author" />
+            <TableColumn fx:id="booknameCol" prefWidth="282.0" text="Book Name" />
+          <TableColumn fx:id="categoryCol" prefWidth="155.0" text="Category" />
+            <TableColumn fx:id="authorCol" prefWidth="167.0" text="Author" />
             <TableColumn fx:id="qtyCol" prefWidth="48.0" text="Qty" />
             <TableColumn fx:id="priceCol" prefWidth="64.0" text="Price" />
             <TableColumn fx:id="totalCol" prefWidth="76.0" text="Total" />
@@ -135,5 +137,20 @@
       <Button layoutX="489.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
       <Button layoutX="586.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#comfirm" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
       <Button layoutX="682.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#print" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+      <Pane layoutX="160.0" layoutY="7.0" prefHeight="114.0" prefWidth="530.0" styleClass="pane" stylesheets="@../css/pane1.css">
+         <children>
+            <Label fx:id="pcslb" layoutX="11.0" layoutY="11.0" prefHeight="89.0" prefWidth="238.0" text="122212 pcs" textFill="#1500ff">
+               <font>
+                  <Font name="Pyidaungsu Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label fx:id="amountlb" layoutX="271.0" layoutY="11.0" prefHeight="89.0" prefWidth="256.0" text="1444444 MMK" textFill="RED">
+               <font>
+                  <Font name="Pyidaungsu Bold" size="40.0" />
+               </font>
+            </Label>
+            <Line endX="9.0" endY="70.0" layoutX="251.0" layoutY="42.0" startX="9.0" startY="-39.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

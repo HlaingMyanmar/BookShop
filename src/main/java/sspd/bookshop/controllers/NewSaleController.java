@@ -6,9 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -37,6 +35,12 @@ public class NewSaleController extends Deliver implements Initializable {
 
     @FXML
     private TextField aname;
+
+    @FXML
+    private Label amountlb;
+
+    @FXML
+    private Label pcslb;
 
     @FXML
     private TableColumn<Book, String> authorCol;
@@ -108,7 +112,7 @@ public class NewSaleController extends Deliver implements Initializable {
     String author = aname.getText();
     int quantity = Integer.parseInt(qtytxt.getText());
     int price    = Integer.parseInt(ptxt.getText());
-    int total = Integer.parseInt(this.total.getText());
+    int total = quantity*price;
 
 
     Book book = new Book(bookcode,bookname,quantity,price,author,category,total);
@@ -151,6 +155,7 @@ public class NewSaleController extends Deliver implements Initializable {
         oList.add(book);
 
         otable.setItems(oList);
+        getQtyCalulate();
 
         getClear();
     }
@@ -249,6 +254,7 @@ public class NewSaleController extends Deliver implements Initializable {
         if (selectedIndex >= 0) {
 
             otable.getItems().remove(selectedIndex);
+            getQtyCalulate();
 
             _book = null;
 
@@ -357,6 +363,40 @@ public class NewSaleController extends Deliver implements Initializable {
         stage.initOwner(mainStage);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void getQtyCalulate(){
+
+        int totalqty = 0;
+
+       otable. getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+       otable.getSelectionModel().selectAll();
+
+       ObservableList ob =  otable.getSelectionModel().getSelectedItems();
+
+       pcslb.setText(ob.size() +" pcs");
+
+
+
+
+    }
+
+    private void getTotalCalulate(){
+
+        int totalqty = 0;
+
+        otable. getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        otable.getSelectionModel().selectAll();
+
+        ObservableList ob =  otable.getSelectionModel().getSelectedItems();
+
+        pcslb.setText(ob.size() +" pcs");
+
+
+
+
     }
 
 
