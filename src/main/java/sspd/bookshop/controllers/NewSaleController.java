@@ -126,7 +126,7 @@ public class NewSaleController extends Deliver implements Initializable {
         JOptionPane.showMessageDialog(null,"Please Fill required data?","Notice",0);
 
 
-    } else if (book.getQuantity() > getDataList(bookcode).getQuantity()) {
+    } else if (book.getQuantity() > getDataList(bookcode).getQuantity() ||  getDataList(bookcode).getQuantity()==0) {
 
         JOptionPane.showMessageDialog(null,"This is not Have!!!"+"\nThis is item have "+getDataList(bookcode).getQuantity()+" pcs","Notice",0);
         qtytxt.setText(String.valueOf(getDataList(bookcode).getQuantity()));
@@ -241,6 +241,15 @@ public class NewSaleController extends Deliver implements Initializable {
             getClear();
 
         }
+
+        otable.getItems().clear();
+
+        oid.setText(getOrderID());
+
+        odate.setText(String.valueOf(Date.valueOf(LocalDate.now())));
+
+        cname.setText("");
+        cphone.setText("");
 
 
 
@@ -387,7 +396,7 @@ public class NewSaleController extends Deliver implements Initializable {
         }
         else {
 
-            return "#Or"+ Integer.toString(orderList .size()+1);
+            return "#Or"+ (orderList.size() + 1);
 
         }
 
