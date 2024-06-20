@@ -1,18 +1,20 @@
 package sspd.bookshop.models;
 
+
+import java.sql.Date;
+
 public class Order {
+
     private String orderid;
-    private String bookcode;
+    private Date orderdate;
+    private String culname;
+    private String cuphone;
 
-    private int quanity;
-
-    private int price;
-
-    public Order(String orderid, String bookcode, int quanity, int price) {
+    public Order(String orderid, Date orderdate, String culname, String cuphone) {
         this.orderid = orderid;
-        this.bookcode = bookcode;
-        this.quanity = quanity;
-        this.price = price;
+        this.orderdate = orderdate;
+        this.culname = culname;
+        this.cuphone = cuphone;
     }
 
     public String getOrderid() {
@@ -23,27 +25,27 @@ public class Order {
         this.orderid = orderid;
     }
 
-    public String getBookcode() {
-        return bookcode;
+    public Date getOrderdate() {
+        return orderdate;
     }
 
-    public void setBookcode(String bookcode) {
-        this.bookcode = bookcode;
+    public void setOrderdate(Date orderdate) {
+        this.orderdate = orderdate;
     }
 
-    public int getQuanity() {
-        return quanity;
+    public String getCulname() {
+        return culname;
     }
 
-    public void setQuanity(int quanity) {
-        this.quanity = quanity;
+    public void setCulname(String culname) {
+        this.culname = culname;
     }
 
-    public int getPrice() {
-        return price;
+    public String getCuphone() {
+        return cuphone;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setCuphone(String cuphone) {
+        this.cuphone = cuphone;
     }
 }

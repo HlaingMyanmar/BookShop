@@ -8,16 +8,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="522.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSaleController">
+<AnchorPane onKeyPressed="#helpAction" prefHeight="522.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSaleController">
    <children>
-      <TableView layoutX="14.0" layoutY="132.0" prefHeight="244.0" prefWidth="863.0">
+      <TableView fx:id="otable" layoutX="14.0" layoutY="132.0" prefHeight="244.0" prefWidth="863.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="bookcodeCol" prefWidth="70.0" text="Book Code" />
+            <TableColumn fx:id="booknameCol" prefWidth="329.0" text="Book Name" />
+          <TableColumn fx:id="categoryCol" prefWidth="132.0" text="Category" />
+            <TableColumn fx:id="authorCol" prefWidth="143.0" text="Author" />
+            <TableColumn fx:id="qtyCol" prefWidth="48.0" text="Qty" />
+            <TableColumn fx:id="priceCol" prefWidth="64.0" text="Price" />
+            <TableColumn fx:id="totalCol" prefWidth="76.0" text="Total" />
         </columns>
       </TableView>
-      <TextField fx:id="pid" layoutX="11.0" layoutY="27.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="133.0" promptText="Order ID">
+      <TextField fx:id="oid" editable="false" layoutX="11.0" layoutY="27.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="133.0" promptText="Order ID">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -27,7 +31,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid1" layoutX="701.0" layoutY="27.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Name">
+      <TextField fx:id="cname" layoutX="701.0" layoutY="27.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Name">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -37,7 +41,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid2" layoutX="14.0" layoutY="91.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="133.0" promptText="Order Date">
+      <TextField fx:id="odate" editable="false" layoutX="14.0" layoutY="91.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="133.0" promptText="Order Date">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -47,7 +51,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid11" layoutX="701.0" layoutY="91.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Phone">
+      <TextField fx:id="cphone" layoutX="701.0" layoutY="91.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Phone">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -57,7 +61,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid21" layoutX="15.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
+      <TextField fx:id="bcode" layoutX="15.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -67,7 +71,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid211" layoutX="159.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Book Name">
+      <TextField fx:id="bname" layoutX="159.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Book Name">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -77,7 +81,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid2111" layoutX="395.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Category ">
+      <TextField fx:id="caname" layoutX="395.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Category ">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -87,7 +91,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid21111" layoutX="629.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Author">
+      <TextField fx:id="aname" layoutX="629.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Author">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -97,7 +101,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid211111" layoutX="15.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="87.0" promptText="Qty">
+      <TextField fx:id="qtytxt" layoutX="15.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="87.0" promptText="Qty">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -107,7 +111,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid2111111" layoutX="116.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="87.0" promptText="Price">
+      <TextField fx:id="ptxt" layoutX="116.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="87.0" promptText="Price">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -117,7 +121,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="pid21111111" layoutX="216.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="166.0" promptText="total">
+      <TextField fx:id="total" layoutX="216.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="166.0" promptText="total">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -127,9 +131,9 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="394.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
-      <Button layoutX="489.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
-      <Button layoutX="586.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
-      <Button layoutX="682.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+      <Button layoutX="394.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
+      <Button layoutX="489.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
+      <Button layoutX="586.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#comfirm" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
+      <Button layoutX="682.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#print" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
    </children>
 </AnchorPane>

@@ -1517,7 +1517,24 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
+    @FXML
+    public void newSaleAction(MouseEvent event) throws IOException {
 
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newSale.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) booktable.getScene().getWindow();
+        stage.setTitle("New Sale");
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
+
+
+
+    }
 
 
     //OrderTab controller
