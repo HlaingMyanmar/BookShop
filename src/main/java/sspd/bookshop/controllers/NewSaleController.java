@@ -156,6 +156,7 @@ public class NewSaleController extends Deliver implements Initializable {
 
         otable.setItems(oList);
         getQtyCalulate();
+        getTotalCalulate();
 
         getClear();
     }
@@ -255,6 +256,7 @@ public class NewSaleController extends Deliver implements Initializable {
 
             otable.getItems().remove(selectedIndex);
             getQtyCalulate();
+            getTotalCalulate();
 
             _book = null;
 
@@ -384,7 +386,7 @@ public class NewSaleController extends Deliver implements Initializable {
 
     private void getTotalCalulate(){
 
-        int totalqty = 0;
+        int total = 0;
 
         otable. getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -392,7 +394,15 @@ public class NewSaleController extends Deliver implements Initializable {
 
         ObservableList ob =  otable.getSelectionModel().getSelectedItems();
 
-        pcslb.setText(ob.size() +" pcs");
+        int p = 0;
+
+        for(Object b :ob){
+
+             total  = total+((Book)ob.get(p)).getTotal();
+             p++;
+        }
+
+        amountlb.setText(total +" MMK");
 
 
 
