@@ -92,10 +92,13 @@ public class NewSaleController extends Deliver implements Initializable {
     @FXML
     private TableColumn<Book, Integer> totalCol;
 
-    ObservableList<Book> oList = FXCollections.observableArrayList();
+    public static ObservableList<Book> oList = FXCollections.observableArrayList();
+
 
     @FXML
     void addItem(MouseEvent event) {
+
+    boolean bo = false;
 
 
 
@@ -107,46 +110,78 @@ public class NewSaleController extends Deliver implements Initializable {
     int price    = Integer.parseInt(ptxt.getText());
     int total = Integer.parseInt(this.total.getText());
 
+
+    Book book = new Book(bookcode,bookname,quantity,price,author,category,total);
+
+
     if(bcode.getText().equals("") || bname.getText().equals("") || caname.getText().equals("") || aname.getText().equals("") || qtytxt.getText().equals("") || ptxt.getText().equals("") || this.total.getText().equals("")){
 
 
         JOptionPane.showMessageDialog(null,"Please Fill required data?","Notice",0);
 
 
+    } else if (book.getQuantity() > getDataList(bookcode).getQuantity()) {
+
+        JOptionPane.showMessageDialog(null,"This is not Have!!!"+"\nThis is item have "+getDataList(bookcode).getQuantity()+" pcs","Notice",0);
+        qtytxt.setText(String.valueOf(getDataList(bookcode).getQuantity()));
+
+    }
+
+
+    else {
+
+
+
+    for(Book b :oList){
+
+        if( b.getBookid().equals(bookcode)){
+
+            bo = true;
+
+        }
+
+    }
+
+
+    if (!bo){
+
+
+
+
+        oList.add(book);
+
+        otable.setItems(oList);
+
+        getClear();
     }
 
     else {
 
-    Book book = new Book(bookcode,bookname,quantity,price,author,category,total);
+        JOptionPane.showMessageDialog(null,"This data is duplicate !!!!","Notice",2);
+        getClear();
 
-
-    oList.add(book);
-
-    otable.setItems(oList);
-
-    bcode.setText("");
-    bname.setText("");
-    caname.setText("");
-    aname.setText("");
-    qtytxt.setText("");
-    this.total.setText("");
-    ptxt.setText("");
-    _book = null;
-
-
-
+    }
     }
 
 
 
 
+    }
+
+    private void getClear(){
+
+        bcode.setText("");
+        bname.setText("");
+        caname.setText("");
+        aname.setText("");
+        qtytxt.setText("");
+        this.total.setText("");
+        ptxt.setText("");
+        _book = null;
     }
 
     @FXML
     void addlistItem(KeyEvent event) {
-
-
-
 
     }
 
