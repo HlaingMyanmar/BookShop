@@ -4,6 +4,7 @@ import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Order;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,7 @@ public class Orderdb implements DataAccessObject<Order> {
             pst.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,"Please check Order Create Error","Notice",0);
         }
 
     }

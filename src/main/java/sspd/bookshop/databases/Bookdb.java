@@ -204,7 +204,7 @@ public class Bookdb implements DataAccessObject<Book> {
             pst.setString(3,book.getBookid());
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Book Sub Successful");
+
 
 
 
@@ -212,7 +212,7 @@ public class Bookdb implements DataAccessObject<Book> {
 
 
 
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,"Please check Book SubQty Create Error","Notice",0);
         }
 
 

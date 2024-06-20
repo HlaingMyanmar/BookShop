@@ -98,6 +98,9 @@ public class NewSaleController extends Deliver implements Initializable {
     @FXML
     private TableColumn<Book, Integer> totalCol;
 
+    @FXML
+    private TextArea bill;
+
     public static ObservableList<Book> oList = FXCollections.observableArrayList();
 
 
@@ -191,6 +194,77 @@ public class NewSaleController extends Deliver implements Initializable {
     @FXML
     void addlistItem(KeyEvent event) {
 
+
+        boolean bo = false;
+
+
+
+        String bookcode = bcode.getText();
+        String bookname = bname.getText();
+        String category = caname.getText();
+        String author = aname.getText();
+        int quantity = Integer.parseInt(qtytxt.getText());
+        int price    = Integer.parseInt(ptxt.getText());
+        int total = quantity*price;
+
+
+        Book book = new Book(bookcode,bookname,quantity,price,author,category,total);
+
+
+        if(bcode.getText().equals("") || bname.getText().equals("") || caname.getText().equals("") || aname.getText().equals("") || qtytxt.getText().equals("") || ptxt.getText().equals("") || this.total.getText().equals("")){
+
+
+            JOptionPane.showMessageDialog(null,"Please Fill required data?","Notice",0);
+
+
+        } else if (book.getQuantity() > getDataList(bookcode).getQuantity() ||  getDataList(bookcode).getQuantity()==0) {
+
+            JOptionPane.showMessageDialog(null,"This is not Have!!!"+"\nThis is item have "+getDataList(bookcode).getQuantity()+" pcs","Notice",0);
+            qtytxt.setText(String.valueOf(getDataList(bookcode).getQuantity()));
+
+        }
+
+
+        else {
+
+
+
+            for(Book b :oList){
+
+                if( b.getBookid().equals(bookcode)){
+
+                    bo = true;
+
+                }
+
+            }
+
+
+            if (!bo){
+
+
+
+
+                oList.add(book);
+
+                otable.setItems(oList);
+                getQtyCalulate();
+                getTotalCalulate();
+
+                getClear();
+            }
+
+            else {
+
+                JOptionPane.showMessageDialog(null,"This data is duplicate !!!!","Notice",2);
+                getClear();
+
+            }
+        }
+
+
+
+
     }
 
     @FXML
@@ -242,6 +316,8 @@ public class NewSaleController extends Deliver implements Initializable {
 
         }
 
+        JOptionPane.showMessageDialog(null,"Thanks For your purchase!!!!");
+
         otable.getItems().clear();
 
         oid.setText(getOrderID());
@@ -250,6 +326,8 @@ public class NewSaleController extends Deliver implements Initializable {
 
         cname.setText("");
         cphone.setText("");
+        pcslb.setText("0 pcs");
+        amountlb.setText("0 MMK");
 
 
 
@@ -262,6 +340,12 @@ public class NewSaleController extends Deliver implements Initializable {
 
     @FXML
     void print(MouseEvent event) {
+
+
+        bill_print();
+
+
+
 
     }
 
@@ -362,6 +446,9 @@ public class NewSaleController extends Deliver implements Initializable {
         oid.setText(getOrderID());
 
         odate.setText(String.valueOf(Date.valueOf(LocalDate.now())));
+        pcslb.setText("0 pcs");
+        amountlb.setText("0 MMK");
+
 
 
 
@@ -467,6 +554,48 @@ public class NewSaleController extends Deliver implements Initializable {
         }
 
         amountlb.setText(total +" MMK");
+
+
+
+
+    }
+
+    private void bill_print() {
+
+
+        StringBuilder billContent = new StringBuilder();
+
+        billContent.append("\t\t\t\t SSPD IT Services & Training\n");
+        billContent.append("\tအမှတ် (၁၆၀၈) ၊ ပုဂံလမ်းမပေါ် ၊ (၅၇)ရပ်ကွက် ၊ ဒဂုံသီရိဈေးအနီး\n");
+        billContent.append("\t\t\t\t တောင်ဒဂုံမြို့နယ် ၊ ရန်ကုန်မြို့။ \n");
+        billContent.append("\t\t\t\t\t09-09252425319\n");
+        billContent.append("------------------------------------------------------------------------\n");
+        billContent.append(" Item \t\t\t\t\t\t\tQty \t\t\tPrice \n");
+        billContent.append("------------------------------------------------------------------------\n");
+
+        ObservableList<Book> data = otable.getItems();
+
+        int i = 1;
+
+        for(Book b : data){
+
+            String bookname = b.getBookname();
+            String qty = String.valueOf(b.getQuantity());
+            String price = String.valueOf(b.getPrice());
+
+
+
+            billContent.append(i+". "+bookname).append("\n\t").append(qty).append(" pcs \t").append(price+" Kyats").append("\t").append("\n------------------------------------------------------------------------").append("\n");
+            i++;
+
+        }
+
+
+
+        bill.setText(billContent.toString());
+
+
+
 
 
 

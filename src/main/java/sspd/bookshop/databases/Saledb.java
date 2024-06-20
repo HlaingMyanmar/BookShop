@@ -4,6 +4,7 @@ import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Sale;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -63,7 +64,7 @@ public class Saledb implements DataAccessObject<Sale> {
 
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,"Please check Sale Create Error","Notice",0);
         }
 
     }

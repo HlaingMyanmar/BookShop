@@ -4,13 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#helpAction" prefHeight="522.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSaleController">
+<AnchorPane onKeyPressed="#helpAction" prefHeight="522.0" prefWidth="1285.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSaleController">
    <children>
       <TableView fx:id="otable" layoutX="14.0" layoutY="132.0" prefHeight="244.0" prefWidth="863.0">
         <columns>
@@ -136,7 +137,7 @@
       <Button layoutX="394.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#addItem" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
       <Button layoutX="489.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#remove" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
       <Button layoutX="586.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#comfirm" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
-      <Button layoutX="682.0" layoutY="475.0" mnemonicParsing="false" onKeyPressed="#addlistItem" onMouseClicked="#print" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+      <Button layoutX="682.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#print" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
       <Pane layoutX="160.0" layoutY="7.0" prefHeight="114.0" prefWidth="530.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" stylesheets="@../css/pane1.css">
          <children>
             <Label fx:id="pcslb" layoutX="23.0" layoutY="11.0" prefHeight="89.0" prefWidth="215.0" text="122212 pcs" textFill="#1500ff">
@@ -152,5 +153,10 @@
             <Line endX="9.0" endY="70.0" layoutX="254.0" layoutY="42.0" startX="9.0" startY="-39.0" />
          </children>
       </Pane>
+      <TextArea fx:id="bill" layoutX="906.0" layoutY="14.0" prefHeight="490.0" prefWidth="361.0">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextArea>
    </children>
 </AnchorPane>
