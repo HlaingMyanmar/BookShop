@@ -21,6 +21,7 @@ import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
+import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -32,7 +33,7 @@ import java.util.ResourceBundle;
 
 import static sspd.bookshop.modules.Deliver._book;
 
-public class NewSaleController implements Initializable {
+public class NewSaleController extends Deliver implements Initializable {
 
     @FXML
     private TextField aname;
@@ -123,6 +124,15 @@ public class NewSaleController implements Initializable {
 
     otable.setItems(oList);
 
+    bcode.setText("");
+    bname.setText("");
+    caname.setText("");
+    aname.setText("");
+    qtytxt.setText("");
+    this.total.setText("");
+    ptxt.setText("");
+    _book = null;
+
 
 
     }
@@ -180,18 +190,58 @@ public class NewSaleController implements Initializable {
     }
 
     @FXML
+    void getbook(KeyEvent event) {
+
+        if(event.getCode()== KeyCode.ENTER){
+
+            Book book =  getDataList(bcode.getText());
+
+            bcode.setText(book.getBookid());
+            bname.setText(book.getBookname());
+            caname.setText(book.getCid());
+            aname.setText(book.getAid());
+            ptxt.setText(String.valueOf(book.getPrice()));
+
+
+        }
+
+    }
+
+    @FXML
     void remove(MouseEvent event) {
+        int selectedIndex = otable.getSelectionModel().getSelectedIndex();
+
+        if (selectedIndex >= 0) {
+
+            otable.getItems().remove(selectedIndex);
+
+            _book = null;
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,"No Item Select","Notice",0);
+            _book = null;
+        }
+
 
     }
 
     @FXML
     void getDataAction(MouseEvent event) {
 
-        bcode.setText(_book.getBookid());
-        bname.setText(_book.getBookname());
-        caname.setText(_book.getCid());
-        aname.setText(_book.getAid());
-        ptxt.setText(String.valueOf(_book.getPrice()));
+        try {
+
+            bcode.setText(_book.getBookid());
+            bname.setText(_book.getBookname());
+            caname.setText(_book.getCid());
+            aname.setText(_book.getAid());
+            ptxt.setText(String.valueOf(_book.getPrice()));
+
+        }catch (NullPointerException ex){
+
+            JOptionPane.showMessageDialog(null,"Please Find Item 'F1' Click ","Notice",1);
+
+        }
 
 
     }

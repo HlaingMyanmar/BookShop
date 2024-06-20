@@ -61,7 +61,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="bcode" layoutX="15.0" layoutY="410.0" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
+      <TextField fx:id="bcode" layoutX="15.0" layoutY="410.0" onKeyPressed="#getbook" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
