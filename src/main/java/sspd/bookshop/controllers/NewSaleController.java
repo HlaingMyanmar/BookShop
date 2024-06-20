@@ -22,6 +22,7 @@ import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -37,7 +38,7 @@ public class NewSaleController implements Initializable {
     private TextField aname;
 
     @FXML
-    private TableColumn<Sale, String> authorCol;
+    private TableColumn<Book, String> authorCol;
 
     @FXML
     private TextField bcode;
@@ -46,7 +47,7 @@ public class NewSaleController implements Initializable {
     private TextField bname;
 
     @FXML
-    private TableColumn<Sale, String> bookcodeCol;
+    private TableColumn<Book, String> bookcodeCol;
 
     @FXML
     private TableColumn<Sale, String> booknameCol;
@@ -55,7 +56,7 @@ public class NewSaleController implements Initializable {
     private TextField caname;
 
     @FXML
-    private TableColumn<Sale, String> categoryCol;
+    private TableColumn<Book, String> categoryCol;
 
     @FXML
     private TextField cname;
@@ -73,13 +74,13 @@ public class NewSaleController implements Initializable {
     private TableView otable;
 
     @FXML
-    private TableColumn<Sale, Integer> priceCol;
+    private TableColumn<Book, Integer> priceCol;
 
     @FXML
     private TextField ptxt;
 
     @FXML
-    private TableColumn<Sale, Integer> qtyCol;
+    private TableColumn<Book, Integer> qtyCol;
 
     @FXML
     private TextField qtytxt;
@@ -88,14 +89,14 @@ public class NewSaleController implements Initializable {
     private TextField total;
 
     @FXML
-    private TableColumn<Sale, Integer> totalCol;
+    private TableColumn<Book, Integer> totalCol;
 
     ObservableList<Book> oList = FXCollections.observableArrayList();
 
     @FXML
     void addItem(MouseEvent event) {
 
-      Date date = Date.valueOf(odate.getText());
+
 
     String bookcode = bcode.getText();
     String bookname = bname.getText();
@@ -103,11 +104,28 @@ public class NewSaleController implements Initializable {
     String author = aname.getText();
     int quantity = Integer.parseInt(qtytxt.getText());
     int price    = Integer.parseInt(ptxt.getText());
+    int total = Integer.parseInt(this.total.getText());
 
-   // Sale sale = new Sale(oid.getText(),date,cname.getText(),cphone.getText(),bookcode,bookname,category,author,quantity,price,(quantity*price));
+    if(bcode.getText().equals("") || bname.getText().equals("") || caname.getText().equals("") || aname.getText().equals("") || qtytxt.getText().equals("") || ptxt.getText().equals("") || this.total.getText().equals("")){
 
-   // oList.add(sale);
 
+        JOptionPane.showMessageDialog(null,"Please Fill required data?","Notice",0);
+
+
+    }
+
+    else {
+
+    Book book = new Book(bookcode,bookname,quantity,price,author,category,total);
+
+
+    oList.add(book);
+
+    otable.setItems(oList);
+
+
+
+    }
 
 
 
@@ -179,10 +197,6 @@ public class NewSaleController implements Initializable {
     }
 
 
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -198,11 +212,11 @@ public class NewSaleController implements Initializable {
 
     private void getordertableInit(){
 
-        bookcodeCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
-        booknameCol.setCellValueFactory(new PropertyValueFactory<>("bname"));
-        categoryCol.setCellValueFactory(new PropertyValueFactory<>("ccode"));
-        authorCol.setCellValueFactory(new PropertyValueFactory<>("acode"));
-        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        bookcodeCol.setCellValueFactory(new PropertyValueFactory<>("bookid"));
+        booknameCol.setCellValueFactory(new PropertyValueFactory<>("bookname"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
 
