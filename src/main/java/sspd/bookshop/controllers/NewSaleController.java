@@ -148,6 +148,14 @@ public class NewSaleController implements Initializable {
     @FXML
     void purchaseCodeKeyAction(KeyEvent event) {
 
+        if (event.getCode()== KeyCode.ENTER){
+
+
+            int i = (Integer.parseInt(qtytxt.getText())) * (Integer.parseInt(ptxt.getText()));
+
+            total.setText(String.valueOf(i));
+        }
+
 
 
 
@@ -163,6 +171,9 @@ public class NewSaleController implements Initializable {
 
         bcode.setText(_book.getBookid());
         bname.setText(_book.getBookname());
+        caname.setText(_book.getCid());
+        aname.setText(_book.getAid());
+        ptxt.setText(String.valueOf(_book.getPrice()));
 
 
     }

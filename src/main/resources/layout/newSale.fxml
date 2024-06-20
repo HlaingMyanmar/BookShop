@@ -61,7 +61,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="bcode" layoutX="15.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
+      <TextField fx:id="bcode" layoutX="15.0" layoutY="410.0" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -71,7 +71,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="bname" layoutX="159.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Book Name">
+      <TextField fx:id="bname" layoutX="159.0" layoutY="410.0" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="224.0" promptText="Book Name">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -81,7 +81,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="caname" layoutX="395.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Category ">
+      <TextField fx:id="caname" layoutX="395.0" layoutY="410.0" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="224.0" promptText="Category ">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -91,7 +91,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="aname" layoutX="629.0" layoutY="410.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="224.0" promptText="Author">
+      <TextField fx:id="aname" layoutX="629.0" layoutY="410.0" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="224.0" promptText="Author">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -111,7 +111,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="ptxt" layoutX="116.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="87.0" promptText="Price">
+      <TextField fx:id="ptxt" editable="false" layoutX="116.0" layoutY="474.0" onMouseClicked="#getDataAction" prefHeight="32.0" prefWidth="87.0" promptText="Price">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -121,7 +121,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="total" layoutX="216.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="166.0" promptText="total">
+      <TextField fx:id="total" editable="false" layoutX="216.0" layoutY="474.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="166.0" promptText="total">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
