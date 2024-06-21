@@ -191,7 +191,9 @@ public class PurchasereturnController extends Deliver implements Initializable {
 
             db.insert(prd1);
 
-            SimpleIntegerProperty qty = new SimpleIntegerProperty(prd.getQty());
+            //SimpleIntegerProperty qty = new SimpleIntegerProperty(prd.getQty());
+
+            int qty =  prd.getQty();
 
             Book b = new Book(getBookCode(prd.getBcode()),qty);
 

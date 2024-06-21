@@ -23,6 +23,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
 import sspd.bookshop.databases.Saledb;
@@ -33,12 +38,11 @@ import sspd.bookshop.models.Sale;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class NewSaleController extends Deliver implements Initializable {
@@ -357,55 +361,102 @@ public class NewSaleController extends Deliver implements Initializable {
     void print(MouseEvent event) throws Exception {
 
 
-        bill_print();
+        try{
 
-        System.out.println(bill.getText());
-
-
-        class PrintUI extends Application {
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(oList);
 
 
-            @Override
-            public void start(Stage stage) throws Exception {
+            Map<String,Object> parameters = new HashMap<String,Object>();
+            parameters.put("Collection",itemsJRBean);
 
-                AnchorPane anchorPane = new AnchorPane();
+            InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
 
-                anchorPane.setPrefWidth(550);
-                anchorPane.setPrefHeight(793);
+            JasperDesign jasperDesign = JRXmlLoader.load(input);
 
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
-                TextArea textArea = new TextArea();
-                textArea.setStyle("-fx-border-width: 0; -fx-border-color: transparent;");
-                textArea.setPrefWidth(550);
-                textArea.setPrefHeight(793);
-
-                anchorPane.getChildren().add(textArea);
-
-                textArea.setText(bill.getText());
-
-                PrinterJob job = PrinterJob.createPrinterJob();
-                if (job != null && job.showPrintDialog(pcslb.getScene().getWindow()) ) {
-
-                    boolean success = job.printPage(textArea);
-                    if (success) {
-                        job.endJob();
-                    }
-                }
-
-//                Scene scene = new Scene(anchorPane);
-//
-//                stage.setScene(scene);
-//
-//                stage.show();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
 
 
-            }
+            JasperViewer.viewReport(jasperPrint);
+
+            JasperExportManager.exportReportToPdfStream(jasperPrint, OutputStream.nullOutputStream());
+
+
+
+        }catch (NullPointerException ex ){
+
         }
 
-        PrintUI ui = new PrintUI();
-        Stage stage = new Stage();
-        ui.start(stage);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        bill_print();
+
+//        System.out.println(bill.getText());
+//
+//
+//        class PrintUI extends Application {
+//
+//
+//            @Override
+//            public void start(Stage stage) throws Exception {
+//
+//                AnchorPane anchorPane = new AnchorPane();
+//
+//                anchorPane.setPrefWidth(550);
+//                anchorPane.setPrefHeight(793);
+//
+//
+//                TextArea textArea = new TextArea();
+//                textArea.setStyle("-fx-border-width: 0; -fx-border-color: transparent;");
+//                textArea.setPrefWidth(550);
+//                textArea.setPrefHeight(793);
+//
+//                anchorPane.getChildren().add(textArea);
+//
+//                textArea.setText(bill.getText());
+//
+//                PrinterJob job = PrinterJob.createPrinterJob();
+//
+//                if (job != null && job.showPrintDialog(pcslb.getScene().getWindow()) ) {
+//
+//                    boolean success = job.printPage(textArea);
+//
+//                    if (success) {
+//
+//                        job.endJob();
+//
+//                    }
+//                }
+//
+////                Scene scene = new Scene(anchorPane);
+////
+////                stage.setScene(scene);
+////
+////                stage.show();
+//
+//
+//            }
+//        }
+//
+//        PrintUI ui = new PrintUI();
+//        Stage stage = new Stage();
+//        ui.start(stage);
+//
 
 
 
@@ -564,6 +615,7 @@ public class NewSaleController extends Deliver implements Initializable {
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/booksearch.fxml"));
+
         Scene scene = null;
 
 
