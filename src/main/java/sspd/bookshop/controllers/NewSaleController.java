@@ -377,15 +377,23 @@ public class NewSaleController extends Deliver implements Initializable {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
 
-
-            JasperViewer.viewReport(jasperPrint);
-
-            JasperExportManager.exportReportToPdfStream(jasperPrint, OutputStream.nullOutputStream());
-
+            JasperViewer viewer = new JasperViewer(jasperPrint,false);
+            viewer.setVisible(true);
+           // JasperViewer.viewReport(jasperPrint);
 
 
-        }catch (NullPointerException ex ){
 
+
+
+
+           // JasperExportManager.exportReportToPdfStream(jasperPrint, OutputStream.nullOutputStream());
+
+
+
+
+
+        }catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
 
