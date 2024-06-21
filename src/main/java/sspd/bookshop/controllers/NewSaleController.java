@@ -379,18 +379,6 @@ public class NewSaleController extends Deliver implements Initializable {
 
             JasperViewer viewer = new JasperViewer(jasperPrint,false);
             viewer.setVisible(true);
-           // JasperViewer.viewReport(jasperPrint);
-
-
-
-
-
-
-           // JasperExportManager.exportReportToPdfStream(jasperPrint, OutputStream.nullOutputStream());
-
-
-
-
 
         }catch (NullPointerException e) {
             e.printStackTrace();
