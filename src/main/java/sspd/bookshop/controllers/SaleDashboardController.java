@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +22,7 @@ import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -121,6 +119,37 @@ public class SaleDashboardController implements Initializable {
     @FXML
     void searchpurchareAction(MouseEvent event) {
 
+        if(ssearch.getText().equals("")){
+
+            ssearch1.setEditable(false);
+
+
+            JOptionPane.showMessageDialog(null,"Please First Start , start filter box","Notice",0);
+
+            ssearch.setStyle("-fx-border-color:red;");
+
+
+
+            ssearch.setPromptText("Please Fill Filter check!!!");
+
+
+        }
+        else {
+
+            ssearch.setStyle("");
+
+
+            ssearch1.setEditable(true);
+
+            ordertable.getSelectionModel().selectAll();
+
+
+            setFilter();
+
+
+        }
+
+
 
 
     }
@@ -132,6 +161,10 @@ public class SaleDashboardController implements Initializable {
         getorderTableIni();
 
         getFindLoadBookData();
+
+        ordertable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        getOrderViewer();
 
 
     }
@@ -221,22 +254,22 @@ public class SaleDashboardController implements Initializable {
 
     private void setFilter(){
 
-        ObservableList<Order> observableList = FXCollections.observableArrayList();
+        ObservableList i = ordertable.getSelectionModel().getSelectedItems();
 
-        Orderdb orderdb = new Orderdb();
+        ObservableList<Order> updateList= FXCollections.observableArrayList();
 
-        List<Order> orderList= null;
+        int p=0;
 
-        orderList = orderdb.getList();
+        for(Object z: i){
 
-        for(Order m :orderList){
-
-            observableList.add(m);
+           Order order = (Order) i.get(p);
+            updateList.add(order);
+            p++;
         }
 
 
         // Wrap the ObservableList in a FilteredList (initially display all data).
-        FilteredList<Order> filteredData = new FilteredList<>(observableList, b -> true);
+        FilteredList<Order> filteredData = new FilteredList<>(updateList, b -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
 
@@ -284,5 +317,42 @@ public class SaleDashboardController implements Initializable {
 
         // 5. Add sorted (and filtered) data to the table.
         ordertable.setItems(sortedData);
+    }
+
+
+    private  void getOrderViewer(){
+
+
+        StringBuilder billContent = new StringBuilder();
+
+        billContent.append("\t\t\t SSPD IT Services & Training\n");
+        billContent.append("အမှတ် (၁၆၀၈) ၊ ပုဂံလမ်းမပေါ် ၊ (၅၇)ရပ်ကွက် ၊ ဒဂုံသီရိဈေးအနီး\n");
+        billContent.append("\t\t\t တောင်ဒဂုံမြို့နယ် ၊ ရန်ကုန်မြို့။ \n");
+        billContent.append("\t\t\t\t  09-09252425319\n");
+        billContent.append("  ********************************************************\n");
+
+        int i = 1;
+
+      // Check if oList is not null and has items
+        if (oList != null && !oList.isEmpty()) {
+            for (Book b : oList) {
+                String bookname = b.getBookname();
+                String qty = String.valueOf(b.getQuantity());
+                String price = String.valueOf(b.getPrice());
+                String total = String.valueOf(b.getTotal());
+
+                billContent.append(i + ". " + bookname).append("\n\t").append(qty).append(" pcs \t").append(price + " Kyat").append("\t").append(total).append(" Kyats\t").append("\n------------------------------------------------------------------------").append("\n");
+                i++;
+            }
+        } else {
+            // Handle case where oList is empty
+            billContent.append("\t\t\tNo items to display\n");
+        }
+
+        billContent.append("\t\t\tThanks For your Purchase!!!!");
+
+        reportArea.setText(billContent.toString());
+
+
     }
 }

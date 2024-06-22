@@ -146,6 +146,7 @@ public class BookSearchController extends Deliver implements Initializable {
 
 
     private void setFilter(){
+
         ObservableList i = booktable.getSelectionModel().getSelectedItems();
 
         ObservableList<Book> updateList= FXCollections.observableArrayList();
@@ -248,7 +249,7 @@ public class BookSearchController extends Deliver implements Initializable {
 
             searchBox1.setEditable(true);
 
-            booktable.getSelectionModel().selectAll();
+
 
 
             setFilter();
