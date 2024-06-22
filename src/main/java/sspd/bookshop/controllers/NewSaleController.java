@@ -383,7 +383,10 @@ public class NewSaleController extends Deliver implements Initializable {
             Map<String,Object> parameters = new HashMap<String,Object>();
             parameters.put("Collection",itemsJRBean);
 
-            InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
+            //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
+            InputStream input = new FileInputStream(new File("F:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
+
+
 
             JasperDesign jasperDesign = JRXmlLoader.load(input);
 
