@@ -2,12 +2,15 @@ package sspd.bookshop.databases;
 
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Saledb implements DataAccessObject<Sale> {
@@ -80,7 +83,7 @@ public class Saledb implements DataAccessObject<Sale> {
 
     }
 
-    public void findByOrderID(String orderid){
+    public List<Book> findByOrderID(String orderid){
 
 
 
@@ -100,7 +103,7 @@ public class Saledb implements DataAccessObject<Sale> {
                 ON
                     o.orid = sa.orid
                 WHERE
-                    o.orid = '#Or1'
+                    o.orid = ?
                 GROUP BY
                     sa.bcode,
                     sa.cid,
@@ -110,9 +113,43 @@ public class Saledb implements DataAccessObject<Sale> {
                 ORDER BY
                     CAST(SUBSTRING(o.orid, 4) AS UNSIGNED) DESC;
                                 
-                
-                
+             
                 """;
+
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1,orderid);
+
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Book> saleList = new ArrayList<>();
+
+
+            while (rs.next()){
+
+
+                String bcode = rs.getString("bcode");
+                String cid = rs.getString("cid");
+                String aid = rs.getString("aid");
+                int qty = rs.getInt("qty");
+                int price = rs.getInt("price");
+                int amount = rs.getInt("amount");
+
+                Book book = new Book(bcode,qty,price,aid,cid,amount);
+
+                saleList.add(book);
+
+            }
+
+
+
+            return saleList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

@@ -30,6 +30,15 @@ public class Book {
         this.total = total;
     }
 
+    public Book(String bookid, int quantity, int price, String aid, String cid, int total) {
+        this.bookid = bookid;
+        this.quantity = quantity;
+        this.price = price;
+        this.aid = aid;
+        this.cid = cid;
+        this.total = total;
+    }
+
     public Book(String bookid, int quantity) {
         this.bookid = bookid;
         this.quantity = quantity;

@@ -18,9 +18,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
+import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
+import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -31,7 +33,7 @@ import java.util.ResourceBundle;
 
 import static sspd.bookshop.controllers.NewSaleController.oList;
 
-public class SaleDashboardController implements Initializable {
+public class SaleDashboardController extends Deliver implements Initializable {
 
     @FXML
     private TableColumn<Order, String> cuCol;
@@ -165,6 +167,44 @@ public class SaleDashboardController implements Initializable {
         ordertable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         getOrderViewer();
+
+
+    }
+
+
+    @FXML
+    void selectItemAction(MouseEvent event) {
+
+
+       Order order = (Order) ordertable.getSelectionModel().getSelectedItem();
+
+
+        Saledb saledb = new Saledb();
+
+       List<Book> bookList =  saledb.findByOrderID(order.getOrderid());
+
+       StringBuilder listContent = new StringBuilder();
+
+       int i = 1;
+
+        for (Book b : bookList) {
+
+            String bookname = getBookName(b.getBookid());
+            String qty = String.valueOf(b.getQuantity());
+            String price = String.valueOf(b.getPrice());
+            String total = String.valueOf(b.getTotal());
+
+
+            listContent.append(i+". "+bookname+"\n\t"+qty+" pcs"+"\t"+price+" MMK"+"\t"+total+" MMK"+"\n\n");
+            i++;
+
+
+        }
+
+        reportArea.setText(listContent.toString());
+
+
+
 
 
     }

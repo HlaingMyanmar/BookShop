@@ -30,7 +30,7 @@
             </JFXCheckBox>
             <AnchorPane fx:id="purchasePane1" layoutX="10.0" layoutY="40.0" prefHeight="647.0" prefWidth="1079.0">
                <children>
-                  <TableView fx:id="ordertable" layoutX="-1.0" layoutY="87.0" prefHeight="488.0" prefWidth="707.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="87.0">
+                  <TableView fx:id="ordertable" layoutX="-1.0" layoutY="87.0" onMouseClicked="#selectItemAction" prefHeight="488.0" prefWidth="707.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="87.0">
                      <columns>
                         <TableColumn fx:id="oidCol" prefWidth="76.0" text="Order ID" />
                         <TableColumn fx:id="oDateCol" prefWidth="126.0" text="Date" />
@@ -60,7 +60,11 @@
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <TextArea fx:id="reportArea" editable="false" layoutX="710.0" layoutY="87.0" prefHeight="549.0" prefWidth="356.0" />
+                  <TextArea fx:id="reportArea" editable="false" layoutX="710.0" layoutY="87.0" prefHeight="549.0" prefWidth="356.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
                </children>
             </AnchorPane>
          </children>
