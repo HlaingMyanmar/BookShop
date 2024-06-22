@@ -361,9 +361,23 @@ public class NewSaleController extends Deliver implements Initializable {
     void print(MouseEvent event) throws Exception {
 
 
+        List<Sale> saleList = new ArrayList<>();
+
+        for(Book b : oList){
+
+
+
+            Sale sale = new Sale(oid.getText(),Date.valueOf(odate.getText()),cname.getText(),cphone.getText(),b.getBookid(),b.getBookname(),b.getCid(),b.getAid(),b.getQuantity(),b.getPrice(),b.getTotal());
+
+            saleList.add(sale);
+
+
+        }
+
+
         try{
 
-            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(oList);
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(saleList);
 
 
             Map<String,Object> parameters = new HashMap<String,Object>();

@@ -14,6 +14,36 @@ public class Sale extends Order{
     private int price;
     private int total;
 
+    private String oid;
+    private Date odate;
+    private String cuname;
+    private String cuphone;
+
+    public Date getOdate() {
+        return odate;
+    }
+
+    public void setOdate(Date odate) {
+        this.odate = odate;
+    }
+
+    public String getCuname() {
+        return cuname;
+    }
+
+    public void setCuname(String cuname) {
+        this.cuname = cuname;
+    }
+
+    @Override
+    public String getCuphone() {
+        return cuphone;
+    }
+
+    @Override
+    public void setCuphone(String cuphone) {
+        this.cuphone = cuphone;
+    }
 
     public Sale(String orderid, Date orderdate, String culname, String cuphone) {
         super(orderid, orderdate, culname, cuphone);
@@ -28,6 +58,10 @@ public class Sale extends Order{
         this.qty = qty;
         this.price = price;
         this.total = total;
+        this.oid = orderid;
+        this.odate = orderdate;
+        this.cuname = culname;
+        this.cuphone = cuphone;
     }
 
 
@@ -39,6 +73,14 @@ public class Sale extends Order{
         this.ccode = ccode;
         this.bname = bname;
         this.bcode = bcode;
+    }
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
     }
 
     public String getBcode() {

@@ -36,6 +36,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static sspd.bookshop.controllers.NewSaleController.oList;
+
 public class DashboardController extends Deliver implements Initializable  {
 
     
@@ -1521,6 +1523,9 @@ public class DashboardController extends Deliver implements Initializable  {
     public void newSaleAction(MouseEvent event) throws IOException {
 
         Stage stage = new Stage();
+
+
+        oList.clear();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newSale.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
