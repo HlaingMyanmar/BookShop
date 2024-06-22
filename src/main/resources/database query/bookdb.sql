@@ -91,3 +91,13 @@ CREATE TABLE sale (
     FOREIGN KEY (cid) REFERENCES category(cid),
     FOREIGN KEY (aid) REFERENCES author(aid)
 );
+CREATE TABLE sale_return (
+    return_id VARCHAR(15) PRIMARY KEY NOT NULL,
+    orid VARCHAR(15) NOT NULL,
+    bcode VARCHAR(15) NOT NULL,
+    return_date DATE NOT NULL,
+    qty_returned INT,
+    reason VARCHAR(255),
+    FOREIGN KEY (orid) REFERENCES cuorder(orid),
+    FOREIGN KEY (bcode) REFERENCES sale(bcode)
+);
