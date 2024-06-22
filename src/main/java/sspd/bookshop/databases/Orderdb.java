@@ -15,7 +15,28 @@ public class Orderdb implements DataAccessObject<Order> {
     @Override
     public List<Order> getList() {
 
-        String sql = "SELECT * FROM `cuorder` ORDER BY cast(Substring(orid,4)AS unsigned) DESC";
+        String sql = """
+                
+                SELECT
+                    o.orid,
+                    o.ordate,
+                    o.cuname,
+                    o.cuphone,
+                    SUM(sa.qty * sa.price) AS amount
+                FROM
+                    cuorder o
+                INNER JOIN
+                    sale sa
+                ON
+                    o.orid = sa.orid
+                GROUP BY
+                    o.orid, o.ordate, o.cuname, o.cuphone
+                ORDER BY
+                    CAST(SUBSTRING(o.orid, 4) AS UNSIGNED) DESC;
+                
+    
+                
+                """;
 
 
 
@@ -31,8 +52,9 @@ public class Orderdb implements DataAccessObject<Order> {
                 Date ordate  = rs.getDate("ordate");
                 String cuname = rs.getString("cuname");
                 String cuphone = rs.getString("cuphone");
+                int oramount = rs.getInt("amount");
 
-                Order order = new Order(orderid,ordate,cuname,cuphone);
+                Order order = new Order(orderid,ordate,cuname,cuphone,oramount);
 
                 orderlist.add(order);
 

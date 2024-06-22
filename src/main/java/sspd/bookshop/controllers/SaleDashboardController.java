@@ -1,5 +1,9 @@
 package sspd.bookshop.controllers;
 import com.jfoenix.controls.JFXCheckBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,12 +19,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sspd.bookshop.databases.Bookdb;
+import sspd.bookshop.databases.Orderdb;
 import sspd.bookshop.launch.Bookshop;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static sspd.bookshop.controllers.NewSaleController.oList;
@@ -113,6 +121,8 @@ public class SaleDashboardController implements Initializable {
     @FXML
     void searchpurchareAction(MouseEvent event) {
 
+
+
     }
 
 
@@ -120,6 +130,8 @@ public class SaleDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         getorderTableIni();
+
+        getFindLoadBookData();
 
 
     }
@@ -133,5 +145,144 @@ public class SaleDashboardController implements Initializable {
         cuphoneCol.setCellValueFactory(new PropertyValueFactory<>("cuphone"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
 
+    }
+
+    private void getFindLoadBookData() {
+
+
+
+        ObservableList<Order> observableList = FXCollections.observableArrayList();
+
+        Orderdb orderdb = new Orderdb();
+
+        List<Order> orderList= null;
+
+        orderList = orderdb.getList();
+
+        for(Order m :orderList){
+
+            observableList.add(m);
+        }
+
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Order> filteredData = new FilteredList<>(observableList, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+
+        ssearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(filter -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (filter.getOrderid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                    return true; // Filter matches first name.
+                }
+                else if (filter.getOrderdate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getCulname().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (filter.getCuphone().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (String.valueOf(filter.getTotal()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+
+                else
+                    return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Order> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(ordertable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        ordertable.setItems(sortedData);
+
+
+    }
+
+
+    private void setFilter(){
+
+        ObservableList<Order> observableList = FXCollections.observableArrayList();
+
+        Orderdb orderdb = new Orderdb();
+
+        List<Order> orderList= null;
+
+        orderList = orderdb.getList();
+
+        for(Order m :orderList){
+
+            observableList.add(m);
+        }
+
+
+        // Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Order> filteredData = new FilteredList<>(observableList, b -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+
+        ssearch1.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(filter -> {
+                // If filter text is empty, display all persons.
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (filter.getOrderid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                    return true; // Filter matches first name.
+                }
+                else if (filter.getOrderdate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                else if (filter.getCulname().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (filter.getCuphone().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+                else if (String.valueOf(filter.getTotal()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+
+
+                else
+                    return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Order> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(ordertable.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        ordertable.setItems(sortedData);
     }
 }
