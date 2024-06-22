@@ -110,13 +110,6 @@ public class NewSaleController extends Deliver implements Initializable {
     @FXML
     private TableColumn<Book, Integer> totalCol;
 
-    @FXML
-    private TextArea bill;
-
-    @FXML
-    private AnchorPane test;
-
-
 
 
     public static ObservableList<Book> oList = FXCollections.observableArrayList();
@@ -176,7 +169,7 @@ public class NewSaleController extends Deliver implements Initializable {
 
 
         oList.add(book);
-        bill_print();
+
 
         otable.setItems(oList);
         getQtyCalulate();
@@ -337,6 +330,11 @@ public class NewSaleController extends Deliver implements Initializable {
 
         JOptionPane.showMessageDialog(null,"Thanks For your purchase!!!!");
 
+        getPrint();
+
+
+        oList.clear();
+
         otable.getItems().clear();
 
         oid.setText(getOrderID());
@@ -358,8 +356,17 @@ public class NewSaleController extends Deliver implements Initializable {
     }
 
     @FXML
-    void print(MouseEvent event) throws Exception {
+    void print(MouseEvent event)  {
 
+
+            getPrint();
+
+
+
+
+    }
+
+    private void getPrint(){
 
         List<Sale> saleList = new ArrayList<>();
 
@@ -397,84 +404,11 @@ public class NewSaleController extends Deliver implements Initializable {
             JasperViewer viewer = new JasperViewer(jasperPrint,false);
             viewer.setVisible(true);
 
-        }catch (NullPointerException e) {
+        }catch (NullPointerException | FileNotFoundException e) {
             e.printStackTrace();
+        } catch (JRException e) {
+            throw new RuntimeException(e);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        bill_print();
-
-//        System.out.println(bill.getText());
-//
-//
-//        class PrintUI extends Application {
-//
-//
-//            @Override
-//            public void start(Stage stage) throws Exception {
-//
-//                AnchorPane anchorPane = new AnchorPane();
-//
-//                anchorPane.setPrefWidth(550);
-//                anchorPane.setPrefHeight(793);
-//
-//
-//                TextArea textArea = new TextArea();
-//                textArea.setStyle("-fx-border-width: 0; -fx-border-color: transparent;");
-//                textArea.setPrefWidth(550);
-//                textArea.setPrefHeight(793);
-//
-//                anchorPane.getChildren().add(textArea);
-//
-//                textArea.setText(bill.getText());
-//
-//                PrinterJob job = PrinterJob.createPrinterJob();
-//
-//                if (job != null && job.showPrintDialog(pcslb.getScene().getWindow()) ) {
-//
-//                    boolean success = job.printPage(textArea);
-//
-//                    if (success) {
-//
-//                        job.endJob();
-//
-//                    }
-//                }
-//
-////                Scene scene = new Scene(anchorPane);
-////
-////                stage.setScene(scene);
-////
-////                stage.show();
-//
-//
-//            }
-//        }
-//
-//        PrintUI ui = new PrintUI();
-//        Stage stage = new Stage();
-//        ui.start(stage);
-//
-
-
-
-
-
 
 
     }
@@ -578,10 +512,6 @@ public class NewSaleController extends Deliver implements Initializable {
         odate.setText(String.valueOf(Date.valueOf(LocalDate.now())));
         pcslb.setText("0 pcs");
         amountlb.setText("0 MMK");
-
-        bill_print();
-
-
 
 
     }
@@ -693,86 +623,7 @@ public class NewSaleController extends Deliver implements Initializable {
 
     }
 
-    private void bill_print() {
 
-
-
-
-
-        StringBuilder billContent = new StringBuilder();
-
-        billContent.append("\t\t\t SSPD IT Services & Training\n");
-        billContent.append("အမှတ် (၁၆၀၈) ၊ ပုဂံလမ်းမပေါ် ၊ (၅၇)ရပ်ကွက် ၊ ဒဂုံသီရိဈေးအနီး\n");
-        billContent.append("\t\t\t တောင်ဒဂုံမြို့နယ် ၊ ရန်ကုန်မြို့။ \n");
-        billContent.append("\t\t\t\t  09-09252425319\n");
-        billContent.append("  ********************************************************\n");
-
-
-        int i = 1;
-
-        for(Book b : oList){
-
-            String bookname = b.getBookname();
-            String qty = String.valueOf(b.getQuantity());
-            String price = String.valueOf(b.getPrice());
-            String total = String.valueOf(b.getTotal());
-
-
-            billContent.append(i+". "+bookname).append("\n\t").append(qty).append(" pcs \t").append(price+" Kyat").append("\t").append(total).append(" Kyats\t").append("\n------------------------------------------------------------------------").append("\n");
-            i++;
-
-        }
-
-        billContent.append("\t\t\tThanks For you Purchase!!!!");
-
-
-
-        bill.setText(billContent.toString());
-
-
-//        StringBuilder billContent = new StringBuilder();
-//
-//        billContent.append("\t\t\t\t\t\t\t SSPD IT Services & Training\n");
-//        billContent.append("\t\t\t\tအမှတ် (၁၆၀၈) ၊ ပုဂံလမ်းမပေါ် ၊ (၅၇)ရပ်ကွက် ၊ ဒဂုံသီရိဈေးအနီး\n");
-//        billContent.append("\t\t\t\t\t\t\t တောင်ဒဂုံမြို့နယ် ၊ ရန်ကုန်မြို့။ \n");
-//        billContent.append("\t\t\t\t\t\t\t\t  09-09252425319\n");
-//        billContent.append("**************************************************************************************************\n");
-//
-//
-//        int i = 1;
-//
-//        for(Book b : oList){
-//
-//            String bookname = b.getBookname();
-//            String qty = String.valueOf(b.getQuantity());
-//            String price = String.valueOf(b.getPrice());
-//            String total = String.valueOf(b.getTotal());
-//
-//
-//            billContent.append(i+". "+bookname).append("\n\t").append(qty).append(" pcs \t").append(price+" Kyat").append("\t").append(total).append(" Kyats\t").append("\n------------------------------------------------------------------------").append("\n");
-//            i++;
-//
-//        }
-//
-//        billContent.append("\t\t\t\t\t\t\tThanks For you Purchase!!!!");
-//
-//
-//
-//        bill.setText(billContent.toString());
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
 
 
 

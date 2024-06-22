@@ -78,13 +78,15 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="saledetailtable" layoutX="531.0" layoutY="89.0" prefHeight="514.0" prefWidth="791.0" stylesheets="@../css/table.css">
+                              <TableView fx:id="saledetailtable" layoutX="450.0" layoutY="89.0" prefHeight="514.0" prefWidth="892.0" stylesheets="@../css/table.css">
                                  <columns>
-                                    <TableColumn fx:id="psupplierCol11" prefWidth="73.0" text="Order ID" />
-                                    <TableColumn fx:id="pcodeCol11" prefWidth="84.0" text="Date" />
-                                    <TableColumn fx:id="pdateCol11" prefWidth="104.0" text="Customer" />
-                                    <TableColumn fx:id="pnameCol11" prefWidth="90.0" text="Phone" />
-                                    <TableColumn fx:id="ptotalCol11" prefWidth="79.0" text="Total" />
+                                    <TableColumn fx:id="psupplierCol11" prefWidth="88.0" text="Book Code" />
+                                    <TableColumn fx:id="pcodeCol11" prefWidth="274.0" text="Description" />
+                                    <TableColumn fx:id="pdateCol11" prefWidth="123.0" text="Category" />
+                                    <TableColumn fx:id="pnameCol11" prefWidth="143.0" text="Author" />
+                                    <TableColumn fx:id="ptotalCol11" prefWidth="66.0" text="Qty" />
+                                    <TableColumn fx:id="ptotalCol111" prefWidth="83.0" text="Price" />
+                                    <TableColumn fx:id="ptotalCol112" prefWidth="123.0" text="Amount" />
                                  </columns>
                               </TableView>
                            </children>

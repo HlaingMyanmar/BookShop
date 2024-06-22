@@ -9,12 +9,29 @@ public class Order {
     private Date orderdate;
     private String culname;
     private String cuphone;
+    private int total;
 
     public Order(String orderid, Date orderdate, String culname, String cuphone) {
         this.orderid = orderid;
         this.orderdate = orderdate;
         this.culname = culname;
         this.cuphone = cuphone;
+    }
+
+    public Order(String orderid, Date orderdate, String culname, String cuphone, int total) {
+        this.orderid = orderid;
+        this.orderdate = orderdate;
+        this.culname = culname;
+        this.cuphone = cuphone;
+        this.total = total;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public String getOrderid() {
