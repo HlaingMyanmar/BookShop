@@ -166,7 +166,7 @@ public class SaleDashboardController extends Deliver implements Initializable {
 
         ordertable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        getOrderViewer();
+
 
 
     }
@@ -185,7 +185,11 @@ public class SaleDashboardController extends Deliver implements Initializable {
 
        StringBuilder listContent = new StringBuilder();
 
+       listContent.append("\t\t\t\t\t Item List\n\n");
+
        int i = 1;
+
+       double grand = 0.0;
 
         for (Book b : bookList) {
 
@@ -194,12 +198,18 @@ public class SaleDashboardController extends Deliver implements Initializable {
             String price = String.valueOf(b.getPrice());
             String total = String.valueOf(b.getTotal());
 
+            grand = grand+b.getTotal();
+
 
             listContent.append(i+". "+bookname+"\n\t"+qty+" pcs"+"\t"+price+" MMK"+"\t"+total+" MMK"+"\n\n");
             i++;
 
 
         }
+
+        listContent.append("Total Amount : "+grand+" MMK"+"\n\n");
+
+        listContent.append("\t\t\t\t\t End\n\n");
 
         reportArea.setText(listContent.toString());
 
@@ -360,39 +370,5 @@ public class SaleDashboardController extends Deliver implements Initializable {
     }
 
 
-    private  void getOrderViewer(){
 
-
-        StringBuilder billContent = new StringBuilder();
-
-        billContent.append("\t\t\t SSPD IT Services & Training\n");
-        billContent.append("အမှတ် (၁၆၀၈) ၊ ပုဂံလမ်းမပေါ် ၊ (၅၇)ရပ်ကွက် ၊ ဒဂုံသီရိဈေးအနီး\n");
-        billContent.append("\t\t\t တောင်ဒဂုံမြို့နယ် ၊ ရန်ကုန်မြို့။ \n");
-        billContent.append("\t\t\t\t  09-09252425319\n");
-        billContent.append("  ********************************************************\n");
-
-        int i = 1;
-
-      // Check if oList is not null and has items
-        if (oList != null && !oList.isEmpty()) {
-            for (Book b : oList) {
-                String bookname = b.getBookname();
-                String qty = String.valueOf(b.getQuantity());
-                String price = String.valueOf(b.getPrice());
-                String total = String.valueOf(b.getTotal());
-
-                billContent.append(i + ". " + bookname).append("\n\t").append(qty).append(" pcs \t").append(price + " Kyat").append("\t").append(total).append(" Kyats\t").append("\n------------------------------------------------------------------------").append("\n");
-                i++;
-            }
-        } else {
-            // Handle case where oList is empty
-            billContent.append("\t\t\tNo items to display\n");
-        }
-
-        billContent.append("\t\t\tThanks For your Purchase!!!!");
-
-        reportArea.setText(billContent.toString());
-
-
-    }
 }
