@@ -18,6 +18,12 @@ public class Saledb implements DataAccessObject<Sale> {
     @Override
     public List<Sale> getList()
     {
+
+
+
+
+
+
         return List.of();
     }
 
@@ -71,6 +77,42 @@ public class Saledb implements DataAccessObject<Sale> {
 
     @Override
     public void delete(Sale sale) {
+
+    }
+
+    public void findByOrderID(String orderid){
+
+
+
+        String sql = """
+                
+                SELECT
+                    sa.bcode,
+                    sa.cid,
+                    sa.aid,
+                    sa.qty,
+                    sa.price,
+                    SUM(sa.qty * sa.price) AS amount
+                FROM
+                    cuorder o
+                INNER JOIN
+                    sale sa
+                ON
+                    o.orid = sa.orid
+                WHERE
+                    o.orid = '#Or1'
+                GROUP BY
+                    sa.bcode,
+                    sa.cid,
+                    sa.aid,
+                    sa.qty,
+                    sa.price
+                ORDER BY
+                    CAST(SUBSTRING(o.orid, 4) AS UNSIGNED) DESC;
+                                
+                
+                
+                """;
 
     }
 }
