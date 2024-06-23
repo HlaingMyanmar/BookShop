@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.converter.IntegerStringConverter;
 import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
@@ -223,6 +225,34 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         pcslb.setText("0 pcs");
         amountlb.setText("0 MMK");
+
+
+
+        otable.setEditable(true);
+
+        qtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+        qtyCol.setOnEditCommit(event -> {
+
+            String value = String.valueOf(event.getNewValue());
+
+            if(null != value && !value.isEmpty()){
+
+                event.getRowValue().setQuantity(Integer.parseInt(value));
+
+            }
+
+        });
+
+
+
+
+
+
+
+
+
+
 
 
 
