@@ -26,6 +26,7 @@ import sspd.bookshop.modules.Deliver;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -116,6 +117,26 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
     @FXML
     void addItem(MouseEvent event) {
+
+        String orderID = oid.getText();
+
+        Date date = Date.valueOf(odate.getText());
+
+        String customerName = cname.getText();
+
+        String customerPhone = cphone.getText();
+
+        Book book = new Book(bcode.getText(),bname.getText(),Integer.parseInt(qtytxt.getText()),Integer.parseInt(ptxt.getText()),aname.getText(),caname.getText());
+
+        Sale sale = new Sale(orderID,date,customerName,customerPhone,book.getBookid(),book.getBookname(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),book.getQuantity(),book.getPrice(),book.getTotal());
+
+        bookdb.subQty(book);
+
+        saledb.create(sale);
+
+        oList.add(book);
+
+        getOrderList();
 
     }
 

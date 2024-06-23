@@ -110,6 +110,8 @@ public class Saledb implements DataAccessObject<Sale> {
 
 
         } catch (SQLException e) {
+
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,"Please check Sale Create Error","Notice",0);
         }
 
