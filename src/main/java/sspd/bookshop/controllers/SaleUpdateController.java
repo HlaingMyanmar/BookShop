@@ -16,6 +16,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.IntegerStringConverter;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
@@ -24,11 +29,10 @@ import sspd.bookshop.models.Sale;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static sspd.bookshop.controllers.NewSaleController.oList;
 import static sspd.bookshop.controllers.SaleDashboardController._ordered;
@@ -190,7 +194,56 @@ public class SaleUpdateController extends Deliver implements Initializable {
     @FXML
     void print(MouseEvent event) {
 
+        getPrint();
+
     }
+    private void getPrint(){
+
+        List<Sale> saleList = new ArrayList<>();
+
+        for(Book b : oList){
+
+
+
+            Sale sale = new Sale(oid.getText(),Date.valueOf(odate.getText()),cname.getText(),cphone.getText(),b.getBookid(),b.getBookname(),b.getCid(),b.getAid(),b.getQuantity(),b.getPrice(),b.getTotal());
+
+            saleList.add(sale);
+
+
+        }
+
+
+        try{
+
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(saleList);
+
+
+            Map<String,Object> parameters = new HashMap<String,Object>();
+            parameters.put("Collection",itemsJRBean);
+
+            //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
+            InputStream input = new FileInputStream(new File("F:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
+
+
+
+            JasperDesign jasperDesign = JRXmlLoader.load(input);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
+
+            JasperViewer viewer = new JasperViewer(jasperPrint,false);
+            viewer.setVisible(true);
+
+        }catch (NullPointerException | FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
     @FXML
     void purchaseCodeKeyAction(KeyEvent event) {
