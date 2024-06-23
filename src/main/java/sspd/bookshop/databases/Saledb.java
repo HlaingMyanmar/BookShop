@@ -3,6 +3,7 @@ package sspd.bookshop.databases;
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Book;
+import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
@@ -46,6 +47,8 @@ public class Saledb implements DataAccessObject<Sale> {
 
          pst.executeUpdate();
 
+         JOptionPane.showMessageDialog(null,"Update Successful");
+
 
      } catch (SQLException e) {
          throw new RuntimeException(e);
@@ -53,6 +56,40 @@ public class Saledb implements DataAccessObject<Sale> {
 
 
     }
+
+    public void getOrderIDupdate(Sale sale) {
+
+        String sql = """
+                
+                UPDATE `sale`
+                SET `qty` = ?
+                WHERE `orid` = ? AND `bcode` = ?;
+                
+                
+                
+                
+                """;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,sale.getQty());
+            pst.setString(2,sale.getOrderid());
+            pst.setString(3,sale.getBcode());
+
+
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Update Successful");
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
 
     @Override
     public void create(Sale sale) {

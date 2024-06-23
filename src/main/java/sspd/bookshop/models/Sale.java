@@ -75,6 +75,12 @@ public class Sale extends Order{
         this.bcode = bcode;
     }
 
+    public Sale(String orderid, int qty,String bcode) {
+        super(orderid);
+        this.qty = qty;
+        this.bcode = bcode;
+    }
+
     public String getOid() {
         return oid;
     }

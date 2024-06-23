@@ -26,6 +26,10 @@ public class Order {
         this.total = total;
     }
 
+    public Order(String orderid) {
+        this.orderid = orderid;
+    }
+
     public int getTotal() {
         return total;
     }

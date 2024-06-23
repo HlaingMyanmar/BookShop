@@ -240,6 +240,9 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
                 event.getRowValue().setQuantity(Integer.parseInt(value));
 
+                getRowUpdate();
+                getOrderList();
+
             }
 
         });
@@ -344,6 +347,26 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         amountlb.setText(total +" MMK");
 
+
+
+
+    }
+
+    private  void getRowUpdate(){
+
+        int index = otable.getSelectionModel().getSelectedIndex();
+
+        Book book =  oList.get(index);
+
+        Saledb saledb = new Saledb();
+
+        oList.get(index).setTotal(oList.get(index).getQuantity()*oList.get(index).getPrice());
+
+        System.out.println(book.getBookid());
+
+        Sale sale = new Sale(_ordered.getOrderid(),book.getQuantity(),book.getBookid());
+
+        saledb.getOrderIDupdate(sale);
 
 
 
