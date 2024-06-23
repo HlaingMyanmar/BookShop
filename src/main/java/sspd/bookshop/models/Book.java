@@ -44,6 +44,12 @@ public class Book {
         this.quantity = quantity;
     }
 
+    public Book(String bookid, int quantity, int price) {
+        this.bookid = bookid;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public String getBookname() {
         return bookname;
     }

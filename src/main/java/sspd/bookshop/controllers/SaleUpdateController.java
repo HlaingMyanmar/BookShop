@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.IntegerStringConverter;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
@@ -107,6 +108,11 @@ public class SaleUpdateController extends Deliver implements Initializable {
     private TextField total;
 
 
+    Bookdb bookdb = new Bookdb();
+
+    Saledb saledb = new Saledb();
+
+
 
     @FXML
     void addItem(MouseEvent event) {
@@ -183,7 +189,12 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         int selectedIndex = otable.getSelectionModel().getSelectedIndex();
 
+
         if (selectedIndex >= 0) {
+
+           Saledb saledb  = new Saledb();
+           Sale sale  = new Sale(_ordered.getOrderid(),oList.get(selectedIndex).getQuantity(),oList.get(selectedIndex).getBookid());
+           saledb.delete(sale);
 
             otable.getItems().remove(selectedIndex);
             getQtyCalulate();
@@ -198,6 +209,7 @@ public class SaleUpdateController extends Deliver implements Initializable {
         }
 
     }
+
     private void getordertableInit(){
 
         bookcodeCol.setCellValueFactory(new PropertyValueFactory<>("bookid"));
@@ -246,19 +258,6 @@ public class SaleUpdateController extends Deliver implements Initializable {
             }
 
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -358,10 +357,7 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         Book book =  oList.get(index);
 
-        Saledb saledb = new Saledb();
-
-        oList.get(index).setTotal(oList.get(index).getQuantity()*oList.get(index).getPrice());
-
+        int oldvlue = saledb.getQty(_ordered.getOrderid(),book.getBookid());
 
 
         if(oList.get(index).getQuantity()>getDataList(book.getBookid()).getQuantity()){
@@ -369,13 +365,59 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
             JOptionPane.showMessageDialog(null,"This is not Have!!!"+"\nThis is item have "+getDataList(book.getBookid()).getQuantity()+" pcs","Notice",0);
 
-
         }
         else {
 
-            Sale sale = new Sale(_ordered.getOrderid(),book.getQuantity(),book.getBookid());
+            int newqty = oList.get(index).getQuantity();
 
-            saledb.getOrderIDupdate(sale);
+            if(oldvlue>newqty){
+
+
+                int sumBook =  oldvlue-oList.get(index).getQuantity();
+
+                System.out.println("Sum : "+sumBook);
+
+                Book b = new Book(book.getBookid(),sumBook,book.getPrice());
+
+                bookdb.sumQty(b);
+
+                oList.get(index).setTotal(oList.get(index).getQuantity()*oList.get(index).getPrice());
+
+                Sale sale = new Sale(_ordered.getOrderid(),book.getQuantity(),book.getBookid());
+
+                saledb.getOrderIDupdate(sale);
+
+
+
+            }
+            else {
+
+
+                int subBook =  oList.get(index).getQuantity()- oldvlue;
+
+                System.out.println("Sub : "+subBook);
+
+                Book b = new Book(book.getBookid(),subBook,book.getPrice());
+
+                bookdb.subQty(b);
+
+                oList.get(index).setTotal(oList.get(index).getQuantity()*oList.get(index).getPrice());
+
+                Sale sale = new Sale(_ordered.getOrderid(),book.getQuantity(),book.getBookid());
+
+                saledb.getOrderIDupdate(sale);
+
+
+            }
+
+
+
+
+
+
+
+
+
 
         }
 

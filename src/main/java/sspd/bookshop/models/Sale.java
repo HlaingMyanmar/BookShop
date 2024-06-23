@@ -81,6 +81,9 @@ public class Sale extends Order{
         this.bcode = bcode;
     }
 
+
+
+
     public String getOid() {
         return oid;
     }

@@ -179,7 +179,7 @@ public class Bookdb implements DataAccessObject<Book> {
             pst.setString(3,book.getBookid());
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Book Sub Successful");
+
 
 
 
@@ -203,8 +203,6 @@ public class Bookdb implements DataAccessObject<Book> {
             pst.setInt(2,book.getPrice());
             pst.setString(3,book.getBookid());
             pst.executeUpdate();
-
-
 
 
 

@@ -118,6 +118,25 @@ public class Saledb implements DataAccessObject<Sale> {
     @Override
     public void delete(Sale sale) {
 
+        String sql = "DELETE FROM `sale` WHERE `orid` = ? AND `bcode` = ?;";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+
+            pst.setString(1,sale.getOrderid());
+            pst.setString(2,sale.getBcode());
+
+
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Delete Successful");
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     public List<Book> findByOrderID(String orderid){
@@ -188,5 +207,47 @@ public class Saledb implements DataAccessObject<Sale> {
             throw new RuntimeException(e);
         }
 
+    }
+
+
+    public  int getQty(String orderid , String bookcode){
+
+
+        String sql = """
+                SELECT `qty`
+                FROM `sale`
+                WHERE `orid` = ? AND `bcode` = ?;
+                
+                """;
+
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+
+
+            pst.setString(1,orderid);
+            pst.setString(2,bookcode);
+            ResultSet rs = pst.executeQuery();
+
+            int qty = 0;
+
+            while(rs.next()){
+
+                qty = rs.getInt("qty");
+
+            }
+
+
+            return qty;
+
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
     }
 }
