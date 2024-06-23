@@ -2,20 +2,26 @@ package sspd.bookshop.controllers;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sspd.bookshop.databases.Saledb;
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Sale;
 import sspd.bookshop.modules.Deliver;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -118,6 +124,19 @@ public class SaleUpdateController extends Deliver implements Initializable {
     @FXML
     void getDataAction(MouseEvent event) {
 
+        try {
+
+            bcode.setText(_book.getBookid());
+            bname.setText(_book.getBookname());
+            caname.setText(_book.getCid());
+            aname.setText(_book.getAid());
+            ptxt.setText(String.valueOf(_book.getPrice()));
+
+        }catch (NullPointerException ex){
+
+            JOptionPane.showMessageDialog(null,"Please Find Item 'F1' Click ","Notice",1);
+
+        }
     }
 
     @FXML
@@ -127,6 +146,15 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
     @FXML
     void helpAction(KeyEvent event) {
+
+        if(event.getCode()== KeyCode.F1){
+
+
+            getChildbookTable();
+
+
+
+        }
 
     }
 
@@ -138,10 +166,34 @@ public class SaleUpdateController extends Deliver implements Initializable {
     @FXML
     void purchaseCodeKeyAction(KeyEvent event) {
 
+        if (event.getCode()== KeyCode.ENTER){
+
+
+            int i = (Integer.parseInt(qtytxt.getText())) * (Integer.parseInt(ptxt.getText()));
+
+            total.setText(String.valueOf(i));
+        }
+
     }
 
     @FXML
     void removeItem(MouseEvent event) {
+
+        int selectedIndex = otable.getSelectionModel().getSelectedIndex();
+
+        if (selectedIndex >= 0) {
+
+            otable.getItems().remove(selectedIndex);
+            getQtyCalulate();
+            getTotalCalulate();
+
+            _book = null;
+
+        } else {
+
+            JOptionPane.showMessageDialog(null,"No Item Select","Notice",0);
+            _book = null;
+        }
 
     }
     private void getordertableInit(){
@@ -169,6 +221,9 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         getOrderList();
 
+        pcslb.setText("0 pcs");
+        amountlb.setText("0 MMK");
+
 
 
 
@@ -193,5 +248,76 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
 
     }
+
+    private void getChildbookTable(){
+
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/booksearch.fxml"));
+
+        Scene scene = null;
+
+
+        try {
+
+
+            scene = new Scene(fxmlLoader.load());
+
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        }
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) otable.getScene().getWindow();
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void getQtyCalulate(){
+
+        int totalqty = 0;
+
+        otable. getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        otable.getSelectionModel().selectAll();
+
+        ObservableList ob =  otable.getSelectionModel().getSelectedItems();
+
+        pcslb.setText(ob.size() +" pcs");
+
+
+
+
+    }
+
+    private void getTotalCalulate(){
+
+        int total = 0;
+
+        otable. getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        otable.getSelectionModel().selectAll();
+
+        ObservableList ob =  otable.getSelectionModel().getSelectedItems();
+
+        int p = 0;
+
+        for(Object b :ob){
+
+            total  = total+((Book)ob.get(p)).getTotal();
+            p++;
+        }
+
+        amountlb.setText(total +" MMK");
+
+
+
+
+    }
+
 }
 

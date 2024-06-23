@@ -462,6 +462,7 @@ public class NewSaleController extends Deliver implements Initializable {
 
     @FXML
     void remove(MouseEvent event) {
+
         int selectedIndex = otable.getSelectionModel().getSelectedIndex();
 
         if (selectedIndex >= 0) {
