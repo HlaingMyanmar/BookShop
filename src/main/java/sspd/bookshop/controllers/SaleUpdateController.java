@@ -194,7 +194,12 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
            Saledb saledb  = new Saledb();
            Sale sale  = new Sale(_ordered.getOrderid(),oList.get(selectedIndex).getQuantity(),oList.get(selectedIndex).getBookid());
-           saledb.delete(sale);
+           Book book =  oList.get(selectedIndex);
+           int oldvlue = saledb.getQty(_ordered.getOrderid(),book.getBookid());
+           Book b = new Book(book.getBookid(),oldvlue,book.getPrice());
+
+            bookdb.sumQty(b);
+            saledb.delete(sale);
 
             otable.getItems().remove(selectedIndex);
             getQtyCalulate();
