@@ -362,11 +362,26 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         oList.get(index).setTotal(oList.get(index).getQuantity()*oList.get(index).getPrice());
 
-        System.out.println(book.getBookid());
 
-        Sale sale = new Sale(_ordered.getOrderid(),book.getQuantity(),book.getBookid());
 
-        saledb.getOrderIDupdate(sale);
+        if(oList.get(index).getQuantity()>getDataList(book.getBookid()).getQuantity()){
+
+
+            JOptionPane.showMessageDialog(null,"This is not Have!!!"+"\nThis is item have "+getDataList(book.getBookid()).getQuantity()+" pcs","Notice",0);
+
+
+        }
+        else {
+
+            Sale sale = new Sale(_ordered.getOrderid(),book.getQuantity(),book.getBookid());
+
+            saledb.getOrderIDupdate(sale);
+
+        }
+
+
+
+
 
 
 
