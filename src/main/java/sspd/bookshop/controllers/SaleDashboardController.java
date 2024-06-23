@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
 import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
@@ -70,6 +69,9 @@ public class SaleDashboardController extends Deliver implements Initializable {
 
     @FXML
     private TextField ssearch1;
+
+
+    static Order _ordered = null;
 
 
 
@@ -173,45 +175,76 @@ public class SaleDashboardController extends Deliver implements Initializable {
 
 
     @FXML
-    void selectItemAction(MouseEvent event) {
+    void selectItemAction(MouseEvent event) throws IOException {
 
 
-       Order order = (Order) ordertable.getSelectionModel().getSelectedItem();
+        if(event.getClickCount()==1){
+
+            Order order = (Order) ordertable.getSelectionModel().getSelectedItem();
 
 
-        Saledb saledb = new Saledb();
+            Saledb saledb = new Saledb();
 
-       List<Book> bookList =  saledb.findByOrderID(order.getOrderid());
+            List<Book> bookList =  saledb.findByOrderID(order.getOrderid());
 
-       StringBuilder listContent = new StringBuilder();
+            StringBuilder listContent = new StringBuilder();
 
-       listContent.append("\t\t\t\t\t Item List\n\n");
+            listContent.append("\t\t\t\t\t Item List\n\n");
 
-       int i = 1;
+            int i = 1;
 
-       double grand = 0.0;
+            double grand = 0.0;
 
-        for (Book b : bookList) {
+            for (Book b : bookList) {
 
-            String bookname = getBookName(b.getBookid());
-            String qty = String.valueOf(b.getQuantity());
-            String price = String.valueOf(b.getPrice());
-            String total = String.valueOf(b.getTotal());
+                String bookname = getBookName(b.getBookid());
+                String qty = String.valueOf(b.getQuantity());
+                String price = String.valueOf(b.getPrice());
+                String total = String.valueOf(b.getTotal());
 
-            grand = grand+b.getTotal();
+                grand = grand+b.getTotal();
 
 
-            listContent.append(i+". "+bookname+"\n\t"+qty+" pcs"+"\t"+price+" MMK"+"\t"+total+" MMK"+"\n\n");
-            i++;
+                listContent.append(i+". "+bookname+"\n\t"+qty+" pcs"+"\t"+price+" MMK"+"\t"+total+" MMK"+"\n\n");
+                i++;
+
+
+            }
+
+            listContent.append("Total Amount : "+grand+" MMK"+"\n\n");
+
+            listContent.append("\t\t\t\t\t End\n\n");
+
+            reportArea.setText(listContent.toString());
 
 
         }
 
-        listContent.append("Total Amount : "+grand+" MMK"+"\n\n");
+        else if (event.getClickCount()==2){
 
-        listContent.append("\t\t\t\t\t End\n\n");
+           _ordered = (Order) ordertable.getSelectionModel().getSelectedItem();
 
-        reportArea.setText(listContent.toString());
+           Stage stage = new Stage();
+
+
+            oList.clear();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/saleupdate.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) ordertable.getScene().getWindow();
+            stage.setTitle("Update Sale");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
+
+
+
+        }
+
+
+
 
 
 
