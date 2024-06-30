@@ -38,10 +38,12 @@ public class Authordb implements DataAccessObject<Author> {
 
              while(rs.next()){
 
-                 String aid = rs.getString("aid");
-                 String aname = rs.getString("aname");
+                 Author author = new Author(
 
-                 Author author = new Author(aid,aname);
+
+                         rs.getString("aid"),
+                         rs.getString("aname"));
+
 
                  authorList.add(author);
 
@@ -75,6 +77,8 @@ public class Authordb implements DataAccessObject<Author> {
             pst.setString(1,author.getAuthor_name());
             pst.setString(2,author.getAuthor_id());
             pst.executeUpdate();
+
+
             JOptionPane.showMessageDialog(null,"Update Successful");
 
 

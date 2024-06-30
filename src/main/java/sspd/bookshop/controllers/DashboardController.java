@@ -36,6 +36,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static sspd.bookshop.controllers.ApplicationViewController.cho;
 import static sspd.bookshop.controllers.NewSaleController.oList;
 
 public class DashboardController extends Deliver implements Initializable  {
@@ -215,11 +216,55 @@ public class DashboardController extends Deliver implements Initializable  {
     public static int checkPoint = 0;
 
 
+    @FXML
+    private Tab mPane;
+
+
+    @FXML
+    private Tab oPane;
+
+    @FXML
+    private Tab pPane;
+
+    @FXML
+    private TabPane tabPane;
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
+        if(cho=="P"){
 
+
+            tabPane.getTabs().remove(mPane);
+            tabPane.getTabs().remove(oPane);
+           // mPane.setDisable(true);
+           // oPane.setDisable(true);
+
+
+
+
+        }
+
+        if(cho=="S"){
+
+            tabPane.getTabs().remove(pPane);
+           // pPane.setDisable(true);
+           // oPane.setDisable(true);
+            tabPane.getTabs().remove(oPane);
+
+
+        }
+
+        if (cho== "Si"){
+
+
+            tabPane.getTabs().remove(pPane);
+            tabPane.getTabs().remove(mPane  );
+        }
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -1168,7 +1213,7 @@ public class DashboardController extends Deliver implements Initializable  {
         }
         stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.WINDOW_MODAL);
-        Stage mainStage = (Stage) booktable.getScene().getWindow();
+        Stage mainStage = (Stage) purchasetable.getScene().getWindow();
         stage.setTitle("New Purchase");
         stage.initOwner(mainStage);
         stage.setScene(scene);

@@ -12,17 +12,17 @@
          <image>
             <Image url="@../image/bookshop.png" />
          </image></ImageView>
-      <JFXButton layoutX="33.0" layoutY="27.0" onMouseClicked="#saleAction" prefHeight="76.0" prefWidth="199.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အရောင်းစာရင်း">
+      <JFXButton layoutX="431.0" layoutY="113.0" onMouseClicked="#saleAction" prefHeight="76.0" prefWidth="220.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အရောင်းစာရင်း">
          <font>
             <Font name="Pyidaungsu" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="238.0" layoutY="27.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အဝယ် စာရင်း">
+      <JFXButton layoutX="238.0" layoutY="27.0" onMouseClicked="#purchaseAction" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အဝယ် စာရင်း">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="431.0" layoutY="27.0" prefHeight="76.0" prefWidth="220.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="ပစ္စည်းလက်ကျန်">
+      <JFXButton layoutX="431.0" layoutY="27.0" onMouseClicked="#stockAction" prefHeight="76.0" prefWidth="220.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="ပစ္စည်းလက်ကျန်">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
@@ -32,22 +32,12 @@
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="238.0" layoutY="112.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="ကိုးကား">
+      <JFXButton layoutX="238.0" layoutY="113.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="ကိုးကား">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="851.0" layoutY="27.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="စာအုပ်တိုက်">
-         <font>
-            <Font name="Alfredo Heavy" size="34.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="659.0" layoutY="112.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="စာရေးသူများ">
-         <font>
-            <Font name="Alfredo Heavy" size="34.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="432.0" layoutY="112.0" prefHeight="76.0" prefWidth="220.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အမျိုးအစားများ" textAlignment="CENTER">
+      <JFXButton layoutX="657.0" layoutY="113.0" onMouseClicked="#supplierAction" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="စာအုပ်တိုက်">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>

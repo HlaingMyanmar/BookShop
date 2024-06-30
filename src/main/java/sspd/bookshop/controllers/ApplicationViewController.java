@@ -17,8 +17,14 @@ import java.sql.Connection;
 import static sspd.bookshop.controllers.NewSaleController.oList;
 
 public class ApplicationViewController {
+
+
+
     @FXML
     private ImageView bookimg;
+
+
+    static String cho = null;
 
     Connection con = DatabaseConnector.getInstance().getConn();
 
@@ -46,5 +52,75 @@ public class ApplicationViewController {
 
 
     }
+
+    @FXML
+    void purchaseAction(MouseEvent event) throws IOException {
+
+
+        Stage stage = new Stage();
+
+        cho = "P";
+
+
+        oList.clear();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/maindashboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) bookimg.getScene().getWindow();
+        stage.setTitle("Purchase Option");
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void stockAction(MouseEvent event) throws IOException {
+
+        Stage stage = new Stage();
+
+        cho = "S";
+
+
+        oList.clear();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/maindashboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) bookimg.getScene().getWindow();
+        stage.setTitle("Purchase Option");
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+    @FXML
+    void supplierAction(MouseEvent event) throws IOException {
+
+        Stage stage = new Stage();
+
+        cho = "Si";
+
+
+        oList.clear();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/maindashboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Stage mainStage = (Stage) bookimg.getScene().getWindow();
+        stage.setTitle("Supplier Option");
+        stage.initOwner(mainStage);
+        stage.setScene(scene);
+        stage.show();
+
+
+
+    }
+
 
 }

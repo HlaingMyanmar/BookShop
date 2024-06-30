@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="cname" layoutX="701.0" layoutY="27.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Name">
+            <TextField fx:id="cname" editable="false" layoutX="701.0" layoutY="27.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Name">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -55,7 +55,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="cphone" layoutX="701.0" layoutY="91.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Phone">
+            <TextField fx:id="cphone" editable="false" layoutX="701.0" layoutY="91.0" onKeyPressed="#purchaseCodeKeyAction" prefHeight="32.0" prefWidth="176.0" promptText="Customer Phone">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>

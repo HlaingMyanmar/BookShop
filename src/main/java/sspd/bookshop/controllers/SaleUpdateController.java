@@ -140,7 +140,11 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         oList.add(book);
 
+
+
         getOrderList();
+        getQtyCalulate();
+        getTotalCalulate();
 
     }
 
@@ -281,6 +285,9 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
             _book = null;
 
+            getQtyCalulate();
+            getTotalCalulate();
+
         } else {
 
             JOptionPane.showMessageDialog(null,"No Item Select","Notice",0);
@@ -316,6 +323,9 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
         pcslb.setText("0 pcs");
         amountlb.setText("0 MMK");
+        getQtyCalulate();
+        getTotalCalulate();
+
 
 
 
@@ -333,6 +343,8 @@ public class SaleUpdateController extends Deliver implements Initializable {
 
                 getRowUpdate();
                 getOrderList();
+                getQtyCalulate();
+                getTotalCalulate();
 
             }
 

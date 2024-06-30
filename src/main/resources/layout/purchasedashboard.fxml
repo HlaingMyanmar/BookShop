@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="684.0" prefWidth="1370.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.PurchasedashboardController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <Separator layoutX="7.0" layoutY="36.0" prefHeight="2.0" prefWidth="1333.0" />
+            <JFXCheckBox fx:id="purchaseCb" layoutX="539.0" layoutY="5.0" onMouseClicked="#purchasecheckBoxAction" selected="true" text="Purchase" textFill="#1d00ff">
+               <font>
+                  <Font name="Pyidaungsu Bold" size="15.0" />
+               </font>
+            </JFXCheckBox>
+            <JFXCheckBox fx:id="purchasereturnCb" layoutX="637.0" layoutY="5.0" onMouseClicked="#purchasereturncheckBoxAction" text="Purchase Return" textFill="#1d00ff">
+               <font>
+                  <Font name="Pyidaungsu Bold" size="15.0" />
+               </font>
+            </JFXCheckBox>
+            <Pane fx:id="switchPane" layoutX="7.0" layoutY="39.0" prefHeight="622.0" prefWidth="1350.0" />
+            <AnchorPane fx:id="purchasePane" layoutX="10.0" layoutY="40.0" prefHeight="592.0" prefWidth="1350.0">
+               <children>
+                  <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
+                     <columns>
+                        <TableColumn fx:id="psupplierCol" prefWidth="140.0" text="Supplier Name" />
+                        <TableColumn fx:id="pcodeCol" prefWidth="73.0" text="P Code" />
+                        <TableColumn fx:id="pdateCol" prefWidth="97.33331298828125" text="P Date" />
+                        <TableColumn fx:id="pnameCol" prefWidth="290.66668701171875" text="Description" />
+                        <TableColumn fx:id="pcategoryCol" prefWidth="236.5333251953125" text="Category" />
+                        <TableColumn fx:id="pauthorCol" prefWidth="227.73345947265625" text="Author" />
+                        <TableColumn fx:id="pqtyCol" prefWidth="72.7999267578125" text="Qty" />
+                        <TableColumn fx:id="ppriceCol" prefWidth="90.9332275390625" text="Price" />
+                        <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="Total" />
+                     </columns>
+                  </TableView>
+                  <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/printer.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="148.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+                  <Button fx:id="newPurchasebtn" layoutX="14.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="psearch" layoutX="14.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="Search">
+                     <font>
+                        <Font name="Pyidaungsu" size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="psearch1" layoutX="636.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="Search">
+                     <font>
+                        <Font name="Pyidaungsu" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="totalPrice" layoutX="1132.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalQty" layoutX="1003.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
