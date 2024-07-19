@@ -1,5 +1,6 @@
 package sspd.bookshop.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -214,6 +215,9 @@ public class DashboardController extends Deliver implements Initializable {
     private Label totalQtytxt;
 
     @FXML
+    private JFXButton emptybtn;
+
+    @FXML
     void bootableClickeAction(MouseEvent event) {
 
 
@@ -239,6 +243,8 @@ public class DashboardController extends Deliver implements Initializable {
 
     }
 
+
+
     private double getItemTotal(){
 
         Bookdb bookdb  = new Bookdb();
@@ -260,6 +266,8 @@ public class DashboardController extends Deliver implements Initializable {
 
 
         grandTotaltxt.setText("Amount : "+getItemTotal()+" MMK");
+
+
 
 
 
@@ -986,6 +994,57 @@ public class DashboardController extends Deliver implements Initializable {
         booktable.setItems(sortedData);
 
 
+        int size = 0;
+
+
+        for(Book b: sortedData){
+
+            if(b.getQuantity()==0){
+
+
+
+                size++;
+
+            }
+        }
+
+        emptybtn.setText("Empty "+size+" pcs");
+
+        emptybtn.setOnAction(event -> {
+
+
+            ObservableList<Book> books = FXCollections.observableArrayList();
+
+            for(Book b: sortedData){
+
+                if(b.getQuantity()==0){
+
+                    books.add(b);
+                }
+
+
+
+            }
+
+            booktable.setItems(books);
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -1079,6 +1138,9 @@ public class DashboardController extends Deliver implements Initializable {
         });
         // 5. Add sorted (and filtered) data to the table.
         booktable.setItems(sortedData);
+
+
+
 
 
 

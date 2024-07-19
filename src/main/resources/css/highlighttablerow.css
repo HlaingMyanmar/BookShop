@@ -1,0 +1,16 @@
+.btn{
+
+    -fx-background-color:#FFFFFF;
+    -fx-font-size:12px;
+    -fx-text-fill:red;
+    -fx-font-weight: bold;
+
+}
+.btn:hover{
+
+    -fx-background-color:#E33B2E;
+     -fx-text-fill:white;
+
+
+
+}
