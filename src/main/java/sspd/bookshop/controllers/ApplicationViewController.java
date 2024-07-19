@@ -90,7 +90,7 @@ public class ApplicationViewController {
         stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.WINDOW_MODAL);
         Stage mainStage = (Stage) bookimg.getScene().getWindow();
-        stage.setTitle("Purchase Option");
+        stage.setTitle("Stock Option");
         stage.initOwner(mainStage);
         stage.setScene(scene);
         stage.show();

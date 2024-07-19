@@ -6,41 +6,57 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="610.0" prefWidth="1073.0" style="-fx-background-color: #BCE7D6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.ApplicationViewController">
+<AnchorPane prefHeight="636.0" prefWidth="1123.0" style="-fx-background-color: #BCE7D6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.ApplicationViewController">
    <children>
-      <ImageView fx:id="bookimg" fitHeight="406.0" fitWidth="739.0" layoutX="185.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/bookshop.png" />
-         </image></ImageView>
-      <JFXButton layoutX="431.0" layoutY="113.0" onMouseClicked="#saleAction" prefHeight="76.0" prefWidth="220.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အရောင်းစာရင်း">
+      <JFXButton layoutX="610.0" layoutY="260.0" onMouseClicked="#saleAction" prefHeight="76.0" prefWidth="280.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="Sale (အရောင်းစာရင်း)">
          <font>
             <Font name="Pyidaungsu" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="238.0" layoutY="27.0" onMouseClicked="#purchaseAction" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အဝယ် စာရင်း">
+      <JFXButton layoutX="227.0" layoutY="260.0" onMouseClicked="#purchaseAction" prefHeight="76.0" prefWidth="375.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="Purchase (အဝယ်)">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="431.0" layoutY="27.0" onMouseClicked="#stockAction" prefHeight="76.0" prefWidth="220.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="ပစ္စည်းလက်ကျန်">
+      <JFXButton layoutX="227.0" layoutY="174.0" onMouseClicked="#stockAction" prefHeight="76.0" prefWidth="375.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="Stock (ပစ္စည်းလက်ကျန်)">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="657.0" layoutY="27.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="အသုံးသူပြုများ">
+      <JFXButton layoutX="610.0" layoutY="174.0" prefHeight="76.0" prefWidth="280.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="User (အသုံးသူပြုများ)">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="238.0" layoutY="113.0" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="ကိုးကား">
+      <JFXButton layoutX="227.0" layoutY="347.0" prefHeight="76.0" prefWidth="375.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="Quotation(ကိုးကား)">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="657.0" layoutY="113.0" onMouseClicked="#supplierAction" prefHeight="76.0" prefWidth="187.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="စာအုပ်တိုက်">
+      <JFXButton layoutX="610.0" layoutY="347.0" onMouseClicked="#supplierAction" prefHeight="76.0" prefWidth="280.0" styleClass="btn" stylesheets="@../css/mainbtn.css" text="Supplier(စာအုပ်တိုက်)">
          <font>
             <Font name="Alfredo Heavy" size="34.0" />
          </font>
       </JFXButton>
+      <ImageView fx:id="bookimg" fitHeight="212.0" fitWidth="220.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/shopping-list.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="203.0" fitWidth="195.0" layoutX="7.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/purchase.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="190.0" fitWidth="256.0" layoutX="927.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="251.0" fitWidth="114.0" layoutX="998.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/sale.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

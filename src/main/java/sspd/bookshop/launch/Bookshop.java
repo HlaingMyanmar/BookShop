@@ -13,7 +13,7 @@ public class Bookshop extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Sale Report");
+        stage.setTitle("Main Dashboard");
         stage.setScene(scene);
         stage.show();
 

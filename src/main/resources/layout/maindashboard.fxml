@@ -22,7 +22,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="732.0">
                <children>
-                  <TableView fx:id="booktable" layoutX="17.0" layoutY="85.0" prefHeight="564.0" prefWidth="1317.0" stylesheets="@../css/table.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
+                  <TableView fx:id="booktable" layoutX="17.0" layoutY="85.0" onMouseClicked="#bootableClickeAction" prefHeight="564.0" prefWidth="1317.0" stylesheets="@../css/table.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
                      <columns>
                         <TableColumn fx:id="bcodeCol" prefWidth="110.0" text="Item Code" />
                         <TableColumn fx:id="bnameCol" prefWidth="433.6000061035156" text="Description" />
@@ -55,12 +55,12 @@
                   </ImageView>
                   <Button layoutX="1133.6000000000001" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#bookrefreshAction" prefHeight="42.0" prefWidth="199.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Clear" AnchorPane.rightAnchor="18.0" />
                   <Separator layoutX="4.0" layoutY="59.0" prefHeight="5.0" prefWidth="1335.0" />
-                  <Label layoutX="1048.0" layoutY="66.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="totalQtytxt" layoutX="1009.0" layoutY="66.0" text="End Date" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1270.0" layoutY="66.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="grandTotaltxt" layoutX="1175.0" layoutY="66.0" text="End Date" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

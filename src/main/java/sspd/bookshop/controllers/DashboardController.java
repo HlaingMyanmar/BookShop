@@ -39,9 +39,7 @@ import java.util.concurrent.TimeUnit;
 import static sspd.bookshop.controllers.ApplicationViewController.cho;
 import static sspd.bookshop.controllers.NewSaleController.oList;
 
-public class DashboardController extends Deliver implements Initializable  {
-
-    
+public class DashboardController extends Deliver implements Initializable {
 
 
     @FXML
@@ -75,7 +73,7 @@ public class DashboardController extends Deliver implements Initializable  {
     private TextField categorySearch;
 
     @FXML
-    private TableView  categorytable;
+    private TableView categorytable;
 
     @FXML
     private TableColumn<Supplier, String> suAddress;
@@ -101,14 +99,14 @@ public class DashboardController extends Deliver implements Initializable  {
     @FXML
     private TextField suphone;
     @FXML
-    private TableView  suppliertable;
+    private TableView suppliertable;
 
     @FXML
     private TextField suSearch;
 
 
     @FXML
-    private TableView  booktable;
+    private TableView booktable;
 
 
     @FXML
@@ -143,16 +141,8 @@ public class DashboardController extends Deliver implements Initializable  {
     @FXML
     private JFXCheckBox purchasereturnCb;
 
-
     @FXML
     private Pane switchPane;
-
-
-    @FXML
-    private Button newPurchasebtn;
-
-
-
 
     @FXML
     private TableColumn<Purchase, String> pauthorCol;
@@ -200,19 +190,6 @@ public class DashboardController extends Deliver implements Initializable  {
     @FXML
     private AnchorPane purchasePane;
 
-    @FXML
-    private TableView saletable;
-
-    @FXML
-    private TableView saledetailtable;
-
-    @FXML
-    private CheckBox saleCheck;
-
-    @FXML
-    private  CheckBox salereturnCheck;
-
-
     public static int checkPoint = 0;
 
 
@@ -230,63 +207,111 @@ public class DashboardController extends Deliver implements Initializable  {
     private TabPane tabPane;
 
 
+    @FXML
+    private Label grandTotaltxt;
+
+    @FXML
+    private Label totalQtytxt;
+
+    @FXML
+    void bootableClickeAction(MouseEvent event) {
+
+
+        // Set Total Qty and Amount
+
+        Book book =  (Book) booktable.getSelectionModel().getSelectedItem();
+
+
+        grandTotaltxt.setText("Amount : "+book.getTotal()+" MMK");
+
+        totalQtytxt.setText("Qty : "+book.getQuantity()+" pcs");
+
+    }
+
+
+    private int getItemSize(){
+
+        Bookdb bookdb  = new Bookdb();
+
+        List<Book> bookList =bookdb.getList();
+
+        return bookList.size();
+
+    }
+
+    private double getItemTotal(){
+
+        Bookdb bookdb  = new Bookdb();
+
+        List<Book> bookList =bookdb.getList();
+
+        return bookList.stream()
+                .mapToDouble(Book::getTotal)
+                .sum();
+
+    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        totalQtytxt.setText("Qty : "+getItemSize()+" pcs");
 
-        if(cho=="P"){
+        grandTotaltxt.setText("Amount : "+getItemTotal()+" MMK");
+
+
+
+
+
+
+
+
+
+
+
+
+        if (cho == "P") {
 
 
             tabPane.getTabs().remove(mPane);
             tabPane.getTabs().remove(oPane);
-           // mPane.setDisable(true);
-           // oPane.setDisable(true);
-
-
-
 
         }
 
-        if(cho=="S"){
+        if (cho == "S") {
 
             tabPane.getTabs().remove(pPane);
-           // pPane.setDisable(true);
-           // oPane.setDisable(true);
             tabPane.getTabs().remove(oPane);
 
-
         }
 
-        if (cho== "Si"){
+        if (cho == "Si") {
 
 
             tabPane.getTabs().remove(pPane);
-            tabPane.getTabs().remove(mPane  );
+            tabPane.getTabs().remove(mPane);
         }
 
         booktable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+
         purchasetable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
-       // ->>> Author Set <<<<<-
+        auid.setText(getAuthorID());
 
-       auid.setText(getAuthorID());
+        getIniAuthorTable();
+        getFindLoadAuthorData();
 
-       getIniAuthorTable();
-       getFindLoadAuthorData();
+        authortable.setEditable(true);
 
-       authortable.setEditable(true);
+        auName.setCellFactory(TextFieldTableCell.forTableColumn());
 
-       auName.setCellFactory(TextFieldTableCell.forTableColumn());
-
-       auName.setOnEditCommit(event -> {
+        auName.setOnEditCommit(event -> {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setAuthor_name(value);
 
@@ -296,11 +321,6 @@ public class DashboardController extends Deliver implements Initializable  {
             }
 
         });
-
-
-       // ->>> Author Set Close <<<<-
-
-        // ->>> Category Set Open <<<<-
 
         caid.setText(getCategoryID());
 
@@ -315,7 +335,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setCategory_name(value);
 
@@ -324,9 +344,6 @@ public class DashboardController extends Deliver implements Initializable  {
             }
 
         });
-
-
-        // ->>> Supplier Set Open <<<<-
 
         getIniSupplierTable();
 
@@ -342,7 +359,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setS_name(value);
 
@@ -358,7 +375,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setS_phone(value);
 
@@ -374,7 +391,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setS_address(value);
 
@@ -383,21 +400,6 @@ public class DashboardController extends Deliver implements Initializable  {
             }
 
         });
-
-        // ->>> Supplier Set Close<<<<-
-
-        // HidePane
-
-
-
-
-
-
-        // HidePane Close <<<<<<<
-
-
-        // Set  Book Set Open
-
 
 
         getIniBookTable();
@@ -412,7 +414,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setBookname(value);
 
@@ -428,7 +430,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setCid(value);
 
@@ -444,7 +446,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
             String value = event.getNewValue();
 
-            if(null != value && !value.isEmpty()){
+            if (null != value && !value.isEmpty()) {
 
                 event.getRowValue().setAid(value);
 
@@ -455,7 +457,7 @@ public class DashboardController extends Deliver implements Initializable  {
         });
 
 
-        if(searchBox.getText().equals("")){
+        if (searchBox.getText().equals("")) {
             searchBox1.setEditable(false);
         }
 
@@ -463,22 +465,6 @@ public class DashboardController extends Deliver implements Initializable  {
         getIniPurchaseTable();
 
         getFindLoadPurchaseData();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -489,26 +475,24 @@ public class DashboardController extends Deliver implements Initializable  {
     void savenewAuthor(MouseEvent event) {
 
 
-        if(auname.getText().isEmpty() || auid.getText().isEmpty()){
+        if (auname.getText().isEmpty() || auid.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null,"Please fill required field");
+            JOptionPane.showMessageDialog(null, "Please fill required field");
 
-        }
-        else {
-
+        } else {
 
 
-        Authordb authordb = new Authordb();
+            Authordb authordb = new Authordb();
 
-        Author author = new Author(auid.getText(),auname.getText());
+            Author author = new Author(auid.getText(), auname.getText());
 
-        authordb.create(author);
+            authordb.create(author);
 
-        getFindLoadAuthorData();
+            getFindLoadAuthorData();
 
-        auid.setText(getAuthorID());
+            auid.setText(getAuthorID());
 
-        auname.setText("");
+            auname.setText("");
 
             getUpdateData();
 
@@ -517,13 +501,12 @@ public class DashboardController extends Deliver implements Initializable  {
     }
 
 
+    private void getauthorRowUpdate() {
 
-    private void getauthorRowUpdate(){
-
-        Author author = (Author ) authortable.getSelectionModel().getSelectedItem();
+        Author author = (Author) authortable.getSelectionModel().getSelectedItem();
 
 
-        Author authorupate = new  Author(author.getAuthor_id(),author.getAuthor_name());
+        Author authorupate = new Author(author.getAuthor_id(), author.getAuthor_name());
 
         Authordb authordb = new Authordb();
 
@@ -533,34 +516,32 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
-    private void getIniAuthorTable(){
+    private void getIniAuthorTable() {
 
 
-        auID.setCellValueFactory(new PropertyValueFactory<Author,String>("author_id"));
-        auName.setCellValueFactory(new PropertyValueFactory<Author,String>("author_name"));
+        auID.setCellValueFactory(new PropertyValueFactory<>("author_id"));
+        auName.setCellValueFactory(new PropertyValueFactory<>("author_name"));
 
 
     }
 
-    private String getAuthorID(){
+    private String getAuthorID() {
 
         String defaultid = "#au1";
 
         Authordb authordb = new Authordb();
         List<Author> authorList = authordb.getList();
 
-            if(authorList.size()==0){
+        if (authorList.size() == 0) {
 
-                return defaultid;
+            return defaultid;
 
-            }
-            else {
+        } else {
 
 
-                return "#au"+ Integer.toString(authorList.size()+1);
+            return "#au" + Integer.toString(authorList.size() + 1);
 
-            }
-
+        }
 
 
     }
@@ -575,7 +556,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
         authorList = adb.getList();
 
-        for(Author m :authorList){
+        for (Author m : authorList) {
 
             observableList.add(m);
         }
@@ -596,18 +577,13 @@ public class DashboardController extends Deliver implements Initializable  {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (filter.getAuthor_id().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (filter.getAuthor_id().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getAuthor_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getAuthor_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getAuthor_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getAuthor_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -633,18 +609,16 @@ public class DashboardController extends Deliver implements Initializable  {
     @FXML
     void savenewCategory(MouseEvent event) {
 
-        if(caname.getText().isEmpty() || caid.getText().isEmpty()){
+        if (caname.getText().isEmpty() || caid.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null,"Please Category fill required field");
+            JOptionPane.showMessageDialog(null, "Please Category fill required field");
 
-        }
-        else {
-
+        } else {
 
 
             Categorydb categorydb = new Categorydb();
 
-            Category category = new Category(caid.getText(),caname.getText());
+            Category category = new Category(caid.getText(), caname.getText());
 
             categorydb.create(category);
 
@@ -659,24 +633,22 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
-    private String getCategoryID(){
+    private String getCategoryID() {
 
         String defaultid = "#ca1";
 
         Categorydb categorydb = new Categorydb();
-        List<Category> categoryList = categorydb .getList();
+        List<Category> categoryList = categorydb.getList();
 
-        if(categoryList .size()==0){
+        if (categoryList.size() == 0) {
 
             return defaultid;
 
+        } else {
+
+            return "#ca" + Integer.toString(categoryList.size() + 1);
+
         }
-        else {
-
-            return "#ca"+ Integer.toString(categoryList .size()+1);
-
-        }
-
 
 
     }
@@ -689,9 +661,9 @@ public class DashboardController extends Deliver implements Initializable  {
 
         List<Category> categoryList = null;
 
-        categoryList  = adb.getList();
+        categoryList = adb.getList();
 
-        for(Category m :categoryList ){
+        for (Category m : categoryList) {
 
             observableList.add(m);
         }
@@ -712,18 +684,13 @@ public class DashboardController extends Deliver implements Initializable  {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (filter.getCategory_id().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (filter.getCategory_id().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getCategory_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getCategory_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getCategory_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getCategory_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -741,21 +708,21 @@ public class DashboardController extends Deliver implements Initializable  {
         getUpdateData();
     }
 
-    private void getIniCategoryTable(){
+    private void getIniCategoryTable() {
 
 
-        caID.setCellValueFactory(new PropertyValueFactory<Category,String>("category_id"));
-        caName.setCellValueFactory(new PropertyValueFactory<Category,String>("category_name"));
+        caID.setCellValueFactory(new PropertyValueFactory<Category, String>("category_id"));
+        caName.setCellValueFactory(new PropertyValueFactory<Category, String>("category_name"));
 
 
     }
 
-    private void getcategoryRowUpdate(){
+    private void getcategoryRowUpdate() {
 
         Category category = (Category) categorytable.getSelectionModel().getSelectedItem();
 
 
-        Category categoryupate = new Category(category.getCategory_id(),category.getCategory_name());
+        Category categoryupate = new Category(category.getCategory_id(), category.getCategory_name());
 
         Categorydb categorydb = new Categorydb();
 
@@ -774,19 +741,16 @@ public class DashboardController extends Deliver implements Initializable  {
     @FXML
     void savenewSupplier(MouseEvent event) {
 
-        if(suid.getText().isEmpty() || suname.getText().isEmpty() || suphone.getText().isEmpty() || suaddress.getText().isEmpty()){
+        if (suid.getText().isEmpty() || suname.getText().isEmpty() || suphone.getText().isEmpty() || suaddress.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null,"Please Supplier fill required field");
+            JOptionPane.showMessageDialog(null, "Please Supplier fill required field");
 
-        }
-
-        else {
+        } else {
 
 
+            Supplierdb supplierdb = new Supplierdb();
 
-           Supplierdb supplierdb = new Supplierdb();
-
-            Supplier supplier =new Supplier(suid.getText(),suname.getText(),suphone.getText(),suaddress.getText());
+            Supplier supplier = new Supplier(suid.getText(), suname.getText(), suphone.getText(), suaddress.getText());
 
             supplierdb.create(supplier);
 
@@ -804,35 +768,33 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
-    private void getIniSupplierTable(){
+    private void getIniSupplierTable() {
 
 
-        suID.setCellValueFactory(new PropertyValueFactory<Supplier,String>("s_id"));
-        suName.setCellValueFactory(new PropertyValueFactory<Supplier,String>("s_name"));
-        suPhone.setCellValueFactory(new PropertyValueFactory<Supplier,String>("s_phone"));
-        suAddress.setCellValueFactory(new PropertyValueFactory<Supplier,String>("s_address"));
+        suID.setCellValueFactory(new PropertyValueFactory<Supplier, String>("s_id"));
+        suName.setCellValueFactory(new PropertyValueFactory<Supplier, String>("s_name"));
+        suPhone.setCellValueFactory(new PropertyValueFactory<Supplier, String>("s_phone"));
+        suAddress.setCellValueFactory(new PropertyValueFactory<Supplier, String>("s_address"));
 
 
     }
 
-    private String getSupplierID(){
+    private String getSupplierID() {
 
         String defaultid = "#su1";
 
-        Supplierdb supplierdb  = new Supplierdb();
-        List<Supplier> supplierList = supplierdb .getList();
+        Supplierdb supplierdb = new Supplierdb();
+        List<Supplier> supplierList = supplierdb.getList();
 
-        if(supplierList  .size()==0){
+        if (supplierList.size() == 0) {
 
             return defaultid;
 
+        } else {
+
+            return "#su" + Integer.toString(supplierList.size() + 1);
+
         }
-        else {
-
-            return "#su"+ Integer.toString(supplierList  .size()+1);
-
-        }
-
 
 
     }
@@ -841,13 +803,13 @@ public class DashboardController extends Deliver implements Initializable  {
 
         ObservableList<Supplier> observableList = FXCollections.observableArrayList();
 
-       Supplierdb supplierdb = new Supplierdb();
+        Supplierdb supplierdb = new Supplierdb();
 
         List<Supplier> supplierList = null;
 
-        supplierList  = supplierdb.getList();
+        supplierList = supplierdb.getList();
 
-        for(Supplier m :supplierList ){
+        for (Supplier m : supplierList) {
 
             observableList.add(m);
         }
@@ -868,22 +830,15 @@ public class DashboardController extends Deliver implements Initializable  {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (filter.getS_id().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (filter.getS_id().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getS_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getS_name().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getS_phone().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getS_phone().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getS_address().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getS_address().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -901,12 +856,12 @@ public class DashboardController extends Deliver implements Initializable  {
         getUpdateData();
     }
 
-    private void getSupplierRowUpdate(){
+    private void getSupplierRowUpdate() {
 
         Supplier supplier = (Supplier) suppliertable.getSelectionModel().getSelectedItem();
 
 
-        Supplier supplierupate = new Supplier(supplier.getS_id(),supplier.getS_name(),supplier.getS_phone(),supplier.getS_address());
+        Supplier supplierupate = new Supplier(supplier.getS_id(), supplier.getS_name(), supplier.getS_phone(), supplier.getS_address());
 
         Supplierdb supplierdb = new Supplierdb();
 
@@ -916,61 +871,56 @@ public class DashboardController extends Deliver implements Initializable  {
     }
 
 
-
     // ->>>> Supplier Set Close <<<<<
 
 
     // ->>>> Book Set Open <<<<<
 
-    private String getBookID(){
+    private String getBookID() {
 
         String defaultid = "#bo1";
 
         Bookdb bookdb = new Bookdb();
         List<Book> bookList = bookdb.getList();
 
-        if(bookList .size()==0){
+        if (bookList.size() == 0) {
 
             return defaultid;
 
+        } else {
+
+            return "#bo" + Integer.toString(bookList.size() + 1);
+
         }
-        else {
-
-            return "#bo"+ Integer.toString(bookList .size()+1);
-
-        }
-
 
 
     }
 
-    private void getIniBookTable(){
+    private void getIniBookTable() {
 
-        bcodeCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookid"));
-        bnameCol.setCellValueFactory(new PropertyValueFactory<Book,String>("bookname"));
-        bcategoryCol.setCellValueFactory(new PropertyValueFactory<Book,String>("cid"));
-        bauthorCol.setCellValueFactory(new PropertyValueFactory<Book,String>("aid"));
-        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("quantity"));
-        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("price"));
-        btotalCol.setCellValueFactory(new PropertyValueFactory<Book,Integer>("total"));
-
+        bcodeCol.setCellValueFactory(new PropertyValueFactory<Book, String>("bookid"));
+        bnameCol.setCellValueFactory(new PropertyValueFactory<Book, String>("bookname"));
+        bcategoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("cid"));
+        bauthorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("aid"));
+        bqtyCol.setCellValueFactory(new PropertyValueFactory<Book, Integer>("quantity"));
+        bpriceCol.setCellValueFactory(new PropertyValueFactory<Book, Integer>("price"));
+        btotalCol.setCellValueFactory(new PropertyValueFactory<Book, Integer>("total"));
 
 
     }
 
-    public  void getFindLoadBookData() {
-
+    public void getFindLoadBookData() {
 
 
         ObservableList<Book> observableList = FXCollections.observableArrayList();
 
         Bookdb bookdb = new Bookdb();
 
-        List<Book> bookList= null;
+        List<Book> bookList = null;
 
         bookList = bookdb.getList();
 
-        for(Book m :bookList ){
+        for (Book m : bookList) {
 
             observableList.add(m);
         }
@@ -992,22 +942,15 @@ public class DashboardController extends Deliver implements Initializable  {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (filter.getBookid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (filter.getBookid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getBookname().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getBookname().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -1026,36 +969,33 @@ public class DashboardController extends Deliver implements Initializable  {
     }
 
 
-    private void getBookRowUpdate(){
+    private void getBookRowUpdate() {
 
 
+        Book book = (Book) booktable.getSelectionModel().getSelectedItem();
 
-      Book book = (Book) booktable.getSelectionModel().getSelectedItem();
+        int i = booktable.getSelectionModel().getSelectedIndex();
 
-      int i = booktable.getSelectionModel().getSelectedIndex();
+        Book book1 = new Book(book.getBookid(), book.getBookname(), book.getQuantity(), book.getPrice(), getAuthorCode(book.getAid()), getCategoryCode(book.getCid()));
 
-      Book book1 = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
+        Bookdb bookdb = new Bookdb();
 
-      Bookdb bookdb = new Bookdb();
-
-      bookdb.update(book1);
+        bookdb.update(book1);
         getUpdateData();
 
     }
 
 
-
-
-    private void setFilter(){
+    private void setFilter() {
 
 
         ObservableList i = booktable.getSelectionModel().getSelectedItems();
 
-        ObservableList<Book> updateList= FXCollections.observableArrayList();
+        ObservableList<Book> updateList = FXCollections.observableArrayList();
 
-        int p=0;
+        int p = 0;
 
-        for(Object z: i){
+        for (Object z : i) {
 
             Book book = (Book) i.get(p);
             updateList.add(book);
@@ -1080,20 +1020,13 @@ public class DashboardController extends Deliver implements Initializable  {
 
                 if (filter.getBookid().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getBookname().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (filter.getBookname().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getAid().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (filter.getAid().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getCid().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (filter.getCid().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches last name.
-                }
-
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -1112,31 +1045,24 @@ public class DashboardController extends Deliver implements Initializable  {
     }
 
 
-
-
-
     @FXML
     void noticeAction(MouseEvent event) {
 
 
-
-
-        if(searchBox.getText().equals("")){
+        if (searchBox.getText().equals("")) {
 
             searchBox1.setEditable(false);
 
 
-            JOptionPane.showMessageDialog(null,"Please First Start , start filter box","Notice",0);
+            JOptionPane.showMessageDialog(null, "Please First Start , start filter box", "Notice", 0);
 
             searchBox.setStyle("-fx-border-color:red;");
-
 
 
             searchBox.setPromptText("Please Fill Filter check!!!");
 
 
-        }
-        else {
+        } else {
 
             searchBox.setStyle("");
 
@@ -1152,9 +1078,6 @@ public class DashboardController extends Deliver implements Initializable  {
         }
 
 
-
-
-
     }
 
     @FXML
@@ -1164,6 +1087,13 @@ public class DashboardController extends Deliver implements Initializable  {
         searchBox.setText("");
         searchBox.setPromptText("Start Search . ..................................");
         searchBox1.setText("");
+
+        totalQtytxt.setText("Qty : "+getItemSize()+" pcs");
+
+        grandTotaltxt.setText("Amount : "+getItemTotal()+" MMK");
+
+
+
 
 
 
@@ -1175,8 +1105,7 @@ public class DashboardController extends Deliver implements Initializable  {
     }
 
 
-
-    private void getUpdateData(){
+    private void getUpdateData() {
 
         getFindLoadBookData();
 
@@ -1188,9 +1117,6 @@ public class DashboardController extends Deliver implements Initializable  {
     void newPurchareAction(MouseEvent event) {
 
 
-
-
-
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/purchase.fxml"));
@@ -1200,10 +1126,7 @@ public class DashboardController extends Deliver implements Initializable  {
         try {
 
 
-
             scene = new Scene(fxmlLoader.load());
-
-
 
 
         } catch (IOException e) {
@@ -1220,14 +1143,12 @@ public class DashboardController extends Deliver implements Initializable  {
         stage.show();
 
 
-
-
     }
 
-    private void getIniPurchaseTable(){
+    private void getIniPurchaseTable() {
 
-        pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase,String>("puid"));
-        pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase,Date>("pudate"));
+        pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase, String>("puid"));
+        pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase, Date>("pudate"));
         pnameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
         pcategoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
         pauthorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
@@ -1235,7 +1156,6 @@ public class DashboardController extends Deliver implements Initializable  {
         pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
-
 
 
     }
@@ -1248,9 +1168,9 @@ public class DashboardController extends Deliver implements Initializable  {
 
         List<Purchase> purchaseList = null;
 
-        purchaseList  = purchasedb.getList();
+        purchaseList = purchasedb.getList();
 
-        for(Purchase m :purchaseList ){
+        for (Purchase m : purchaseList) {
 
             observableList.add(m);
         }
@@ -1271,27 +1191,19 @@ public class DashboardController extends Deliver implements Initializable  {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getSid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getSid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -1307,13 +1219,12 @@ public class DashboardController extends Deliver implements Initializable  {
         purchasetable.setItems(sortedData);
 
 
-
-        getTotalSelectList(sortedData,totalQty,totalPrice);
+        getTotalSelectList(sortedData, totalQty, totalPrice);
 
 
     }
 
-    private void getAutoRunning(){
+    private void getAutoRunning() {
 
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
@@ -1325,13 +1236,13 @@ public class DashboardController extends Deliver implements Initializable  {
 
 
             }
-        },0,5, TimeUnit.SECONDS);
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
     @FXML
     void purchasetableClickAction(MouseEvent event) {
 
-        if(event.getClickCount()==1 && checkPoint==1){
+        if (event.getClickCount() == 1 && checkPoint == 1) {
 
             getFindLoadPurchaseData();
 
@@ -1340,45 +1251,34 @@ public class DashboardController extends Deliver implements Initializable  {
         }
 
 
-
-
-
-
-
-
     }
 
     @FXML
-    void searchPurchareBookAction(MouseEvent event){
+    void searchPurchareBookAction(MouseEvent event) {
 
         getFindLoadPurchaseData();
         getFindLoadBookData();
 
 
-
-
-
-
     }
-    @FXML
-    void searchpurchareAction(MouseEvent event){
 
-        if(psearch.getText().equals("")){
+    @FXML
+    void searchpurchareAction(MouseEvent event) {
+
+        if (psearch.getText().equals("")) {
 
             psearch1.setEditable(false);
 
 
-            JOptionPane.showMessageDialog(null,"Please First Start , start filter box","Notice",0);
+            JOptionPane.showMessageDialog(null, "Please First Start , start filter box", "Notice", 0);
 
             psearch.setStyle("-fx-border-color:red;");
-
 
 
             psearch.setPromptText("Please Fill Filter check!!!");
 
 
-        }
-        else {
+        } else {
 
             psearch.setStyle("");
 
@@ -1395,17 +1295,17 @@ public class DashboardController extends Deliver implements Initializable  {
 
     }
 
-    private void setPurchaseFilter(){
+    private void setPurchaseFilter() {
 
         ObservableList i = purchasetable.getSelectionModel().getSelectedItems();
 
-        ObservableList<Purchase> updateList= FXCollections.observableArrayList();
+        ObservableList<Purchase> updateList = FXCollections.observableArrayList();
 
-        int p=0;
+        int p = 0;
 
-        for(Object z: i){
+        for (Object z : i) {
 
-            Purchase  purchase = (Purchase) i.get(p);
+            Purchase purchase = (Purchase) i.get(p);
             updateList.add(purchase);
             p++;
         }
@@ -1426,27 +1326,19 @@ public class DashboardController extends Deliver implements Initializable  {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+                if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches first name.
-                }
-                else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getBcode().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getAid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-                else if (filter.getSid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getSid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                }
-
-                else
+                } else
                     return false; // Does not match.
             });
         });
@@ -1460,7 +1352,7 @@ public class DashboardController extends Deliver implements Initializable  {
 
         // 5. Add sorted (and filtered) data to the table.
         purchasetable.setItems(sortedData);
-        getTotalSelectList(sortedData,totalQty,totalPrice);
+        getTotalSelectList(sortedData, totalQty, totalPrice);
     }
 
 
@@ -1468,16 +1360,12 @@ public class DashboardController extends Deliver implements Initializable  {
     void getPurchaseSelectPrint(MouseEvent event) throws FileNotFoundException, JRException {
 
 
-
-
-
-
     }
 
     @FXML
     void getQtyPrice(KeyEvent event) {
 
-        if(event.getCode() == KeyCode.ENTER){
+        if (event.getCode() == KeyCode.ENTER) {
 
             purchasetable.getSelectionModel().selectAll();
 
@@ -1487,22 +1375,21 @@ public class DashboardController extends Deliver implements Initializable  {
         }
 
 
-
     }
 
-    private void getTotalSelectList(ObservableList<Purchase> observableList,Label qtyLabel,Label priceLabel){
+    private void getTotalSelectList(ObservableList<Purchase> observableList, Label qtyLabel, Label priceLabel) {
 
-       qtyLabel.setText("Item : "+ observableList.size());
+        qtyLabel.setText("Item : " + observableList.size());
 
-       int total = 0;
+        int total = 0;
 
-       for(Purchase p : observableList){
+        for (Purchase p : observableList) {
 
-           total+=p.getTotal();
+            total += p.getTotal();
 
-       }
+        }
 
-       priceLabel.setText("Total Amount : "+ total+" MMK");
+        priceLabel.setText("Total Amount : " + total + " MMK");
 
 
     }
@@ -1511,15 +1398,14 @@ public class DashboardController extends Deliver implements Initializable  {
     void purchasecheckBoxAction(MouseEvent event) {
 
 
-        if(purchaseCb.isSelected()){
+        if (purchaseCb.isSelected()) {
 
             switchPane.getChildren().clear();
 
             purchasereturnCb.setSelected(false);
             purchasePane.setVisible(true);
 //.
-        }
-        else {
+        } else {
             purchasereturnCb.setSelected(true);
         }
 
@@ -1530,13 +1416,12 @@ public class DashboardController extends Deliver implements Initializable  {
     void purchasereturncheckBoxAction(MouseEvent event) {
 
 
-        if(purchasereturnCb.isSelected()){
+        if (purchasereturnCb.isSelected()) {
 
             purchasePane.setVisible(false);
 
 
             purchaseCb.setSelected(false);
-
 
 
             FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/purchasereturnreport.fxml"));
@@ -1553,12 +1438,7 @@ public class DashboardController extends Deliver implements Initializable  {
             }
 
 
-
-
-
-
-        }
-        else {
+        } else {
             purchaseCb.setSelected(true);
         }
 
@@ -1583,20 +1463,10 @@ public class DashboardController extends Deliver implements Initializable  {
         stage.show();
 
 
-
     }
 
 
     //OrderTab controller
-
-
-
-
-
-
-
-
-
 
 
 }

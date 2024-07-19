@@ -239,6 +239,8 @@ public class SaleUpdateController extends Deliver implements Initializable {
             JasperViewer viewer = new JasperViewer(jasperPrint,false);
             viewer.setVisible(true);
 
+
+
         }catch (NullPointerException | FileNotFoundException e) {
             e.printStackTrace();
         } catch (JRException e) {
