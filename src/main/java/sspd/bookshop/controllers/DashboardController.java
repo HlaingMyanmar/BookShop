@@ -226,9 +226,11 @@ public class DashboardController extends Deliver implements Initializable {
         Book book =  (Book) booktable.getSelectionModel().getSelectedItem();
 
 
-        grandTotaltxt.setText("Amount : "+book.getTotal()+" MMK");
+        grandTotaltxt.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+book.getTotal()+" )ကျပ် ရှိပါသည်။");
 
-        totalQtytxt.setText("Qty : "+book.getQuantity()+" pcs");
+        totalQtytxt.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+book.getQuantity()+" )ခုရှိပါသည်။");
+
+
 
     }
 
@@ -262,10 +264,11 @@ public class DashboardController extends Deliver implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        totalQtytxt.setText("Qty : "+getItemSize()+" pcs");
+        totalQtytxt.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+getItemSize()+" )ခုရှိပါသည်။");
 
 
-        grandTotaltxt.setText("Amount : "+getItemTotal()+" MMK");
+        grandTotaltxt.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+getItemTotal()+" )ကျပ် ရှိပါသည်။");
+
 
 
 
@@ -977,13 +980,15 @@ public class DashboardController extends Deliver implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
 
 
-                totalQtytxt.setText("Qty : "+sortedData.size()+" pcs");
+
+                totalQtytxt.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
+
 
                 double sum = filteredData.stream()
                         .mapToDouble(Book::getTotal)
                         .sum();
 
-                grandTotaltxt.setText("Amount : "+sum+" MMK");
+                grandTotaltxt.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+sum+" )ကျပ် ရှိပါသည်။");
 
 
             }
@@ -1008,7 +1013,7 @@ public class DashboardController extends Deliver implements Initializable {
             }
         }
 
-        emptybtn.setText("Empty "+size+" pcs");
+        emptybtn.setText("ကုန်နေ‌သောပစ္စည်း( " +size+ " )ခုရှိပါသည်။");
 
         emptybtn.setOnAction(event -> {
 
@@ -1125,13 +1130,15 @@ public class DashboardController extends Deliver implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
 
 
-                totalQtytxt.setText("Qty : "+sortedData.size()+" pcs");
+                totalQtytxt.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
 
                 double sum = filteredData.stream()
                         .mapToDouble(Book::getTotal)
                         .sum();
 
-                grandTotaltxt.setText("Amount : "+sum+" MMK");
+
+
+                grandTotaltxt.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+sum+" )ကျပ် ရှိပါသည်။");
 
 
             }
