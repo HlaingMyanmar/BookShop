@@ -255,11 +255,11 @@ public class DashboardController extends Deliver implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         totalQtytxt.setText("Qty : "+getItemSize()+" pcs");
 
+
         grandTotaltxt.setText("Amount : "+getItemTotal()+" MMK");
-
-
 
 
 
@@ -912,6 +912,7 @@ public class DashboardController extends Deliver implements Initializable {
     public void getFindLoadBookData() {
 
 
+
         ObservableList<Book> observableList = FXCollections.observableArrayList();
 
         Bookdb bookdb = new Bookdb();
@@ -962,8 +963,28 @@ public class DashboardController extends Deliver implements Initializable {
         // 	  Otherwise, sorting the TableView would have no effect.
         sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
+
+
+        searchBox.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+
+
+                totalQtytxt.setText("Qty : "+sortedData.size()+" pcs");
+
+                double sum = filteredData.stream()
+                        .mapToDouble(Book::getTotal)
+                        .sum();
+
+                grandTotaltxt.setText("Amount : "+sum+" MMK");
+
+
+            }
+        });
+
+
         // 5. Add sorted (and filtered) data to the table.
         booktable.setItems(sortedData);
+
 
 
     }
@@ -1038,11 +1059,35 @@ public class DashboardController extends Deliver implements Initializable {
         // 	  Otherwise, sorting the TableView would have no effect.
         sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
+
+
+
+        searchBox1.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+
+
+                totalQtytxt.setText("Qty : "+sortedData.size()+" pcs");
+
+                double sum = filteredData.stream()
+                        .mapToDouble(Book::getTotal)
+                        .sum();
+
+                grandTotaltxt.setText("Amount : "+sum+" MMK");
+
+
+            }
+        });
         // 5. Add sorted (and filtered) data to the table.
         booktable.setItems(sortedData);
 
+
+
+
+
+
         //System.out.println(book.getBookname());
     }
+
 
 
     @FXML
