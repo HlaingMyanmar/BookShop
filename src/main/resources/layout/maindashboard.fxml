@@ -17,11 +17,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1350.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.DashboardController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="749.0" prefWidth="1350.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.DashboardController">
   <tabs>
       <Tab fx:id="mPane" text="ပစ္စည်းစာရင်း">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="732.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="630.0" prefWidth="1350.0">
                <children>
                   <TableView fx:id="booktable" layoutX="17.0" layoutY="85.0" onMouseClicked="#bootableClickeAction" prefHeight="564.0" prefWidth="1317.0" stylesheets="@../css/table.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
                      <columns>
@@ -80,21 +80,21 @@
       </Tab>
       <Tab fx:id="pPane" text="အဝယ်စာရင်း">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="682.0" prefWidth="1350.0">
                <children>
-                  <Separator layoutX="7.0" layoutY="36.0" prefHeight="2.0" prefWidth="1333.0" />
-                  <JFXCheckBox fx:id="purchaseCb" layoutX="539.0" layoutY="5.0" onMouseClicked="#purchasecheckBoxAction" selected="true" text="Purchase" textFill="#1d00ff">
+                  <Separator layoutX="7.0" layoutY="59.0" prefHeight="2.0" prefWidth="1333.0" />
+                  <JFXCheckBox fx:id="purchaseCb" layoutX="1000.0" layoutY="-1.0" onMouseClicked="#purchasecheckBoxAction" selected="true" text="Purchase" textFill="#1d00ff">
                      <font>
                         <Font name="Pyidaungsu Bold" size="15.0" />
                      </font>
                   </JFXCheckBox>
-                  <JFXCheckBox fx:id="purchasereturnCb" layoutX="637.0" layoutY="5.0" onMouseClicked="#purchasereturncheckBoxAction" text="Purchase Return" textFill="#1d00ff">
+                  <JFXCheckBox fx:id="purchasereturnCb" layoutX="1000.0" layoutY="31.0" onMouseClicked="#purchasereturncheckBoxAction" text="Purchase Return" textFill="#1d00ff">
                      <font>
                         <Font name="Pyidaungsu Bold" size="15.0" />
                      </font>
                   </JFXCheckBox>
-                  <Pane fx:id="switchPane" layoutX="7.0" layoutY="39.0" prefHeight="622.0" prefWidth="1350.0" />
-                  <AnchorPane fx:id="purchasePane" layoutX="10.0" layoutY="40.0" prefHeight="592.0" prefWidth="1350.0">
+                  <Pane fx:id="switchPane" layoutX="7.0" layoutY="96.0" prefHeight="566.0" prefWidth="1350.0" />
+                  <AnchorPane fx:id="purchasePane" layoutX="10.0" layoutY="64.0" prefHeight="618.0" prefWidth="1350.0">
                      <children>
                         <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="432.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                            <columns>
@@ -109,39 +109,49 @@
                               <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="စုစုပေါင်း" />
                            </columns>
                         </TableView>
-                        <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/printer.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="148.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
-                        <Button fx:id="newPurchasebtn" layoutX="14.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase">
+                        <Button layoutX="148.0" layoutY="558.0" mnemonicParsing="false" onMouseClicked="#getPurchaseSelectPrint" prefHeight="31.0" prefWidth="123.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+                        <Button fx:id="newPurchasebtn" layoutX="14.0" layoutY="558.0" mnemonicParsing="false" onMouseClicked="#newPurchareAction" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="New Purchase">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="psearch" layoutX="14.0" layoutY="14.0" onKeyPressed="#getpurchaseboxOnefindAction" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="ရှာဖွေခြင်း (၁) .............................................">
+                        <TextField fx:id="psearch" layoutX="2.0" layoutY="3.0" onKeyPressed="#getpurchaseboxOnefindAction" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="622.0" promptText="ရှာဖွေခြင်း (၁) ............................................." styleClass="btn" stylesheets="@../css/highlighttablerow3.css">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="psearch1" layoutX="636.0" layoutY="14.0" onKeyPressed="#getpurchaseboxOnefindAction" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="ရှာဖွေခြင်း (၂) .............................................">
+                        <TextField fx:id="psearch1" layoutX="636.0" layoutY="3.0" onKeyPressed="#getpurchaseboxOnefindAction" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="ရှာဖွေခြင်း (၂) ............................................." styleClass="btn" stylesheets="@../css/highlighttablerow3.css">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <Label fx:id="totalPrice" layoutX="1132.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                        <Label fx:id="totalPrice" layoutX="947.0" layoutY="46.0" prefHeight="37.0" prefWidth="385.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="totalQty" layoutX="1003.0" layoutY="60.0" text="End Date" textAlignment="CENTER" textFill="RED">
+                        <Label fx:id="totalQty" layoutX="633.0" layoutY="46.0" prefHeight="37.0" prefWidth="302.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
+                        <JFXButton fx:id="returnbtn" layoutX="5.0" layoutY="44.0" prefHeight="37.0" prefWidth="372.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css">
+                           <font>
+                              <Font name="Pyidaungsu Bold" size="28.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
+                  <Button fx:id="purchaseclearBtn" layoutX="1141.0" layoutY="13.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="199.0" styleClass="btn" stylesheets="@../css/highlighttablerow2.css" text="ရှင်းလင်းမည်။">
+                     <font>
+                        <Font name="Pyidaungsu Bold" size="13.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>

@@ -37,6 +37,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static sspd.bookshop.controllers.ApplicationViewController.cho;
 import static sspd.bookshop.controllers.NewSaleController.oList;
@@ -181,7 +182,7 @@ public class DashboardController extends Deliver implements Initializable {
 
     @FXML
     private TextField psearch1;
-
+    
 
     @FXML
     private Label totalPrice;
@@ -217,6 +218,14 @@ public class DashboardController extends Deliver implements Initializable {
 
     @FXML
     private JFXButton emptybtn;
+
+    @FXML
+    private JFXButton returnbtn;
+
+    @FXML
+    private Button purchaseclearBtn;
+
+    public static String _pid =null;
 
 
 
@@ -270,20 +279,12 @@ public class DashboardController extends Deliver implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
+
+
         totalQtytxt.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+getItemSize()+" )ခုရှိပါသည်။");
 
 
         grandTotaltxt.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+getItemTotal()+" )ကျပ် ရှိပါသည်။");
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1290,11 +1291,56 @@ public class DashboardController extends Deliver implements Initializable {
 
         Purchasedb purchasedb = new Purchasedb();
 
-        List<Purchase> purchaseList = null;
+        List<Purchase> purchaseList = purchasedb.getList2();
 
-        purchaseList = purchasedb.getList2();
 
-        purchasetable.getItems().setAll(purchaseList);
+
+        ObservableList<Purchase> purchaseObservableList = FXCollections.observableArrayList();
+
+        purchaseObservableList.addAll(purchaseList);
+
+        purchasetable.setItems(purchaseObservableList);
+
+        totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(purchasedb.getList())+" )ကျပ် ရှိပါသည်။");
+        totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+purchaseObservableList.size()+" )ခုရှိပါသည်။");
+
+        PurchaseReturndb prdb = new PurchaseReturndb();
+
+        returnbtn.setText("ပြန်လည်ပို့ဆောင်ထားသော ပစ္စည်း ("+prdb.getList().size()+")ခုရှိပါသည်");
+
+
+        returnbtn.setOnAction(event -> {
+
+            Purchasedb pd = new Purchasedb();
+            List<Purchase> pdbList = pd.getList2();
+
+            List<PurchaseReturn> prdbList = prdb.getList();
+
+            ObservableList<Purchase> updateList = FXCollections.observableArrayList(
+                     pdbList.stream()
+                    .filter(p -> prdbList.stream()
+                    .anyMatch(pr -> pr.getPuid().equals(p.getPuid())))
+                    .collect(Collectors.toList())
+            );
+
+            purchasetable.setItems(updateList);
+
+            totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(updateList)+" )ကျပ် ရှိပါသည်။");
+            totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+updateList.size()+" )ခုရှိပါသည်။");
+
+            returnbtn.setText("ပြန်လည်ပို့ဆောင်ထားသော ပစ္စည်း (" + prdbList.size() + ")ခုရှိပါသည်");
+
+
+        });
+
+        purchaseclearBtn.setOnAction(event1 -> {
+
+            psearch.setText("");
+            psearch1.setText("");
+
+            getFindLoadPurchaseIniData();
+
+        });
 
     }
 
@@ -1325,9 +1371,6 @@ public class DashboardController extends Deliver implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
 
 
-
-
-
                     return true;
                 }
 
@@ -1335,6 +1378,7 @@ public class DashboardController extends Deliver implements Initializable {
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (filter.getPuid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+
                     return true; // Filter matches first name.
                 } else if (filter.getPudate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
@@ -1346,12 +1390,16 @@ public class DashboardController extends Deliver implements Initializable {
                     return true; // Filter matches last name.
                 } else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                } else{
+                }
+
+                else{
 
 
 
                     return false;
                 }
+
+
                   // Does not match.
             });
         });
@@ -1366,17 +1414,87 @@ public class DashboardController extends Deliver implements Initializable {
         // 5. Add sorted (and filtered) data to the table.
 
 
+        purchaseclearBtn.setOnAction(event -> {
+
+            psearch.setText("");
+            psearch1.setText("");
+
+            getFindLoadPurchaseIniData();
+
+
+
+
+
+        });
+
+
+
+
+
+
+        psearch.setOnKeyPressed(event -> {
+
+
+            if (event.getCode() ==KeyCode.ENTER){
+
+                String id = psearch.getText();
+
+                if(id.contains("#")){
+
+                    ObservableList<Purchase> upList = FXCollections.observableArrayList();
+
+                    Purchasedb pdb = new Purchasedb();
+
+                    List<Purchase> pList = pdb.getList();
+
+                    upList.addAll(pList.stream()
+                            .filter(purchase -> purchase.getPuid().equals(id))
+                            .toList());
+
+                    purchasetable.setItems(upList);
+
+                    totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(upList)+" )ကျပ် ရှိပါသည်။");
+
+                    totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+upList.size()+" )ခုရှိပါသည်။");
+
+
+
+                }
+                else {
+
+                    totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(sortedData)+" )ကျပ် ရှိပါသည်။");
+                    totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
+
+                }
+
+
+
+
+
+            }
+
+
+        });
+
+
+
 
 
         purchasetable.setItems(sortedData);
 
+        totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
 
-        getTotalSelectList(sortedData, totalQty, totalPrice);
+        totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(sortedData)+" )ကျပ် ရှိပါသည်။");
+
+
+
 
 
 
 
     }
+
+
 
     private void getAutoRunning() {
 
@@ -1402,13 +1520,104 @@ public class DashboardController extends Deliver implements Initializable {
 
             checkPoint = 2;
 
+        } else if (event.getClickCount() == 2) {
+
+            ObservableList<Purchase> updateList = FXCollections.observableArrayList();
+
+            Purchasedb pdb = new Purchasedb();
+
+            List<Purchase> pList = pdb.getList();
+
+            Purchase purchase = (Purchase) purchasetable.getSelectionModel().getSelectedItem();
+
+
+            for (Purchase p : pList) {
+
+                if (p.getPuid().equals(purchase.getPuid())) {
+
+                    updateList.add(p);
+                }
+
+            }
+
+            totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( " + getSumPurchase(updateList) + " )ကျပ် ရှိပါသည်။");
+            totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( " + updateList.size() + " )ခုရှိပါသည်။");
+
+
+            purchasetable.setItems(updateList);
+
+
+            //
+
+
+            Purchasedb pd = new Purchasedb();
+            PurchaseReturndb prdb = new PurchaseReturndb();
+            List<Purchase> pdbList = pd.getList2();
+
+            List<PurchaseReturn> prdbList = prdb.getList();
+
+            ObservableList<Purchase> updateList2 = FXCollections.observableArrayList(
+                    pdbList.stream()
+                            .filter(p -> prdbList.stream()
+                            .anyMatch(pr -> pr.getPuid().equals(p.getPuid())))
+                            .collect(Collectors.toList())
+
+
+            );
+
+            for(Purchase p :updateList2){
+
+                if(p.getPuid().equals(purchase.getPuid())){
+
+                    _pid =p.getPuid();
+
+
+                    purchasePane.setVisible(false);
+
+                    purchaseCb.setSelected(false);
+
+                    purchasereturnCb.setSelected(true);
+
+
+                    FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/purchasereturnreport.fxml"));
+                    Node node2 = null;
+
+                    try {
+
+                        node2 = fxmlLoader2.load();
+                        switchPane.getChildren().add(node2);
+
+                    } catch (IOException e) {
+
+                        throw new RuntimeException(e);
+                    }
+
+
+                } else {
+                    purchaseCb.setSelected(true);
+                }
+
+
+            }
+
+            purchaseclearBtn.setOnAction(event1 -> {
+
+                psearch.setText("");
+                psearch1.setText("");
+
+                getFindLoadPurchaseIniData();
+
+            });
+
+
         }
-
-
     }
 
     @FXML
     void searchPurchareBookAction(MouseEvent event) {
+
+
+
 
         getFindLoadPurchaseData();
         getFindLoadBookData();
@@ -1505,8 +1714,59 @@ public class DashboardController extends Deliver implements Initializable {
         sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
+        psearch1.setOnKeyPressed(event -> {
+
+
+            if (event.getCode() ==KeyCode.ENTER){
+
+                String id = psearch.getText();
+
+                if(id.contains("#")){
+
+                    ObservableList<Purchase> upList = FXCollections.observableArrayList();
+
+                    Purchasedb pdb = new Purchasedb();
+
+                    List<Purchase> pList = pdb.getList();
+
+                    upList.addAll(pList.stream()
+                            .filter(purchase -> purchase.getPuid().equals(id))
+                            .toList());
+
+                    purchasetable.setItems(upList);
+
+                    totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(pList)+" )ကျပ် ရှိပါသည်။");
+
+                    totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+pList.size()+" )ခုရှိပါသည်။");
+
+
+                }
+                else {
+
+                    totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(sortedData)+" )ကျပ် ရှိပါသည်။");
+
+                    totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
+
+                }
+
+
+
+
+
+            }
+
+
+        });
+
+
+
+
+
         purchasetable.setItems(sortedData);
-        getTotalSelectList(sortedData, totalQty, totalPrice);
+
+        totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(sortedData)+" )ကျပ် ရှိပါသည်။");
+        totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
+      //  getTotalSelectList(sortedData, totalQty, totalPrice);
     }
 
 
@@ -1523,8 +1783,56 @@ public class DashboardController extends Deliver implements Initializable {
     void getpurchaseboxOnefindAction(KeyEvent event) {
 
 
+//       if (event.getCode() ==KeyCode.ENTER){
+//
+//           String id = psearch.getText();
+//
+//           if(id.contains("#")){
+//
+//               ObservableList<Purchase> upList = FXCollections.observableArrayList();
+//
+//               Purchasedb pdb = new Purchasedb();
+//
+//               List<Purchase> pList = pdb.getList();
+//
+//               upList.addAll(pList.stream()
+//                       .filter(purchase -> purchase.getPuid().equals(id))
+//                       .toList());
+//
+//               purchasetable.setItems(upList);
+//
+//
+//           }
+//           else {
+//
+//               totalPrice.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+ getSumPurchase(sortedData)+" )ကျပ် ရှိပါသည်။");
+//
+//           }
+//
+//
+//
+//
+//
+//       }
 
-        }
+
+
+    }
+
+    private double getSumPurchase( List<Purchase> p ){
+
+
+        double sum = 0.0;
+
+       for(Purchase p1 :p){
+
+           sum +=p1.getTotal();
+
+       }
+
+       return sum;
+
+    }
 
 
 

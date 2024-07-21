@@ -20,9 +20,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.databases.PurchaseReturnDetaildb;
 
+import sspd.bookshop.databases.PurchaseReturndb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Purchase;
 
+import sspd.bookshop.models.PurchaseReturn;
 import sspd.bookshop.models.PurchaseReturnDetail;
 
 import javax.swing.*;
@@ -33,6 +35,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static sspd.bookshop.controllers.DashboardController._pid;
+
 public class PurchasereturnReportController implements Initializable {
 
     @FXML
@@ -40,8 +44,6 @@ public class PurchasereturnReportController implements Initializable {
 
     @FXML
     private TableColumn<Purchase, Date> dateCol;
-
-
 
     @FXML
     private TableColumn<Purchase, Integer> pqtyCol;
@@ -204,7 +206,10 @@ public class PurchasereturnReportController implements Initializable {
 
         getIniPurchaseTable();
         purchasetable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        getFindLoadPurchaseData();
+
+
+            getFindLoadPurchaseData();
+
 
     }
 
@@ -378,9 +383,39 @@ public class PurchasereturnReportController implements Initializable {
         sortedData.comparatorProperty().bind(purchasetable.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
-        purchasetable.setItems(sortedData);
-        getQtySelectList(sortedData,totalQty);
-        getTotalSelectList(sortedData,totalQty,totalPrice);
+
+
+        if(_pid!=null) {
+
+            ObservableList<PurchaseReturn> updateList = FXCollections.observableArrayList();
+
+
+            for (PurchaseReturn pr : sortedData) {
+
+                if (_pid.equals(pr.getPuid())) {
+
+                    updateList.add(pr);
+
+                }
+
+            }
+
+            purchasetable.setItems(updateList);
+
+
+        }
+        else {
+            purchasetable.setItems(sortedData);
+            getQtySelectList(sortedData,totalQty);
+            getTotalSelectList(sortedData,totalQty,totalPrice);
+
+        }
+
+
+
+
+
+
 
 
 
