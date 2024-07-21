@@ -23,6 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
+import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.*;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.*;
@@ -216,6 +217,8 @@ public class DashboardController extends Deliver implements Initializable {
 
     @FXML
     private JFXButton emptybtn;
+
+
 
     @FXML
     void bootableClickeAction(MouseEvent event) {
@@ -1168,12 +1171,13 @@ public class DashboardController extends Deliver implements Initializable {
             searchBox1.setEditable(false);
 
 
-            JOptionPane.showMessageDialog(null, "Please First Start , start filter box", "Notice", 0);
+            AlertBox.showWarning("သတိထားပါ။ ","ကျေးဇူးပြု၍ ရှာ‌ဖွေခြင်း (၁)တွင် ပထမဦးဆုံးရှာ‌ဖွေပါ။");
+
 
             searchBox.setStyle("-fx-border-color:red;");
 
 
-            searchBox.setPromptText("Please Fill Filter check!!!");
+            searchBox.setPromptText("ဤနေရာတွင် အရင်ရှာဖွေပါ။");
 
 
         } else {
@@ -1202,9 +1206,12 @@ public class DashboardController extends Deliver implements Initializable {
         searchBox.setPromptText("Start Search . ..................................");
         searchBox1.setText("");
 
-        totalQtytxt.setText("Qty : "+getItemSize()+" pcs");
 
-        grandTotaltxt.setText("Amount : "+getItemTotal()+" MMK");
+        grandTotaltxt.setText("တန်ဖိုးစုစု‌ပေါင်း ( "+getItemTotal()+" )ကျပ် ရှိပါသည်။");
+
+        totalQtytxt.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+getItemSize()+" )ခုရှိပါသည်။");
+
+
 
 
 

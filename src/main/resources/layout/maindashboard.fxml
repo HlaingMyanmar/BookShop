@@ -19,7 +19,7 @@
 
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1350.0" stylesheets="@../css/tabpane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.DashboardController">
   <tabs>
-      <Tab fx:id="mPane" text="Main Stock Report">
+      <Tab fx:id="mPane" text="ပစ္စည်းစာရင်း">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="732.0">
                <children>
@@ -34,37 +34,37 @@
                         <TableColumn fx:id="btotalCol" prefWidth="130.1334228515625" text="စုစုပေါင်း" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="searchBox" layoutX="57.0" layoutY="14.0" prefHeight="32.0" prefWidth="429.0" promptText="Start Search . ..................................">
+                  <TextField fx:id="searchBox" layoutX="57.0" layoutY="4.0" prefHeight="41.0" prefWidth="429.0" promptText="ရှာဖွေခြင်း (၁) ............................................." styleClass="btn" stylesheets="@../css/highlighttablerow3.css">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <ImageView fx:id="filter2" fitHeight="38.0" fitWidth="54.0" layoutX="506.2" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="506.2" AnchorPane.rightAnchor="806.2">
+                  <ImageView fx:id="filter2" fitHeight="38.0" fitWidth="54.0" layoutX="506.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="506.0" AnchorPane.rightAnchor="806.0">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchBox1" layoutX="555.0" layoutY="13.0" onMouseClicked="#noticeAction" prefHeight="32.0" prefWidth="548.0" promptText=" Next Search . ..................................">
+                  <TextField fx:id="searchBox1" layoutX="555.0" layoutY="3.0" onMouseClicked="#noticeAction" prefHeight="42.0" prefWidth="548.0" promptText="ရှာဖွေခြင်း (၂) ............................................." styleClass="btn" stylesheets="@../css/highlighttablerow3.css">
                      <font>
                         <Font name="Pyidaungsu" size="12.0" />
                      </font>
                   </TextField>
-                  <ImageView fx:id="filter1" fitHeight="38.0" fitWidth="54.0" layoutX="12.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="filter1" fitHeight="38.0" fitWidth="54.0" layoutX="12.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/filter.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="1133.6000000000001" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#bookrefreshAction" prefHeight="42.0" prefWidth="199.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ရှင်းလင်းမည်။" AnchorPane.rightAnchor="18.0">
+                  <Button layoutX="1133.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#bookrefreshAction" prefHeight="42.0" prefWidth="199.0" styleClass="btn" stylesheets="@../css/highlighttablerow2.css" text="ရှင်းလင်းမည်။" AnchorPane.rightAnchor="18.0">
                      <font>
-                        <Font name="Pyidaungsu" size="40.0" />
+                        <Font name="Pyidaungsu Bold" size="13.0" />
                      </font></Button>
                   <Separator layoutX="4.0" layoutY="59.0" prefHeight="5.0" prefWidth="1335.0" />
-                  <Label fx:id="totalQtytxt" layoutX="718.0" layoutY="66.0" prefHeight="23.0" prefWidth="297.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="totalQtytxt" layoutX="658.0" layoutY="63.0" prefHeight="29.0" prefWidth="342.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="grandTotaltxt" layoutX="1047.0" layoutY="66.0" prefHeight="23.0" prefWidth="290.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="grandTotaltxt" layoutX="1001.0" layoutY="63.0" prefHeight="29.0" prefWidth="336.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -78,7 +78,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="pPane" text="Purchase">
+      <Tab fx:id="pPane" text="အဝယ်စာရင်း">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -98,15 +98,15 @@
                      <children>
                         <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                            <columns>
-                              <TableColumn fx:id="psupplierCol" prefWidth="140.0" text="Supplier Name" />
-                              <TableColumn fx:id="pcodeCol" prefWidth="73.0" text="P Code" />
-                              <TableColumn fx:id="pdateCol" prefWidth="97.33331298828125" text="P Date" />
-                              <TableColumn fx:id="pnameCol" prefWidth="290.66668701171875" text="Description" />
-                              <TableColumn fx:id="pcategoryCol" prefWidth="236.5333251953125" text="Category" />
-                              <TableColumn fx:id="pauthorCol" prefWidth="227.73345947265625" text="Author" />
-                              <TableColumn fx:id="pqtyCol" prefWidth="72.7999267578125" text="Qty" />
-                              <TableColumn fx:id="ppriceCol" prefWidth="90.9332275390625" text="Price" />
-                              <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="Total" />
+                              <TableColumn fx:id="psupplierCol" prefWidth="140.0" text="ထုတ်လုပ်သည့်" />
+                              <TableColumn fx:id="pcodeCol" prefWidth="79.0" text="အဝယ်ကုဒ်" />
+                              <TableColumn fx:id="pdateCol" prefWidth="92.0" text="ရက်စွဲ" />
+                              <TableColumn fx:id="pnameCol" prefWidth="290.66668701171875" text="အမျိုးအမည်" />
+                              <TableColumn fx:id="pcategoryCol" prefWidth="236.5333251953125" text="အုပ်စု အမျိုးအစား" />
+                              <TableColumn fx:id="pauthorCol" prefWidth="212.0" text="ထုတ်လုပ်သူ" />
+                              <TableColumn fx:id="pqtyCol" prefWidth="89.0" text="အရေအတွက်" />
+                              <TableColumn fx:id="ppriceCol" prefWidth="90.9332275390625" text="ဈေးနှုန်း" />
+                              <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="စုစုပေါင်း" />
                            </columns>
                         </TableView>
                         <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="279.0" layoutY="575.0" pickOnBounds="true" preserveRatio="true">
@@ -120,12 +120,12 @@
                               <Font size="10.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="psearch" layoutX="14.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="Search">
+                        <TextField fx:id="psearch" layoutX="14.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchPurchareBookAction" prefHeight="35.0" prefWidth="610.0" promptText="ရှာဖွေခြင်း (၁) .............................................">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="psearch1" layoutX="636.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="Search">
+                        <TextField fx:id="psearch1" layoutX="636.0" layoutY="14.0" onKeyPressed="#getQtyPrice" onMouseClicked="#searchpurchareAction" prefHeight="35.0" prefWidth="698.0" promptText="ရှာဖွေခြင်း (၂) .............................................">
                            <font>
                               <Font name="Pyidaungsu" size="12.0" />
                            </font>
