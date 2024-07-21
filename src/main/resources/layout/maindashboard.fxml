@@ -135,7 +135,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="totalQty" layoutX="633.0" layoutY="46.0" prefHeight="37.0" prefWidth="302.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
+                        <Label fx:id="totalQty" layoutX="581.0" layoutY="46.0" prefHeight="37.0" prefWidth="354.0" styleClass="btn" stylesheets="@../css/highlighttablerow.css" text="End Date" textAlignment="CENTER" textFill="RED">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
