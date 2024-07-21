@@ -220,6 +220,9 @@ public class DashboardController extends Deliver implements Initializable {
 
 
 
+
+
+
     @FXML
     void bootableClickeAction(MouseEvent event) {
 
@@ -478,7 +481,9 @@ public class DashboardController extends Deliver implements Initializable {
 
         getIniPurchaseTable();
 
-        getFindLoadPurchaseData();
+        getFindLoadPurchaseIniData();
+
+       // getFindLoadPurchaseData();
 
 
     }
@@ -1281,6 +1286,18 @@ public class DashboardController extends Deliver implements Initializable {
 
     }
 
+    public void getFindLoadPurchaseIniData(){
+
+        Purchasedb purchasedb = new Purchasedb();
+
+        List<Purchase> purchaseList = null;
+
+        purchaseList = purchasedb.getList2();
+
+        purchasetable.getItems().setAll(purchaseList);
+
+    }
+
     public void getFindLoadPurchaseData() {
 
         ObservableList<Purchase> observableList = FXCollections.observableArrayList();
@@ -1306,6 +1323,11 @@ public class DashboardController extends Deliver implements Initializable {
                 // If filter text is empty, display all persons.
 
                 if (newValue == null || newValue.isEmpty()) {
+
+
+
+
+
                     return true;
                 }
 
@@ -1324,8 +1346,13 @@ public class DashboardController extends Deliver implements Initializable {
                     return true; // Filter matches last name.
                 } else if (filter.getCid().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
-                } else
-                    return false; // Does not match.
+                } else{
+
+
+
+                    return false;
+                }
+                  // Does not match.
             });
         });
 
@@ -1337,10 +1364,16 @@ public class DashboardController extends Deliver implements Initializable {
         sortedData.comparatorProperty().bind(suppliertable.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
+
+
+
+
         purchasetable.setItems(sortedData);
 
 
         getTotalSelectList(sortedData, totalQty, totalPrice);
+
+
 
 
     }
@@ -1483,20 +1516,19 @@ public class DashboardController extends Deliver implements Initializable {
 
     }
 
+
+
+
     @FXML
-    void getQtyPrice(KeyEvent event) {
+    void getpurchaseboxOnefindAction(KeyEvent event) {
 
-        if (event.getCode() == KeyCode.ENTER) {
-
-            purchasetable.getSelectionModel().selectAll();
-
-            setPurchaseFilter();
 
 
         }
 
 
-    }
+
+
 
     private void getTotalSelectList(ObservableList<Purchase> observableList, Label qtyLabel, Label priceLabel) {
 

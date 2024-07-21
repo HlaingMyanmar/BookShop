@@ -31,7 +31,7 @@
             <Pane fx:id="switchPane" layoutX="7.0" layoutY="39.0" prefHeight="622.0" prefWidth="1350.0" />
             <AnchorPane fx:id="purchasePane" layoutX="10.0" layoutY="40.0" prefHeight="592.0" prefWidth="1350.0">
                <children>
-                  <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
+                  <TableView fx:id="purchasetable" layoutX="827.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="459.0" prefWidth="518.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                      <columns>
                         <TableColumn fx:id="psupplierCol" prefWidth="140.0" text="ထုတ်လုပ်သည့်" />
                         <TableColumn fx:id="pcodeCol" prefWidth="82.0" text="အဝယ်ကုဒ်" />
