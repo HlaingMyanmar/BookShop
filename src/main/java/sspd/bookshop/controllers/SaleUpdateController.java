@@ -226,7 +226,7 @@ public class SaleUpdateController extends Deliver implements Initializable {
             parameters.put("Collection",itemsJRBean);
 
             //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
-            InputStream input = new FileInputStream(new File("F:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
+            InputStream input = new FileInputStream(new File("D:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
 
 
 

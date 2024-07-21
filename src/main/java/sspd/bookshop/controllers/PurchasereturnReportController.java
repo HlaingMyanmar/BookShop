@@ -402,6 +402,8 @@ public class PurchasereturnReportController implements Initializable {
 
             purchasetable.setItems(updateList);
 
+            _pid =null;
+
 
         }
         else {
