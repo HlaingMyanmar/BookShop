@@ -30,6 +30,7 @@ import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.*;
@@ -225,9 +226,12 @@ public class SaleUpdateController extends Deliver implements Initializable {
             Map<String,Object> parameters = new HashMap<String,Object>();
             parameters.put("Collection",itemsJRBean);
 
-            //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
-            InputStream input = new FileInputStream(new File("D:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
+            URL url = Bookshop.class.getResource("/report/saleinvoice.jrxml");
 
+            InputStream input = new FileInputStream(new File(url.toURI()).getAbsolutePath());
+
+
+           // InputStream input = new FileInputStream(new File("D:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
 
 
             JasperDesign jasperDesign = JRXmlLoader.load(input);
@@ -244,6 +248,8 @@ public class SaleUpdateController extends Deliver implements Initializable {
         }catch (NullPointerException | FileNotFoundException e) {
             e.printStackTrace();
         } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
 
