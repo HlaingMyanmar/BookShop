@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import net.sf.jasperreports.engine.*;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.*;
@@ -173,6 +174,9 @@ public class DashboardController extends Deliver implements Initializable {
 
     @FXML
     private TableColumn<Purchase, Integer> ptotalCol;
+
+    @FXML
+    private TableColumn<Purchase, String>editCol;
 
     @FXML
     private TableView purchasetable;
@@ -1283,6 +1287,7 @@ public class DashboardController extends Deliver implements Initializable {
         pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+        editCol.setCellValueFactory(new PropertyValueFactory<>(""));
 
 
     }
@@ -1341,6 +1346,8 @@ public class DashboardController extends Deliver implements Initializable {
             getFindLoadPurchaseIniData();
 
         });
+
+        tableCellsetIcon();
 
     }
 
@@ -1481,6 +1488,8 @@ public class DashboardController extends Deliver implements Initializable {
 
 
         purchasetable.setItems(sortedData);
+
+
 
         totalQty.setText("ပစ္စည်းအရေအတွက် စုစုပေါင်း ( "+sortedData.size()+" )ခုရှိပါသည်။");
 
@@ -1655,6 +1664,60 @@ public class DashboardController extends Deliver implements Initializable {
 
 
         }
+
+    }
+
+    private void tableCellsetIcon(){
+
+
+        Callback<TableColumn<Purchase,String>,TableCell<Purchase,String>> cellFactory = (param) -> {
+
+
+            final TableCell<Purchase,String> cell = new TableCell<Purchase,String>(){
+
+
+                public void updateItem(String item,boolean empty){
+
+                    super.updateItem(item,empty);
+
+
+                    if(empty){
+                        setGraphic(null);
+                        setText(null);
+                    }
+
+                    else {
+                        final Button editButton = new Button("+");
+
+                        editButton.setOnAction(event -> {
+
+
+                            System.out.println("Teting");
+
+
+                        });
+
+                        setGraphic(editButton);
+                        setText(null);
+                    }
+
+
+                }
+
+            };
+
+
+
+
+            return cell;
+
+
+
+        };
+
+
+
+        editCol.setCellFactory(cellFactory);
 
     }
 

@@ -18,9 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import sspd.bookshop.databases.PurchaseReturnDetaildb;
 
-import sspd.bookshop.databases.PurchaseReturndb;
+
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Purchase;
 
@@ -47,6 +48,9 @@ public class PurchasereturnReportController implements Initializable {
 
     @FXML
     private TableColumn<Purchase, Integer> pqtyCol;
+
+    @FXML
+    private TableColumn<Purchase, String>editCol;
 
     @FXML
     private TextField psearch;
@@ -195,6 +199,8 @@ public class PurchasereturnReportController implements Initializable {
             purchasetable.getSelectionModel().selectAll();
 
 
+
+
             setPurchaseFilter();
 
 
@@ -209,6 +215,7 @@ public class PurchasereturnReportController implements Initializable {
 
 
             getFindLoadPurchaseData();
+
 
 
     }
@@ -249,6 +256,7 @@ public class PurchasereturnReportController implements Initializable {
         pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         ptotalCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         purchaseIDCol.setCellValueFactory(new PropertyValueFactory<>("puid"));
+        editCol.setCellValueFactory(new PropertyValueFactory<>(""));
 
 
 
@@ -320,9 +328,13 @@ public class PurchasereturnReportController implements Initializable {
 
         getQtySelectList(sortedData,totalQty);
 
+
+
     }
 
     public void getFindLoadPurchaseData() {
+
+
 
         ObservableList<PurchaseReturnDetail> observableList = FXCollections.observableArrayList();
 
@@ -423,6 +435,10 @@ public class PurchasereturnReportController implements Initializable {
 
 
     }
+
+
+
+
 
 
 }

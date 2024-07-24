@@ -98,15 +98,15 @@
                      <children>
                         <TableView fx:id="purchasetable" layoutX="2.0" layoutY="87.0" onMouseClicked="#purchasetableClickAction" prefHeight="432.0" prefWidth="1343.0" stylesheets="@../css/table.css" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="87.0">
                            <columns>
-                              <TableColumn fx:id="iconCol" prefWidth="36.000003814697266" />
-                              <TableColumn fx:id="psupplierCol" prefWidth="212.66668701171875" text="ထုတ်လုပ်သည့်" />
-                              <TableColumn fx:id="pcodeCol" prefWidth="111.33331298828125" text="အဝယ်ကုဒ်" />
+                              <TableColumn fx:id="editCol" prefWidth="50.0" />
+                              <TableColumn fx:id="psupplierCol" prefWidth="183.0" text="ထုတ်လုပ်သည့်" />
+                              <TableColumn fx:id="pcodeCol" prefWidth="129.0" text="အဝယ်ကုဒ်" />
                               <TableColumn fx:id="pdateCol" prefWidth="92.0" text="ရက်စွဲ" />
-                              <TableColumn fx:id="pnameCol" prefWidth="290.66668701171875" text="အမျိုးအမည်" />
-                              <TableColumn fx:id="pcategoryCol" prefWidth="236.5333251953125" text="အုပ်စု အမျိုးအစား" />
-                              <TableColumn fx:id="pauthorCol" prefWidth="212.0" text="ထုတ်လုပ်သူ" />
-                              <TableColumn fx:id="pqtyCol" prefWidth="89.0" text="အရေအတွက်" />
-                              <TableColumn fx:id="ppriceCol" prefWidth="91.0" text="ဈေးနှုန်း" />
+                              <TableColumn fx:id="pnameCol" prefWidth="269.0" text="အမျိုးအမည်" />
+                              <TableColumn fx:id="pcategoryCol" prefWidth="231.0" text="အုပ်စု အမျိုးအစား" />
+                              <TableColumn fx:id="pauthorCol" prefWidth="192.0" text="ထုတ်လုပ်သူ" />
+                              <TableColumn fx:id="pqtyCol" prefWidth="90.0" text="အရေအတွက်" />
+                              <TableColumn fx:id="ppriceCol" prefWidth="138.0" text="ဈေးနှုန်း" />
                               <TableColumn fx:id="ptotalCol" prefWidth="93.60009765625" text="စုစုပေါင်း" />
                            </columns>
                         </TableView>
