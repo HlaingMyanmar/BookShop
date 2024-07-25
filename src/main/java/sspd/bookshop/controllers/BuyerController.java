@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.models.Purchase;
 
@@ -55,7 +56,7 @@ public class BuyerController implements Initializable {
     private Label lbTotal;
 
     @FXML
-    private DatePicker dayPicker;
+    private Spinner<Integer> dayPicker;
 
     @FXML
     private Spinner<Integer> monthPicker;
@@ -99,6 +100,11 @@ public class BuyerController implements Initializable {
 
     private void getIni(){
 
+        getIniPurchaseTable();
+
+        int day = LocalDate.now().getDayOfMonth();
+        dayPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, day));
+
         int year = LocalDate.now().getYear();
         yearPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1900, 2100, year));
 
@@ -106,20 +112,89 @@ public class BuyerController implements Initializable {
         monthPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 12, 1));
         monthPicker.getValueFactory().setValue(month);
 
+        daybtn.setOnAction(event -> {
 
-        getIniPurchaseTable();
+
+            Purchasedb purchasedb = new Purchasedb();
+
+            try {
+
+                List<Purchase> purchaseList = purchasedb.getDay(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
+                if(purchaseList.isEmpty()){
+
+                    AlertBox.showWarning("Data Option","No Data Found!!!");
+                }
+                purchasetable.getItems().setAll(purchaseList);
+
+            }catch (NullPointerException e){
+
+
+            }
+
+
+
+        });
+
+
+
+        monthbtn.setOnAction(event -> {
+
+            Purchasedb purchasedb = new Purchasedb();
+
+            try {
+
+                List<Purchase> purchaseList = purchasedb.getMonth(monthPicker.getValue(), yearPicker.getValue());
+                if(purchaseList.isEmpty()){
+
+                    AlertBox.showWarning("Data Option","No Data Found!!!");
+                }
+                purchasetable.getItems().setAll(purchaseList);
+
+            }catch (NullPointerException e){
+
+
+            }
+
+
+        });
+
+        yearbtn.setOnAction(event -> {
+
+            Purchasedb purchasedb = new Purchasedb();
+
+            try {
+
+                List<Purchase> purchaseList = purchasedb.getYear(yearPicker.getValue());
+
+                if(purchaseList.isEmpty()){
+
+                    AlertBox.showWarning("Data Option","No Data Found!!!");
+                }
+
+                purchasetable.getItems().setAll(purchaseList);
+
+            }catch (NullPointerException _){
+
+            }
+
+        });
 
         getLoadData();
+
+
+
+
 
     }
 
 
     private  void getLoadData(){
 
+        Purchasedb purchasedb = new Purchasedb();
+
         try {
 
-            Purchasedb purchasedb = new Purchasedb();
-            List<Purchase> purchaseList = purchasedb.getDate(Date.valueOf(dayPicker.getValue()));
+            List<Purchase> purchaseList = purchasedb.getDay(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
 
             purchasetable.getItems().setAll(purchaseList);
 

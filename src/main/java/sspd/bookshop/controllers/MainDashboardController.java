@@ -24,6 +24,8 @@ public class MainDashboardController implements Initializable {
     @FXML
     private ImageView adverImg;
 
+    @FXML
+    private MenuItem showpurchasebtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +47,7 @@ public class MainDashboardController implements Initializable {
             try {
 
                 node = fxmlLoader2.load();
+                switchPane.getChildren().clear();
                 switchPane.getChildren().add(node);
                 adverImg.setImage(null);
 
@@ -53,6 +56,27 @@ public class MainDashboardController implements Initializable {
 
                 throw new RuntimeException(e);
             }
+
+        });
+
+        showpurchasebtn.setOnAction(event -> {
+
+            FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/buy.fxml"));
+            Node node = null;
+
+            try {
+
+                node = fxmlLoader2.load();
+                switchPane.getChildren().clear();
+                switchPane.getChildren().add(node);
+                adverImg.setImage(null);
+
+
+            } catch (IOException e) {
+
+                throw new RuntimeException(e);
+            }
+
 
         });
 

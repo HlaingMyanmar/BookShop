@@ -322,25 +322,141 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
 
-    public List<Purchase> getDate (Date date){
+    public List<Purchase> getMonth (int month , int year){
 
 
         String sql = """
                 
-                SELECT p.pudate,s.suname,b.name,c.cname,a.aname,p.puid,p.qty,p.price
+                SELECT p.pudate, s.suname, b.name, c.cname, a.aname, p.puid, p.qty, p.price
                 FROM purchase p
-                inner join book b on b.bcode=p.bcode
-                inner join category c on c.cid = p.bcategory
-                inner join author a on a.aid = p.bauthor
-                inner join supplier s on s.suid = p.sid
-                WHERE p.pudate = ?
-                ORDER BY cast(SubString(p.puid,4) as UNSIGNED) DESC
+                INNER JOIN book b ON b.bcode = p.bcode
+                INNER JOIN category c ON c.cid = p.bcategory
+                INNER JOIN author a ON a.aid = p.bauthor
+                INNER JOIN supplier s ON s.suid = p.sid
+                WHERE YEAR(p.pudate) = ? AND MONTH(p.pudate) = ?
+                ORDER BY CAST(SUBSTRING(p.puid, 4) AS UNSIGNED) DESC;
          
                 """;
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
-            pst.setDate(1,date);
+            pst.setInt(1,year);
+            pst.setInt(2,month);
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Purchase> pList = new ArrayList<>();
+
+            while(rs.next()){
+
+                String puid = rs.getString("puid");
+                Date pudate = rs.getDate("pudate");
+                String bcode = rs.getString("name");
+                String bcategory = rs.getString("cname");
+                String bauthor = rs.getString("aname");
+                String sid = rs.getString("suname");
+                int qty = rs.getInt("qty");
+                int price  = rs.getInt("price");
+
+                Purchase purchase = new Purchase(puid,pudate,bcode,bcategory,bauthor,sid,qty,price,(qty*price));
+
+                pList.add(purchase);
+
+
+            }
+
+            return pList;
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public List<Purchase> getYear( int year){
+
+
+        String sql = """
+                
+                SELECT p.pudate, s.suname, b.name, c.cname, a.aname, p.puid, p.qty, p.price
+                FROM purchase p
+                INNER JOIN book b ON b.bcode = p.bcode
+                INNER JOIN category c ON c.cid = p.bcategory
+                INNER JOIN author a ON a.aid = p.bauthor
+                INNER JOIN supplier s ON s.suid = p.sid
+                WHERE YEAR(p.pudate) = ?
+                ORDER BY CAST(SUBSTRING(p.puid, 4) AS UNSIGNED) DESC;
+                                                                     
+         
+                """;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,year);
+
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Purchase> pList = new ArrayList<>();
+
+            while(rs.next()){
+
+                String puid = rs.getString("puid");
+                Date pudate = rs.getDate("pudate");
+                String bcode = rs.getString("name");
+                String bcategory = rs.getString("cname");
+                String bauthor = rs.getString("aname");
+                String sid = rs.getString("suname");
+                int qty = rs.getInt("qty");
+                int price  = rs.getInt("price");
+
+                Purchase purchase = new Purchase(puid,pudate,bcode,bcategory,bauthor,sid,qty,price,(qty*price));
+
+                pList.add(purchase);
+
+
+            }
+
+            return pList;
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public List<Purchase> getDay( int day,int month,int year){
+
+
+        String sql = """
+                
+                SELECT p.pudate, s.suname, b.name, c.cname, a.aname, p.puid, p.qty, p.price
+                FROM purchase p
+                INNER JOIN book b ON b.bcode = p.bcode
+                INNER JOIN category c ON c.cid = p.bcategory
+                INNER JOIN author a ON a.aid = p.bauthor
+                INNER JOIN supplier s ON s.suid = p.sid
+                WHERE DAY(p.pudate) = ? AND MONTH(p.pudate) = ? AND YEAR(p.pudate) = ?
+                ORDER BY CAST(SUBSTRING(p.puid, 4) AS UNSIGNED) DESC;
+                                                                     
+                                                                     
+         
+                """;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1,day);
+            pst.setInt(2,month);
+            pst.setInt(3,year);
+
 
             ResultSet rs = pst.executeQuery();
 
