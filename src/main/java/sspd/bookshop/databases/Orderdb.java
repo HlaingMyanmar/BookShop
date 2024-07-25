@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Orderdb implements DataAccessObject<Order> {
 
-    Connection con = DatabaseConnector.getConn();
+    Connection con = DatabaseConnector.getInstance().getConn();
     @Override
     public List<Order> getList() {
 

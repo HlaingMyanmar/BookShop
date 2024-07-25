@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Saledb implements DataAccessObject<Sale> {
 
-    Connection con = DatabaseConnector.getConn();
+    Connection con = DatabaseConnector.getInstance().getConn();
 
 
     @Override

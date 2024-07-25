@@ -62,7 +62,7 @@ public class DatabaseConnector {
         return instance;
     }
 
-    public static Connection getConn() {
+    public  Connection getConn() {
 
         return con;
     }

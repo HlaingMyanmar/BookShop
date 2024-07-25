@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Bookdb implements DataAccessObject<Book> {
 
-    private  Connection con = DatabaseConnector.getConn();
+    private  Connection con = DatabaseConnector.getInstance().getConn();
 
     @Override
     public List<Book> getList() {

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
-    private final Connection con = DatabaseConnector.getConn();
+    private final Connection con = DatabaseConnector.getInstance().getConn();
 
 
 
