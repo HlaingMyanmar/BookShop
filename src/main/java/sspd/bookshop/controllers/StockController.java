@@ -6,6 +6,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -42,6 +43,12 @@ public class StockController implements Initializable {
 
     @FXML
     private TableColumn<Book, Double> btotalCol;
+
+    @FXML
+    private Label lbCount;
+
+    @FXML
+    private Label lbTotal;
 
     @FXML
     private TextField searchCom;
@@ -108,7 +115,21 @@ public class StockController implements Initializable {
         SortedList<Book> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
+        updateLabels(filteredData);
         booktable.setItems(sortedData);
+
+
+
+
+
+
+    }
+    private void updateLabels(FilteredList<Book> filteredData) {
+        lbCount.setText(String.valueOf(filteredData.size()));
+        double sum = filteredData.stream()
+                .mapToDouble(Book::getTotal)
+                .sum();
+        lbTotal.setText(String.format("%.2f", sum));
     }
 
     private void addTextFieldListener(TextField textField, FilteredList<Book> filteredData) {
@@ -119,7 +140,6 @@ public class StockController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (book.getBookid().toLowerCase().contains(lowerCaseFilter)) {
@@ -145,7 +165,11 @@ public class StockController implements Initializable {
                 }
                 return false;
             });
+
+            updateLabels(filteredData);
         });
+
+
     }
 }
 
