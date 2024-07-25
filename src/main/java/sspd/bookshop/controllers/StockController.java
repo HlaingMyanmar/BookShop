@@ -16,6 +16,7 @@ import sspd.bookshop.models.Book;
 
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -114,7 +115,9 @@ public class StockController implements Initializable {
         addTextFieldListener(searchQty, filteredData);
         addTextFieldListener(searchTotal, filteredData);
 
+
         SortedList<Book> sortedData = new SortedList<>(filteredData);
+
         sortedData.comparatorProperty().bind(booktable.comparatorProperty());
 
         updateLabels(filteredData);
@@ -124,17 +127,7 @@ public class StockController implements Initializable {
 
 
 
-
     }
-    private void updateLabels(FilteredList<Book> filteredData) {
-        lbCount.setText(String.valueOf(filteredData.size()));
-        double sum = filteredData.stream()
-                .mapToDouble(Book::getTotal)
-                .sum();
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("my", "MM"));
-        lbTotal.setText(convertToMyanmarCurrency(sum));
-    }
-
     private void addTextFieldListener(TextField textField, FilteredList<Book> filteredData) {
 
 
@@ -174,6 +167,16 @@ public class StockController implements Initializable {
 
 
     }
+    private void updateLabels(FilteredList<Book> filteredData) {
+        lbCount.setText(String.valueOf(filteredData.size()));
+        double sum = filteredData.stream()
+                .mapToDouble(Book::getTotal)
+                .sum();
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("my", "MM"));
+        lbTotal.setText(convertToMyanmarCurrency(sum));
+    }
+
+
 
     private String convertToMyanmarCurrency(double amount) {
         long kyat = (long) amount;

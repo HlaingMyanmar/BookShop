@@ -22,10 +22,11 @@ public class Bookdb implements DataAccessObject<Book> {
 
        String sql = """
                 
-                select b.bcode,b.name,c.cname,a.aname,b.qty,b.price from book b
-                inner join  category c on c.cid = b.cid
-                inner join author a on a.aid = b.aid
-                ORDER by cast(SubString(bcode,4) as UNSIGNED) DESC
+               SELECT b.bcode, b.name, c.cname, a.aname, b.qty, b.price
+               FROM book b 
+               INNER JOIN category c ON c.cid = b.cid
+               INNER JOIN author a ON a.aid = b.aid
+               ORDER BY b.qty ASC, CAST(SUBSTRING(b.bcode, 4) AS UNSIGNED) DESC;
                 
                 
                 """;
