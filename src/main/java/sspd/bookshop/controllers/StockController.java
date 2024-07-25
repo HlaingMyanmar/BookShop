@@ -15,7 +15,9 @@ import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.models.Book;
 
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class StockController implements Initializable {
@@ -129,7 +131,8 @@ public class StockController implements Initializable {
         double sum = filteredData.stream()
                 .mapToDouble(Book::getTotal)
                 .sum();
-        lbTotal.setText(String.format("%.2f", sum));
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("my", "MM"));
+        lbTotal.setText(currencyFormat.format(sum));
     }
 
     private void addTextFieldListener(TextField textField, FilteredList<Book> filteredData) {
