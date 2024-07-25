@@ -322,6 +322,60 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
 
+    public List<Purchase> getDate (Date date){
+
+
+        String sql = """
+                
+                SELECT p.pudate,s.suname,b.name,c.cname,a.aname,p.puid,p.qty,p.price
+                FROM purchase p
+                inner join book b on b.bcode=p.bcode
+                inner join category c on c.cid = p.bcategory
+                inner join author a on a.aid = p.bauthor
+                inner join supplier s on s.suid = p.sid
+                WHERE p.pudate = ?
+                ORDER BY cast(SubString(p.puid,4) as UNSIGNED) DESC
+         
+                """;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setDate(1,date);
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Purchase> pList = new ArrayList<>();
+
+            while(rs.next()){
+
+                String puid = rs.getString("puid");
+                Date pudate = rs.getDate("pudate");
+                String bcode = rs.getString("name");
+                String bcategory = rs.getString("cname");
+                String bauthor = rs.getString("aname");
+                String sid = rs.getString("suname");
+                int qty = rs.getInt("qty");
+                int price  = rs.getInt("price");
+
+                Purchase purchase = new Purchase(puid,pudate,bcode,bcategory,bauthor,sid,qty,price,(qty*price));
+
+                pList.add(purchase);
+
+
+            }
+
+            return pList;
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
 
 
