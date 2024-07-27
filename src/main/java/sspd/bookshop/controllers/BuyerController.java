@@ -3,11 +3,15 @@ package sspd.bookshop.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
@@ -25,6 +29,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 
@@ -239,7 +244,7 @@ public class BuyerController implements Initializable {
                     Purchase rowData = row.getItem();
 
 
-                    
+
 
 
                 }
@@ -270,59 +275,105 @@ public class BuyerController implements Initializable {
         });
 
     }
-    private void tableCellsetIcon(){
+    private void tableCellsetIcon() {
+        Callback<TableColumn<Purchase, String>, TableCell<Purchase, String>> cellFactory = (param) -> {
+
+            return new TableCell<Purchase, String>() {
+
+                private final Button editButton = new Button("+");
+
+                {
+                    editButton.setOnAction(event -> {
+                        int index = getIndex();
+                        if (index < 0 || index >= purchasetable.getItems().size()) {
+                            return;
+                        }
+
+                        Purchase purchase = (Purchase) purchasetable.getItems().get(index);
+
+                        Purchasedb purchasedb = new Purchasedb();
+                        List<Purchase> purchaseList = purchasedb.getList();
 
 
-        Callback<TableColumn<Purchase,String>,TableCell<Purchase,String>> cellFactory = (param) -> {
+                        TableView<Purchase> purchaseTableView = new TableView<>();
+
+                        TableColumn<Purchase, String> pauthorCol = new TableColumn<>("ထုတ်လုပ်သူ");
+
+                        TableColumn<Purchase, String> pcategoryCol= new TableColumn<>("အုပ်စုအမျိုးအစား");
+
+                        TableColumn<Purchase, String> pcodeCol= new TableColumn<>("အဝယ်ကုဒ်");
+
+                        TableColumn<Purchase, Date> pdateCol= new TableColumn<>("ရက်စွဲ");
+
+                        TableColumn<Purchase, String> pnameCol= new TableColumn<>("အမျိုးအမည်");
+
+                        TableColumn<Purchase, Integer> ppriceCol= new TableColumn<>("ဈေးနှုန်း");
+
+                        TableColumn<Purchase, Integer> pqtyCol= new TableColumn<>("အရေအတွက်");
+
+                        TableColumn<Purchase, String> psupplierCol= new TableColumn<>("ထုတ်လုပ်သည့်");
+
+                        TableColumn<Purchase, Integer> ptotalCol= new TableColumn<>("စုစုပေါင်း");
+
+                        pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase, String>("puid"));
+                        pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase, Date>("pudate"));
+                        pnameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
+                        pcategoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
+                        pauthorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
+                        psupplierCol.setCellValueFactory(new PropertyValueFactory<>("sid"));
+                        pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+                        ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+                        ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
 
 
-            final TableCell<Purchase,String> cell = new TableCell<Purchase,String>(){
+                        purchaseTableView.getColumns().addAll(psupplierCol,pcodeCol,pdateCol,pnameCol,pcategoryCol,pauthorCol,pqtyCol,ppriceCol,ptotalCol);
 
+                        List<Purchase> filteredList = purchaseList.stream()
+                                .filter(p -> p.getPuid().equals(purchase.getPuid()))
+                                .collect(Collectors.toList());
 
-                public void updateItem(String item,boolean empty){
+                        purchaseTableView.getItems().setAll(filteredList);
 
-                    super.updateItem(item,empty);
+                        double totalAmount = filteredList.stream()
+                                .mapToDouble(Purchase::getTotal) // Assuming getTotal() returns an int
+                                .sum();
 
+                        Label totalLabel = new Label("Total Amount: " + convertToMyanmarCurrency(totalAmount));
 
-                    if(empty){
+                        totalLabel.setStyle("-fx-font-weight: bold; -fx-padding: 10;");
+
+                        Popup popup = new Popup();
+                        VBox vbox = new VBox(purchaseTableView,totalLabel);
+                        vbox.setPadding(new Insets(10));
+                        vbox.setStyle("-fx-background-color: white; -fx-border-color: gray;");
+                        popup.getContent().add(vbox);
+
+                        Point2D cellLocation = localToScreen(getLayoutBounds().getMinX(), getLayoutBounds().getMaxY());
+                        popup.setX(cellLocation.getX());
+                        popup.setY(cellLocation.getY());
+
+                        popup.setAutoHide(true);
+                        popup.show(getScene().getWindow());
+                    });
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
                         setGraphic(null);
                         setText(null);
-                    }
-
-                    else {
-                        final Button editButton = new Button("+");
-
-                        editButton.setOnAction(event -> {
-
-
-                            System.out.println("Teting");
-
-
-                        });
-
+                    } else {
                         setGraphic(editButton);
                         setText(null);
                     }
-
-
                 }
-
             };
-
-
-
-
-            return cell;
-
-
-
         };
 
-
-
         editCol.setCellFactory(cellFactory);
-
     }
+
 
     private  void getLoadData(){
 
