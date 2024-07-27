@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="1340.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SpecialFindpurchase">
+   <children>
+      <TableView fx:id="purchasetable" layoutX="6.0" layoutY="70.0" prefHeight="581.0" prefWidth="1344.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
+         <columns>
+            <TableColumn fx:id="psupplierCol" prefWidth="147.0" text="ထုတ်လုပ်သည့်" />
+            <TableColumn fx:id="pcodeCol" prefWidth="136.0" text="အဝယ်ကုဒ်" />
+            <TableColumn fx:id="pdateCol" prefWidth="117.0" text="ရက်စွဲ" />
+            <TableColumn fx:id="pnameCol" prefWidth="251.0" text="အမျိုးအမည်" />
+            <TableColumn fx:id="pcategoryCol" prefWidth="207.0" text="အုပ်စု အမျိုးအစား" />
+            <TableColumn fx:id="pauthorCol" prefWidth="201.0" text="ထုတ်လုပ်သူ" />
+            <TableColumn fx:id="pqtyCol" prefWidth="92.0" text="အရေအတွက်" />
+            <TableColumn fx:id="ppriceCol" prefWidth="86.0" text="ဈေးနှုန်း" />
+            <TableColumn fx:id="ptotalCol" prefWidth="102.0" text="စုစုပေါင်း" />
+         </columns>
+      </TableView>
+      <Pane layoutX="5.0" layoutY="7.0" prefHeight="55.0" prefWidth="1344.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #005796;">
+         <children>
+            <TextField fx:id="searchID" layoutX="7.0" layoutY="4.0" prefHeight="48.0" prefWidth="136.0" promptText="ကုတ်နံပါတ် ..............." style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchItem" layoutX="141.0" layoutY="4.0" prefHeight="48.0" prefWidth="318.0" promptText="ပစ္စည်း အမျိုးအမည်    ......................................................" style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchGroup" layoutX="470.0" layoutY="4.0" prefHeight="48.0" prefWidth="240.0" promptText="အုပ်စု    ..................................................." style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchCom" layoutX="711.0" layoutY="5.0" prefHeight="48.0" prefWidth="240.0" promptText="ထုတ်လုပ်သည့်    ....................................." style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchQty" layoutX="952.0" layoutY="5.0" prefHeight="48.0" prefWidth="101.0" promptText="အရေအတွက် .." style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchTotal" layoutX="1157.0" layoutY="2.0" prefHeight="48.0" prefWidth="136.0" promptText="စုစုပေါင်း   ................" style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <Line endX="258.0" endY="102.0" layoutX="-117.0" layoutY="-53.0" startX="258.0" startY="58.0" stroke="#005796" />
+            <Line endX="258.0" endY="102.0" layoutX="454.0" layoutY="-53.0" startX="258.0" startY="58.0" stroke="#005796" />
+            <Line endX="258.0" endY="102.0" layoutX="693.0" layoutY="-53.0" startX="258.0" startY="58.0" stroke="#005796" />
+            <Line endX="258.0" endY="102.0" layoutX="794.0" layoutY="-53.0" startX="258.0" startY="58.0" stroke="#005796" />
+            <TextField fx:id="searchPrice" layoutX="1053.0" layoutY="3.0" prefHeight="48.0" prefWidth="109.0" promptText="ဈေးနှုန်း   ............ |" style="-fx-background-color: #FFFFFF;">
+               <font>
+                  <Font name="Pyidaungsu" size="14.0" />
+               </font>
+            </TextField>
+            <Line endX="258.0" endY="102.0" layoutX="900.0" layoutY="-52.0" startX="258.0" startY="58.0" stroke="#005796" />
+            <Line endX="258.0" endY="102.0" layoutX="206.0" layoutY="-52.0" startX="258.0" startY="58.0" stroke="#005796" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

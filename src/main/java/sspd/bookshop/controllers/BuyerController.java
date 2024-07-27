@@ -1,16 +1,23 @@
 package sspd.bookshop.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Purchasedb;
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.text.NumberFormat;
@@ -82,6 +89,9 @@ public class BuyerController implements Initializable {
 
     @FXML
     private Button clearbtn;
+
+    @FXML
+    private Button specialsearchbtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -235,6 +245,28 @@ public class BuyerController implements Initializable {
                 }
             });
             return row;
+        });
+
+        specialsearchbtn.setOnAction(event -> {
+
+            Stage stage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/specialfindpurchase.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) specialsearchbtn.getScene().getWindow();
+            stage.setTitle("Purchase Option");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
+
+
         });
 
     }
