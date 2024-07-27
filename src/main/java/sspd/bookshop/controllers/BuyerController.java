@@ -4,15 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Purchasedb;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 
 import java.net.URL;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 
 public class BuyerController implements Initializable {
 
@@ -73,6 +80,9 @@ public class BuyerController implements Initializable {
     @FXML
     private Button yearbtn;
 
+    @FXML
+    private Button clearbtn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -120,6 +130,13 @@ public class BuyerController implements Initializable {
             try {
 
                 List<Purchase> purchaseList = purchasedb.getDay(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
+                List<Purchase> purchaseListSum = purchasedb.getDayTotal(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
+
+                double sum = purchaseListSum.stream()
+                        .mapToDouble(Purchase::getTotal)
+                        .sum();
+                lbTotal.setText(convertToMyanmarCurrency(sum));
+                lbCount.setText(String.valueOf(purchaseList.size()));
                 if(purchaseList.isEmpty()){
 
                     AlertBox.showWarning("Data Option","No Data Found!!!");
@@ -144,6 +161,12 @@ public class BuyerController implements Initializable {
             try {
 
                 List<Purchase> purchaseList = purchasedb.getMonth(monthPicker.getValue(), yearPicker.getValue());
+                List<Purchase> purchaseListSum = purchasedb.getMonth(monthPicker.getValue(), yearPicker.getValue());
+                double sum = purchaseListSum.stream()
+                        .mapToDouble(Purchase::getTotal)
+                        .sum();
+                lbTotal.setText(convertToMyanmarCurrency(sum));
+                lbCount.setText(String.valueOf(purchaseList.size()));
                 if(purchaseList.isEmpty()){
 
                     AlertBox.showWarning("Data Option","No Data Found!!!");
@@ -165,6 +188,13 @@ public class BuyerController implements Initializable {
             try {
 
                 List<Purchase> purchaseList = purchasedb.getYear(yearPicker.getValue());
+                List<Purchase> purchaseListSum = purchasedb.getYearTotal(yearPicker.getValue());
+
+                double sum = purchaseListSum.stream()
+                        .mapToDouble(Purchase::getTotal)
+                        .sum();
+                lbTotal.setText(convertToMyanmarCurrency(sum));
+                lbCount.setText(String.valueOf(purchaseList.size()));
 
                 if(purchaseList.isEmpty()){
 
@@ -181,12 +211,86 @@ public class BuyerController implements Initializable {
 
         getLoadData();
 
+        clearbtn.setOnAction(event -> {
 
 
+            getIni();
 
+
+        });
+
+        tableCellsetIcon();
+
+
+        purchasetable.setRowFactory(tv -> {
+            TableRow<Purchase> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (!row.isEmpty())) {
+                    Purchase rowData = row.getItem();
+
+
+                    
+
+
+                }
+            });
+            return row;
+        });
 
     }
+    private void tableCellsetIcon(){
 
+
+        Callback<TableColumn<Purchase,String>,TableCell<Purchase,String>> cellFactory = (param) -> {
+
+
+            final TableCell<Purchase,String> cell = new TableCell<Purchase,String>(){
+
+
+                public void updateItem(String item,boolean empty){
+
+                    super.updateItem(item,empty);
+
+
+                    if(empty){
+                        setGraphic(null);
+                        setText(null);
+                    }
+
+                    else {
+                        final Button editButton = new Button("+");
+
+                        editButton.setOnAction(event -> {
+
+
+                            System.out.println("Teting");
+
+
+                        });
+
+                        setGraphic(editButton);
+                        setText(null);
+                    }
+
+
+                }
+
+            };
+
+
+
+
+            return cell;
+
+
+
+        };
+
+
+
+        editCol.setCellFactory(cellFactory);
+
+    }
 
     private  void getLoadData(){
 
@@ -195,8 +299,16 @@ public class BuyerController implements Initializable {
         try {
 
             List<Purchase> purchaseList = purchasedb.getDay(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
+            List<Purchase> purchaseListSum = purchasedb.getDayTotal(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
 
             purchasetable.getItems().setAll(purchaseList);
+
+            double sum = purchaseListSum.stream()
+                    .mapToDouble(Purchase::getTotal)
+                    .sum();
+            lbTotal.setText(convertToMyanmarCurrency(sum));
+            lbCount.setText(String.valueOf(purchaseList.size()));
+
 
         }catch (NullPointerException _){
 
@@ -204,6 +316,8 @@ public class BuyerController implements Initializable {
         }
 
     }
+
+
 
 
 

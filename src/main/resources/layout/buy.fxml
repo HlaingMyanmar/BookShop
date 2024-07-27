@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.BuyerController">
+<AnchorPane prefHeight="674.0" prefWidth="1347.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.BuyerController">
    <children>
-      <TableView fx:id="purchasetable" layoutX="3.0" layoutY="60.0" prefHeight="632.0" prefWidth="1344.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
+      <TableView fx:id="purchasetable" layoutX="3.0" layoutY="60.0" prefHeight="601.0" prefWidth="1344.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
          <columns>
             <TableColumn fx:id="editCol" prefWidth="50.0" />
             <TableColumn fx:id="psupplierCol" prefWidth="147.0" text="ထုတ်လုပ်သည့်" />
@@ -24,22 +24,22 @@
             <TableColumn fx:id="ptotalCol" prefWidth="117.0" text="စုစုပေါင်း" />
          </columns>
       </TableView>
-      <Label layoutX="847.0" layoutY="14.0" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #FFFFFF; -fx-alignment: center;" text="စုစုပေါင်း " textFill="#4527a0">
+      <Label layoutX="926.0" layoutY="14.0" prefHeight="37.0" prefWidth="101.0" style="-fx-background-color: #FFFFFF; -fx-alignment: center;" text="စုစုပေါင်း " textFill="#4527a0">
          <font>
             <Font name="Pyidaungsu Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lbTotal" layoutX="983.0" layoutY="14.0" prefHeight="37.0" prefWidth="355.0" style="-fx-background-color: #FFFFFF; -fx-alignment: left;" text="Total Amount :" textFill="#ff0202">
+      <Label fx:id="lbTotal" layoutX="1029.0" layoutY="14.0" prefHeight="37.0" prefWidth="309.0" style="-fx-background-color: #FFFFFF; -fx-alignment: left;" text="Total Amount :" textFill="#ff0202">
          <font>
             <Font name="Pyidaungsu Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="605.0" layoutY="14.0" prefHeight="37.0" prefWidth="136.0" style="-fx-alignment: center; -fx-background-color: #FFFFFF;" text="အရေအတွက် :" textFill="#4527a0">
+      <Label layoutX="704.0" layoutY="14.0" prefHeight="37.0" prefWidth="136.0" style="-fx-alignment: center; -fx-background-color: #FFFFFF;" text="အရေအတွက် :" textFill="#4527a0">
          <font>
             <Font name="Pyidaungsu Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lbCount" layoutX="741.0" layoutY="14.0" prefHeight="37.0" prefWidth="101.0" style="-fx-background-color: #FFFFFF; -fx-alignment: left;" text="Count =" textFill="#ff0202">
+      <Label fx:id="lbCount" layoutX="838.0" layoutY="14.0" prefHeight="37.0" prefWidth="77.0" style="-fx-background-color: #FFFFFF; -fx-alignment: left;" text="Count =" textFill="#ff0202">
          <font>
             <Font name="Pyidaungsu Bold" size="18.0" />
          </font>
@@ -62,5 +62,10 @@
          </font>
       </Button>
       <Spinner fx:id="dayPicker" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="37.0" prefWidth="101.0" />
+      <Button fx:id="clearbtn" layoutX="603.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="93.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ရှင်းလင်းရန်">
+         <font>
+            <Font name="Pyidaungsu Bold" size="42.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
