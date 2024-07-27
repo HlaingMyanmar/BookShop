@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -20,6 +21,7 @@ import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
+import sspd.bookshop.modules.TableUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -334,16 +336,24 @@ public class BuyerController implements Initializable {
 
                         purchaseTableView.getItems().setAll(filteredList);
 
+                        TableUtils.setColumnWidthsProportional(purchaseTableView);
+                        TableUtils.resizeTableColumnsToFitContent(purchaseTableView);
+
+
+
                         double totalAmount = filteredList.stream()
                                 .mapToDouble(Purchase::getTotal) // Assuming getTotal() returns an int
                                 .sum();
 
-                        Label totalLabel = new Label("Total Amount: " + convertToMyanmarCurrency(totalAmount));
+                        Label totalLabel = new Label("စုစုပေါင်းကုန်ကျငွေ : ( " + convertToMyanmarCurrency(totalAmount)+" )");
+                        Label labelcount = new Label("အရေအတွက်: ( " + filteredList.size()+" )ခုရှိပါသည်။");
 
-                        totalLabel.setStyle("-fx-font-weight: bold; -fx-padding: 10;");
+                        totalLabel.setStyle("-fx-font-weight: bold; -fx-padding: 15;");
+                        labelcount.setStyle("-fx-font-weight: bold; -fx-padding: 15;");
 
                         Popup popup = new Popup();
-                        VBox vbox = new VBox(purchaseTableView,totalLabel);
+                        HBox hBox = new HBox(labelcount,totalLabel);
+                        VBox vbox = new VBox(purchaseTableView,hBox);
                         vbox.setPadding(new Insets(10));
                         vbox.setStyle("-fx-background-color: white; -fx-border-color: gray;");
                         popup.getContent().add(vbox);
