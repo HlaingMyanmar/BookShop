@@ -148,6 +148,31 @@ public class BuyerController implements Initializable {
         monthPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 12, 1));
         monthPicker.getValueFactory().setValue(month);
 
+        newpurchasebtn.setOnAction(event -> {
+
+            Stage stage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newpurchase.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) newpurchasebtn.getScene().getWindow();
+            stage.setTitle("အဝယ် အသစ်ထည့်သွင်းခြင်း။");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
+
+
+
+
+
+        });
+
         daybtn.setOnAction(event -> {
 
             Purchasedb purchasedb = new Purchasedb();
