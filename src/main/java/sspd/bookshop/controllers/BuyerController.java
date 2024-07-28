@@ -100,6 +100,15 @@ public class BuyerController implements Initializable {
     @FXML
     private Button specialsearchbtn;
 
+    @FXML
+    private Button printpurchasebtn;
+
+    @FXML
+    private Button deletepurchasebtn;
+
+    @FXML
+    private Button newpurchasebtn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -140,7 +149,6 @@ public class BuyerController implements Initializable {
         monthPicker.getValueFactory().setValue(month);
 
         daybtn.setOnAction(event -> {
-
 
             Purchasedb purchasedb = new Purchasedb();
 
