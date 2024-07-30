@@ -2,6 +2,8 @@ package sspd.bookshop.modules;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.databases.*;
 import sspd.bookshop.models.*;
@@ -10,7 +12,9 @@ import sspd.bookshop.models.*;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public  class Deliver extends  Thread implements GenerateResult {
 
@@ -189,6 +193,37 @@ public  class Deliver extends  Thread implements GenerateResult {
 
         return list;
     }
+
+    public void getSupplierName(ComboBox<String> comboBox, TextField reciveBox){
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        Supplierdb supplierdb = new Supplierdb();
+
+        List<Supplier> cList = supplierdb.getList();
+
+        Map<String, String> supplierMap = new HashMap<>();
+
+        for (Supplier c : cList) {
+            comboBox.getItems().add(c.getS_name());
+            supplierMap.put(c.getS_name(), c.getS_id());
+        }
+
+        comboBox.setOnAction(event -> {
+
+            String selectSupplier  = comboBox.getValue();
+
+            String selectedID =supplierMap.get(selectSupplier);
+            reciveBox.setText(selectedID);
+
+
+        });
+
+
+
+    }
+
+
 
     @Override
     public Book getDataList(String bookCode) {

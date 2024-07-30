@@ -10,18 +10,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.models.Book;
-import sspd.bookshop.models.Purchase;
-import sspd.bookshop.modules.IDGenerate;
+import sspd.bookshop.modules.Deliver;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static sspd.bookshop.modules.IDGenerate.getID;
 
-public class NewPurchaseController implements Initializable {
+public class NewPurchaseController extends Deliver implements Initializable {
 
 
     @FXML
@@ -37,7 +35,7 @@ public class NewPurchaseController implements Initializable {
     private TextField purchaseidtxt;
 
     @FXML
-    private TextField purchasenametxt;
+    private TextField supplierid;
 
 
     @FXML
@@ -47,7 +45,7 @@ public class NewPurchaseController implements Initializable {
     private ComboBox<String> stockcategorycobox;
 
     @FXML
-    private ComboBox<String> saleidtxt;
+    private ComboBox<String> suppliername;
 
     @FXML
     private TextField stockidtxt;
@@ -92,8 +90,15 @@ public class NewPurchaseController implements Initializable {
 
     public void ini(){
 
-         purchaseidtxt.setText(getPurchaseID("#P1"));
+         purchaseidtxt.setText(getPurchaseID());
          datetxt.setText(String.valueOf(LocalDate.now()));
+
+         //Set Supplier Name
+          getSupplierName(suppliername,supplierid);
+
+
+
+
 
 
 
@@ -101,15 +106,13 @@ public class NewPurchaseController implements Initializable {
 
     }
 
-    private String getPurchaseID(String prefix){
+    private String getPurchaseID(){
 
         Purchasedb purchasedb = new Purchasedb();
 
-        String id = purchasedb.getList().getFirst().getPuid();
+        String id= (purchasedb.getList().isEmpty())?null: (purchasedb.getList().getFirst().getPuid());
 
-        getID(prefix,id);
-
-        return id;
+        return  getID("#P-", id);
 
     }
 

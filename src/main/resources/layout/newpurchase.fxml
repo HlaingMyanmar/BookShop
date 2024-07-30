@@ -14,7 +14,7 @@
    <children>
       <AnchorPane layoutX="7.0" layoutY="15.0" prefHeight="197.0" prefWidth="520.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #0078D7;">
          <children>
-            <TextField fx:id="purchaseidtxt" editable="false" layoutX="11.0" layoutY="131.0" prefHeight="35.0" prefWidth="200.0" promptText="ID">
+            <TextField fx:id="purchaseidtxt" editable="false" layoutX="11.0" layoutY="131.0" prefHeight="35.0" prefWidth="200.0" promptText="အဝယ် အိုင်ဒီ">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -24,7 +24,7 @@
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="datetxt" editable="false" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="200.0" promptText="Date">
+            <TextField fx:id="datetxt" editable="false" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="200.0" promptText="ရက်စွဲ">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -34,27 +34,27 @@
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="purchasenametxt" editable="false" layoutX="224.0" layoutY="131.0" prefHeight="35.0" prefWidth="251.0" promptText="ID">
+            <TextField fx:id="supplierid" editable="false" layoutX="224.0" layoutY="131.0" prefHeight="35.0" prefWidth="251.0" promptText="သက်ဆိုင်ရာ အိုင်ဒီ">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <Label layoutX="227.0" layoutY="96.0" text="ရောင်းသူ ကိုယ်ပိုင်နာမည်။">
+            <Label layoutX="224.0" layoutY="7.0" text="ရောင်းသူ ကိုယ်ပိုင်နာမည်။">
                <font>
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="223.0" layoutY="7.0" text="ရောင်းသူ အိုင်ဒီ။">
+            <Label layoutX="224.0" layoutY="99.0" text="ရောင်းသူ အိုင်ဒီ။">
                <font>
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="saleidtxt" editable="true" layoutX="221.0" layoutY="43.0" prefHeight="35.0" prefWidth="251.0" />
+            <ComboBox fx:id="suppliername" editable="true" layoutX="221.0" layoutY="43.0" prefHeight="35.0" prefWidth="251.0" promptText="ရောင်းချပေးသူ၏ ဆိုင်အမည်နာမ" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="7.0" layoutY="221.0" prefHeight="469.0" prefWidth="520.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #0078D7;">
          <children>
-            <TextField fx:id="stockidtxt" editable="false" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="200.0" promptText="Date">
+            <TextField fx:id="stockidtxt" editable="false" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="200.0" promptText="ပစ္စည်း ကုဒ်">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
