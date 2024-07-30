@@ -156,7 +156,9 @@ public class BuyerController implements Initializable {
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load());
+
             } catch (IOException e) {
+
                 throw new RuntimeException(e);
             }
             stage.initStyle(StageStyle.UTILITY);

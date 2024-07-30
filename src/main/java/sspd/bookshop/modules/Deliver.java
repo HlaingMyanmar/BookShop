@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public  class Deliver extends  Thread implements GenerateResult {
 
@@ -220,6 +221,70 @@ public  class Deliver extends  Thread implements GenerateResult {
         });
 
 
+
+    }
+    public String getAuthorName(ComboBox<String> comboBox){
+
+        AtomicReference<String> reciveBox = new AtomicReference<>();
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        Authordb authordb = new Authordb();
+
+        List<Author> cList =authordb.getList();
+
+        Map<String, String> supplierMap = new HashMap<>();
+
+        for (Author c : cList) {
+            comboBox.getItems().add(c.getAuthor_name());
+            supplierMap.put(c.getAuthor_name(), c.getAuthor_id());
+        }
+
+        comboBox.setOnAction(event -> {
+
+            String selectSupplier  = comboBox.getValue();
+
+            String selectedID =supplierMap.get(selectSupplier);
+            reciveBox.set(selectedID);
+
+
+
+
+        });
+
+        return reciveBox.get();
+
+    }
+    public String getCategoryName(ComboBox<String> comboBox){
+
+        AtomicReference<String> reciveBox = new AtomicReference<>();
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+       Categorydb categorydb = new Categorydb();
+
+        List<Category> cList =categorydb.getList();
+
+        Map<String, String> supplierMap = new HashMap<>();
+
+        for (Category c : cList) {
+            comboBox.getItems().add(c.getCategory_name());
+            supplierMap.put(c.getCategory_name(), c.getCategory_id());
+        }
+
+        comboBox.setOnAction(event -> {
+
+            String selectSupplier  = comboBox.getValue();
+
+            String selectedID =supplierMap.get(selectSupplier);
+            reciveBox.set(selectedID);
+
+
+
+
+        });
+
+        return reciveBox.get();
 
     }
 
