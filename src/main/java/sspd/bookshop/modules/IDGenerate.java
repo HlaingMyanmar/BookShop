@@ -7,35 +7,46 @@ public class IDGenerate {
 
     static  String  number_ =null;
 
+    private static String lastDate = "";
+    private static int counter = 0;
 
 
-    public static String getID(String startID) {
-
-
-        int len = startID.length();
-        int i = len - 1;
-
-
-        while (i >= 0 && Character.isDigit(startID.charAt(i))) {
-            i--;
-        }
-
-        String prefix = startID.substring(0, i + 1);
-        String numPart = startID.substring(i + 1);
-
-        int num = Integer.parseInt(numPart);
-        num++;
-        String newNumPart = String.format("%0" + numPart.length() + "d", num);
-
+    public static String getID(String prefix,String endID) {
 
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String dateStr = now.format(formatter);
+        String currentDate = now.format(formatter);
 
-        number_ = newNumPart;
 
-        return prefix + dateStr +"-"+ newNumPart;
+        if (!currentDate.equals(lastDate)) {
+            lastDate = currentDate;
+            counter = 1;
+        } else {
+
+            counter++;
+
+
+
+
+            int count = Integer.parseInt(endID.substring(12));
+
+            if(counter< count){
+
+                counter = count;
+
+                counter++;
+
+            }
+        }
+
+        String newNumPart =  String.format("%02d", counter);
+
+
+        return prefix + currentDate + "-" + newNumPart;
+
     }
+
+
 
 
 

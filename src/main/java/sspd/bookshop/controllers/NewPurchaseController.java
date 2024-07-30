@@ -8,12 +8,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.IDGenerate;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static sspd.bookshop.modules.IDGenerate.getID;
@@ -83,11 +86,35 @@ public class NewPurchaseController implements Initializable {
     private TableColumn<Book, Double> totalCol;
 
 
+
+
+
+
     public void ini(){
 
-        purchaseidtxt.setText(getID("#P-00"));
-        datetxt.setText(String.valueOf(LocalDate.now()));
+         purchaseidtxt.setText(getPurchaseID("#P1"));
+         datetxt.setText(String.valueOf(LocalDate.now()));
+
+
+
+
+
     }
+
+    private String getPurchaseID(String prefix){
+
+        Purchasedb purchasedb = new Purchasedb();
+
+        String id = purchasedb.getList().getFirst().getPuid();
+
+        getID(prefix,id);
+
+        return id;
+
+    }
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

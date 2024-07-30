@@ -9,6 +9,8 @@ module sspd.bookshop.bookshop {
     requires jasperreports;
     requires com.jfoenix;
     requires jdk.compiler;
+    requires org.jetbrains.annotations;
+    requires junit;
 
 
     opens sspd.bookshop.models to javafx.fxml;
@@ -21,4 +23,6 @@ module sspd.bookshop.bookshop {
     opens sspd.bookshop.launch to javafx.fxml;
     exports sspd.bookshop.databases;
     opens sspd.bookshop.databases to javafx.fxml;
+
+    exports sspd.bookshop.Test;
 }

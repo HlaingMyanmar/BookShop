@@ -195,11 +195,7 @@ public class BuyerController implements Initializable {
 
             }catch (NullPointerException e){
 
-
             }
-
-
-
         });
 
 
