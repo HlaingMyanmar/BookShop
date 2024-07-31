@@ -1,88 +1,85 @@
 package sspd.bookshop.modules;
 
+import sspd.bookshop.databases.Purchasedb;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class IDGenerate {
 
-    private static String lastDate = "";
-    private static int _counter = 0;
+    private static int _counter = 1;
 
-    private static String stocklastDate = "";
-    private static int stockcounter = 0;
+    private static int _stockcounter = 1;
 
 
-    public static String getID(String prefix,String endID) {
+    public static String getID(String prefix, String endID) {
 
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String currentDate = now.format(formatter);
+        String currentDate = null;
+
+        try {
+
+            LocalDate now = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+            currentDate = now.format(formatter);
 
 
-        if (!currentDate.equals(lastDate)) {
-            lastDate = currentDate;
-            _counter = 1;
-        } else {
+            if (currentDate.equals(endID.substring(3, 11))) {
 
-            try {
+                _counter = Integer.parseInt(endID.substring(12));
 
-                int count = Integer.parseInt(endID.substring(12));
-                System.out.println(count);
-                if(_counter< count){
-
-                    _counter = count;
-
-                    _counter++;
-
-                }
-
-            }catch (NullPointerException e_){
-
-                _counter =0;
+                _counter++;
 
             }
 
+        } catch (NullPointerException | StringIndexOutOfBoundsException e_) {
+
+                _counter =1;
+
+              return prefix + "-" + currentDate + "-" + _counter;
 
         }
 
-        String newNumPart =  String.format("%02d", _counter);
 
-
-        return prefix +"-"+ currentDate + "-" + newNumPart;
-
+        return prefix + "-" + currentDate + "-" + _counter;
     }
+
+
+
+
 
     public static String getStockIDGenerate(String prefix,String endID) {
 
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String currentDate = now.format(formatter);
+        String currentDate = null;
+
+        try {
+
+            LocalDate now = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+            currentDate = now.format(formatter);
 
 
-        if (!currentDate.equals(stocklastDate)) {
-            stocklastDate = currentDate;
-            stockcounter = 1;
-        } else {
+            if (currentDate.equals(endID.substring(3, 11))) {
 
-            stockcounter++;
+                _stockcounter = Integer.parseInt(endID.substring(12));
 
-            int count = Integer.parseInt(endID.substring(12));
-
-            if(stockcounter< count){
-
-                stockcounter = count;
-
-                stockcounter++;
+                _stockcounter++;
 
             }
+
+        } catch (NullPointerException | StringIndexOutOfBoundsException e_) {
+
+            _stockcounter =1;
+
+            return prefix + "-" + currentDate + "-" +_stockcounter;
+
         }
 
-        String newNumPart =  String.format("%02d", stockcounter);
 
-
-        return prefix +"-"+ currentDate + "-" + newNumPart;
+        return prefix + "-" + currentDate + "-" + _stockcounter;
 
     }
+
+
 
 
 

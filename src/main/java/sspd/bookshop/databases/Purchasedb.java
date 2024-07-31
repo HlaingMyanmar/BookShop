@@ -27,7 +27,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
                 inner join category c on c.cid = p.bcategory
                 inner join author a on a.aid = p.bauthor
                 inner join supplier s on s.suid = p.sid
-                ORDER BY cast(SubString(p.puid,4) as UNSIGNED) DESC
+                ORDER BY cast(SubString(p.puid,13) as UNSIGNED) DESC
          
                 """;
 

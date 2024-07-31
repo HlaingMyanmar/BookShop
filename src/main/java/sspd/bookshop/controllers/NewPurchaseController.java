@@ -356,11 +356,8 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
         String id= (purchasedb.getList().isEmpty())?null: (purchasedb.getList().getFirst().getPuid());
 
-        System.out.println(id);
 
-        System.out.println(getID("#Pu",id));
-
-        return  getID("#Pu", id);
+        return  getID("#P", id);
 
     }
 
@@ -368,9 +365,11 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
         Bookdb bookdb = new Bookdb();
 
-        String id = (bookdb.getList().isEmpty())?null: (bookdb.getList().getFirst().getBookid());
+        String id = (bookdb.getList().isEmpty())?null: (bookdb.getList2().getFirst().getBookid());
 
-        return getStockIDGenerate("#St",id);
+        System.out.println(id);
+
+        return getStockIDGenerate("#S",id);
 
     }
 

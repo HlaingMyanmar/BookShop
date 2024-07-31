@@ -26,9 +26,53 @@ public class Bookdb implements DataAccessObject<Book> {
                FROM book b 
                INNER JOIN category c ON c.cid = b.cid
                INNER JOIN author a ON a.aid = b.aid
-               ORDER BY b.qty ASC, CAST(SUBSTRING(b.bcode, 4) AS UNSIGNED) DESC;
+               ORDER BY b.qty ASC, CAST(SUBSTRING(b.bcode, 11) AS UNSIGNED) DESC;
+                 
+                """;
+
+        ResultSet rs = null;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)){
+
+            List<Book> booklist  = new ArrayList<>();
+
+            rs = pst.executeQuery();
+
+            while (rs.next()){
+
+                String bcode = rs.getString("bcode");
+                String bname = rs.getString("name");
+                int qty = rs.getInt("qty");
+                int price = rs.getInt("price");
+                String aid = rs.getString("aname");
+                String cid = rs.getString("cname");
+
+
+                Book b =new Book(bcode,bname,qty,price,aid,cid,(qty*price));
+
+                booklist.add(b);
+
+            }
+            return booklist;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public List<Book> getList2() {
+
+        String sql = """
                 
-                
+               SELECT b.bcode, b.name, c.cname, a.aname, b.qty, b.price
+               FROM book b 
+               INNER JOIN category c ON c.cid = b.cid
+               INNER JOIN author a ON a.aid = b.aid
+               ORDER BY CAST(SUBSTRING(b.bcode, 11) AS UNSIGNED) DESC;
+                 
                 """;
 
         ResultSet rs = null;
