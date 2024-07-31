@@ -3,7 +3,6 @@ package sspd.bookshop.databases;
 import sspd.bookshop.DAO.DataAccessObject;
 import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Book;
-import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
@@ -92,7 +91,9 @@ public class Saledb implements DataAccessObject<Sale> {
 
 
     @Override
-    public void create(Sale sale) {
+    public int create(Sale sale) {
+        
+        int i = 0;
 
         String sql = "INSERT INTO `sale`(`orid`, `bcode`, `cid`, `aid`, `qty`, `price`) VALUES (?,?,?,?,?,?)";
 
@@ -105,7 +106,7 @@ public class Saledb implements DataAccessObject<Sale> {
             pst.setInt(5,sale.getQty());
             pst.setInt(6,sale.getPrice());
 
-            pst.executeUpdate();
+            i = pst.executeUpdate();
 
 
 
@@ -115,6 +116,7 @@ public class Saledb implements DataAccessObject<Sale> {
             JOptionPane.showMessageDialog(null,"Please check Sale Create Error","Notice",0);
         }
 
+        return i;
     }
 
     @Override

@@ -24,17 +24,25 @@ public class IDGenerate {
             _counter = 1;
         } else {
 
-            _counter++;
+            try {
 
-            int count = Integer.parseInt(endID.substring(12));
+                int count = Integer.parseInt(endID.substring(12));
+                System.out.println(count);
+                if(_counter< count){
 
-            if(_counter< count){
+                    _counter = count;
 
-                _counter = count;
+                    _counter++;
 
-                _counter++;
+                }
+
+            }catch (NullPointerException e_){
+
+                _counter =0;
 
             }
+
+
         }
 
         String newNumPart =  String.format("%02d", _counter);

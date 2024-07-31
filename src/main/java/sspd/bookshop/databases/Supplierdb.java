@@ -78,7 +78,9 @@ public class Supplierdb implements DataAccessObject<Supplier> {
     }
 
     @Override
-    public void create(Supplier supplier) {
+    public int create(Supplier supplier) {
+
+        int i = 0;
 
         String sql ="INSERT INTO supplier(suid, suname, suphone, suaddress) VALUES (?,?,?,?)";
 
@@ -89,7 +91,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
             pst.setString(3,supplier.getS_phone());
             pst.setString(4,supplier.getS_address().toString());
 
-            pst.executeUpdate();
+            i = pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null,"Insert Supplier Successful");
 
@@ -100,6 +102,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
             throw new RuntimeException(e);
         }
 
+        return i;
     }
 
     @Override

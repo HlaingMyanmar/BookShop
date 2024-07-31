@@ -12,11 +12,13 @@ import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.models.Book;
+import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -100,6 +102,12 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
     @FXML
     private Button newItem;
+
+    @FXML
+    private Button addItem;
+
+    @FXML
+    private Button removeItem;
 
 
     ObservableList<Book> predataList = FXCollections.observableArrayList();
@@ -190,9 +198,7 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
         });
 
-        newItem.setOnAction(event -> {
-
-
+        addItem.setOnAction(event -> {
 
             String itemcodee = stockidtxt.getText();
             String itemnamee =stocknametxt.getText();
@@ -203,41 +209,102 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
             Book book = new Book(itemcodee,itemnamee,itemqtyy,itempricee,itemautho,itemca,itempricee*itemqtyy);
 
-
             boolean isDuplicate = predataList.stream()
                     .anyMatch(b -> b.getBookid().equals(stockidtxt.getText()));
 
-            if (isDuplicate) {
+            if(isDuplicate){
 
-                AlertBox.showWarning("‌ကျေးဇူးပြုပြန်လည်စစ်ဆေးပေးပါ။","သင့်၏ စာအုပ် အိုင်ဒီသည် ထပ်နေပါသည်။");
+                AlertBox.showError("သတိထားစရာ","သင့်၏ ပစ္စည်း အိုင်ဒီ ထပ်နေပါသည်။ကျေးဇူးပြု၍ပြန်လည်စစ်ဆေးပါ။");
+
+            }
+
+            else {
+
+                predataList.add(book);
+                purchasetable.setItems(predataList);
+                getBookClear();
+            }
+
+
+        });
+
+        removeItem.setOnAction(event -> {
+
+
+            int selectedIndex = purchasetable.getSelectionModel().getSelectedIndex();
+
+
+            if (selectedIndex >= 0) {
+
+                purchasetable.getItems().remove(selectedIndex);
 
             } else {
 
-
-                predataList.add(book);
-                purchasetable.setItems(FXCollections.observableList(predataList));
-
-                lbCount.setText(String.valueOf(predataList.size()));
-
-                double total = 0.0;
-
-                double sum= book.getTotal();
-                 total +=sum;
-
-                lbTotal.setText(convertToMyanmarCurrency(total));
-
-
-
-
+                AlertBox.showWarning("သတိထားစရာ","သင့်သည် ပစ္စည်းအား မှတ်သားထားခြင်းမရှိပါ။");
             }
 
 
 
+        });
+
+        newItem.setOnAction(event -> {
+
+            String purchaseId = purchaseidtxt.getText();
+
+            String remark = stockremarktxt.getText();
+
+            Date purchasedate = Date.valueOf(datetxt.getText());
+
+            String supplierID = supplierid.getText();
+
+            if(purchaseidtxt.getText().isEmpty() || datetxt.getText().isEmpty() || supplierid.getText().isEmpty()){
+
+                AlertBox.showError("သတိထားစရာ","ကျေးဇူးပြု၍ အဝယ်ကုဒ်, ရက်စွဲ , ရောင်းသူ အိုင်ဒီ များကိုပြန်လည်စစ်ဆေးပေးပါ။");
+
+            }
+            else {
+
+                int result = 0;
+
+
+                int size = purchasetable.getItems().size();
+
+                Bookdb bookdb = new Bookdb();
+                Purchasedb purchasedb =new Purchasedb();
+
+                for(int i = 0;i<size;i++){
+
+                    Book book = (Book)  purchasetable.getItems().get(i);
+
+                    boolean b = bookdb.getList().stream()
+                            .anyMatch(bb -> book.getBookid().equals(bb.getBookid()));
+
+
+                    if(b){
+
+                        purchasedb.sumBookQty(book);
+
+                    }
+                    else {
+
+                        Book newBook = new Book(book.getBookid(),book.getBookname(),book.getQuantity(),book.getPrice(),getAuthorCode(book.getAid()),getCategoryCode(book.getCid()));
+
+                        bookdb.create(newBook);
+
+                    }
+
+                    Purchase p = new Purchase(purchaseId,purchasedate,book.getBookid(),getCategoryCode(book.getCid()),getAuthorCode(book.getAid()),supplierID,book.getQuantity(),book.getPrice(),remark );
+                    result = purchasedb.create(p);
+
+                }
+
+                if(result==1){
+                    AlertBox.showInformation("အသစ်ထည်သွင်းခြင်း","ပစ္စည်းဝယ်ခြင်း အချက်အလက်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်။");
+                }
 
 
 
-
-
+            }
 
 
 
@@ -254,6 +321,19 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
 
 
+
+
+    }
+
+    private  void getBookClear(){
+
+        stockidtxt.setText("");
+        stocknametxt.setText("");
+        stockqtytxt.setText("");
+        stockpricetxt.setText("");
+        stockauthorcobox.setValue("");
+        stockcategorycobox.setValue("");
+        stocktotaltxt.setText("");
 
 
     }
@@ -275,6 +355,10 @@ public class NewPurchaseController extends Deliver implements Initializable {
         Purchasedb purchasedb = new Purchasedb();
 
         String id= (purchasedb.getList().isEmpty())?null: (purchasedb.getList().getFirst().getPuid());
+
+        System.out.println(id);
+
+        System.out.println(getID("#Pu",id));
 
         return  getID("#Pu", id);
 

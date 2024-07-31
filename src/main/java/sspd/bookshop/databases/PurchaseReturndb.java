@@ -81,7 +81,8 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
     }
 
     @Override
-    public void create(PurchaseReturn purchaseReturn) {
+    public int create(PurchaseReturn purchaseReturn) {
+        int i ;
 
         String sql = "INSERT INTO `purchasereturn`( `rdate`, `puid`) VALUES (?,?)";
 
@@ -91,7 +92,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
             pst.setString(2,purchaseReturn.getPuid());
 
 
-            pst.executeUpdate();
+             i = pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null,"Save");
 
@@ -101,6 +102,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
             throw new RuntimeException(e);
         }
 
+        return i;
     }
 
     @Override

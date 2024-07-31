@@ -95,8 +95,8 @@ public class Orderdb implements DataAccessObject<Order> {
     }
 
     @Override
-    public void create(Order order) {
-
+    public int create(Order order) {
+        int i = 0;
         String sql = "INSERT INTO `cuorder`(`orid`, `ordate`, `cuname`, `cuphone`) VALUES (?,?,?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
@@ -106,12 +106,13 @@ public class Orderdb implements DataAccessObject<Order> {
             pst.setString(3,order.getCulname());
             pst.setString(4, order.getCuphone());
 
-            pst.executeUpdate();
+            i = pst.executeUpdate();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Please check Order Create Error","Notice",0);
         }
 
+        return i;
     }
 
     @Override

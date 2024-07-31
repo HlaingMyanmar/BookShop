@@ -7,7 +7,7 @@ public interface DataAccessObject<V> {
     List<V> getList();
 
     void update(V v);
-    void create(V v);
+    int create(V v);
     void delete(V v);
 
 

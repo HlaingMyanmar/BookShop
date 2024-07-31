@@ -54,7 +54,7 @@
       </AnchorPane>
       <AnchorPane layoutX="7.0" layoutY="221.0" prefHeight="469.0" prefWidth="520.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #0078D7;">
          <children>
-            <TextField fx:id="stockidtxt" editable="false" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="200.0" promptText="ပစ္စည်း ကုဒ်">
+            <TextField fx:id="stockidtxt" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="200.0" promptText="ပစ္စည်း ကုဒ်">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -146,17 +146,17 @@
             <Font name="Pyidaungsu Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="newItem" focusTraversable="false" layoutX="536.0" layoutY="609.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: #4527A0;" text="ထည့်ရန်။" textFill="WHITE">
+      <Button fx:id="addItem" focusTraversable="false" layoutX="536.0" layoutY="609.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: #4527A0;" text="ထည့်ရန်။" textFill="WHITE">
          <font>
             <Font name="Pyidaungsu Bold" size="19.0" />
          </font>
       </Button>
-      <Button focusTraversable="false" layoutX="683.0" layoutY="609.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: #4527A0;" text="ဖျက်ရန်။" textFill="WHITE">
+      <Button fx:id="removeItem" focusTraversable="false" layoutX="683.0" layoutY="609.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: #4527A0;" text="ဖျက်ရန်။" textFill="WHITE">
          <font>
             <Font name="Pyidaungsu Bold" size="19.0" />
          </font>
       </Button>
-      <Button focusTraversable="false" layoutX="830.0" layoutY="609.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="144.0" style="-fx-background-color: #4527A0;" text="သေချာပါသည်။" textFill="WHITE">
+      <Button fx:id="newItem" focusTraversable="false" layoutX="830.0" layoutY="609.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="144.0" style="-fx-background-color: #4527A0;" text="သေချာပါသည်။" textFill="WHITE">
          <font>
             <Font name="Pyidaungsu Bold" size="19.0" />
          </font>

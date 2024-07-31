@@ -77,7 +77,9 @@ public class Categorydb implements DataAccessObject<Category> {
     }
 
     @Override
-    public void create(Category category) {
+    public int create(Category category) {
+
+        int i = 0 ;
 
         String sql = "INSERT INTO category(cid, cname) VALUES (?,?)";
 
@@ -86,7 +88,7 @@ public class Categorydb implements DataAccessObject<Category> {
             pst.setString(1,category.getCategory_id());
             pst.setString(2,category.getCategory_name());
 
-            pst.executeUpdate();
+            i = pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null,"Add Category Successful");
 
@@ -99,6 +101,7 @@ public class Categorydb implements DataAccessObject<Category> {
         }
 
 
+        return i;
     }
 
     @Override

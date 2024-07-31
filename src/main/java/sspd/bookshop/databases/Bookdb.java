@@ -93,10 +93,12 @@ public class Bookdb implements DataAccessObject<Book> {
     }
 
     @Override
-    public void create(Book b) {
+    public int create(Book b) {
 
 
         String sql = "INSERT INTO book(bcode, name, qty, price, cid, aid) VALUES (?,?,?,?,?,?)";
+
+        int i ;
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -108,9 +110,8 @@ public class Bookdb implements DataAccessObject<Book> {
             pst.setString(6,b.getAid());
 
 
-            pst.executeUpdate();
+            i =  pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Book Insertion Successful");
 
 
 
@@ -124,6 +125,7 @@ public class Bookdb implements DataAccessObject<Book> {
 
         }
 
+        return i;
     }
 
     @Override

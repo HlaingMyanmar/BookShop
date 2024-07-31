@@ -175,7 +175,9 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     }
 
     @Override
-    public void create(Purchase purchase) {
+    public int create(Purchase purchase) {
+
+        int i = 0;
 
 
 
@@ -193,10 +195,8 @@ public class Purchasedb implements DataAccessObject<Purchase> {
             pst.setInt(8,purchase.getPrice());
             pst.setString(9,purchase.getRemark());
 
-            System.out.println(purchase.getRemark());
 
-
-            pst.executeUpdate();
+            i =  pst.executeUpdate();
 
 
 
@@ -213,6 +213,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
             JOptionPane.showMessageDialog(null,"Insert Purchase DB Error");
         }
 
+        return i;
     }
 
     @Override

@@ -91,7 +91,9 @@ public class Authordb implements DataAccessObject<Author> {
     }
 
     @Override
-    public void create(Author author) {
+    public int create(Author author) {
+
+        int i = 0;
 
         Connection con = DatabaseConnector.getInstance().getConn();
 
@@ -103,7 +105,7 @@ public class Authordb implements DataAccessObject<Author> {
             pst.setString(1,author.getAuthor_id());
             pst.setString(2,author.getAuthor_name());
 
-            pst.executeUpdate();
+            i = pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null,"Insert Successful");
 
@@ -115,6 +117,7 @@ public class Authordb implements DataAccessObject<Author> {
         }
 
 
+        return i ;
     }
 
     @Override
