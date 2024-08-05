@@ -1,27 +1,36 @@
 package sspd.bookshop.controllers;
 
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Purchasedb;
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static sspd.bookshop.controllers.StockController._bookid;
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 import static sspd.bookshop.modules.IDGenerate.getID;
 import static sspd.bookshop.modules.IDGenerate.getStockIDGenerate;
@@ -110,6 +119,17 @@ public class NewPurchaseController extends Deliver implements Initializable {
     private Button removeItem;
 
 
+    @FXML
+    private AnchorPane switchPane;
+
+
+    @FXML
+    private JFXCheckBox itemnew;
+
+    @FXML
+    private JFXCheckBox itemold;
+
+
     ObservableList<Book> predataList = FXCollections.observableArrayList();
 
 
@@ -119,9 +139,29 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
     public void ini(){
 
+
+        itemnew.setSelected(true);
+
+        itemnew.setOnAction(event -> {
+
+            if(itemnew.isSelected()){
+                itemold.setSelected(false);
+            }
+
+        });
+
+        itemold.setOnAction(event -> {
+            if(itemold.isSelected()){
+                itemnew.setSelected(false);
+            }
+        });
+
         getCategoryName(stockcategorycobox);
 
         getAuthorName(stockauthorcobox);
+
+
+        //stockidtxt.setText(_bookid);
 
 
 
@@ -142,8 +182,43 @@ public class NewPurchaseController extends Deliver implements Initializable {
             if(event.getCode()== KeyCode.F1){
 
 
+                Stage stage = new Stage();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/stock.fxml"));
+                Scene scene = null;
+
+
+                try {
+                    scene = new Scene(fxmlLoader.load());
+
+                } catch (IOException e) {
+
+                    throw new RuntimeException(e);
+                }
+                stage.initStyle(StageStyle.UTILITY);
+                stage.initModality(Modality.WINDOW_MODAL);
+                Stage mainStage = (Stage) mainPane.getScene().getWindow();
+
+                stage.setTitle("ပစ္စည်းများ");
+                stage.initOwner(mainStage);
+                stage.setScene(scene);
+                stage.show();
+
+
 
             }
+
+        });
+
+        stockidtxt.setOnMouseClicked(event -> {
+
+            stockidtxt.setText(_bookid.getBookid());
+            stocknametxt.setText(_bookid.getBookname());
+            stockcategorycobox.setValue(_bookid.getCid());
+            stockauthorcobox.setValue(_bookid.getAid());
+            stockqtytxt.setText(String.valueOf(_bookid.getQuantity()));
+            stockpricetxt.setText(String.valueOf(_bookid.getPrice()));
+            stocktotaltxt.setText(String.valueOf(_bookid.getQuantity()*_bookid.getPrice()));
 
         });
 
@@ -223,6 +298,9 @@ public class NewPurchaseController extends Deliver implements Initializable {
                 predataList.add(book);
                 purchasetable.setItems(predataList);
                 getBookClear();
+
+
+                stockidtxt.setText(getStockID());
             }
 
 
@@ -380,6 +458,11 @@ public class NewPurchaseController extends Deliver implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         ini();
+
+
+
+
+
 
     }
 }

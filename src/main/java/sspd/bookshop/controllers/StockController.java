@@ -1,5 +1,6 @@
 package sspd.bookshop.controllers;
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -11,6 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.models.Book;
 
@@ -73,6 +76,9 @@ public class StockController implements Initializable {
 
     @FXML
     private TextField searchTotal;
+
+
+    public  static Book _bookid = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -206,6 +212,25 @@ public class StockController implements Initializable {
         result.append(kyat).append(" ကျပ်");
 
         return result.toString();
+    }
+
+    @FXML
+    void tableClickAction(MouseEvent event) {
+
+        if(event.getClickCount()==2){
+
+            _bookid = (Book) booktable.getSelectionModel().getSelectedItem();
+
+            Stage mainStage = (Stage) booktable.getScene().getWindow();
+
+            mainStage.close();
+        }
+
+
+
+
+
+
     }
 
 }

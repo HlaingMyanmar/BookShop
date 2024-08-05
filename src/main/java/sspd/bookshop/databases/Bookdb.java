@@ -121,6 +121,8 @@ public class Bookdb implements DataAccessObject<Book> {
             pst.setString(5,b.getCid());
             pst.setString(6,b.getBookid());
 
+
+
             pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null,"Update Successful");

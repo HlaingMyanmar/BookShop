@@ -61,7 +61,7 @@
       <Line endX="258.0" endY="102.0" layoutX="219.0" layoutY="8.0" startX="258.0" startY="58.0" stroke="#005796" />
       <AnchorPane layoutX="9.0" layoutY="120.0" prefHeight="529.0" prefWidth="1298.0">
          <children>
-            <TableView fx:id="booktable" layoutY="6.0" prefHeight="520.0" prefWidth="1295.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
+            <TableView fx:id="booktable" layoutY="6.0" onMouseClicked="#tableClickAction" prefHeight="520.0" prefWidth="1295.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
                <columns>
                   <TableColumn fx:id="bcodeCol" prefWidth="142.0" text="ကုတ်နံပါတ်" />
                   <TableColumn fx:id="bnameCol" prefWidth="324.0" text="အမျိုးအမည်" />

@@ -70,7 +70,7 @@ public class IDGenerate {
 
             _stockcounter =1;
 
-            return prefix + "-" + currentDate + "-" +_stockcounter;
+            return prefix + "-" + currentDate + "-" + _stockcounter;
 
         }
 
