@@ -458,13 +458,7 @@ public class BuyerController extends Deliver implements Initializable {
                                 else {
 
                                     int finalqty = qty.get()-intValue;
-
-                                    System.out.println(qty.get());
-                                    System.out.println(intValue);
-                                    System.out.println(finalqty);
-
                                     int resultSub = bookdb.subQty(new Book(bookcode.get(),finalqty));
-
 
                                     int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(),intValue,bookcode.get()));
 
