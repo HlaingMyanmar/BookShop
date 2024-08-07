@@ -41,6 +41,11 @@ public class Purchase {
         this.price = price;
         this.bcode = bcode;
     }
+    public Purchase(String puid,int qty,String bcode) {
+        this.qty = qty;
+        this.puid = puid;
+        this.bcode = bcode;
+    }
 
 
 

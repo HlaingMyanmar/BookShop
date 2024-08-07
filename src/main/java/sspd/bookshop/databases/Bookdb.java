@@ -1,15 +1,13 @@
 package sspd.bookshop.databases;
 
+import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.DAO.DataAccessObject;
 
 import sspd.bookshop.DAO.DatabaseConnector;
 import sspd.bookshop.models.Book;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +69,7 @@ public class Bookdb implements DataAccessObject<Book> {
                FROM book b 
                INNER JOIN category c ON c.cid = b.cid
                INNER JOIN author a ON a.aid = b.aid
-               ORDER BY CAST(SUBSTRING(b.bcode, 11) AS UNSIGNED) DESC;
+               ORDER BY CAST(SUBSTRING(b.bcode, 13) AS UNSIGNED) DESC;
                  
                 """;
 
@@ -107,6 +105,47 @@ public class Bookdb implements DataAccessObject<Book> {
 
 
     }
+    public List<Book> getListgenerateID() {
+
+        String sql = """
+                
+              SELECT * FROM `book` WHERE 1
+                 
+                """;
+
+        ResultSet rs = null;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)){
+
+            List<Book> booklist  = new ArrayList<>();
+
+            rs = pst.executeQuery();
+
+            while (rs.next()){
+
+                String bcode = rs.getString("bcode");
+                String bname = rs.getString("name");
+                int qty = rs.getInt("qty");
+                int price = rs.getInt("price");
+                String aid = rs.getString("aid");
+                String cid = rs.getString("cid");
+
+
+                Book b =new Book(bcode,bname,qty,price,aid,cid,(qty*price));
+
+                booklist.add(b);
+
+            }
+            return booklist;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
     @Override
     public void update(Book b) {
@@ -144,7 +183,7 @@ public class Bookdb implements DataAccessObject<Book> {
 
         String sql = "INSERT INTO book(bcode, name, qty, price, cid, aid) VALUES (?,?,?,?,?,?)";
 
-        int i ;
+        int i = 0;
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -162,16 +201,17 @@ public class Bookdb implements DataAccessObject<Book> {
 
 
 
-        } catch (SQLException e) {
-
-
-
-            throw new RuntimeException(e);
-
-
         }
+        
+    catch (SQLIntegrityConstraintViolationException e) {
+        AlertBox.showError("သတိပေးချက်", "သင့်၏ ပစ္စည်းအိုင်ဒီ ထပ်နေပါသည်။");
+    } 
+    catch (SQLException e) {
+     
+        AlertBox.showError("အမှား", "ပျက်စီးမှုများဖြစ်ပွားခဲ့ပါသည်။");
+    }
 
-        return i;
+        return i;  
     }
 
     @Override
@@ -217,16 +257,19 @@ public class Bookdb implements DataAccessObject<Book> {
 
     }
 
-    public void sumQty(Book book){
+    public int  sumQty(Book book){
+        int i =0;
 
-        String sql = " UPDATE book SET qty = qty + ?, price = ?  WHERE bcode = ?";
+
+        String sql = " UPDATE book SET qty = qty + ?  WHERE bcode = ?";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setInt(1,book.getQuantity());
-            pst.setInt(2,book.getPrice());
-            pst.setString(3,book.getBookid());
-            pst.executeUpdate();
+            pst.setString(2,book.getBookid());
+            i = pst.executeUpdate();
+
+            System.out.println("sumQty"+i);
 
 
 
@@ -238,20 +281,24 @@ public class Bookdb implements DataAccessObject<Book> {
 
             throw new RuntimeException(e);
         }
+        return  i;
 
 
     }
 
-    public void subQty(Book book){
+    public int subQty(Book book){
 
-        String sql = " UPDATE book SET qty = qty - ?, price = ?  WHERE bcode = ?";
+        int i =0;
+
+        String sql = " UPDATE book SET qty = qty - ? WHERE bcode = ?";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setInt(1,book.getQuantity());
-            pst.setInt(2,book.getPrice());
-            pst.setString(3,book.getBookid());
-            pst.executeUpdate();
+            pst.setString(2,book.getBookid());
+          i=   pst.executeUpdate();
+
+            System.out.println("subQty"+i);
 
 
 
@@ -261,6 +308,8 @@ public class Bookdb implements DataAccessObject<Book> {
 
             JOptionPane.showMessageDialog(null,"Please check Book SubQty Create Error","Notice",0);
         }
+
+        return i ;
 
 
     }

@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -16,26 +16,29 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javafx.util.converter.IntegerStringConverter;
 import sspd.bookshop.Alerts.AlertBox;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
+import sspd.bookshop.modules.Deliver;
 import sspd.bookshop.modules.TableUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 
-public class BuyerController implements Initializable {
+public class BuyerController extends Deliver implements Initializable {
 
     @FXML
     private TableColumn<Purchase, String> pauthorCol;
@@ -395,6 +398,102 @@ public class BuyerController implements Initializable {
 
                         popup.setAutoHide(true);
                         popup.show(getScene().getWindow());
+
+                        AtomicInteger qty = new AtomicInteger();
+                        AtomicReference<String> bookcode = new AtomicReference<>();
+                        AtomicReference<String> pcode = new AtomicReference<>();
+
+
+                        purchaseTableView.setOnMouseClicked(even -> {
+
+                            if (even.getClickCount() == 2) {
+
+                                Purchase selectedItem = purchaseTableView.getSelectionModel().getSelectedItem();
+                                if (selectedItem != null) {
+                                   qty.set(selectedItem.getQty());
+                                   bookcode.set(getBookCode(selectedItem.getBcode()));
+                                   pcode.set(selectedItem.getPuid());
+                                }
+                            }
+
+                        });
+
+                        purchaseTableView.setEditable(true);
+
+                        pqtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+                        pqtyCol.setOnEditCommit(event1 -> {
+
+                            String value = String.valueOf(event1.getNewValue());
+
+
+                            try {
+
+                                int intValue = Integer.parseInt(value);
+
+
+                                event1.getRowValue().setQty(intValue);
+
+                                Bookdb bookdb = new Bookdb();
+
+                                System.out.println("Bcode:"+bookcode.get()+"Qty:"+qty.get()+"new Qty:"+intValue+"Pcode+"+pcode.get());
+
+
+                                if(qty.get()<intValue){
+
+                                    int resultSub = bookdb.subQty(new Book(bookcode.get(),qty.get()));
+
+                                    int resultSum = bookdb.sumQty(new Book(bookcode.get(),intValue));
+
+                                    int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(),intValue,bookcode.get()));
+
+                                    if(resultSum==1 && resultSub==1 && resultPurchaseQty==1){
+
+                                        AlertBox.showInformation("ပြုပြင်ခြင်း။","ပြန်လည်ထက်တိုးခြင်း ‌အောင်မြင်ပါသည်။");
+
+                                    }
+                                    qty.set(0);
+
+                                }
+                                else {
+
+                                    int finalqty = qty.get()-intValue;
+
+                                    System.out.println(qty.get());
+                                    System.out.println(intValue);
+                                    System.out.println(finalqty);
+
+                                    int resultSub = bookdb.subQty(new Book(bookcode.get(),finalqty));
+
+
+                                    int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(),intValue,bookcode.get()));
+
+                                    if( resultSub==1 && resultPurchaseQty==1){
+
+                                        AlertBox.showInformation("ပြုပြင်ခြင်း။","ပြန်လည်နုတ်ယူခြင်း ‌အောင်မြင်ပါသည်။");
+
+                                    }
+                                    qty.set(0);
+
+
+                                }
+
+
+
+
+
+
+
+
+                            } catch (NumberFormatException e) {
+
+
+                            }
+                        });
+
+
+
+
                     });
                 }
 

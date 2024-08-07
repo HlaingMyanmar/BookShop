@@ -5,6 +5,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.stage.StageStyle;
 
+import java.util.Objects;
+
 public class AlertBox {
     private static AlertBox messageBox ;
 
@@ -55,7 +57,7 @@ public class AlertBox {
 
         // Customize the dialog pane (optional)
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(AlertBox.class.getResource("message-box.css").toExternalForm()
+        dialogPane.getStylesheets().add(Objects.requireNonNull(AlertBox.class.getResource("message-box.css")).toExternalForm()
         );
         dialogPane.getStyleClass().add("message-box");
 

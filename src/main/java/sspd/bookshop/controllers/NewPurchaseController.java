@@ -22,13 +22,12 @@ import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
-import javax.swing.*;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static sspd.bookshop.controllers.StockController._bookid;
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
@@ -122,7 +121,6 @@ public class NewPurchaseController extends Deliver implements Initializable {
     @FXML
     private AnchorPane switchPane;
 
-
     @FXML
     private JFXCheckBox itemnew;
 
@@ -130,7 +128,14 @@ public class NewPurchaseController extends Deliver implements Initializable {
     private JFXCheckBox itemold;
 
 
+
     ObservableList<Book> predataList = FXCollections.observableArrayList();
+
+    Bookdb bookdb = new Bookdb();
+
+    private String itemid_ = null;
+
+
 
 
 
@@ -140,21 +145,29 @@ public class NewPurchaseController extends Deliver implements Initializable {
     public void ini(){
 
 
-        itemnew.setSelected(true);
 
-        itemnew.setOnAction(event -> {
+        itemnew.setOnAction(_ -> {
 
             if(itemnew.isSelected()){
+
                 itemold.setSelected(false);
+                stockidtxt.setText(getStockID());
+
             }
+
 
         });
 
-        itemold.setOnAction(event -> {
+        itemold.setOnAction(_ -> {
+
             if(itemold.isSelected()){
                 itemnew.setSelected(false);
             }
+
         });
+
+
+
 
         getCategoryName(stockcategorycobox);
 
@@ -167,7 +180,6 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
          getIniPurchaseTable();
          purchaseidtxt.setText(getPurchaseID());
-         stockidtxt.setText(getStockID());
          datetxt.setText(String.valueOf(LocalDate.now()));
 
          //Set Supplier Name
@@ -295,12 +307,29 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
             else {
 
+
+                if(itemnew.isSelected()){
+
+
+                        Book b = new Book(itemcodee,itemnamee,0,0,getAuthorCode(itemautho),getCategoryCode(itemca),itempricee*itemqtyy);
+                        bookdb.create(b);
+                        itemid_ =  itemcodee;
+                        stockidtxt.setText(getStockID());
+
+
+
+
+
+
+
+                }
+
+
                 predataList.add(book);
                 purchasetable.setItems(predataList);
                 getBookClear();
 
 
-                stockidtxt.setText(getStockID());
             }
 
 
@@ -377,7 +406,11 @@ public class NewPurchaseController extends Deliver implements Initializable {
                 }
 
                 if(result==1){
+
                     AlertBox.showInformation("အသစ်ထည်သွင်းခြင်း","ပစ္စည်းဝယ်ခြင်း အချက်အလက်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်။");
+
+                    Stage stage = (Stage) purchasetable.getScene().getWindow();
+                    stage.close();
                 }
 
 
@@ -432,8 +465,7 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
         Purchasedb purchasedb = new Purchasedb();
 
-        String id= (purchasedb.getList().isEmpty())?null: (purchasedb.getList().getFirst().getPuid());
-
+        String id= (purchasedb.getList().isEmpty())?null: (purchasedb.getListGenerateID().getLast().getPuid());
 
         return  getID("#P", id);
 
@@ -443,14 +475,12 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
         Bookdb bookdb = new Bookdb();
 
-        String id = (bookdb.getList().isEmpty())?null: (bookdb.getList2().getFirst().getBookid());
+        String id = (bookdb.getList2().isEmpty())?null: (bookdb.getListgenerateID().getLast().getBookid());
 
-        System.out.println(id);
 
         return getStockIDGenerate("#S",id);
 
     }
-
 
 
 

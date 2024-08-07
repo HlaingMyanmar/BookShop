@@ -66,6 +66,50 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
     }
+    public List<Purchase> getListGenerateID() {
+
+
+        String sql = """
+                
+               SELECT * FROM `purchase` WHERE 1
+         
+                """;
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Purchase> pList = new ArrayList<>();
+
+            while(rs.next()){
+
+                String puid = rs.getString("puid");
+                Date pudate = rs.getDate("pudate");
+                String bcode = rs.getString("bcode");
+                String bcategory = rs.getString("bcategory");
+                String bauthor = rs.getString("bauthor");
+                String sid = rs.getString("sid");
+                int qty = rs.getInt("qty");
+                int price  = rs.getInt("price");
+
+                Purchase purchase = new Purchase(puid,pudate,bcode,bcategory,bauthor,sid,qty,price,(qty*price));
+
+                pList.add(purchase);
+
+
+            }
+
+            return pList;
+
+
+        } catch (SQLException e) {
+
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
     public List<Purchase> getList2() {
 
@@ -170,6 +214,40 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
             throw new RuntimeException(e);
         }
+
+
+    }
+    public int updateQty(Purchase purchase) {
+
+        int i  =0;
+
+
+        String sql =  "UPDATE `purchase` SET `qty`=? WHERE `puid`=? AND `bcode`=?";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+
+
+            pst.setInt(1,purchase.getQty());
+            pst.setString(2,purchase.getPuid());
+            pst.setString(3,purchase.getBcode());
+
+           i = pst.executeUpdate();
+            System.out.println("pQty"+i);
+
+
+
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
+
+        return i;
 
 
     }
@@ -598,7 +676,6 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
     }
 
-
     public List<Purchase> getDay( int day,int month,int year){
 
 
@@ -682,6 +759,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
 
     }
+
     public List<Purchase> getDayTotal( int day,int month,int year){
 
 
