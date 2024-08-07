@@ -328,6 +328,12 @@ public class NewPurchaseController extends Deliver implements Initializable {
                 predataList.add(book);
                 purchasetable.setItems(predataList);
                 getBookClear();
+                lbCount.setText(String.valueOf(predataList.size()));
+
+                double sum = predataList.stream()
+                        .mapToDouble(Book::getTotal)
+                        .sum();
+                lbTotal.setText(convertToMyanmarCurrency(sum));
 
 
             }

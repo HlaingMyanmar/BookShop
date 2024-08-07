@@ -29,7 +29,6 @@
             <Menu mnemonicParsing="false" text="အဝယ် စာရင်း">
                <items>
                   <MenuItem fx:id="showpurchasebtn" mnemonicParsing="false" text="အဝယ်ပစ္စည်းစာရင်း" />
-                  <MenuItem mnemonicParsing="false" text="အဝယ်" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="အရောင်း စာရင်း">
