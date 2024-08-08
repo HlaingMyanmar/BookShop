@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class NetPriceController implements Initializable {
 
     @FXML
@@ -34,11 +35,13 @@ public class NetPriceController implements Initializable {
     @FXML
     private TextField qtytxt;
 
-    @FXML
-    private Button submitbtn;
+
 
     @FXML
     private TextField trantxt;
+
+    @FXML
+    private Button calculatebtn;
 
     private void ini(){
 
@@ -48,10 +51,47 @@ public class NetPriceController implements Initializable {
         currencyList.add("Dollor ($)");
         currencycombo.setItems(currencyList);
 
+        currencycombo.setOnAction(_ -> {
 
-        if(currencycombo.getValue().equals("MMK (Kyat)")){
-            dollortxt.setText();
+            if(currencycombo.getValue().equals("MMK (Kyat)")){
+            dollortxt.setEditable(false);
+            dollortxt.setText("1");
+
+
         }
+            else {
+                dollortxt.setEditable(true);
+                dollortxt.setText("0");
+            }
+
+        });
+
+
+        calculatebtn.setOnAction(event -> {
+
+            double tran = Double.parseDouble(trantxt.getText());
+            double otherexpense = Double.parseDouble(otherexpentxt.getText());
+            int qty = Integer.parseInt(qtytxt.getText());
+            int dollor = Integer.parseInt(dollortxt.getText());
+            double amount = Double.parseDouble(amounttxt.getText());
+
+            int percentage = Integer.parseInt(pertxt.getText());
+
+
+            double finalresult = ((tran+otherexpense)/qty)+(dollor*amount);
+
+            double netresult = (finalresult*((double) percentage /100))+finalresult;
+
+            finalpricetxt.setText(String.valueOf(netresult));
+
+
+
+
+        });
+
+
+
+//
 
 
     }

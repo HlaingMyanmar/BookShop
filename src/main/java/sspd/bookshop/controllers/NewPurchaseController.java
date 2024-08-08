@@ -25,7 +25,6 @@ import sspd.bookshop.modules.Deliver;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -146,6 +145,7 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
 
 
+
     public void ini(){
 
         getpricebtn.setOnAction(_ -> {
@@ -156,7 +156,7 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
             oList.clear();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/netPrice.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/netprice.fxml"));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load());
@@ -170,6 +170,8 @@ public class NewPurchaseController extends Deliver implements Initializable {
             stage.initOwner(mainStage);
             stage.setScene(scene);
             stage.show();
+
+
 
         });
 

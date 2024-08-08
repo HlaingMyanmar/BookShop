@@ -97,7 +97,7 @@
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="stockpricetxt" editable="false" layoutX="114.0" layoutY="264.0" prefHeight="35.0" prefWidth="95.0" promptText="ဈေးနှုန်း။">
+            <TextField fx:id="stockpricetxt" layoutX="114.0" layoutY="264.0" prefHeight="35.0" prefWidth="95.0" promptText="ဈေးနှုန်း။">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -128,7 +128,7 @@
                </font></TextArea>
             <JFXCheckBox fx:id="itemnew" layoutX="240.0" layoutY="21.0" prefHeight="18.0" prefWidth="136.0" text="ပစ္စည်းအသစ် ထည့်သွင်းခြင်း။" />
             <JFXCheckBox fx:id="itemold" layoutX="240.0" layoutY="57.0" prefHeight="18.0" prefWidth="136.0" text="ပစ္စည်းအဟောင်း ထည့်သွင်းခြင်း။" />
-            <Button fx:id="getpricebtn" layoutX="221.0" layoutY="262.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" text="ဈေးနှုန်းရယူရန်။" />
+            <Button fx:id="getpricebtn" layoutX="221.0" layoutY="262.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" text="ဈေးနှုန်းတွက်ချက်ရန်ရန်။" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="536.0" layoutY="447.0" prefHeight="144.0" prefWidth="781.0" style="-fx-background-color: #535353;">

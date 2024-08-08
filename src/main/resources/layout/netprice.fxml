@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="321.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NetPriceController">
+<AnchorPane prefHeight="292.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NetPriceController">
    <children>
       <JFXComboBox fx:id="currencycombo" layoutX="21.0" layoutY="40.0" prefHeight="25.0" prefWidth="117.0" promptText="ငွေကြေးပုံစံ" />
       <TextField fx:id="dollortxt" layoutX="145.0" layoutY="39.0" prefHeight="32.0" prefWidth="89.0" promptText="Dollor Amount">
@@ -40,7 +40,7 @@
             <Font name="Pyidaungsu" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="qtytxt" editable="false" layoutX="21.0" layoutY="177.0" prefHeight="32.0" prefWidth="59.0" promptText="Qty">
+      <TextField fx:id="qtytxt" layoutX="21.0" layoutY="177.0" prefHeight="32.0" prefWidth="59.0" promptText="Qty">
          <font>
             <Font name="Pyidaungsu" size="12.0" />
          </font>
@@ -80,6 +80,6 @@
             <Font name="Pyidaungsu" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="submitbtn" layoutX="21.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="သေချာပါသည်။" />
+      <Button fx:id="calculatebtn" layoutX="216.0" layoutY="181.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="တွက်ရန်။" />
    </children>
 </AnchorPane>
