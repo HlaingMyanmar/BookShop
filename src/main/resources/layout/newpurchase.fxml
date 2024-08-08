@@ -97,7 +97,7 @@
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="stockpricetxt" layoutX="114.0" layoutY="264.0" prefHeight="35.0" prefWidth="95.0" promptText="ဈေးနှုန်း။">
+            <TextField fx:id="stockpricetxt" editable="false" layoutX="114.0" layoutY="264.0" prefHeight="35.0" prefWidth="95.0" promptText="ဈေးနှုန်း။">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
@@ -107,27 +107,28 @@
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="stocktotaltxt" editable="false" layoutX="220.0" layoutY="264.0" prefHeight="35.0" prefWidth="251.0" promptText="ကုန်ကျငွေ။">
+            <TextField fx:id="stocktotaltxt" editable="false" layoutX="9.0" layoutY="331.0" prefHeight="35.0" prefWidth="460.0" promptText="ကုန်ကျငွေ။">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font>
             </TextField>
-            <Label layoutX="220.0" layoutY="232.0" text="ကုန်ကျငွေ။">
+            <Label layoutX="9.0" layoutY="299.0" text="ကုန်ကျငွေ။">
                <font>
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="309.0" text="မှတ်ထားသင့်သည့်စာသားများ။">
+            <Label layoutX="10.0" layoutY="367.0" text="မှတ်ထားသင့်သည့်စာသားများ။">
                <font>
                   <Font name="Pyidaungsu Bold" size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="stockremarktxt" layoutX="10.0" layoutY="344.0" prefHeight="113.0" prefWidth="460.0" promptText="မှတ်ထားသင့်သည့်စာသားများ။">
+            <TextArea fx:id="stockremarktxt" layoutX="10.0" layoutY="396.0" prefHeight="61.0" prefWidth="460.0" promptText="မှတ်ထားသင့်သည့်စာသားများ။">
                <font>
                   <Font name="Pyidaungsu" size="12.0" />
                </font></TextArea>
             <JFXCheckBox fx:id="itemnew" layoutX="240.0" layoutY="21.0" prefHeight="18.0" prefWidth="136.0" text="ပစ္စည်းအသစ် ထည့်သွင်းခြင်း။" />
             <JFXCheckBox fx:id="itemold" layoutX="240.0" layoutY="57.0" prefHeight="18.0" prefWidth="136.0" text="ပစ္စည်းအဟောင်း ထည့်သွင်းခြင်း။" />
+            <Button fx:id="getpricebtn" layoutX="221.0" layoutY="262.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" text="ဈေးနှုန်းရယူရန်။" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="536.0" layoutY="447.0" prefHeight="144.0" prefWidth="781.0" style="-fx-background-color: #535353;">

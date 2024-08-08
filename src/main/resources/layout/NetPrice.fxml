@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="321.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NetPriceController">
+   <children>
+      <JFXComboBox fx:id="currencycombo" layoutX="21.0" layoutY="40.0" prefHeight="25.0" prefWidth="117.0" promptText="ငွေကြေးပုံစံ" />
+      <TextField fx:id="dollortxt" layoutX="145.0" layoutY="39.0" prefHeight="32.0" prefWidth="89.0" promptText="Dollor Amount">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="amounttxt" layoutX="244.0" layoutY="38.0" prefHeight="32.0" prefWidth="157.0" promptText="Amount">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="trantxt" layoutX="21.0" layoutY="112.0" prefHeight="25.0" prefWidth="185.0" promptText="Transportation">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="21.0" layoutY="88.0" text="လမ်းစရိတ်">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="otherexpentxt" layoutX="216.0" layoutY="112.0" prefHeight="25.0" prefWidth="185.0" promptText="Expense">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="216.0" layoutY="88.0" text="အခြားကုန်ကျငွေ">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="qtytxt" editable="false" layoutX="21.0" layoutY="177.0" prefHeight="32.0" prefWidth="59.0" promptText="Qty">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="21.0" layoutY="153.0" text="အရေအတွက်">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pertxt" layoutX="95.0" layoutY="176.0" prefHeight="32.0" prefWidth="109.0" promptText="Profit Margin">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="95.0" layoutY="152.0" text="(%) ရာခိုင်နှုန်း">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="finalpricetxt" layoutX="21.0" layoutY="243.0" prefHeight="32.0" prefWidth="378.0" promptText="S Price">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="21.0" layoutY="219.0" text="ပစ္စည်းတစ်ခုဈေးနှုန်း">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="246.0" layoutY="14.0" text="ပမာဏ">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="145.0" layoutY="14.0" text="ဒေါ်လာ ပမာဏ">
+         <font>
+            <Font name="Pyidaungsu" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="submitbtn" layoutX="21.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="သေချာပါသည်။" />
+   </children>
+</AnchorPane>

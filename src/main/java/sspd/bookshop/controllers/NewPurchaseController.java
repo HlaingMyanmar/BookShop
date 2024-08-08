@@ -29,6 +29,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.util.*;
 
+import static sspd.bookshop.controllers.NewSaleController.oList;
 import static sspd.bookshop.controllers.StockController._bookid;
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 import static sspd.bookshop.modules.IDGenerate.getID;
@@ -117,6 +118,9 @@ public class NewPurchaseController extends Deliver implements Initializable {
     @FXML
     private Button removeItem;
 
+    @FXML
+    private Button getpricebtn;
+
 
     @FXML
     private AnchorPane switchPane;
@@ -144,7 +148,30 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
     public void ini(){
 
+        getpricebtn.setOnAction(_ -> {
 
+
+            Stage stage = new Stage();
+
+
+            oList.clear();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/netPrice.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) getpricebtn.getScene().getWindow();
+            stage.setTitle("get Price");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
+
+        });
 
         itemnew.setOnAction(_ -> {
 
