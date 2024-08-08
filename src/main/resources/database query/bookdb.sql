@@ -101,3 +101,18 @@ CREATE TABLE sale_return (
     FOREIGN KEY (orid) REFERENCES cuorder(orid),
     FOREIGN KEY (bcode) REFERENCES sale(bcode)
 );
+CREATE TABLE netprofit (
+    puid VARCHAR(15) NOT NULL,
+    pudate DATE NOT NULL,
+    bcode VARCHAR(15),
+    currency VARCHAR(10),
+    currency_amount INT,
+    amount INT,
+    transportation INT,
+    expense INT,
+    qty INT,
+    percentage INT,
+    netprofit INT
+
+);
+

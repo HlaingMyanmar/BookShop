@@ -7,9 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import sspd.bookshop.models.NetPurchaseprice;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static sspd.bookshop.controllers.NewPurchaseController.netPriceList;
 
 
 public class NetPriceController implements Initializable {
@@ -43,6 +46,17 @@ public class NetPriceController implements Initializable {
     @FXML
     private Button calculatebtn;
 
+
+    public  static  int _transportation= 0;
+    public static  int  _otherexpense = 0;
+    public static int _qty = 0 ;
+    public static double _usdamount = 0;
+    public static int _amount = 0;
+    public static  String _usdname = null;
+    public static  double _percent = 0;
+    public static  double _netresult  = 0;
+
+
     private void ini(){
 
         ObservableList<String> currencyList = FXCollections.observableArrayList();
@@ -72,17 +86,28 @@ public class NetPriceController implements Initializable {
             double tran = Double.parseDouble(trantxt.getText());
             double otherexpense = Double.parseDouble(otherexpentxt.getText());
             int qty = Integer.parseInt(qtytxt.getText());
-            int dollor = Integer.parseInt(dollortxt.getText());
+            double dollor = Double.parseDouble(dollortxt.getText());
             double amount = Double.parseDouble(amounttxt.getText());
+
+
 
             int percentage = Integer.parseInt(pertxt.getText());
 
 
             double finalresult = ((tran+otherexpense)/qty)+(dollor*amount);
 
-            double netresult = (finalresult*((double) percentage /100))+finalresult;
+            int netresult = (int) ((finalresult*((double) percentage /100))+finalresult);
 
             finalpricetxt.setText(String.valueOf(netresult));
+
+           _transportation= (int) tran;
+           _otherexpense = (int) otherexpense;
+           _qty = qty ;
+           _usdamount =  dollor;
+           _usdname = currencycombo.getValue();
+           _amount = (int) amount;
+           _percent = percentage;
+           _netresult  = (int) netresult;
 
 
 

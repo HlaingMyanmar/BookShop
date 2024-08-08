@@ -16,9 +16,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Bookdb;
+import sspd.bookshop.databases.NetPurchasePricedb;
 import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
+import sspd.bookshop.models.NetPurchaseprice;
 import sspd.bookshop.models.Purchase;
 import sspd.bookshop.modules.Deliver;
 
@@ -28,6 +30,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
+import static sspd.bookshop.controllers.NetPriceController.*;
 import static sspd.bookshop.controllers.NewSaleController.oList;
 import static sspd.bookshop.controllers.StockController._bookid;
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
@@ -137,6 +140,8 @@ public class NewPurchaseController extends Deliver implements Initializable {
     Bookdb bookdb = new Bookdb();
 
     private String itemid_ = null;
+
+    static  List<NetPriceController> netPriceList = new LinkedList<>();
 
 
 
@@ -363,6 +368,16 @@ public class NewPurchaseController extends Deliver implements Initializable {
                         .mapToDouble(Book::getTotal)
                         .sum();
                 lbTotal.setText(convertToMyanmarCurrency(sum));
+
+                String purchaseId = purchaseidtxt.getText();
+
+                Date purchasedate = Date.valueOf(datetxt.getText());
+
+                System.out.println(book.getBookid());
+
+                NetPurchaseprice netPurchaseprice = new NetPurchaseprice(purchaseId,purchasedate,book.getBookid(),_usdname,_usdamount, _amount, _transportation, _otherexpense,  _qty, _percent,  _netresult);
+                NetPurchasePricedb netPurchasePricedb = new NetPurchasePricedb();
+                netPurchasePricedb.create(netPurchaseprice);
 
 
             }
