@@ -21,8 +21,6 @@ public class MainDashboardController implements Initializable {
     @FXML
     private AnchorPane switchPane;
 
-    @FXML
-    private ImageView adverImg;
 
     @FXML
     private MenuItem showpurchasebtn;
@@ -49,7 +47,7 @@ public class MainDashboardController implements Initializable {
                 node = fxmlLoader2.load();
                 switchPane.getChildren().clear();
                 switchPane.getChildren().add(node);
-                adverImg.setImage(null);
+
 
 
             } catch (IOException e) {
@@ -69,7 +67,7 @@ public class MainDashboardController implements Initializable {
                 node = fxmlLoader2.load();
                 switchPane.getChildren().clear();
                 switchPane.getChildren().add(node);
-                adverImg.setImage(null);
+
 
 
             } catch (IOException e) {

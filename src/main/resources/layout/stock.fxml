@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.StockController">
+<AnchorPane prefHeight="655.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.StockController">
    <children>
       <Pane layoutX="14.0" layoutY="60.0" prefHeight="55.0" prefWidth="1295.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #005796;">
          <children>
@@ -94,12 +94,12 @@
             <Font name="Pyidaungsu Bold" size="18.0" />
          </font>
       </Label>
-      <Button focusTraversable="false" layoutX="1165.0" layoutY="649.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: #4527A0;" text="Print " textFill="WHITE">
+      <Button focusTraversable="false" layoutX="694.0" layoutY="10.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: #4527A0;" text="Print " textFill="WHITE">
          <font>
             <Font name="Pyidaungsu Bold" size="19.0" />
          </font>
       </Button>
-      <ImageView fitHeight="37.0" fitWidth="65.0" layoutX="1264.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="65.0" layoutX="793.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/printer.png" />
          </image>

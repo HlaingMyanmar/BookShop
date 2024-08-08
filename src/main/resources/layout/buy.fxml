@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="674.0" prefWidth="1347.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.BuyerController">
+<AnchorPane prefHeight="661.0" prefWidth="1347.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.BuyerController">
    <children>
-      <TableView fx:id="purchasetable" layoutX="3.0" layoutY="60.0" prefHeight="553.0" prefWidth="1344.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
+      <TableView fx:id="purchasetable" layoutX="3.0" layoutY="60.0" prefHeight="542.0" prefWidth="1344.0" style="-fx-border-color: #505050;" stylesheets="@../css/table.css">
          <columns>
             <TableColumn fx:id="editCol" prefWidth="50.0" />
             <TableColumn fx:id="psupplierCol" prefWidth="147.0" text="ထုတ်လုပ်သည့်" />
@@ -72,17 +72,17 @@
             <Font name="Pyidaungsu Bold" size="42.0" />
          </font>
       </Button>
-      <Button fx:id="newpurchasebtn" layoutX="3.0" layoutY="623.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" styleClass="btn" stylesheets="@../css/buttom.css" text="အသစ်တိုးရန်။">
+      <Button fx:id="newpurchasebtn" layoutX="3.0" layoutY="610.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" styleClass="btn" stylesheets="@../css/buttom.css" text="အသစ်တိုးရန်။">
          <font>
             <Font name="Pyidaungsu Bold" size="42.0" />
          </font>
       </Button>
-      <Button fx:id="deletepurchasebtn" layoutX="150.0" layoutY="623.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ဖျက်ရန်။">
+      <Button fx:id="deletepurchasebtn" layoutX="150.0" layoutY="610.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ဖျက်ရန်။">
          <font>
             <Font name="Pyidaungsu Bold" size="42.0" />
          </font>
       </Button>
-      <Button fx:id="printpurchasebtn" layoutX="297.0" layoutY="623.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" styleClass="btn" stylesheets="@../css/buttom.css" text="စာရွက်ထုတ်ရန်။">
+      <Button fx:id="printpurchasebtn" layoutX="297.0" layoutY="610.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" styleClass="btn" stylesheets="@../css/buttom.css" text="စာရွက်ထုတ်ရန်။">
          <font>
             <Font name="Pyidaungsu Bold" size="42.0" />
          </font>
