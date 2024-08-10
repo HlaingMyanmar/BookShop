@@ -36,6 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
+import static sspd.bookshop.controllers.LoginController._level;
 import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 
 public class BuyerController extends Deliver implements Initializable {
@@ -153,30 +154,31 @@ public class BuyerController extends Deliver implements Initializable {
         monthPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 12, 1));
         monthPicker.getValueFactory().setValue(month);
 
-        newpurchasebtn.setOnAction(_e -> {
+        newpurchasebtn.setOnAction(_ -> {
 
-            Stage stage = new Stage();
+            if(getPermission()) {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newpurchase.fxml"));
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
 
-            } catch (IOException e) {
+                FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newpurchase.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
 
-                throw new RuntimeException(e);
+                } catch (IOException e) {
+
+                    throw new RuntimeException(e);
+                }
+                stage.initStyle(StageStyle.UTILITY);
+                stage.initModality(Modality.WINDOW_MODAL);
+                Stage mainStage = (Stage) newpurchasebtn.getScene().getWindow();
+                stage.setTitle("အဝယ် အသစ်ထည့်သွင်းခြင်း။");
+                stage.initOwner(mainStage);
+                stage.setScene(scene);
+                stage.show();
+
+
             }
-            stage.initStyle(StageStyle.UTILITY);
-            stage.initModality(Modality.WINDOW_MODAL);
-            Stage mainStage = (Stage) newpurchasebtn.getScene().getWindow();
-            stage.setTitle("အဝယ် အသစ်ထည့်သွင်းခြင်း။");
-            stage.initOwner(mainStage);
-            stage.setScene(scene);
-            stage.show();
-
-
-
-
 
         });
 
@@ -411,6 +413,7 @@ public class BuyerController extends Deliver implements Initializable {
 
                         purchaseTableView.setOnMouseClicked(even -> {
 
+
                             if (even.getClickCount() == 2) {
 
                                 Purchase selectedItem = purchaseTableView.getSelectionModel().getSelectedItem();
@@ -492,13 +495,11 @@ public class BuyerController extends Deliver implements Initializable {
 
                         purchaseTableView.setOnMouseClicked(event1 -> {
 
-
-
-                            if(event1.getClickCount()==2){
+                            if(getPermission()){
 
                                 Purchase  p = purchaseTableView.getSelectionModel().getSelectedItem();
 
-                               _updatepurchase = new Purchase(p.getPuid(),p.getPudate(),getBookCode(p.getBcode()));
+                                _updatepurchase = new Purchase(p.getPuid(),p.getPudate(),getBookCode(p.getBcode()));
 
 
                                 Stage stage = new Stage();
@@ -521,8 +522,12 @@ public class BuyerController extends Deliver implements Initializable {
                                 stage.show();
 
 
-
                             }
+
+
+
+
+
 
 
 
@@ -580,6 +585,26 @@ public class BuyerController extends Deliver implements Initializable {
 
 
         }
+
+    }
+
+    private boolean getPermission(){
+
+        boolean pre = false;
+
+
+        if(_level.equals("Technical") || _level.equals("Admin")){
+
+                pre =true;
+
+
+        }
+
+        else {
+            AlertBox.showWarning("သတ်မှတ်ချက်များ","ကန့်သက်စည်းမျဉ်း "+"\n"+"\nသင်ဝင်‌ရောက်ခွင့်မရှိပါ။");
+        }
+        return pre;
+
 
     }
 

@@ -11,9 +11,9 @@ public class Bookshop extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/applicationView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/loginform.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Main Dashboard");
+        stage.setTitle("အကောင့်ဝင်ရန်။");
         stage.setScene(scene);
         stage.show();
 

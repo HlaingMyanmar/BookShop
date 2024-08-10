@@ -10,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import sspd.bookshop.Alerts.AlertBox;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.NetPurchasePricedb;
+import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.models.NetPurchaseprice;
 import sspd.bookshop.models.Purchase;
 
@@ -110,12 +112,29 @@ public class NetPriceController implements Initializable {
 
                         if (event.isControlDown() && event.getCode() == KeyCode.S) {
 
+                            String curency = currencycombo.getValue();
+                            int  tran = Integer.parseInt(trantxt.getText());
+                            int otherexpense = Integer.parseInt(otherexpentxt.getText());
+                            int qty = Integer.parseInt(qtytxt.getText());
+                            double dollor = Double.parseDouble(dollortxt.getText());
+                            double amount = Double.parseDouble(amounttxt.getText());
+                            int percentage = Integer.parseInt(pertxt.getText());
+                            double net = Double.parseDouble(finalpricetxt.getText());
 
+                            NetPurchaseprice n = new NetPurchaseprice(update.getPuid(),update.getPudate(),update.getBcode(),curency,dollor,amount,tran,otherexpense,qty,percentage,net);
 
                             NetPurchasePricedb netPurchasePricedb = new NetPurchasePricedb();
-                            netPurchasePricedb.update()
+                            Bookdb bookdb = new Bookdb();
+                            Purchasedb purchasedb  = new Purchasedb();
 
-                            AlertBox.showInformation("t","t");
+                            
+                            
+                            if(netPurchasePricedb.update(n)==1  && bookdb.getupdate(update.getBcode(), (int) net) == 1 && purchasedb.getupdate(update.getPuid(),update.getPudate(),update.getBcode(),net)==1){
+
+                                AlertBox.showInformation("‌ဈေးနှုန်း","ဈေးနှုန်းချိန်ခြင်းအောင်မြင်ပါသည်။");
+                            }
+
+
 
                         }
 
@@ -133,8 +152,6 @@ public class NetPriceController implements Initializable {
             int qty = Integer.parseInt(qtytxt.getText());
             double dollor = Double.parseDouble(dollortxt.getText());
             double amount = Double.parseDouble(amounttxt.getText());
-
-
 
             int percentage = Integer.parseInt(pertxt.getText());
 

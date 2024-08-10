@@ -4,14 +4,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sspd.bookshop.launch.Bookshop;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static sspd.bookshop.controllers.LoginController._level;
 
 public class MainDashboardController implements Initializable {
 
@@ -24,9 +30,16 @@ public class MainDashboardController implements Initializable {
 
     @FXML
     private MenuItem showpurchasebtn;
+    @FXML
+    private Label loginlevel;
+
+    @FXML
+    private MenuItem exitbtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        loginlevel.setText(_level);
 
 
         ini();
@@ -37,7 +50,30 @@ public class MainDashboardController implements Initializable {
 
     private void  ini(){
 
-        showStockbtn.setOnAction(event -> {
+        exitbtn.setOnAction(_ -> {
+
+            Stage stage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/loginform.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) loginlevel.getScene().getWindow();
+            stage.setTitle("အကောင့်ဝင်ရန်");
+            stage.setScene(scene);
+            mainStage.close();
+            stage.show();
+
+        });
+
+
+
+        showStockbtn.setOnAction(_ -> {
 
             FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/stock.fxml"));
             Node node = null;

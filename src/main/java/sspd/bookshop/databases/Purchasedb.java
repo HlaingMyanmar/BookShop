@@ -187,6 +187,8 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     @Override
     public int update(Purchase purchase) {
 
+        int i = 0;
+
 
         String sql = "UPDATE `purchase` SET ,`bcode`=?,`bcategory`=?,`bauthor`=?,`sid`=?,`qty`=?,`price`=? WHERE `puid`=?";
 
@@ -201,9 +203,9 @@ public class Purchasedb implements DataAccessObject<Purchase> {
             pst.setInt(6,purchase.getPrice());
             pst.setString(7,purchase.getPuid());
 
-            pst.executeUpdate();
+           i =  pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Update Successful");
+
 
 
 
@@ -214,7 +216,34 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
             throw new RuntimeException(e);
         }
-return 0;
+return i;
+
+    }
+    public int getupdate(String purchaseid , Date purchaseDate , String bookcode,double price) {
+
+        int i = 0;
+
+        String sql = "UPDATE `purchase` SET `price`=? WHERE `puid`=? AND pudate=? AND bcode = ?";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+
+            pst.setDouble(1,price);
+            pst.setString(2,purchaseid);
+            pst.setDate(3,purchaseDate);
+            pst.setString(4,bookcode);
+
+            i =  pst.executeUpdate();
+
+
+
+        } catch (SQLException e) {
+
+
+
+            throw new RuntimeException(e);
+        }
+        return i;
 
     }
     public int updateQty(Purchase purchase) {

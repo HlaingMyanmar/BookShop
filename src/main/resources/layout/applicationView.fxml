@@ -14,9 +14,9 @@
    <children>
       <MenuBar layoutY="2.0" prefHeight="40.0" prefWidth="1323.0" stylesheets="@../css/menusbar.css">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="အကောင့်">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="exitbtn" mnemonicParsing="false" text="ထွက်ရန်။" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="အသုံးပြုသူများ">
@@ -82,18 +82,20 @@
                   <Font name="Clarendon BT Bold" size="38.0" />
                </font>
             </Label>
-            <Label layoutX="1107.0" layoutY="577.0" prefHeight="30.0" prefWidth="179.0" text="SSPD IT Service &amp; Training" textFill="#ee9212">
-               <font>
-                  <Font name="Clarendon BT Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="1122.0" layoutY="595.0" prefHeight="30.0" prefWidth="169.0" text="develop by Hlaing Htun" textFill="#2c2926">
-               <font>
-                  <Font name="Clarendon BT Bold" size="12.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
-      <Pane layoutY="674.0" prefHeight="30.0" prefWidth="1325.0" style="-fx-background-color: #512DA8;" />
+      <Pane layoutY="674.0" prefHeight="30.0" prefWidth="1325.0" style="-fx-background-color: #512DA8;">
+         <children>
+            <Label fx:id="loginlevel" layoutX="7.0" layoutY="1.0" prefHeight="30.0" prefWidth="169.0" text="develop by Hlaing Htun" textFill="WHITE">
+               <font>
+                  <Font name="CG Times Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1190.0" layoutY="-1.0" prefHeight="30.0" prefWidth="133.0" text="develop by Hlaing Htun" textFill="WHITE">
+               <font>
+                  <Font name="CG Times Bold" size="12.0" />
+               </font>
+            </Label>
+         </children></Pane>
    </children>
 </AnchorPane>

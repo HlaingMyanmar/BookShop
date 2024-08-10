@@ -318,6 +318,35 @@ public class Bookdb implements DataAccessObject<Book> {
 
     }
 
+    public int  getupdate(String bcode, int price) {
+
+        int i = 0;
+        String sql = "update book set price = ?  where bcode =?";
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+
+            pst.setInt(1,price);
+            pst.setString(2,bcode);
+
+
+           i =  pst.executeUpdate();
+
+
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+
+            JOptionPane.showMessageDialog(null,"Error");
+
+
+        }
+
+        return  i ;
+    }
+
 
 
 

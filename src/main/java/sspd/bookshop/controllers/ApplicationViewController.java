@@ -26,6 +26,8 @@ public class ApplicationViewController {
 
     static String cho = null;
 
+
+
     Connection con = DatabaseConnector.getInstance().getConn();
 
 
