@@ -151,7 +151,7 @@ public class BuyerController extends Deliver implements Initializable {
         monthPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 12, 1));
         monthPicker.getValueFactory().setValue(month);
 
-        newpurchasebtn.setOnAction(event -> {
+        newpurchasebtn.setOnAction(_e -> {
 
             Stage stage = new Stage();
 
@@ -178,7 +178,7 @@ public class BuyerController extends Deliver implements Initializable {
 
         });
 
-        daybtn.setOnAction(event -> {
+        daybtn.setOnAction(_e -> {
 
             Purchasedb purchasedb = new Purchasedb();
 
@@ -312,6 +312,9 @@ public class BuyerController extends Deliver implements Initializable {
 
     }
     private void tableCellsetIcon() {
+
+
+
         Callback<TableColumn<Purchase, String>, TableCell<Purchase, String>> cellFactory = (param) -> {
 
             return new TableCell<Purchase, String>() {
@@ -484,6 +487,50 @@ public class BuyerController extends Deliver implements Initializable {
 
                             }
                         });
+
+                        purchaseTableView.setOnMouseClicked(event1 -> {
+
+
+
+                            if(event1.getClickCount()==2){
+
+                                Purchase  p = purchaseTableView.getSelectionModel().getSelectedItem();
+
+                                Purchase update = new Purchase()
+
+
+                                Stage stage = new Stage();
+
+                                FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/netprice.fxml"));
+                                Scene scene = null;
+                                try {
+                                    scene = new Scene(fxmlLoader.load());
+
+                                } catch (IOException e) {
+
+                                    throw new RuntimeException(e);
+                                }
+                                stage.initStyle(StageStyle.UTILITY);
+                                stage.initModality(Modality.WINDOW_MODAL);
+                                Stage mainStage = (Stage) newpurchasebtn.getScene().getWindow();
+                                stage.setTitle("မူရင်း။");
+                                stage.initOwner(mainStage);
+                                stage.setScene(scene);
+                                stage.show();
+
+
+
+                            }
+
+
+
+
+
+
+                        });
+
+
+
 
 
 
