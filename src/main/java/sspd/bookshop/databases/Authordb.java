@@ -68,7 +68,7 @@ public class Authordb implements DataAccessObject<Author> {
     }
 
     @Override
-    public void update(Author author) {
+    public int update(Author author) {
 
         String sql = "UPDATE author SET aname=? WHERE aid=?";
 
@@ -87,6 +87,8 @@ public class Authordb implements DataAccessObject<Author> {
 
             throw new RuntimeException(e);
         }
+
+        return 0;
 
     }
 
@@ -121,7 +123,9 @@ public class Authordb implements DataAccessObject<Author> {
     }
 
     @Override
-    public void delete(Author author) {
+    public int delete(Author author) {
+
+        return 0;
 
     }
 }

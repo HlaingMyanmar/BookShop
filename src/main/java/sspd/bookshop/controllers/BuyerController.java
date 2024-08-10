@@ -112,6 +112,8 @@ public class BuyerController extends Deliver implements Initializable {
     @FXML
     private Button newpurchasebtn;
 
+    static  Purchase _updatepurchase = null;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -496,7 +498,7 @@ public class BuyerController extends Deliver implements Initializable {
 
                                 Purchase  p = purchaseTableView.getSelectionModel().getSelectedItem();
 
-                                Purchase update = new Purchase()
+                               _updatepurchase = new Purchase(p.getPuid(),p.getPudate(),getBookCode(p.getBcode()));
 
 
                                 Stage stage = new Stage();

@@ -7,12 +7,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import sspd.bookshop.Alerts.AlertBox;
+import sspd.bookshop.databases.NetPurchasePricedb;
 import sspd.bookshop.models.NetPurchaseprice;
+import sspd.bookshop.models.Purchase;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import static sspd.bookshop.controllers.NewPurchaseController.netPriceList;
+
+import static sspd.bookshop.controllers.BuyerController._updatepurchase;
+
 
 
 public class NetPriceController implements Initializable {
@@ -45,6 +53,9 @@ public class NetPriceController implements Initializable {
 
     @FXML
     private Button calculatebtn;
+
+    @FXML
+    private AnchorPane mainPane;
 
 
     public  static  int _transportation= 0;
@@ -79,6 +90,40 @@ public class NetPriceController implements Initializable {
             }
 
         });
+
+
+        if(_updatepurchase != null){
+
+
+            NetPurchaseprice update = getNetPrice(_updatepurchase);
+            currencycombo.setValue(update.getCurrency());
+            dollortxt.setText(String.valueOf(update.getCurrency_amount()));
+            amounttxt.setText(String.valueOf(update.getAmount()));
+            trantxt.setText(String.valueOf(update.getTran()));
+            otherexpentxt.setText(String.valueOf(update.getExpen()));
+            qtytxt.setText(String.valueOf(update.getQty()));
+            pertxt.setText(String.valueOf(update.getPercen()));
+            finalpricetxt.setText(String.valueOf(update.getNetprofit()));
+
+            mainPane.setOnKeyPressed(event -> {
+
+
+                        if (event.isControlDown() && event.getCode() == KeyCode.S) {
+
+
+
+                            NetPurchasePricedb netPurchasePricedb = new NetPurchasePricedb();
+                            netPurchasePricedb.update()
+
+                            AlertBox.showInformation("t","t");
+
+                        }
+
+            });
+
+
+
+        }
 
 
         calculatebtn.setOnAction(event -> {
@@ -121,10 +166,41 @@ public class NetPriceController implements Initializable {
 
     }
 
+
+    private  NetPurchaseprice getNetPrice(Purchase purchase){
+
+        NetPurchaseprice n1 = null;
+
+
+        NetPurchasePricedb netdb = new NetPurchasePricedb();
+
+        List<NetPurchaseprice> netList = netdb.getList();
+
+        for(NetPurchaseprice  n  : netList){
+
+            if(n.getPuid().equals(purchase.getPuid()) && n.getPudate().equals(purchase.getPudate()) && n.getBcode().equals(purchase.getBcode())){
+
+
+                n1 = n;
+
+
+            }
+
+        }
+
+        return n1;
+
+
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         ini();
+
+
+
 
     }
 }

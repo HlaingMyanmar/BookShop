@@ -53,7 +53,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
     }
 
     @Override
-    public void update(Supplier supplier) {
+    public int update(Supplier supplier) {
 
         String sql = "UPDATE supplier SET suname=?,suphone=?,suaddress=? WHERE suid=?";
 
@@ -74,6 +74,8 @@ public class Supplierdb implements DataAccessObject<Supplier> {
 
             throw new RuntimeException(e);
         }
+
+        return 0;
 
     }
 
@@ -106,7 +108,9 @@ public class Supplierdb implements DataAccessObject<Supplier> {
     }
 
     @Override
-    public void delete(Supplier supplier) {
+    public int delete(Supplier supplier) {
+
+        return 0;
 
     }
 }

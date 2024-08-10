@@ -55,7 +55,7 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
     }
 
     @Override
-    public void update(PurchaseReturn purchaseReturn) {
+    public int  update(PurchaseReturn purchaseReturn) {
 
         String sql = "UPDATE `purchasereturn` SET `puid`=? WHERE `rdate`=?";
 
@@ -77,6 +77,8 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
 
             throw new RuntimeException(e);
         }
+
+        return 0;
 
     }
 
@@ -106,7 +108,9 @@ public class PurchaseReturndb implements DataAccessObject<PurchaseReturn> {
     }
 
     @Override
-    public void delete(PurchaseReturn purchaseReturn) {
+    public int delete(PurchaseReturn purchaseReturn) {
+
+        return 0;
 
     }
 }

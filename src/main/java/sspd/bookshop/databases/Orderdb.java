@@ -73,7 +73,7 @@ public class Orderdb implements DataAccessObject<Order> {
     }
 
     @Override
-    public void update(Order order) {
+    public int update(Order order) {
 
     String sql = "UPDATE `cuorder` SET `ordate`=?,`cuname`=?,`cuphone`=? WHERE `orid`=?";
 
@@ -90,6 +90,8 @@ public class Orderdb implements DataAccessObject<Order> {
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
+
+    return 0;
 
 
     }
@@ -116,7 +118,9 @@ public class Orderdb implements DataAccessObject<Order> {
     }
 
     @Override
-    public void delete(Order order) {
+    public int  delete(Order order) {
+
+        return 0;
 
     }
 }

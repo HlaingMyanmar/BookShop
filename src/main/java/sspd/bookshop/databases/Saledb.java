@@ -31,7 +31,7 @@ public class Saledb implements DataAccessObject<Sale> {
     }
 
     @Override
-    public void update(Sale sale) {
+    public int update(Sale sale) {
 
      String sql = "UPDATE `sale` SET `bcode`=?,`cid`=?,`aid`=?,`qty`=?,`price`=? WHERE `orid`=?";
 
@@ -53,7 +53,7 @@ public class Saledb implements DataAccessObject<Sale> {
          throw new RuntimeException(e);
      }
 
-
+return  0;
     }
 
     public void getOrderIDupdate(Sale sale) {
@@ -120,7 +120,7 @@ public class Saledb implements DataAccessObject<Sale> {
     }
 
     @Override
-    public void delete(Sale sale) {
+    public int delete(Sale sale) {
 
         String sql = "DELETE FROM `sale` WHERE `orid` = ? AND `bcode` = ?;";
 
@@ -139,6 +139,8 @@ public class Saledb implements DataAccessObject<Sale> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        return 0;
 
 
     }

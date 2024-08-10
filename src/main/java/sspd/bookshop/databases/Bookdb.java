@@ -148,7 +148,7 @@ public class Bookdb implements DataAccessObject<Book> {
 
 
     @Override
-    public void update(Book b) {
+    public int  update(Book b) {
         String sql = "update book set name = ?,qty = ?,price = ?,aid = ?,cid = ? where bcode =?";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
@@ -175,6 +175,8 @@ public class Bookdb implements DataAccessObject<Book> {
 
 
         }
+
+        return  0 ;
     }
 
     @Override
@@ -215,7 +217,9 @@ public class Bookdb implements DataAccessObject<Book> {
     }
 
     @Override
-    public void delete(Book book) {
+    public int delete(Book book) {
+
+        return 0;
 
     }
 

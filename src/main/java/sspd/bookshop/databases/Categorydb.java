@@ -53,7 +53,7 @@ public class Categorydb implements DataAccessObject<Category> {
     }
 
     @Override
-    public void update(Category category) {
+    public int update(Category category) {
 
 
         String sql = "UPDATE category SET cname=? WHERE cid=?";
@@ -72,6 +72,8 @@ public class Categorydb implements DataAccessObject<Category> {
 
             throw new RuntimeException(e);
         }
+
+        return 0;
 
 
     }
@@ -105,7 +107,8 @@ public class Categorydb implements DataAccessObject<Category> {
     }
 
     @Override
-    public void delete(Category category) {
+    public int  delete(Category category) {
 
+        return 0;
     }
 }

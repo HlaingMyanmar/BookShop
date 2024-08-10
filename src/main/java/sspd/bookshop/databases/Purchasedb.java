@@ -185,7 +185,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     }
 
     @Override
-    public void update(Purchase purchase) {
+    public int update(Purchase purchase) {
 
 
         String sql = "UPDATE `purchase` SET ,`bcode`=?,`bcategory`=?,`bauthor`=?,`sid`=?,`qty`=?,`price`=? WHERE `puid`=?";
@@ -214,7 +214,7 @@ public class Purchasedb implements DataAccessObject<Purchase> {
 
             throw new RuntimeException(e);
         }
-
+return 0;
 
     }
     public int updateQty(Purchase purchase) {
@@ -295,7 +295,9 @@ public class Purchasedb implements DataAccessObject<Purchase> {
     }
 
     @Override
-    public void delete(Purchase purchase) {
+    public int delete(Purchase purchase) {
+
+        return 0;
 
     }
 
