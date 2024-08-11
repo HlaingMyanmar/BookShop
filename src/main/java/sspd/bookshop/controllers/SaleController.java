@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,37 +12,28 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.JRGraphics2DExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleGraphics2DExporterOutput;
-import net.sf.jasperreports.export.SimpleGraphics2DReportConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.databases.Orderdb;
+import sspd.bookshop.databases.Saledb;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SaleController implements Initializable {
 
@@ -94,16 +84,31 @@ public class SaleController implements Initializable {
         getorderTableIni();
         getLoadData();
 
-        newSalebtn.setOnAction(event -> {
+        newSalebtn.setOnAction(_ -> {
 
-            try {
-                getReport();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (JRException e) {
-                throw new RuntimeException(e);
+
+
+        });
+
+        ordertable.setOnMouseClicked(event -> {
+
+
+            if (event.getClickCount() == 1) {
+                Order order = (Order) ordertable.getSelectionModel().getSelectedItem();
+
+                Saledb saledb = new Saledb();
+                List<Sale> saleList = saledb.findByOrderCode(order.getOrderid());
+
+                try {
+                    getReport(saleList);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (JRException e) {
+                    throw new RuntimeException(e);
+                }
+
+
             }
-
         });
 
     }
@@ -180,17 +185,7 @@ public class SaleController implements Initializable {
 
     }
 
-    private void getReport() throws FileNotFoundException, JRException {
-
-        Date date = Date.valueOf(LocalDate.now());
-
-
-        Sale s  = new Sale("#or4",date,"HlaingHtun","094875");
-
-        List<Sale> saleList = new LinkedList<>();
-
-        saleList.add(s);
-
+    private void getReport(List<Sale>saleList) throws FileNotFoundException, JRException {
 
 
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(saleList );
@@ -219,12 +214,6 @@ public class SaleController implements Initializable {
         swingNode.setContent(panel);
 
         previewPane.getChildren().add(swingNode);
-
-
-
-
-
-
 
     }
 

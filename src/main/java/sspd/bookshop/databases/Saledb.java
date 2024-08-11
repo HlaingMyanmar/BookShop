@@ -6,10 +6,7 @@ import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,6 +199,93 @@ return  0;
                 Book book = new Book(bcode,qty,price,aid,cid,amount);
 
                 saleList.add(book);
+
+            }
+
+
+
+            return saleList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public List<Sale> findByOrderCode(String orderid){
+
+
+
+        String sql = """
+                
+                SELECT				
+                                                                					o.orid,
+                                                                                    o.ordate,
+                                                                                    o.cuname,
+                                                                                    o.cuphone,
+                                                                                    sa.bcode,
+                                                                                    bo.name,
+                                                                                    sa.cid,
+                                                                                    sa.aid,
+                                                                                    sa.qty,
+                                                                                    sa.price,
+                                                                                    SUM(sa.qty * sa.price) AS amount
+                                                                                FROM
+                                                                                    cuorder o
+                                                                                INNER JOIN
+                                                                                    sale sa
+                                                                                ON
+                                                                                    o.orid = sa.orid
+                                                                                INNER JOIN
+                                                                                    book bo
+                                                                                ON
+                                                                                    bo.bcode = sa.bcode
+                                                                                WHERE
+                                                                                    o.orid = ?
+                                                                                GROUP BY
+                                                                                    o.orid,
+                                                                                    o.ordate,
+                                                                                    o.cuname,
+                                                                                    o.cuphone,
+                                                                                    sa.bcode,
+                                                                                    sa.cid,
+                                                                                    sa.aid,
+                                                                                    sa.qty,
+                                                                                    sa.price
+                                                                                ORDER BY
+                                                                                    CAST(SUBSTRING(o.orid, 4) AS UNSIGNED) DESC;
+                                
+             
+                """;
+
+
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1,orderid);
+
+
+            ResultSet rs = pst.executeQuery();
+
+            List<Sale> saleList = new ArrayList<>();
+
+
+            while (rs.next()){
+
+                String orid = rs.getString("orid");
+                Date odate = rs.getDate("ordate");
+                String cuname = rs.getString("cuname");
+                String cuphone = rs.getString("cuphone");
+                String bcode = rs.getString("bcode");
+                String bname = rs.getString("name");
+                String cid = rs.getString("cid");
+                String aid = rs.getString("aid");
+                int qty = rs.getInt("qty");
+                int price = rs.getInt("price");
+                int amount = rs.getInt("amount");
+
+                Sale sale = new Sale(orderid,odate,cuname,cuphone,bcode,bname,cid,aid,qty,price,amount);
+
+                saleList.add(sale);
 
             }
 
