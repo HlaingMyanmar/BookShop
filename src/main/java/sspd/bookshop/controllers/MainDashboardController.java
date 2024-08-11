@@ -35,6 +35,9 @@ public class MainDashboardController implements Initializable {
 
     @FXML
     private MenuItem exitbtn;
+    @FXML
+    private MenuItem saledashboard;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,6 +52,28 @@ public class MainDashboardController implements Initializable {
 
 
     private void  ini(){
+
+        saledashboard.setOnAction(event -> {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/sale.fxml"));
+            Node node = null;
+
+            try {
+
+                node = fxmlLoader.load();
+                switchPane.getChildren().clear();
+                switchPane.getChildren().add(node);
+
+
+
+            } catch (IOException e) {
+
+                throw new RuntimeException(e);
+            }
+
+
+
+        });
 
         exitbtn.setOnAction(_ -> {
 

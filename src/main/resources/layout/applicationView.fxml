@@ -38,7 +38,7 @@
             <Menu mnemonicParsing="false" text="အရောင်း နှင့်ပတ်သက်သော">
                <items>
                   <MenuItem mnemonicParsing="false" text="ရောင်းမည်။" />
-                  <MenuItem mnemonicParsing="false" text="အရောင်း စာရင်းများ" />
+                  <MenuItem fx:id="saledashboard" mnemonicParsing="false" text="အရောင်း စာရင်းများ" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="ထုတ်လုပ်သည့် အဖွဲ့အစည်း">

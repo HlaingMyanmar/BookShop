@@ -12,6 +12,7 @@ module sspd.bookshop.bookshop {
     requires org.jetbrains.annotations;
     requires junit;
     requires mysql.connector.j;
+    requires javafx.swing;
 
 
     opens sspd.bookshop.models to javafx.fxml;
