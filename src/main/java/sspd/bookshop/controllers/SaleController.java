@@ -99,6 +99,8 @@ public class SaleController implements Initializable {
                 Saledb saledb = new Saledb();
                 List<Sale> saleList = saledb.findByOrderCode(order.getOrderid());
 
+                
+
                 try {
                     getReport(saleList);
                 } catch (FileNotFoundException e) {
