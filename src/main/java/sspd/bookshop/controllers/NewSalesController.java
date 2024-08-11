@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static sspd.bookshop.controllers.StockController._bookid;
-import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 
 public class NewSalesController implements Initializable {
 
@@ -192,7 +191,7 @@ public class NewSalesController implements Initializable {
 
             if(_bookid==null){
 
-                AlertBox.showInformation("‌ရွေးချယ်ရန်။","ပစ္စည်းတစ်ခုခုရွေးချယ်ပါ။");
+                AlertBox.showInformation("‌ရွေးချယ်ရန်။","ပစ္စည်းတစ်ခုခုရွေးချယ်ပါ။\n\nF1 Key နှိပ်ပြီး ပစ္စည်းရွေးချယ်ပါ။");
 
 
             }
@@ -217,7 +216,7 @@ public class NewSalesController implements Initializable {
 
         });
 
-        qtytxt.setOnKeyReleased(event -> {
+        qtytxt.setOnKeyReleased(_ -> {
 
             int qty ;
             double price ;
@@ -241,7 +240,7 @@ public class NewSalesController implements Initializable {
 
         });
 
-        ptxt.setOnKeyReleased(event -> {
+        ptxt.setOnKeyReleased(_ -> {
 
             int qty ;
             double price ;
