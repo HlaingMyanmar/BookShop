@@ -6,13 +6,18 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -20,20 +25,20 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.databases.Orderdb;
 import sspd.bookshop.databases.Saledb;
+import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.sql.Date;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static sspd.bookshop.controllers.NewSaleController.oList;
 
 public class SaleController implements Initializable {
 
@@ -85,7 +90,25 @@ public class SaleController implements Initializable {
         getLoadData();
 
         newSalebtn.setOnAction(_ -> {
+            Stage stage = new Stage();
 
+
+            oList.clear();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newSales.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) newSalebtn.getScene().getWindow();
+            stage.setTitle("New Sale");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
 
 
         });

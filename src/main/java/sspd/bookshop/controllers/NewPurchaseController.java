@@ -153,6 +153,8 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
     public void ini(){
 
+        _bookid =null;
+
         getpricebtn.setOnAction(_ -> {
 
 
@@ -258,13 +260,28 @@ public class NewPurchaseController extends Deliver implements Initializable {
 
         stockidtxt.setOnMouseClicked(event -> {
 
-            stockidtxt.setText(_bookid.getBookid());
-            stocknametxt.setText(_bookid.getBookname());
-            stockcategorycobox.setValue(_bookid.getCid());
-            stockauthorcobox.setValue(_bookid.getAid());
-            stockqtytxt.setText(String.valueOf(_bookid.getQuantity()));
-            stockpricetxt.setText(String.valueOf(_bookid.getPrice()));
-            stocktotaltxt.setText(String.valueOf(_bookid.getQuantity()*_bookid.getPrice()));
+            if(_bookid==null){
+
+                AlertBox.showInformation("‌ရွေးချယ်ရန်။","ပစ္စည်းတစ်ခုခုရွေးချယ်ပါ။");
+
+
+            }
+
+            else {
+
+                stockidtxt.setText(_bookid.getBookid());
+                stocknametxt.setText(_bookid.getBookname());
+                stockcategorycobox.setValue(_bookid.getCid());
+                stockauthorcobox.setValue(_bookid.getAid());
+                stockqtytxt.setText(String.valueOf(_bookid.getQuantity()));
+                stockpricetxt.setText(String.valueOf(_bookid.getPrice()));
+                stocktotaltxt.setText(String.valueOf(_bookid.getQuantity()*_bookid.getPrice()));
+
+                _bookid =null;
+
+            }
+
+
 
         });
 

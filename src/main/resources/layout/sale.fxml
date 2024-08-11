@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="598.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
+<AnchorPane prefHeight="598.0" prefWidth="1302.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
    <children>
       <TableView fx:id="ordertable" layoutX="10.0" layoutY="80.0" prefHeight="462.0" prefWidth="707.0" stylesheets="@../css/table.css">
          <columns>
@@ -64,6 +64,6 @@
             <Font size="10.0" />
          </font>
       </Button>
-      <StackPane fx:id="previewPane" layoutX="732.0" layoutY="14.0" prefHeight="580.0" prefWidth="550.0" />
+      <StackPane fx:id="previewPane" layoutX="732.0" layoutY="-4.0" prefHeight="598.0" prefWidth="567.0" />
    </children>
 </AnchorPane>

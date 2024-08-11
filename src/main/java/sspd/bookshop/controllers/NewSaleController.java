@@ -69,7 +69,7 @@ public class NewSaleController extends Deliver implements Initializable {
     private TableColumn<Book, String> bookcodeCol;
 
     @FXML
-    private TableColumn<Sale, String> booknameCol;
+    private TableColumn<Book, String> booknameCol;
 
     @FXML
     private TextField caname;
