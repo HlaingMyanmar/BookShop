@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.launch.Bookshop;
-import sspd.bookshop.users.Users;
+import sspd.bookshop.Containers.Users;
 
 import java.io.IOException;
 import java.net.URL;

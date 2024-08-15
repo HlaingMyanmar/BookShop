@@ -1,4 +1,4 @@
-package sspd.bookshop.users;
+package sspd.bookshop.Containers;
 
 public enum Users {
 

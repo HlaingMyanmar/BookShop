@@ -1,150 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="help" prefHeight="522.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSalesController">
+<AnchorPane fx:id="help" prefHeight="615.0" prefWidth="1336.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSalesController">
    <children>
-      <TableView fx:id="otable" layoutX="14.0" layoutY="132.0" prefHeight="244.0" prefWidth="863.0">
+      <TableView fx:id="otable" layoutX="11.0" layoutY="93.0" prefHeight="384.0" prefWidth="890.0">
         <columns>
-          <TableColumn fx:id="bookcodeCol" prefWidth="70.0" text="Book Code" />
-            <TableColumn fx:id="booknameCol" prefWidth="282.0" text="Book Name" />
-          <TableColumn fx:id="categoryCol" prefWidth="155.0" text="Category" />
-            <TableColumn fx:id="authorCol" prefWidth="167.0" text="Author" />
-            <TableColumn fx:id="qtyCol" prefWidth="48.0" text="Qty" />
-            <TableColumn fx:id="priceCol" prefWidth="64.0" text="Price" />
-            <TableColumn fx:id="totalCol" prefWidth="76.0" text="Total" />
+          <TableColumn fx:id="bookcodeCol" prefWidth="88.0" text="ပစ္စည်းကုတ်" />
+            <TableColumn fx:id="booknameCol" prefWidth="222.0" text="ပစ္စည်းအမျိုးအမည်" />
+          <TableColumn fx:id="categoryCol" prefWidth="131.0" text="အမျိုးအစားအုပ်စု" />
+            <TableColumn fx:id="authorCol" prefWidth="122.0" text="ထုတ်လုပ်သူ" />
+            <TableColumn fx:id="qtyCol" prefWidth="70.0" text="အရေအတွက်" />
+            <TableColumn fx:id="warrantyCol" prefWidth="89.0" text="အာမခံ" />
+            <TableColumn fx:id="priceCol" prefWidth="55.0" text="ဈေးနှုန်း" />
+            <TableColumn fx:id="discountCol" prefWidth="112.0" text="လျော့ဈေး" />
+            <TableColumn fx:id="totalCol" prefWidth="89.0" text="ကျသင့်ငွေ" />
         </columns>
       </TableView>
-      <TextField fx:id="oid" editable="false" layoutX="11.0" layoutY="27.0" prefHeight="32.0" prefWidth="133.0" promptText="Order ID">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="11.0" layoutY="7.0" text="Order ID :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="cname" layoutX="701.0" layoutY="27.0" prefHeight="32.0" prefWidth="176.0" promptText="Customer Name">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="701.0" layoutY="7.0" text="Customer Name :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="odate" editable="false" layoutX="14.0" layoutY="91.0" prefHeight="32.0" prefWidth="133.0" promptText="Order Date">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="14.0" layoutY="71.0" text="Order Date :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="cphone" layoutX="701.0" layoutY="91.0" prefHeight="32.0" prefWidth="176.0" promptText="Customer Phone">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="701.0" layoutY="71.0" text="Customer Phone:">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="bcode" layoutX="15.0" layoutY="410.0" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="14.0" layoutY="390.0" text="Book Code :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="bname" layoutX="159.0" layoutY="410.0" prefHeight="32.0" prefWidth="224.0" promptText="Book Name">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="158.0" layoutY="390.0" text="Book Name :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="caname" layoutX="395.0" layoutY="410.0" prefHeight="32.0" prefWidth="224.0" promptText="Category ">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="394.0" layoutY="390.0" text="Category :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="aname" layoutX="629.0" layoutY="410.0" prefHeight="32.0" prefWidth="224.0" promptText="Author">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="628.0" layoutY="390.0" text="Author :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="qtytxt" layoutX="15.0" layoutY="474.0" prefHeight="32.0" prefWidth="87.0" promptText="Qty">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="15.0" layoutY="454.0" text="Qty :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="ptxt" editable="false" layoutX="116.0" layoutY="474.0" prefHeight="32.0" prefWidth="87.0" promptText="Price">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="116.0" layoutY="454.0" text="Price :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="total" editable="false" layoutX="216.0" layoutY="474.0" prefHeight="32.0" prefWidth="248.0" promptText="total">
-         <font>
-            <Font name="Pyidaungsu" size="12.0" />
-         </font>
-      </TextField>
-      <Label layoutX="216.0" layoutY="454.0" text="Total">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Button fx:id="addbtn" layoutX="478.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Add" />
-      <Button fx:id="removebtn" layoutX="573.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Remove" />
-      <Button fx:id="comfirmbtn" layoutX="670.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
-      <Button fx:id="printbtn" layoutX="766.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
-      <Pane layoutX="160.0" layoutY="7.0" prefHeight="114.0" prefWidth="530.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" stylesheets="@../css/pane1.css">
+      <Button fx:id="addbtn" layoutX="907.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ရွေးချယ်ရန်။" />
+      <Button fx:id="removebtn" layoutX="1002.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ဖယ်ရှားရန်။" />
+      <Button fx:id="comfirmbtn" layoutX="1094.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
+      <Button fx:id="printbtn" layoutX="1190.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+      <Pane layoutX="11.0" layoutY="493.0" prefHeight="114.0" prefWidth="890.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" stylesheets="@../css/pane1.css">
          <children>
             <Label fx:id="pcslb" layoutX="23.0" layoutY="11.0" prefHeight="89.0" prefWidth="215.0" text="122212 pcs" textFill="#1500ff">
                <font>
                   <Font name="Pyidaungsu Bold" size="40.0" />
                </font>
             </Label>
-            <Label fx:id="amountlb" layoutX="278.0" layoutY="11.0" prefHeight="89.0" prefWidth="248.0" text="1444444 MMK" textFill="RED">
+            <Label fx:id="amountlb" layoutX="278.0" layoutY="11.0" prefHeight="89.0" prefWidth="602.0" text="1444444 MMK" textFill="RED">
                <font>
                   <Font name="Pyidaungsu Bold" size="40.0" />
                </font>
@@ -152,5 +47,158 @@
             <Line endX="9.0" endY="70.0" layoutX="254.0" layoutY="42.0" startX="9.0" startY="-39.0" />
          </children>
       </Pane>
+      <Pane layoutX="911.0" layoutY="32.0" prefHeight="280.0" prefWidth="414.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #0078D7;">
+         <children>
+            <TextField fx:id="bcode" layoutX="12.0" layoutY="31.0" prefHeight="32.0" prefWidth="133.0" promptText="Book Code">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="11.0" layoutY="11.0" text="ပစ္စည်းကုတ်">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="bname" layoutX="12.0" layoutY="94.0" prefHeight="32.0" prefWidth="391.0" promptText="Book Name">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="11.0" layoutY="74.0" text="ပစ္စည်းအမျိုးအမည်">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="qtytxt" layoutX="13.0" layoutY="228.0" prefHeight="32.0" prefWidth="87.0" promptText="Qty">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="13.0" layoutY="208.0" text="အရေအတွက်">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ptxt" editable="false" layoutX="106.0" layoutY="228.0" prefHeight="32.0" prefWidth="98.0" promptText="Price">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="106.0" layoutY="208.0" text="ဈေးနှုန်း">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="total" editable="false" layoutX="212.0" layoutY="228.0" prefHeight="32.0" prefWidth="190.0" promptText="total">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="210.0" layoutY="208.0" text="စုစုပေါင်း">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="193.0" layoutY="31.0" prefHeight="32.0" prefWidth="200.0" text="If you find  item , click 'F1' Key">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="caname" layoutX="13.0" layoutY="161.0" prefHeight="32.0" prefWidth="190.0" promptText="Category ">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="12.0" layoutY="141.0" text="အမျိုးအစားအုပ်စု">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="aname" layoutX="212.0" layoutY="161.0" prefHeight="32.0" prefWidth="190.0" promptText="Author">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="211.0" layoutY="141.0" text="ထုတ်လုပ်သူ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="11.0" layoutY="9.0" prefHeight="80.0" prefWidth="890.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #0078D7;">
+         <children>
+            <TextField fx:id="oid" editable="false" layoutX="11.0" layoutY="31.0" prefHeight="32.0" prefWidth="190.0" promptText="Order ID">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="11.0" layoutY="11.0" text="အော်ဒါ အိုင်ဒီ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="odate" editable="false" layoutX="212.0" layoutY="31.0" prefHeight="32.0" prefWidth="190.0" promptText="Order Date">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="213.0" layoutY="11.0" text="အော်ဒါ ရက်စွဲ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cname" layoutX="413.0" layoutY="31.0" prefHeight="32.0" prefWidth="190.0" promptText="Customer Name">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="413.0" layoutY="11.0" text="ဝယ်သူအမည်">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cphone" layoutX="614.0" layoutY="31.0" prefHeight="32.0" prefWidth="190.0" promptText="Customer Phone">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="614.0" layoutY="11.0" text="ဖုန်းနံပါတ်">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="910.0" layoutY="320.0" prefHeight="236.0" prefWidth="414.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #0078D7;">
+         <children>
+            <TextField fx:id="discounttxt" layoutX="13.0" layoutY="95.0" prefHeight="32.0" prefWidth="391.0" promptText="Discount">
+               <font>
+                  <Font name="Pyidaungsu" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="12.0" layoutY="74.0" text="လျော့ဈေး">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="grandtxt" layoutX="12.0" layoutY="161.0" prefHeight="68.0" prefWidth="391.0" promptText="Grand Total">
+               <font>
+                  <Font name="Pyidaungsu" size="24.0" />
+               </font>
+            </TextField>
+            <Label layoutX="11.0" layoutY="140.0" text="ကျသင့်ငွေ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="warrantycombo" layoutX="12.0" layoutY="24.0" prefHeight="32.0" prefWidth="234.0" promptText="အာမခံ" />
+         </children>
+      </Pane>
+      <ImageView fx:id="cancelimg" fitHeight="31.0" fitWidth="40.0" layoutX="1293.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/cancel.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

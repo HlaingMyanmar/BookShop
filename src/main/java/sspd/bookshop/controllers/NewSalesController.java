@@ -1,17 +1,15 @@
 package sspd.bookshop.controllers;
 
+import com.sun.tools.javac.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -19,9 +17,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Orderdb;
+import sspd.bookshop.databases.Warrantydb;
 import sspd.bookshop.launch.Bookshop;
-import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
+import sspd.bookshop.models.Sale;
+import sspd.bookshop.models.Warranty;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,6 +37,11 @@ public class NewSalesController implements Initializable {
     @FXML
     private Button addbtn;
 
+
+    @FXML
+    private ImageView cancelimg;
+
+
     @FXML
     private Label amountlb;
 
@@ -44,7 +49,7 @@ public class NewSalesController implements Initializable {
     private TextField aname;
 
     @FXML
-    private TableColumn<Book, String> authorCol;
+    private TableColumn<Sale, String> authorCol;
 
     @FXML
     private TextField bcode;
@@ -53,16 +58,16 @@ public class NewSalesController implements Initializable {
     private TextField bname;
 
     @FXML
-    private TableColumn<Book, String> bookcodeCol;
+    private TableColumn<Sale, String> bookcodeCol;
 
     @FXML
-    private TableColumn<Book, String> booknameCol;
+    private TableColumn<Sale, String> booknameCol;
 
     @FXML
     private TextField caname;
 
     @FXML
-    private TableColumn<Book, String> categoryCol;
+    private TableColumn<Sale, String> categoryCol;
 
     @FXML
     private TextField cname;
@@ -86,7 +91,7 @@ public class NewSalesController implements Initializable {
     private Label pcslb;
 
     @FXML
-    private TableColumn<Book, Double> priceCol;
+    private TableColumn<Sale, Double> priceCol;
 
     @FXML
     private Button printbtn;
@@ -95,7 +100,7 @@ public class NewSalesController implements Initializable {
     private TextField ptxt;
 
     @FXML
-    private TableColumn<Book, Integer> qtyCol;
+    private TableColumn<Sale, Integer> qtyCol;
 
     @FXML
     private TextField qtytxt;
@@ -110,9 +115,23 @@ public class NewSalesController implements Initializable {
     private TextField total;
 
     @FXML
-    private TableColumn<Book, Double> totalCol;
+    private TextField discounttxt;
 
-    public static ObservableList<Book> _oList = FXCollections.observableArrayList();
+    @FXML
+    private TextField grandtxt;
+
+
+    @FXML
+    private TableColumn<Sale, Double> totalCol;
+    @FXML
+    private TableColumn<Sale, Integer> discountCol;
+    @FXML
+    private TableColumn<Sale, String> warrantyCol;
+
+    @FXML
+    private ComboBox<String> warrantycombo;
+
+    public static ObservableList<Sale> _oList = FXCollections.observableArrayList();
 
     private void ini(){
 
@@ -120,24 +139,65 @@ public class NewSalesController implements Initializable {
         oid.setText(getOrderID());
         odate.setText(String.valueOf(Date.valueOf(LocalDate.now())));
 
+
+        getWarranty(warrantycombo);
+
+
         addbtn.setOnAction(_ -> {
+            boolean bo = false;
+
 
             if(bcode.getText().isEmpty() || bname.getText().isEmpty() || caname.getText().isEmpty() || aname.getText().isEmpty() || qtytxt.getText().isEmpty() || ptxt.getText().isEmpty() || this.total.getText().isEmpty()){
 
 
                 AlertBox.showWarning("သတိထားရန်။","လိုအပ်သည့် အချက်အလက်များကို ဖြည့်သွင်းပါ။");
 
-            }else {
+            }
 
-                String bookcode = bcode.getText();
-                String bookname = bname.getText();
-                String category = caname.getText();
-                String author = aname.getText();
-                int quantity = Integer.parseInt(qtytxt.getText());
-                int price    = Integer.parseInt(ptxt.getText());
-                int total = quantity*price;
+            else {
 
-                Book book = new Book(bookcode,bookname,quantity,price,author,category,total);
+
+                for(Sale b :_oList){
+
+                    if(b.getBcode().equals(bcode.getText())){
+
+                        bo = true;
+
+                    }
+
+                }
+                if (!bo){
+
+                    String orderid = oid.getText();
+                    String bookcode = bcode.getText();
+                    String bookname = bname.getText();
+                    String category = caname.getText();
+                    String author = aname.getText();
+                    int quantity = Integer.parseInt(qtytxt.getText());
+                    int price    = Integer.parseInt(ptxt.getText());
+                    int total = quantity*price;
+                    int discount = Integer.parseInt(discounttxt.getText());
+                    String warranty = String.valueOf(warrantycombo.getValue());
+
+                    Sale sale = new Sale(orderid,bookcode,bookname,category,author,quantity,price,total,discount,warranty);
+                    _oList.add(sale);
+                    otable.setItems(_oList);
+                    getClear();
+
+                }
+                else {
+
+                    AlertBox.showWarning("အချက်အလက်ထပ်နေခြင်း", "ဤ ပစ္စည်းကိုထည့်သွင်းပြီးပါပြီ။");
+
+
+                }
+
+
+
+
+
+
+
 
             }
 
@@ -149,6 +209,24 @@ public class NewSalesController implements Initializable {
 
 
         });
+
+        cancelimg.setOnMouseClicked(_ -> {
+
+
+            Stage Mainstage = (Stage) cancelimg.getScene().getWindow();
+
+            _oList.clear();
+
+            Mainstage.close();
+
+
+
+
+
+
+        });
+
+
 
         help.setOnKeyPressed(event -> {
 
@@ -205,14 +283,10 @@ public class NewSalesController implements Initializable {
                 ptxt.setText(String.valueOf(_bookid.getPrice()));
                 total.setText(String.valueOf(_bookid.getTotal()));
 
+
                 _bookid =null;
 
             }
-
-
-
-
-
 
         });
 
@@ -264,18 +338,81 @@ public class NewSalesController implements Initializable {
 
         });
 
+        discounttxt.setOnKeyReleased(_ -> {
+
+            int amount ;
+            int  discount ;
+
+            if (qtytxt.getText().isEmpty() || ptxt.getText().isEmpty()){
+
+
+                amount= 0;
+                discount =0;
+
+            }
+            else {
+
+              amount = Integer.parseInt(total.getText());
+              discount = Integer.parseInt(discounttxt.getText());
+
+            }
+
+            double gtotal =amount-discount;
+
+            grandtxt.setText(String.valueOf(gtotal));
+
+
+        });
+
+    }
+
+    private void getClear() {
+
+
+        bcode.setText("");
+        bname.setText("");
+        caname.setText("");
+        aname.setText("");
+        qtytxt.setText("");
+        ptxt.setText("");
+        warrantycombo.setValue("အာမခံ");
+        discounttxt.setText("");
+        _bookid = null;
+
+
+
     }
 
     private void getordertableInit(){
 
-        bookcodeCol.setCellValueFactory(new PropertyValueFactory<>("bookid"));
-        booknameCol.setCellValueFactory(new PropertyValueFactory<>("bookname"));
-        categoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
-        authorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
-        qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        bookcodeCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
+        booknameCol.setCellValueFactory(new PropertyValueFactory<>("bname"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("ccode"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("acode"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        discountCol.setCellValueFactory(new PropertyValueFactory<>("discount"));
+        warrantyCol.setCellValueFactory(new PropertyValueFactory<>("warranty"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
 
+    }
+
+    private void getWarranty(ComboBox<String> comboBox){
+
+        ObservableList<String> setList = FXCollections.observableArrayList();
+
+        Warrantydb warrantydb = new Warrantydb();
+
+        List<Warranty> getList = warrantydb.getWarrantyList();
+
+        for(Warranty w :getList){
+
+
+            setList.add(w.getName());
+
+        }
+
+        comboBox.setItems(setList);
 
 
 

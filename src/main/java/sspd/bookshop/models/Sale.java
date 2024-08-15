@@ -13,11 +13,13 @@ public class Sale extends Order{
     private int qty;
     private int price;
     private int total;
+    private int discount;
 
     private String oid;
     private Date odate;
     private String cuname;
     private String cuphone;
+    private String warranty;
 
     public Date getOdate() {
         return odate;
@@ -64,6 +66,42 @@ public class Sale extends Order{
         this.cuphone = cuphone;
     }
 
+    public String getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(String warranty) {
+        this.warranty = warranty;
+    }
+
+    public Sale(String orderid,String bcode, String bname, String ccode, String acode, int qty, int price, int total, int discount, String warranty) {
+        super(orderid);
+        this.bcode = bcode;
+        this.bname = bname;
+        this.ccode = ccode;
+        this.acode = acode;
+        this.qty = qty;
+        this.price = price;
+        this.total = total;
+        this.discount = discount;
+        this.warranty = warranty;
+    }
+
+    public Sale(String orderid, String bcode, String bname, String ccode, String acode, int qty, int price, int total, int discount, String oid, Date odate, String cuname, String cuphone) {
+        super(orderid);
+        this.bcode = bcode;
+        this.bname = bname;
+        this.ccode = ccode;
+        this.acode = acode;
+        this.qty = qty;
+        this.price = price;
+        this.total = total;
+        this.discount = discount;
+        this.oid = oid;
+        this.odate = odate;
+        this.cuname = cuname;
+        this.cuphone = cuphone;
+    }
 
     public Sale(String orderid, Date orderdate, String culname, String cuphone, int price, int qty, String acode, String ccode, String bname, String bcode) {
         super(orderid, orderdate, culname, cuphone);
@@ -82,7 +120,13 @@ public class Sale extends Order{
     }
 
 
+    public int getDiscount() {
+        return discount;
+    }
 
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
     public String getOid() {
         return oid;

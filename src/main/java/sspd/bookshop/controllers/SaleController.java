@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static sspd.bookshop.controllers.NewSaleController.oList;
+import static sspd.bookshop.controllers.StockController._bookid;
 
 public class SaleController implements Initializable {
 
@@ -95,6 +96,7 @@ public class SaleController implements Initializable {
 
             oList.clear();
 
+
             FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newSales.fxml"));
             Scene scene = null;
             try {
@@ -102,7 +104,7 @@ public class SaleController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            stage.initStyle(StageStyle.UTILITY);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.initModality(Modality.WINDOW_MODAL);
             Stage mainStage = (Stage) newSalebtn.getScene().getWindow();
             stage.setTitle("New Sale");
