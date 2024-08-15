@@ -1,6 +1,5 @@
 package sspd.bookshop.controllers;
 
-import com.sun.tools.javac.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -143,6 +142,7 @@ public class NewSalesController implements Initializable {
         getWarranty(warrantycombo);
 
 
+
         addbtn.setOnAction(_ -> {
             boolean bo = false;
 
@@ -193,18 +193,7 @@ public class NewSalesController implements Initializable {
                 }
 
 
-
-
-
-
-
-
             }
-
-
-
-
-
 
 
 
@@ -212,17 +201,11 @@ public class NewSalesController implements Initializable {
 
         cancelimg.setOnMouseClicked(_ -> {
 
-
             Stage Mainstage = (Stage) cancelimg.getScene().getWindow();
 
             _oList.clear();
 
             Mainstage.close();
-
-
-
-
-
 
         });
 
