@@ -15,12 +15,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sspd.bookshop.Alerts.AlertBox;
+import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
+import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.databases.Warrantydb;
 import sspd.bookshop.launch.Bookshop;
+import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
 import sspd.bookshop.models.Sale;
 import sspd.bookshop.models.Warranty;
+import sspd.bookshop.modules.Deliver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +35,7 @@ import java.util.ResourceBundle;
 
 import static sspd.bookshop.controllers.StockController._bookid;
 
-public class NewSalesController implements Initializable {
+public class NewSalesController extends Deliver implements Initializable {
 
     @FXML
     private Button addbtn;
@@ -209,7 +213,18 @@ public class NewSalesController implements Initializable {
 
         });
 
+        otable.setOnMouseClicked(_ -> {
 
+           int  index =  otable.getSelectionModel().getSelectedIndex();
+
+            removebtn.setOnAction(_ -> {
+
+                _oList.remove(index);
+
+
+            });
+
+        });
 
         help.setOnKeyPressed(event -> {
 
@@ -323,7 +338,7 @@ public class NewSalesController implements Initializable {
 
         discounttxt.setOnKeyReleased(_ -> {
 
-            int amount ;
+            double amount ;
             int  discount ;
 
             if (qtytxt.getText().isEmpty() || ptxt.getText().isEmpty()){
@@ -335,7 +350,7 @@ public class NewSalesController implements Initializable {
             }
             else {
 
-              amount = Integer.parseInt(total.getText());
+              amount = Double.parseDouble(total.getText());
               discount = Integer.parseInt(discounttxt.getText());
 
             }
@@ -344,6 +359,42 @@ public class NewSalesController implements Initializable {
 
             grandtxt.setText(String.valueOf(gtotal));
 
+
+        });
+
+        comfirmbtn.setOnAction(event -> {
+
+            int i=0;
+            int y = 0;
+            int z = 0;
+            String orid =  oid.getText();
+            Date date = Date.valueOf(odate.getText());
+            String cuname = cname.getText();
+            String cuphone = cphone.getText();
+
+
+            Saledb saledb = new Saledb();
+            Bookdb bookdb = new Bookdb();
+            Orderdb orderdb = new Orderdb();
+
+            z= orderdb.create(new Order(orid ,date,cuname,cuphone));
+
+
+
+            for(Sale sale : _oList){
+
+                Sale addSale = new Sale(sale.getOrderid(),sale.getBcode(),sale.getBname(),getCategoryCode(sale.getCcode()),getAuthorCode(sale.getAcode()),sale.getQty(),sale.getPrice(),sale.getTotal(),sale.getDiscount(),sale.getWarranty());
+
+              i =  saledb.create(addSale);
+              y =  bookdb.subQty(new Book(addSale.getBcode(),addSale.getQty()));
+            }
+
+            if(i==1 && y==1 && z ==1){
+
+
+                AlertBox.showInformation("အောင်မြင်သည်။","အောင်မြင်ပါသည်");
+
+            }
 
         });
 

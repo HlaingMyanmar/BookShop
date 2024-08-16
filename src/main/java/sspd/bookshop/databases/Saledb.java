@@ -92,7 +92,7 @@ return  0;
         
         int i = 0;
 
-        String sql = "INSERT INTO `sale`(`orid`, `bcode`, `cid`, `aid`, `qty`, `price`) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO `sale`(`orid`, `bcode`, `cid`, `aid`, `qty`, `price`,`discount`,`warranty`) VALUES (?,?,?,?,?,?,?,?)";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -102,6 +102,8 @@ return  0;
             pst.setString(4, sale.getAcode());
             pst.setInt(5,sale.getQty());
             pst.setInt(6,sale.getPrice());
+            pst.setInt(7,sale.getDiscount());
+            pst.setString(8,sale.getWarranty());
 
             i = pst.executeUpdate();
 
