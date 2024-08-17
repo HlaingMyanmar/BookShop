@@ -2,7 +2,6 @@ package sspd.bookshop.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +31,6 @@ import sspd.bookshop.models.Sale;
 import sspd.bookshop.models.Warranty;
 import sspd.bookshop.modules.Deliver;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.sql.Date;
@@ -102,8 +100,7 @@ public class NewSalesController extends Deliver implements Initializable {
     @FXML
     private TableColumn<Sale, Double> priceCol;
 
-    @FXML
-    private Button printbtn;
+
 
     @FXML
     private TextField ptxt;
@@ -194,6 +191,8 @@ public class NewSalesController extends Deliver implements Initializable {
                     Sale sale = new Sale(orderid,bookcode,bookname,category,author,quantity,price,total,discount,warranty);
                     _oList.add(sale);
                     otable.setItems(_oList);
+                    pcslb.setText(_oList.size()+" pcs");
+                    amountlb.setText(grandtxt.getText()+" MMK");
                     getClear();
 
                 }
@@ -370,7 +369,7 @@ public class NewSalesController extends Deliver implements Initializable {
 
         });
 
-        comfirmbtn.setOnAction(event -> {
+        comfirmbtn.setOnAction(_ -> {
 
             int i=0;
             int y = 0;
@@ -402,27 +401,15 @@ public class NewSalesController extends Deliver implements Initializable {
 
 
                 AlertBox.showInformation("အောင်မြင်သည်။","အောင်မြင်ပါသည်");
+                Stage MainStage = (Stage) comfirmbtn.getScene().getWindow();
+                MainStage.close();
+
 
             }
 
 
 
         });
-
-        printbtn.setOnAction(_ -> {
-
-
-            try {
-                getReport(printList);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (JRException e) {
-                throw new RuntimeException(e);
-            }
-
-
-        });
-
 
 
     }
@@ -529,8 +516,6 @@ public class NewSalesController extends Deliver implements Initializable {
 
 
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

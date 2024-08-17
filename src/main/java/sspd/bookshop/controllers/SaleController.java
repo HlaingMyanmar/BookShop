@@ -118,7 +118,11 @@ public class SaleController implements Initializable {
         ordertable.setOnMouseClicked(event -> {
 
 
+
+
+
             if (event.getClickCount() == 1) {
+
                 Order order = (Order) ordertable.getSelectionModel().getSelectedItem();
 
                 Saledb saledb = new Saledb();
@@ -128,6 +132,7 @@ public class SaleController implements Initializable {
 
                 try {
                     getReport(saleList);
+                    getLoadData();
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 } catch (JRException e) {

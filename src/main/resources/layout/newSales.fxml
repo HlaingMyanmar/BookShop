@@ -15,23 +15,22 @@
 
 <AnchorPane fx:id="help" prefHeight="615.0" prefWidth="1336.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.NewSalesController">
    <children>
-      <TableView fx:id="otable" layoutX="11.0" layoutY="93.0" prefHeight="384.0" prefWidth="890.0">
+      <TableView fx:id="otable" layoutX="11.0" layoutY="93.0" prefHeight="384.0" prefWidth="890.0" stylesheets="@../css/table.css">
         <columns>
-          <TableColumn fx:id="bookcodeCol" prefWidth="88.0" text="ပစ္စည်းကုတ်" />
-            <TableColumn fx:id="booknameCol" prefWidth="222.0" text="ပစ္စည်းအမျိုးအမည်" />
-          <TableColumn fx:id="categoryCol" prefWidth="131.0" text="အမျိုးအစားအုပ်စု" />
-            <TableColumn fx:id="authorCol" prefWidth="122.0" text="ထုတ်လုပ်သူ" />
-            <TableColumn fx:id="qtyCol" prefWidth="70.0" text="အရေအတွက်" />
-            <TableColumn fx:id="warrantyCol" prefWidth="89.0" text="အာမခံ" />
-            <TableColumn fx:id="priceCol" prefWidth="55.0" text="ဈေးနှုန်း" />
-            <TableColumn fx:id="discountCol" prefWidth="112.0" text="လျော့ဈေး" />
+          <TableColumn fx:id="bookcodeCol" prefWidth="88.0" text="Item Code" />
+            <TableColumn fx:id="booknameCol" prefWidth="222.0" text="Description" />
+          <TableColumn fx:id="categoryCol" prefWidth="131.0" text="Category" />
+            <TableColumn fx:id="authorCol" prefWidth="122.0" text="Author" />
+            <TableColumn fx:id="qtyCol" prefWidth="77.0" text="Qty" />
+            <TableColumn fx:id="warrantyCol" prefWidth="82.0" text="Warranty" />
+            <TableColumn fx:id="priceCol" prefWidth="67.0" text="Price" />
+            <TableColumn fx:id="discountCol" prefWidth="100.0" text="Discount" />
             <TableColumn fx:id="totalCol" prefWidth="89.0" text="ကျသင့်ငွေ" />
         </columns>
       </TableView>
       <Button fx:id="addbtn" layoutX="907.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ရွေးချယ်ရန်။" />
       <Button fx:id="removebtn" layoutX="1002.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ဖယ်ရှားရန်။" />
-      <Button fx:id="comfirmbtn" layoutX="1094.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Comfirm" />
-      <Button fx:id="printbtn" layoutX="1190.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn" stylesheets="@../css/buttom.css" text="Print" />
+      <Button fx:id="comfirmbtn" layoutX="1094.0" layoutY="573.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" styleClass="btn" stylesheets="@../css/buttom.css" text="သေချာပါသည်။" />
       <Pane layoutX="11.0" layoutY="493.0" prefHeight="114.0" prefWidth="890.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" stylesheets="@../css/pane1.css">
          <children>
             <Label fx:id="pcslb" layoutX="23.0" layoutY="11.0" prefHeight="89.0" prefWidth="215.0" text="122212 pcs" textFill="#1500ff">
