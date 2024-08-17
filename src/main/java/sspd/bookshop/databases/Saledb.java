@@ -221,41 +221,48 @@ return  0;
         String sql = """
                 
                 SELECT				
-                                                                					o.orid,
-                                                                                    o.ordate,
-                                                                                    o.cuname,
-                                                                                    o.cuphone,
-                                                                                    sa.bcode,
-                                                                                    bo.name,
-                                                                                    sa.cid,
-                                                                                    sa.aid,
-                                                                                    sa.qty,
-                                                                                    sa.price,
-                                                                                    SUM(sa.qty * sa.price) AS amount
-                                                                                FROM
-                                                                                    cuorder o
-                                                                                INNER JOIN
-                                                                                    sale sa
-                                                                                ON
-                                                                                    o.orid = sa.orid
-                                                                                INNER JOIN
-                                                                                    book bo
-                                                                                ON
-                                                                                    bo.bcode = sa.bcode
-                                                                                WHERE
-                                                                                    o.orid = ?
-                                                                                GROUP BY
-                                                                                    o.orid,
-                                                                                    o.ordate,
-                                                                                    o.cuname,
-                                                                                    o.cuphone,
-                                                                                    sa.bcode,
-                                                                                    sa.cid,
-                                                                                    sa.aid,
-                                                                                    sa.qty,
-                                                                                    sa.price
-                                                                                ORDER BY
-                                                                                    CAST(SUBSTRING(o.orid, 4) AS UNSIGNED) DESC;
+                                                                                                                                                                                                					o.orid,
+                                                                                                                                                                                                                    o.ordate,
+                                                                                                                                                                                                                    o.cuname,
+                                                                                                                                                                                                                    o.cuphone,
+                                                                                                                                                                                                                    sa.bcode,
+                                                                                                                                                                                                                    bo.name,
+                                                                                                                                                                                                                    sa.cid,
+                                                                                                                                                                                                                    sa.aid,
+                                                                                                                                                                                                                    sa.warranty,
+                                                                                                                                                                                                                    sa.qty,
+                                                                                                                                                                                                                    sa.price,
+                                                                                                                                                                                                                    SUM(sa.qty * sa.price) AS amount,
+                                                                                                                                                                                                                    sa.discount ,
+                                                                                                                                                                                                                    (SUM(sa.qty * sa.price)-sa.discount) as total
+                                                                                                                                                                                                                   
+                                                                                                                                                                                                                FROM
+                                                                                                                                                                                                                    cuorder o
+                                                                                                                                                                                                                INNER JOIN
+                                                                                                                                                                                                                    sale sa
+                                                                                                                                                                                                                ON
+                                                                                                                                                                                                                    o.orid = sa.orid
+                                                                                                                                                                                                                INNER JOIN
+                                                                                                                                                                                                                    book bo
+                                                                                                                                                                                                                ON
+                                                                                                                                                                                                                    bo.bcode = sa.bcode
+                                                                                                                                                                                                                WHERE
+                                                                                                                                                                                                                    o.orid =?
+                                                                                                                                                                                                                GROUP BY
+                                                                                                                                                                                                                    o.orid,
+                                                                                                                                                                                                                    o.ordate,
+                                                                                                                                                                                                                    o.cuname,
+                                                                                                                                                                                                                    o.cuphone,
+                                                                                                                                                                                                                    sa.bcode,
+                                                                                                                                                                                                                    sa.cid,
+                                                                                                                                                                                                                    sa.aid,
+                                                                                                                                                                                                                    sa.warranty,
+                                                                                                                                                                                                                    sa.qty,
+                                                                                                                                                                                                                    sa.discount ,
+                                                                                                                                                                                                                    sa.price
+                                                                                                                                                                                                                   
+                                                                                                                                                                                                                ORDER BY
+                                                                                                                                                                                                                    CAST(SUBSTRING(o.orid, 4) AS UNSIGNED) DESC;
                                 
              
                 """;
@@ -281,11 +288,14 @@ return  0;
                 String bname = rs.getString("name");
                 String cid = rs.getString("cid");
                 String aid = rs.getString("aid");
+                String warran = rs.getString("warranty");
+                int dsicount = rs.getInt("discount");
+                int total = rs.getInt("total");
                 int qty = rs.getInt("qty");
                 int price = rs.getInt("price");
                 int amount = rs.getInt("amount");
 
-                Sale sale = new Sale(orderid,odate,cuname,cuphone,bcode,bname,cid,aid,qty,price,amount);
+                Sale sale = new Sale(orderid,odate,cuname,cuphone,bcode,bname,cid,aid,qty,price,amount,dsicount,warran,total);
 
                 saleList.add(sale);
 

@@ -2,6 +2,7 @@ package sspd.bookshop.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Bookdb;
 import sspd.bookshop.databases.Orderdb;
@@ -26,12 +32,12 @@ import sspd.bookshop.models.Sale;
 import sspd.bookshop.models.Warranty;
 import sspd.bookshop.modules.Deliver;
 
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static sspd.bookshop.controllers.StockController._bookid;
 
@@ -135,6 +141,8 @@ public class NewSalesController extends Deliver implements Initializable {
     private ComboBox<String> warrantycombo;
 
     public static ObservableList<Sale> _oList = FXCollections.observableArrayList();
+
+    List<Sale> printList = new ArrayList<>();
 
     private void ini(){
 
@@ -383,8 +391,9 @@ public class NewSalesController extends Deliver implements Initializable {
 
             for(Sale sale : _oList){
 
-                Sale addSale = new Sale(sale.getOrderid(),sale.getBcode(),sale.getBname(),getCategoryCode(sale.getCcode()),getAuthorCode(sale.getAcode()),sale.getQty(),sale.getPrice(),sale.getTotal(),sale.getDiscount(),sale.getWarranty());
 
+                Sale addSale = new Sale(sale.getOrderid(),date,cuname,cuphone,sale.getBcode(),sale.getBname(),getCategoryCode(sale.getCcode()),getAuthorCode(sale.getAcode()),sale.getQty(),sale.getPrice(),sale.getTotal(),sale.getDiscount(),sale.getWarranty(),sale.getGrandtotal());
+                printList.add(sale);
               i =  saledb.create(addSale);
               y =  bookdb.subQty(new Book(addSale.getBcode(),addSale.getQty()));
             }
@@ -396,7 +405,54 @@ public class NewSalesController extends Deliver implements Initializable {
 
             }
 
+
+
         });
+
+        printbtn.setOnAction(_ -> {
+
+
+            try {
+                getReport(printList);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (JRException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        });
+
+
+
+    }
+
+    private void getReport(List<Sale>saleList) throws FileNotFoundException, JRException {
+
+
+        Saledb saledb = new Saledb();
+        List<Sale> updateList = saledb.findByOrderCode(saleList.getFirst().getOrderid());
+
+        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(updateList);
+
+
+        Map<String,Object> parameters = new HashMap<String,Object>();
+        parameters.put("Collection",itemsJRBean);
+
+        //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
+        InputStream input = new FileInputStream(new File("E:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
+
+
+        JasperDesign jasperDesign = JRXmlLoader.load(input);
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
+
+        JasperViewer viewer = new JasperViewer(jasperPrint,false);
+        viewer.setVisible(true);
+
+
 
     }
 
