@@ -1,5 +1,6 @@
 package sspd.bookshop.controllers;
 
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -9,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -23,23 +21,25 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Orderdb;
+import sspd.bookshop.databases.Purchasedb;
 import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
-import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
+import sspd.bookshop.models.Purchase;
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static sspd.bookshop.controllers.NewSaleController.oList;
-import static sspd.bookshop.controllers.StockController._bookid;
+import static sspd.bookshop.modules.Currency.convertToMyanmarCurrency;
 
 public class SaleController implements Initializable {
 
@@ -84,11 +84,44 @@ public class SaleController implements Initializable {
 
 
 
+    @FXML
+    private Button daybtn;
+
+    @FXML
+    private Spinner<Integer> monthPicker;
+
+    @FXML
+    private Spinner<Integer> yearPicker;
+
+    @FXML
+    private Spinner<Integer> dayPicker;
+
+    @FXML
+    private Button monthbtn;
+
+    @FXML
+    private JFXToggleButton specialSearchtoglebtn;
+
+
+    @FXML
+    private Label lbCount;
+
+    @FXML
+    private Label lbTotal;
+
+
+
+    @FXML
+    private Button yearbtn;
+
+
+
 
     private void ini(){
 
         getorderTableIni();
-        getLoadData();
+        setDisable();
+
 
         newSalebtn.setOnAction(_ -> {
             Stage stage = new Stage();
@@ -121,7 +154,7 @@ public class SaleController implements Initializable {
 
 
 
-            if (event.getClickCount() == 1) {
+            if (event.getClickCount() == 2) {
 
                 Order order = (Order) ordertable.getSelectionModel().getSelectedItem();
 
@@ -132,7 +165,6 @@ public class SaleController implements Initializable {
 
                 try {
                     getReport(saleList);
-                    getLoadData();
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 } catch (JRException e) {
@@ -143,6 +175,182 @@ public class SaleController implements Initializable {
             }
         });
 
+        int day = LocalDate.now().getDayOfMonth();
+        dayPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, day));
+
+        int year = LocalDate.now().getYear();
+        yearPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1900, 2100, year));
+
+        int month = LocalDate.now().getMonthValue();
+        monthPicker.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 12, 1));
+        monthPicker.getValueFactory().setValue(month);
+
+
+      specialSearchtoglebtn.setOnAction(_ -> {
+
+
+          if (specialSearchtoglebtn.isSelected()) {
+
+
+              getLoadData();
+              setEnable();
+
+          } else {
+
+              setDisable();
+              getLoadDataIni();
+
+          }
+
+
+      });
+
+
+        daybtn.setOnAction(_e -> {
+
+            Orderdb orderdb = new Orderdb();
+
+            try {
+
+                List<Order> orderList = orderdb.getDay(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
+                ObservableList<Order> oList = FXCollections.observableArrayList();
+
+                oList.addAll(orderList);
+                ordertable.setItems(oList);
+
+
+                double sum = orderList.stream()
+                        .mapToDouble(Order::getTotal)
+                        .sum();
+                lbTotal.setText(convertToMyanmarCurrency(sum));
+                lbCount.setText(String.valueOf(orderList.size()));
+
+                if(orderList.isEmpty()){
+
+                    AlertBox.showWarning("Data Option","No Data Found!!!");
+                }
+
+            }catch (NullPointerException e){
+
+
+            }
+
+
+        });
+
+        monthbtn.setOnAction(event -> {
+
+            Orderdb orderdb = new Orderdb();
+
+            try {
+
+                List<Order> orderList = orderdb.getMonth(monthPicker.getValue(), yearPicker.getValue());
+                ObservableList<Order> oList = FXCollections.observableArrayList();
+
+                oList.addAll(orderList);
+                ordertable.setItems(oList);
+
+
+                double sum = orderList.stream()
+                        .mapToDouble(Order::getTotal)
+                        .sum();
+                lbTotal.setText(convertToMyanmarCurrency(sum));
+                lbCount.setText(String.valueOf(orderList.size()));
+
+                if(orderList.isEmpty()){
+
+                    AlertBox.showWarning("Data Option","No Data Found!!!");
+                }
+
+            }catch (NullPointerException e){
+
+
+            }
+
+
+        });
+
+
+      yearbtn.setOnAction(_ -> {
+
+         Orderdb orderdb = new Orderdb();
+
+          try {
+
+              List<Order> orderList = orderdb.getYear(yearPicker.getValue());
+              ObservableList<Order> oList = FXCollections.observableArrayList();
+              oList.addAll(orderList);
+              ordertable.setItems(oList);
+
+
+              double sum = orderList.stream()
+                      .mapToDouble(Order::getTotal)
+                      .sum();
+              lbTotal.setText(convertToMyanmarCurrency(sum));
+              lbCount.setText(String.valueOf(orderList.size()));
+
+              if(orderList.isEmpty()){
+
+                  AlertBox.showWarning("Data Option","No Data Found!!!");
+              }
+
+
+
+          }catch (NullPointerException _){
+
+          }
+
+
+      });
+
+
+
+
+
+
+    }
+
+    private  void getLoadDataIni(){
+
+        Orderdb orderdb = new Orderdb();
+
+        try {
+
+            List<Order> orderList =  orderdb.getDay(dayPicker.getValue(),monthPicker.getValue(),yearPicker.getValue());
+
+            ObservableList<Order> oList = FXCollections.observableArrayList();
+            oList.addAll(orderList);
+            ordertable.setItems(oList);
+
+            double sum = orderList.stream()
+                    .mapToDouble(Order::getTotal)
+                    .sum();
+            lbTotal.setText(convertToMyanmarCurrency(sum));
+            lbCount.setText(String.valueOf(orderList.size()));
+
+
+        }catch (NullPointerException _){
+
+
+        }
+
+    }
+
+    private void setDisable(){
+
+        searchID.setDisable(true);
+        searchdate.setDisable(true);
+        searchcustomer.setDisable(true);
+        searchphone.setDisable(true);
+        searchamount.setDisable(true);
+    }
+    private void setEnable(){
+
+        searchID.setDisable(false);
+        searchdate.setDisable(false);
+        searchcustomer.setDisable(false);
+        searchphone.setDisable(false);
+        searchamount.setDisable(false);
     }
 
 
@@ -258,4 +466,6 @@ public class SaleController implements Initializable {
         ini();
 
     }
+
+
 }

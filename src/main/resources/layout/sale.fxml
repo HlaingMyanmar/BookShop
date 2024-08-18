@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,9 +13,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="598.0" prefWidth="1302.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
+<AnchorPane prefHeight="625.0" prefWidth="1302.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SaleController">
    <children>
-      <TableView fx:id="ordertable" layoutX="10.0" layoutY="80.0" prefHeight="462.0" prefWidth="707.0" stylesheets="@../css/table.css">
+      <TableView fx:id="ordertable" layoutX="10.0" layoutY="135.0" prefHeight="441.0" prefWidth="707.0" stylesheets="@../css/table.css">
          <columns>
             <TableColumn fx:id="oidCol" prefWidth="95.0" text="အော်ဒါကုတ်" />
             <TableColumn fx:id="oDateCol" prefWidth="107.0" text="အော်ဒါ ရက်စွဲ" />
@@ -21,7 +24,7 @@
             <TableColumn fx:id="totalCol" prefWidth="109.0" text="ပမာဏ" />
          </columns>
       </TableView>
-      <Pane layoutX="11.0" layoutY="14.0" prefHeight="55.0" prefWidth="707.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #005796;">
+      <Pane layoutX="11.0" layoutY="68.0" prefHeight="55.0" prefWidth="707.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #005796;">
          <children>
             <TextField fx:id="searchID" layoutX="7.0" layoutY="4.0" prefHeight="48.0" prefWidth="94.0" promptText="ကုတ်နံပါတ် ..............." style="-fx-background-color: #FFFFFF;">
                <font>
@@ -34,7 +37,7 @@
                </font>
             </TextField>
             <Line endX="258.0" endY="102.0" layoutX="-154.0" layoutY="-53.0" startX="258.0" startY="58.0" stroke="#005796" />
-            <TextField fx:id="searchcustomer" layoutX="216.0" layoutY="4.0" prefHeight="48.0" prefWidth="208.0" promptText="ဝယ်ယူသူအမည်" style="-fx-background-color: #FFFFFF;">
+            <TextField fx:id="searchcustomer" layoutX="216.0" layoutY="3.0" prefHeight="48.0" prefWidth="208.0" promptText="ဝယ်ယူသူအမည်" style="-fx-background-color: #FFFFFF;">
                <font>
                   <Font name="Pyidaungsu" size="14.0" />
                </font>
@@ -54,16 +57,59 @@
             </TextField>
          </children>
       </Pane>
-      <Button fx:id="newSalebtn" layoutX="8.0" layoutY="558.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="အသစ်ရောင်းရန်။">
+      <Button fx:id="newSalebtn" layoutX="8.0" layoutY="584.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="အသစ်ရောင်းရန်။">
          <font>
             <Font size="10.0" />
          </font>
       </Button>
-      <Button layoutX="143.0" layoutY="558.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="အသစ်ရောင်းရန်။">
+      <Button layoutX="143.0" layoutY="584.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" styleClass="btn" stylesheets="@../css/buttom.css" text="အသစ်ရောင်းရန်။">
          <font>
             <Font size="10.0" />
          </font>
       </Button>
-      <StackPane fx:id="previewPane" layoutX="732.0" layoutY="-4.0" prefHeight="598.0" prefWidth="567.0" />
+      <StackPane fx:id="previewPane" layoutX="732.0" layoutY="64.0" prefHeight="557.0" prefWidth="567.0" />
+      <Button fx:id="daybtn" layoutX="80.0" layoutY="14.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="66.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ကြည့်ရန်">
+         <font>
+            <Font name="Pyidaungsu Bold" size="42.0" />
+         </font>
+      </Button>
+      <Spinner fx:id="monthPicker" editable="true" layoutX="151.0" layoutY="15.0" prefHeight="37.0" prefWidth="66.0" />
+      <Button fx:id="monthbtn" layoutX="222.0" layoutY="15.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="66.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ကြည့်ရန်">
+         <font>
+            <Font name="Pyidaungsu Bold" size="42.0" />
+         </font>
+      </Button>
+      <Spinner fx:id="yearPicker" editable="true" layoutX="294.0" layoutY="16.0" prefHeight="37.0" prefWidth="77.0" />
+      <Button fx:id="yearbtn" layoutX="377.0" layoutY="15.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="66.0" styleClass="btn" stylesheets="@../css/buttom.css" text="ကြည့်ရန်">
+         <font>
+            <Font name="Pyidaungsu Bold" size="42.0" />
+         </font>
+      </Button>
+      <Spinner fx:id="dayPicker" editable="true" layoutX="10.0" layoutY="15.0" prefHeight="37.0" prefWidth="66.0" />
+      <JFXToggleButton fx:id="specialSearchtoglebtn" layoutX="462.0" layoutY="4.0" text="Special Search" textFill="#005796">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXToggleButton>
+      <Label layoutX="930.0" layoutY="14.0" prefHeight="37.0" prefWidth="101.0" style="-fx-background-color: #FFFFFF; -fx-alignment: center;" text="စုစုပေါင်း " textFill="#4527a0">
+         <font>
+            <Font name="Pyidaungsu Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbTotal" layoutX="1033.0" layoutY="14.0" prefHeight="37.0" prefWidth="309.0" style="-fx-background-color: #FFFFFF; -fx-alignment: left;" text="Total Amount :" textFill="#ff0202">
+         <font>
+            <Font name="Pyidaungsu Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="716.0" layoutY="14.0" prefHeight="37.0" prefWidth="136.0" style="-fx-alignment: center; -fx-background-color: #FFFFFF;" text="အရေအတွက် :" textFill="#4527a0">
+         <font>
+            <Font name="Pyidaungsu Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbCount" layoutX="850.0" layoutY="14.0" prefHeight="37.0" prefWidth="77.0" style="-fx-background-color: #FFFFFF; -fx-alignment: left;" text="Count =" textFill="#ff0202">
+         <font>
+            <Font name="Pyidaungsu Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

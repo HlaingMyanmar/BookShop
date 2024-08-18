@@ -20,10 +20,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.Alerts.AlertBox;
-import sspd.bookshop.databases.Bookdb;
-import sspd.bookshop.databases.Orderdb;
-import sspd.bookshop.databases.Saledb;
-import sspd.bookshop.databases.Warrantydb;
+import sspd.bookshop.databases.*;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Book;
 import sspd.bookshop.models.Order;
@@ -38,6 +35,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import static sspd.bookshop.controllers.StockController._bookid;
+import static sspd.bookshop.modules.IDGenerate.getID;
 
 public class NewSalesController extends Deliver implements Initializable {
 
@@ -129,8 +127,10 @@ public class NewSalesController extends Deliver implements Initializable {
 
     @FXML
     private TableColumn<Sale, Double> totalCol;
+
     @FXML
     private TableColumn<Sale, Integer> discountCol;
+
     @FXML
     private TableColumn<Sale, String> warrantyCol;
 
@@ -495,33 +495,25 @@ public class NewSalesController extends Deliver implements Initializable {
 
     }
 
-    private String getOrderID(){
 
-        String defaultid = "#Or1";
-
-        Orderdb orderdb = new Orderdb();
-        List<Order> orderList = orderdb.getList();
-
-        if(orderList .size()==0){
-
-            return defaultid;
-
-        }
-        else {
-
-            return "#Or"+ (orderList.size() + 1);
-
-        }
-
-
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         ini();
         _bookid =null;
+
+    }
+
+    private String getOrderID(){
+
+        Orderdb orderdb = new Orderdb();
+
+        String id= (orderdb.getList().isEmpty())?null: (orderdb.getList().getFirst().getOrderid());
+
+
+
+        return  getID("#O", id);
 
     }
 
