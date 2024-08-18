@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static sspd.bookshop.controllers.LoginController._level;
+import static sspd.bookshop.controllers.NewSaleController.oList;
 
 public class MainDashboardController implements Initializable {
 
@@ -38,6 +39,11 @@ public class MainDashboardController implements Initializable {
     @FXML
     private MenuItem saledashboard;
 
+    @FXML
+    private MenuItem newSalebtn;
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,6 +55,8 @@ public class MainDashboardController implements Initializable {
 
 
     }
+
+
 
 
     private void  ini(){
@@ -72,6 +80,31 @@ public class MainDashboardController implements Initializable {
             }
 
 
+
+        });
+
+        newSalebtn.setOnAction(_ -> {
+
+            Stage stage = new Stage();
+
+
+            oList.clear();
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/newSales.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) switchPane.getScene().getWindow();
+            stage.setTitle("New Sale");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
 
         });
 

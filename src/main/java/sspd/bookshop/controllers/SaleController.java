@@ -388,6 +388,12 @@ public class SaleController implements Initializable {
 
         sortedData.comparatorProperty().bind(ordertable.comparatorProperty());
 
+        double sum = sortedData.stream()
+                .mapToDouble(Order::getTotal)
+                .sum();
+
+        lbTotal.setText(convertToMyanmarCurrency(sum));
+        lbCount.setText(String.valueOf(sortedData.size()));
 
         ordertable.setItems(sortedData);
 
@@ -404,7 +410,7 @@ public class SaleController implements Initializable {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (order.getOrderid().toLowerCase().contains(lowerCaseFilter)) {
+                if (textField == searchID && order.getOrderid().toLowerCase().equals(lowerCaseFilter)) {
                     return true;
                 } else if (String.valueOf(order.getOrderdate()).toLowerCase().contains(lowerCaseFilter)) {
                     return true;
