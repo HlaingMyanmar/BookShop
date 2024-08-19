@@ -92,8 +92,6 @@ public class Categorydb implements DataAccessObject<Category> {
 
             i = pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Add Category Successful");
-
 
 
         } catch (SQLException e) {

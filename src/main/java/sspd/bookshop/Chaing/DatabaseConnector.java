@@ -7,41 +7,50 @@ import java.sql.SQLException;
 public class DatabaseConnector {
 
 
-    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver"; //
-    private static final String urlGetDBParameters = "autoReconnect=true&useSSL=false";// Updated driver class name
-    private static final String DB_URL = "jdbc:mysql://192.168.100.143:3306/bookshop_db" + urlGetDBParameters;
+    private static final String DB_DRIVER = "org.mariadb.jdbc.Driver"; //
+    private static final String DB_IP= "192.168.100.163";
+    private static final String DB_URL = "jdbc:mariadb://";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
+    private static final String DB_Name ="bookshop_db";
+    private static final String DB_PORT = "3306";
+
+
 
     public static Connection getConnection() {
 
+        try {
 
+            Class.forName(DB_DRIVER);
+
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
 
         Connection conn = null;
 
-
-
         try {
-            Class.forName(DB_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 
-        } catch (ClassNotFoundException | SQLException e) {
+            conn = DriverManager.getConnection(DB_URL+DB_IP+":"+DB_PORT+"/"+DB_Name+"?user="+DB_USER+"&password="+DB_PASS);
+
+            // conn = DriverManager.getConnection(
+            //         "jdbc:mariadb://192.168.100.163:3306/" + DB_Name + "?user=" + DB_USER + "&password=" + DB_PASS
+            // );
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return conn;
     }
 
     public static void main(String[] args) {
-
-
         Connection con = getConnection();
 
-        if(con==null){
-            System.out.println("Not Connect");
+        if (con == null) {
+            System.out.println("Not Connected");
+        } else {
+            System.out.println("Connected");
         }
-        else {
-            System.out.println("Connect");
-        }
-
     }
+
 }

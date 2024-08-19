@@ -13,6 +13,7 @@ module sspd.bookshop.bookshop {
     requires junit;
     requires mysql.connector.j;
     requires javafx.swing;
+    requires org.mariadb.jdbc;
 
 
     opens sspd.bookshop.models to javafx.fxml;

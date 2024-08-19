@@ -42,6 +42,12 @@ public class MainDashboardController implements Initializable {
     @FXML
     private MenuItem newSalebtn;
 
+    @FXML
+    private MenuItem categoryList;
+
+
+
+
 
 
 
@@ -61,7 +67,7 @@ public class MainDashboardController implements Initializable {
 
     private void  ini(){
 
-        saledashboard.setOnAction(event -> {
+        saledashboard.setOnAction(_ -> {
 
             FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/sale.fxml"));
             Node node = null;
@@ -129,8 +135,6 @@ public class MainDashboardController implements Initializable {
 
         });
 
-
-
         showStockbtn.setOnAction(_ -> {
 
             FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/stock.fxml"));
@@ -151,7 +155,7 @@ public class MainDashboardController implements Initializable {
 
         });
 
-        showpurchasebtn.setOnAction(event -> {
+        showpurchasebtn.setOnAction(_ -> {
 
             FXMLLoader fxmlLoader2 = new FXMLLoader(Bookshop.class.getResource("/layout/buy.fxml"));
             Node node = null;
@@ -171,6 +175,35 @@ public class MainDashboardController implements Initializable {
 
 
         });
+
+        categoryList.setOnAction(_ -> {
+
+
+
+                Stage stage = new Stage();
+
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/category.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage.initStyle(StageStyle.UTILITY);
+                stage.initModality(Modality.WINDOW_MODAL);
+                Stage mainStage = (Stage) switchPane.getScene().getWindow();
+                stage.setTitle("Category Dashboard");
+                stage.initOwner(mainStage);
+                stage.setScene(scene);
+                stage.show();
+
+
+
+        });
+
+
+
 
     }
 }
