@@ -38,7 +38,7 @@
                   <MenuItem fx:id="showpurchasebtn" mnemonicParsing="false" text="Purchase Lists" />
                   <MenuItem mnemonicParsing="false" text="Purchase" />
                   <MenuItem mnemonicParsing="false" text="Suppliers" />
-                  <MenuItem mnemonicParsing="false" text="Supplier Lists" />
+                  <MenuItem fx:id="supplierlList" mnemonicParsing="false" text="Supplier Lists" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Sale">

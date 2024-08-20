@@ -55,6 +55,8 @@ public class Supplierdb implements DataAccessObject<Supplier> {
     @Override
     public int update(Supplier supplier) {
 
+        int  i = 0;
+
         String sql = "UPDATE supplier SET suname=?,suphone=?,suaddress=? WHERE suid=?";
 
         try(PreparedStatement pst = con.prepareStatement(sql)) {
@@ -64,9 +66,9 @@ public class Supplierdb implements DataAccessObject<Supplier> {
             pst.setString(3,supplier.getS_address());
             pst.setString(4,supplier.getS_id());
 
-            pst.executeUpdate();
+           i=  pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Update Supplier Successful");
+
 
 
         } catch (SQLException e) {
@@ -75,7 +77,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
             throw new RuntimeException(e);
         }
 
-        return 0;
+        return i;
 
     }
 
@@ -95,7 +97,7 @@ public class Supplierdb implements DataAccessObject<Supplier> {
 
             i = pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Insert Supplier Successful");
+
 
 
         } catch (SQLException e) {
