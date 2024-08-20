@@ -8,7 +8,7 @@ public class DatabaseConnector {
 
 
     private static final String DB_DRIVER = "org.mariadb.jdbc.Driver"; //
-    private static final String DB_IP= "192.168.100.163";
+    private static final String DB_IP= "192.168.100.162";
     private static final String DB_URL = "jdbc:mariadb://";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";

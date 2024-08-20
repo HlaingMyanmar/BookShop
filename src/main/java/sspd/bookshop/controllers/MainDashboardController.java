@@ -45,6 +45,9 @@ public class MainDashboardController implements Initializable {
     @FXML
     private MenuItem categoryList;
 
+    @FXML
+    private MenuItem authorList;
+
 
 
 
@@ -197,6 +200,32 @@ public class MainDashboardController implements Initializable {
                 stage.initOwner(mainStage);
                 stage.setScene(scene);
                 stage.show();
+
+
+
+        });
+
+        authorList.setOnAction(_ -> {
+
+
+
+            Stage stage = new Stage();
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/author.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.WINDOW_MODAL);
+            Stage mainStage = (Stage) switchPane.getScene().getWindow();
+            stage.setTitle("Author Dashboard");
+            stage.initOwner(mainStage);
+            stage.setScene(scene);
+            stage.show();
 
 
 

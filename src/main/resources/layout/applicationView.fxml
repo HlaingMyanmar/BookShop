@@ -46,7 +46,7 @@
                   <MenuItem fx:id="newSalebtn" mnemonicParsing="false" text="Sale" />
                   <MenuItem fx:id="saledashboard" mnemonicParsing="false" text="Sale Lists" />
                   <MenuItem fx:id="categoryList" mnemonicParsing="false" text="Category" />
-                  <MenuItem mnemonicParsing="false" text="Brand &amp; Company" />
+                  <MenuItem fx:id="authorList" mnemonicParsing="false" text="Brand &amp; Company" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Setting">

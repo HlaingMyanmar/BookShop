@@ -55,6 +55,8 @@ public class Categorydb implements DataAccessObject<Category> {
     @Override
     public int update(Category category) {
 
+        int  i = 0;
+
 
         String sql = "UPDATE category SET cname=? WHERE cid=?";
 
@@ -63,9 +65,9 @@ public class Categorydb implements DataAccessObject<Category> {
             pst.setString(1,category.getCategory_name());
             pst.setString(2,category.getCategory_id());
 
-            pst.executeUpdate();
+             i = pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null,"Update Category Successful");
+
 
 
         } catch (SQLException e) {
@@ -73,7 +75,7 @@ public class Categorydb implements DataAccessObject<Category> {
             throw new RuntimeException(e);
         }
 
-        return 0;
+        return i;
 
 
     }

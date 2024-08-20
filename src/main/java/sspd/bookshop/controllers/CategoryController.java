@@ -2,12 +2,10 @@ package sspd.bookshop.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import org.checkerframework.checker.units.qual.C;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.models.Category;
@@ -36,6 +34,9 @@ public class CategoryController implements Initializable {
     @FXML
     private Button savebtn;
 
+    @FXML
+    private Label sizetxt;
+
     Categorydb categorydb = new Categorydb();
 
     @Override
@@ -47,6 +48,8 @@ public class CategoryController implements Initializable {
 
 
 
+
+
         categorytable.setEditable(true);
 
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -54,8 +57,23 @@ public class CategoryController implements Initializable {
 
             String value = String.valueOf(event.getNewValue());
 
-          
+            if(null!=value && !value.isEmpty()){
 
+                event.getRowValue().setCategory_name(value);
+                Category category = (Category) categorytable.getSelectionModel().getSelectedItem();
+
+
+                if(categorydb.update(category)==1){
+
+
+                    AlertBox.showInformation("‌အုပ်စုအမျိုးအစား", "ပြင်ဆင်ခြင်းအောင်မြင်ပါသည်။");
+                    getLoadData(categorytable);
+
+                }
+
+
+
+            }
 
         });
 
@@ -92,6 +110,8 @@ public class CategoryController implements Initializable {
         });
 
 
+
+
     }
 
     private void getLoadData(TableView tableView){
@@ -103,6 +123,8 @@ public class CategoryController implements Initializable {
         List<Category>categoryList =  categorydb.getList();
 
         tableView.getItems().setAll(categoryList);
+
+       sizetxt.setText(String.valueOf(categoryList.size()));
 
     }
 
