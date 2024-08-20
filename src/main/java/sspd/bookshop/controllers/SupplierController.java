@@ -100,9 +100,9 @@ public class SupplierController  implements Initializable {
 
             if(null!=value && !value.isEmpty()){
 
-                event.getRowValue().setS_name(value);
-                Supplier supplier = (Supplier) suppliertable.getSelectionModel().getSelectedItem();
 
+                Supplier supplier = (Supplier) suppliertable.getSelectionModel().getSelectedItem();
+                event.getRowValue().setS_phone(value);
 
                 if(supplierdb.update(supplier)==1){
 
@@ -125,7 +125,7 @@ public class SupplierController  implements Initializable {
 
             if(null!=value && !value.isEmpty()){
 
-                event.getRowValue().setS_name(value);
+                event.getRowValue().setS_address(value);
                 Supplier supplier = (Supplier) suppliertable.getSelectionModel().getSelectedItem();
 
 
@@ -151,7 +151,7 @@ public class SupplierController  implements Initializable {
     private void ini() {
 
 
-        getLoadData(suppliertable);
+         getLoadData(suppliertable);
         code.setText(getIDGenerate());
 
 
@@ -189,7 +189,7 @@ public class SupplierController  implements Initializable {
         Supplierdb supplierdb = new Supplierdb();
         List<Supplier> supplierList =  supplierdb.getList();
 
-        tableView.getItems().setAll(suppliertable);
+        tableView.getItems().setAll(supplierList);
 
         sizetxt.setText(String.valueOf(supplierList.size()));
 
@@ -217,4 +217,5 @@ public class SupplierController  implements Initializable {
         return text+(Integer.parseInt(lastsupplier.substring(3))+1);
 
     }
+
 }

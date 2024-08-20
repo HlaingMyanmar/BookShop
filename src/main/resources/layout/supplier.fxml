@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="598.0" prefWidth="1296.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sspd.bookshop.controllers.SupplierController">
    <children>
-      <TableView fx:id="suppliertable" layoutX="11.0" layoutY="11.0" prefHeight="572.0" prefWidth="894.0" stylesheets="@../css/table.css">
+      <TableView fx:id="suppliertable" layoutX="11.0" layoutY="11.0" prefHeight="563.0" prefWidth="894.0" stylesheets="@../css/table.css">
         <columns>
           <TableColumn fx:id="codeCol" prefWidth="130.0" text="ကုဒ်" />
           <TableColumn fx:id="nameCol" prefWidth="189.0" text="နာမည်" />
