@@ -20,6 +20,7 @@
           <TableColumn fx:id="nameCol" prefWidth="189.0" text="နာမည်" />
             <TableColumn fx:id="phoneCol" prefWidth="185.0" text="ဖုန်းနံပါတ်" />
             <TableColumn fx:id="addressCol" prefWidth="389.0" text="လိပ်စာ" />
+            <TableColumn fx:id="addressCol1" prefWidth="389.0" text="လိပ်စာ" />
         </columns>
       </TableView>
       <VBox layoutX="899.0" layoutY="93.0" prefHeight="446.0" prefWidth="393.0">
@@ -29,17 +30,17 @@
                   <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="name" prefHeight="40.0" prefWidth="393.0" promptText="အုပ်စု အမျိုးအစား">
+            <TextField fx:id="name" prefHeight="40.0" prefWidth="393.0" promptText="နာမည်">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="phone" layoutX="30.0" layoutY="110.0" prefHeight="40.0" prefWidth="393.0" promptText="အုပ်စု အမျိုးအစား">
+            <TextField fx:id="phone" layoutX="30.0" layoutY="110.0" prefHeight="40.0" prefWidth="393.0" promptText="ဖုန်းနံပါတ်">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="address" prefHeight="165.0" prefWidth="373.0">
+            <TextArea fx:id="address" prefHeight="165.0" prefWidth="373.0" promptText="လိပ်စာ">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
                </VBox.margin>

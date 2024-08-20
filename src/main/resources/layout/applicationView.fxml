@@ -37,7 +37,6 @@
                <items>
                   <MenuItem fx:id="showpurchasebtn" mnemonicParsing="false" text="Purchase Lists" />
                   <MenuItem mnemonicParsing="false" text="Purchase" />
-                  <MenuItem mnemonicParsing="false" text="Suppliers" />
                   <MenuItem fx:id="supplierlList" mnemonicParsing="false" text="Supplier Lists" />
                </items>
             </Menu>
@@ -79,7 +78,7 @@
                   <Font name="Clarendon BT Bold" size="38.0" />
                </font>
             </Label>
-            <LineChart layoutX="801.0" layoutY="96.0">
+            <LineChart layoutX="781.0" layoutY="132.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
