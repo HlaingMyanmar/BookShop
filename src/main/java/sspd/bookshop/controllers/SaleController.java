@@ -165,9 +165,7 @@ public class SaleController implements Initializable {
 
                 try {
                     getReport(saleList);
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                } catch (JRException e) {
+                } catch (FileNotFoundException | JRException e) {
                     throw new RuntimeException(e);
                 }
 
@@ -437,7 +435,7 @@ public class SaleController implements Initializable {
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(saleList );
 
 
-        Map<String,Object> parameters = new HashMap<String,Object>();
+        Map<String,Object> parameters = new HashMap<>();
         parameters.put("Collection",itemsJRBean);
 
         //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));

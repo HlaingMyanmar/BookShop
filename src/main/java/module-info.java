@@ -15,6 +15,7 @@ module sspd.bookshop.bookshop {
     requires javafx.swing;
     requires org.mariadb.jdbc;
     requires org.checkerframework.checker.qual;
+    requires org.slf4j;
 
 
     opens sspd.bookshop.models to javafx.fxml;
