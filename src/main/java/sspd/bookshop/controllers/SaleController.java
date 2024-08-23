@@ -125,6 +125,7 @@ public class SaleController implements Initializable {
         setDisable();
 
 
+
         newSalebtn.setOnAction(_ -> {
             Stage stage = new Stage();
 
@@ -163,10 +164,13 @@ public class SaleController implements Initializable {
                 Saledb saledb = new Saledb();
                 List<Sale> saleList = saledb.findByOrderCode(order.getOrderid());
 
-
                 getReport(saleList);
 
 
+            }
+            else {
+
+                getLoadDataIni();
             }
         });
 
