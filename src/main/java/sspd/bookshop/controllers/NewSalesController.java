@@ -509,9 +509,9 @@ public class NewSalesController extends Deliver implements Initializable {
 
         Orderdb orderdb = new Orderdb();
 
-        String id= (orderdb.getList().isEmpty())?null: (orderdb.getList().getFirst().getOrderid());
+        String id= (orderdb.getList().isEmpty())?null: (orderdb.getOrderList().getLast().getOrderid());
 
-
+        System.out.println(id);
 
         return  getID("#O", id);
 

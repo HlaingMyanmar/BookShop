@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import org.checkerframework.checker.units.qual.C;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.models.Category;
@@ -102,6 +101,7 @@ public class CategoryController implements Initializable {
                 AlertBox.showInformation("‌အုပ်စုအမျိုးအစား", "အသစ်ထည့်သွင်းခြင်းအောင်မြင်ပါသည်။");
                 getLoadData(categorytable);
                 code.setText(getIDGenerate());
+                name.setText("");
 
 
             }
@@ -113,6 +113,7 @@ public class CategoryController implements Initializable {
 
 
     }
+
 
     private void getLoadData(TableView tableView){
 

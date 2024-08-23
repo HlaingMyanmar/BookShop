@@ -11,6 +11,8 @@ public class Bookshop extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/loginform.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("အကောင့်ဝင်ရန်။");
@@ -20,6 +22,8 @@ public class Bookshop extends Application {
     }
 
     public static void main(String[] args) {
+
+
 
         launch();
 

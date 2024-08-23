@@ -23,11 +23,11 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Orderdb;
-import sspd.bookshop.databases.Purchasedb;
+
 import sspd.bookshop.databases.Saledb;
 import sspd.bookshop.launch.Bookshop;
 import sspd.bookshop.models.Order;
-import sspd.bookshop.models.Purchase;
+
 import sspd.bookshop.models.Sale;
 
 import javax.swing.*;
@@ -114,6 +114,8 @@ public class SaleController implements Initializable {
     @FXML
     private Button yearbtn;
 
+    private File file = null;
+
 
 
 
@@ -161,13 +163,8 @@ public class SaleController implements Initializable {
                 Saledb saledb = new Saledb();
                 List<Sale> saleList = saledb.findByOrderCode(order.getOrderid());
 
-                
 
-                try {
-                    getReport(saleList);
-                } catch (FileNotFoundException | JRException e) {
-                    throw new RuntimeException(e);
-                }
+                getReport(saleList);
 
 
             }
@@ -429,7 +426,15 @@ public class SaleController implements Initializable {
 
     }
 
-    private void getReport(List<Sale>saleList) throws FileNotFoundException, JRException {
+
+
+
+    private void getReport(List<Sale>saleList)  {
+
+
+        String url = "E:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml ";
+
+        File file = new File(url);
 
 
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(saleList );
@@ -439,25 +444,38 @@ public class SaleController implements Initializable {
         parameters.put("Collection",itemsJRBean);
 
         //InputStream input = new FileInputStream(new File("F:\\Java Projects\\Reports\\SaleInvoice\\invoice.jrxml"));
-        InputStream input = new FileInputStream(new File("E:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml"));
+        InputStream input = null;
+
+        try {
+
+            input = new FileInputStream(file);
+            JasperDesign jasperDesign = null;
+
+            jasperDesign = JRXmlLoader.load(input);
 
 
-        JasperDesign jasperDesign = JRXmlLoader.load(input);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
 
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,new JREmptyDataSource());
+            JasperViewer viewer = new JasperViewer(jasperPrint,false);
+            //viewer.setVisible(true);
 
-        JasperViewer viewer = new JasperViewer(jasperPrint,false);
-        //viewer.setVisible(true);
+            SwingNode swingNode = new SwingNode();
 
-        SwingNode swingNode = new SwingNode();
+            JPanel panel = (JPanel) viewer.getContentPane();
 
-        JPanel panel = (JPanel) viewer.getContentPane();
+            swingNode.setContent(panel);
 
-        swingNode.setContent(panel);
+            previewPane.getChildren().add(swingNode);
 
-        previewPane.getChildren().add(swingNode);
+        } catch (FileNotFoundException | JRException e) {
+
+            AlertBox.showInformation("ဖိုင်","ဖိုင်မတွေ့ပါ။");
+
+
+        }
+
 
     }
 
@@ -470,6 +488,9 @@ public class SaleController implements Initializable {
         ini();
 
     }
+
+
+
 
 
 }

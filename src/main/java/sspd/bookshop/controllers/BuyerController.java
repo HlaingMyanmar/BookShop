@@ -107,8 +107,6 @@ public class BuyerController extends Deliver implements Initializable {
     @FXML
     private Button printpurchasebtn;
 
-    @FXML
-    private Button deletepurchasebtn;
 
     @FXML
     private Button newpurchasebtn;
@@ -319,244 +317,219 @@ public class BuyerController extends Deliver implements Initializable {
 
 
 
-        Callback<TableColumn<Purchase, String>, TableCell<Purchase, String>> cellFactory = (param) -> {
+        Callback<TableColumn<Purchase, String>, TableCell<Purchase, String>> cellFactory = (_) -> new TableCell<>() {
 
-            return new TableCell<Purchase, String>() {
+            private final Button editButton = new Button("+");
 
-                private final Button editButton = new Button("+");
+            {
+                editButton.setOnAction(event -> {
+                    int index = getIndex();
+                    if (index < 0 || index >= purchasetable.getItems().size()) {
+                        return;
+                    }
 
-                {
-                    editButton.setOnAction(event -> {
-                        int index = getIndex();
-                        if (index < 0 || index >= purchasetable.getItems().size()) {
-                            return;
+                    Purchase purchase = (Purchase) purchasetable.getItems().get(index);
+
+                    Purchasedb purchasedb = new Purchasedb();
+                    List<Purchase> purchaseList = purchasedb.getList();
+
+
+                    TableView<Purchase> purchaseTableView = new TableView<>();
+
+                    TableColumn<Purchase, String> pauthorCol = new TableColumn<>("ထုတ်လုပ်သူ");
+
+                    TableColumn<Purchase, String> pcategoryCol = new TableColumn<>("အုပ်စုအမျိုးအစား");
+
+                    TableColumn<Purchase, String> pcodeCol = new TableColumn<>("အဝယ်ကုဒ်");
+
+                    TableColumn<Purchase, Date> pdateCol = new TableColumn<>("ရက်စွဲ");
+
+                    TableColumn<Purchase, String> pnameCol = new TableColumn<>("အမျိုးအမည်");
+
+                    TableColumn<Purchase, Integer> ppriceCol = new TableColumn<>("ဈေးနှုန်း");
+
+                    TableColumn<Purchase, Integer> pqtyCol = new TableColumn<>("အရေအတွက်");
+
+                    TableColumn<Purchase, String> psupplierCol = new TableColumn<>("ထုတ်လုပ်သည့်");
+
+                    TableColumn<Purchase, Integer> ptotalCol = new TableColumn<>("စုစုပေါင်း");
+
+                    pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase, String>("puid"));
+                    pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase, Date>("pudate"));
+                    pnameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
+                    pcategoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
+                    pauthorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
+                    psupplierCol.setCellValueFactory(new PropertyValueFactory<>("sid"));
+                    pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+                    ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+                    ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+
+                    purchaseTableView.getColumns().addAll(psupplierCol, pcodeCol, pdateCol, pnameCol, pcategoryCol, pauthorCol, pqtyCol, ppriceCol, ptotalCol);
+
+                    List<Purchase> filteredList = purchaseList.stream()
+                            .filter(p -> p.getPuid().equals(purchase.getPuid()))
+                            .collect(Collectors.toList());
+
+                    purchaseTableView.getItems().setAll(filteredList);
+
+                    TableUtils.setColumnWidthsProportional(purchaseTableView);
+                    TableUtils.resizeTableColumnsToFitContent(purchaseTableView);
+
+
+                    double totalAmount = filteredList.stream()
+                            .mapToDouble(Purchase::getTotal) // Assuming getTotal() returns an int
+                            .sum();
+
+                    Label totalLabel = new Label("စုစုပေါင်းကုန်ကျငွေ : ( " + convertToMyanmarCurrency(totalAmount) + " )");
+                    Label labelcount = new Label("အရေအတွက်: ( " + filteredList.size() + " )ခုရှိပါသည်။");
+
+                    totalLabel.setStyle("-fx-font-weight: bold; -fx-padding: 15;");
+                    labelcount.setStyle("-fx-font-weight: bold; -fx-padding: 15;");
+
+                    Popup popup = new Popup();
+                    HBox hBox = new HBox(labelcount, totalLabel);
+                    VBox vbox = new VBox(purchaseTableView, hBox);
+                    vbox.setPadding(new Insets(10));
+                    vbox.setStyle("-fx-background-color: white; -fx-border-color: gray;");
+                    popup.getContent().add(vbox);
+
+                    Point2D cellLocation = localToScreen(getLayoutBounds().getMinX(), getLayoutBounds().getMaxY());
+                    popup.setX(cellLocation.getX());
+                    popup.setY(cellLocation.getY());
+
+                    popup.setAutoHide(true);
+                    popup.show(getScene().getWindow());
+
+                    AtomicInteger qty = new AtomicInteger();
+                    AtomicReference<String> bookcode = new AtomicReference<>();
+                    AtomicReference<String> pcode = new AtomicReference<>();
+
+
+                    purchaseTableView.setOnMouseClicked(even -> {
+
+
+                        if (even.getClickCount() == 2) {
+
+                            Purchase selectedItem = purchaseTableView.getSelectionModel().getSelectedItem();
+                            if (selectedItem != null) {
+                                qty.set(selectedItem.getQty());
+                                bookcode.set(getBookCode(selectedItem.getBcode()));
+                                pcode.set(selectedItem.getPuid());
+                            }
                         }
 
-                        Purchase purchase = (Purchase) purchasetable.getItems().get(index);
+                    });
 
-                        Purchasedb purchasedb = new Purchasedb();
-                        List<Purchase> purchaseList = purchasedb.getList();
+                    purchaseTableView.setEditable(true);
 
+                    pqtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-                        TableView<Purchase> purchaseTableView = new TableView<>();
+                    pqtyCol.setOnEditCommit(event1 -> {
 
-                        TableColumn<Purchase, String> pauthorCol = new TableColumn<>("ထုတ်လုပ်သူ");
-
-                        TableColumn<Purchase, String> pcategoryCol= new TableColumn<>("အုပ်စုအမျိုးအစား");
-
-                        TableColumn<Purchase, String> pcodeCol= new TableColumn<>("အဝယ်ကုဒ်");
-
-                        TableColumn<Purchase, Date> pdateCol= new TableColumn<>("ရက်စွဲ");
-
-                        TableColumn<Purchase, String> pnameCol= new TableColumn<>("အမျိုးအမည်");
-
-                        TableColumn<Purchase, Integer> ppriceCol= new TableColumn<>("ဈေးနှုန်း");
-
-                        TableColumn<Purchase, Integer> pqtyCol= new TableColumn<>("အရေအတွက်");
-
-                        TableColumn<Purchase, String> psupplierCol= new TableColumn<>("ထုတ်လုပ်သည့်");
-
-                        TableColumn<Purchase, Integer> ptotalCol= new TableColumn<>("စုစုပေါင်း");
-
-                        pcodeCol.setCellValueFactory(new PropertyValueFactory<Purchase, String>("puid"));
-                        pdateCol.setCellValueFactory(new PropertyValueFactory<Purchase, Date>("pudate"));
-                        pnameCol.setCellValueFactory(new PropertyValueFactory<>("bcode"));
-                        pcategoryCol.setCellValueFactory(new PropertyValueFactory<>("cid"));
-                        pauthorCol.setCellValueFactory(new PropertyValueFactory<>("aid"));
-                        psupplierCol.setCellValueFactory(new PropertyValueFactory<>("sid"));
-                        pqtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
-                        ppriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-                        ptotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+                        String value = String.valueOf(event1.getNewValue());
 
 
-                        purchaseTableView.getColumns().addAll(psupplierCol,pcodeCol,pdateCol,pnameCol,pcategoryCol,pauthorCol,pqtyCol,ppriceCol,ptotalCol);
+                        try {
 
-                        List<Purchase> filteredList = purchaseList.stream()
-                                .filter(p -> p.getPuid().equals(purchase.getPuid()))
-                                .collect(Collectors.toList());
-
-                        purchaseTableView.getItems().setAll(filteredList);
-
-                        TableUtils.setColumnWidthsProportional(purchaseTableView);
-                        TableUtils.resizeTableColumnsToFitContent(purchaseTableView);
+                            int intValue = Integer.parseInt(value);
 
 
+                            event1.getRowValue().setQty(intValue);
 
-                        double totalAmount = filteredList.stream()
-                                .mapToDouble(Purchase::getTotal) // Assuming getTotal() returns an int
-                                .sum();
+                            Bookdb bookdb = new Bookdb();
 
-                        Label totalLabel = new Label("စုစုပေါင်းကုန်ကျငွေ : ( " + convertToMyanmarCurrency(totalAmount)+" )");
-                        Label labelcount = new Label("အရေအတွက်: ( " + filteredList.size()+" )ခုရှိပါသည်။");
-
-                        totalLabel.setStyle("-fx-font-weight: bold; -fx-padding: 15;");
-                        labelcount.setStyle("-fx-font-weight: bold; -fx-padding: 15;");
-
-                        Popup popup = new Popup();
-                        HBox hBox = new HBox(labelcount,totalLabel);
-                        VBox vbox = new VBox(purchaseTableView,hBox);
-                        vbox.setPadding(new Insets(10));
-                        vbox.setStyle("-fx-background-color: white; -fx-border-color: gray;");
-                        popup.getContent().add(vbox);
-
-                        Point2D cellLocation = localToScreen(getLayoutBounds().getMinX(), getLayoutBounds().getMaxY());
-                        popup.setX(cellLocation.getX());
-                        popup.setY(cellLocation.getY());
-
-                        popup.setAutoHide(true);
-                        popup.show(getScene().getWindow());
-
-                        AtomicInteger qty = new AtomicInteger();
-                        AtomicReference<String> bookcode = new AtomicReference<>();
-                        AtomicReference<String> pcode = new AtomicReference<>();
+                            System.out.println("Bcode:" + bookcode.get() + "Qty:" + qty.get() + "new Qty:" + intValue + "Pcode+" + pcode.get());
 
 
-                        purchaseTableView.setOnMouseClicked(even -> {
+                            if (qty.get() < intValue) {
 
+                                int resultSub = bookdb.subQty(new Book(bookcode.get(), qty.get()));
 
-                            if (even.getClickCount() == 2) {
+                                int resultSum = bookdb.sumQty(new Book(bookcode.get(), intValue));
 
-                                Purchase selectedItem = purchaseTableView.getSelectionModel().getSelectedItem();
-                                if (selectedItem != null) {
-                                   qty.set(selectedItem.getQty());
-                                   bookcode.set(getBookCode(selectedItem.getBcode()));
-                                   pcode.set(selectedItem.getPuid());
+                                int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(), intValue, bookcode.get()));
+
+                                if (resultSum == 1 && resultSub == 1 && resultPurchaseQty == 1) {
+
+                                    AlertBox.showInformation("ပြုပြင်ခြင်း။", "ပြန်လည်ထက်တိုးခြင်း ‌အောင်မြင်ပါသည်။");
+
                                 }
+                                qty.set(0);
+
+                            } else {
+
+                                int finalqty = qty.get() - intValue;
+                                int resultSub = bookdb.subQty(new Book(bookcode.get(), finalqty));
+
+                                int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(), intValue, bookcode.get()));
+
+                                if (resultSub == 1 && resultPurchaseQty == 1) {
+
+                                    AlertBox.showInformation("ပြုပြင်ခြင်း။", "ပြန်လည်နုတ်ယူခြင်း ‌အောင်မြင်ပါသည်။");
+
+                                }
+                                qty.set(0);
+
+
                             }
 
-                        });
 
-                        purchaseTableView.setEditable(true);
-
-                        pqtyCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-
-                        pqtyCol.setOnEditCommit(event1 -> {
-
-                            String value = String.valueOf(event1.getNewValue());
+                        } catch (NumberFormatException e) {
 
 
+                        }
+                    });
+
+                    purchaseTableView.setOnMouseClicked(event1 -> {
+
+                        if (getPermission()) {
+
+                            Purchase p = purchaseTableView.getSelectionModel().getSelectedItem();
+
+                            _updatepurchase = new Purchase(p.getPuid(), p.getPudate(), getBookCode(p.getBcode()));
+
+
+                            Stage stage = new Stage();
+
+                            FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/netprice.fxml"));
+                            Scene scene = null;
                             try {
+                                scene = new Scene(fxmlLoader.load());
 
-                                int intValue = Integer.parseInt(value);
+                            } catch (IOException e) {
 
-
-                                event1.getRowValue().setQty(intValue);
-
-                                Bookdb bookdb = new Bookdb();
-
-                                System.out.println("Bcode:"+bookcode.get()+"Qty:"+qty.get()+"new Qty:"+intValue+"Pcode+"+pcode.get());
-
-
-                                if(qty.get()<intValue){
-
-                                    int resultSub = bookdb.subQty(new Book(bookcode.get(),qty.get()));
-
-                                    int resultSum = bookdb.sumQty(new Book(bookcode.get(),intValue));
-
-                                    int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(),intValue,bookcode.get()));
-
-                                    if(resultSum==1 && resultSub==1 && resultPurchaseQty==1){
-
-                                        AlertBox.showInformation("ပြုပြင်ခြင်း။","ပြန်လည်ထက်တိုးခြင်း ‌အောင်မြင်ပါသည်။");
-
-                                    }
-                                    qty.set(0);
-
-                                }
-                                else {
-
-                                    int finalqty = qty.get()-intValue;
-                                    int resultSub = bookdb.subQty(new Book(bookcode.get(),finalqty));
-
-                                    int resultPurchaseQty = purchasedb.updateQty(new Purchase(pcode.get(),intValue,bookcode.get()));
-
-                                    if( resultSub==1 && resultPurchaseQty==1){
-
-                                        AlertBox.showInformation("ပြုပြင်ခြင်း။","ပြန်လည်နုတ်ယူခြင်း ‌အောင်မြင်ပါသည်။");
-
-                                    }
-                                    qty.set(0);
-
-
-                                }
-
-
-
-
-
-
-
-
-                            } catch (NumberFormatException e) {
-
-
+                                throw new RuntimeException(e);
                             }
-                        });
-
-                        purchaseTableView.setOnMouseClicked(event1 -> {
-
-                            if(getPermission()){
-
-                                Purchase  p = purchaseTableView.getSelectionModel().getSelectedItem();
-
-                                _updatepurchase = new Purchase(p.getPuid(),p.getPudate(),getBookCode(p.getBcode()));
+                            stage.initStyle(StageStyle.UTILITY);
+                            stage.initModality(Modality.WINDOW_MODAL);
+                            Stage mainStage = (Stage) newpurchasebtn.getScene().getWindow();
+                            stage.setTitle("မူရင်း။");
+                            stage.initOwner(mainStage);
+                            stage.setScene(scene);
+                            stage.show();
 
 
-                                Stage stage = new Stage();
-
-                                FXMLLoader fxmlLoader = new FXMLLoader(Bookshop.class.getResource("/layout/netprice.fxml"));
-                                Scene scene = null;
-                                try {
-                                    scene = new Scene(fxmlLoader.load());
-
-                                } catch (IOException e) {
-
-                                    throw new RuntimeException(e);
-                                }
-                                stage.initStyle(StageStyle.UTILITY);
-                                stage.initModality(Modality.WINDOW_MODAL);
-                                Stage mainStage = (Stage) newpurchasebtn.getScene().getWindow();
-                                stage.setTitle("မူရင်း။");
-                                stage.initOwner(mainStage);
-                                stage.setScene(scene);
-                                stage.show();
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-                        });
-
-
-
-
-
+                        }
 
 
                     });
-                }
 
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                        setText(null);
-                    } else {
-                        setGraphic(editButton);
-                        setText(null);
-                    }
+
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(editButton);
+                    setText(null);
                 }
-            };
+            }
         };
 
         editCol.setCellFactory(cellFactory);

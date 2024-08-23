@@ -9,12 +9,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import org.checkerframework.checker.units.qual.A;
 import sspd.bookshop.Alerts.AlertBox;
 import sspd.bookshop.databases.Authordb;
-import sspd.bookshop.databases.Categorydb;
 import sspd.bookshop.models.Author;
-import sspd.bookshop.models.Category;
 
 import java.net.URL;
 import java.util.List;
@@ -108,6 +105,8 @@ public class AuthorController  implements Initializable {
                 AlertBox.showInformation("‌ထုတ်လုပ်သူ", "အသစ်ထည့်သွင်းခြင်းအောင်မြင်ပါသည်။");
                 getLoadData(authortable);
                 code.setText(getIDGenerate());
+
+                name.setText("");
 
 
             }

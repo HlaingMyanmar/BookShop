@@ -33,17 +33,17 @@ public class AlertBox {
 
     }
 
-    // Show an error message box
+
     public static void showError(String title, String content) {
         showAlert(Alert.AlertType.ERROR, title, content);
     }
 
-    // Show a warning message box
+
     public static void showWarning(String title, String content) {
         showAlert(Alert.AlertType.WARNING, title, content);
     }
 
-    // Show a confirmation dialog and return the user's choice
+
     public static boolean showConfirmation(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
