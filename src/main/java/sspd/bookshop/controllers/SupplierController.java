@@ -173,6 +173,10 @@ public class SupplierController  implements Initializable {
                 getLoadData(suppliertable);
                 code.setText(getIDGenerate());
 
+                name.setText("");
+                phone.setText("");
+                address.setText("");
+
 
             }
 

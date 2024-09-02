@@ -170,7 +170,7 @@ public class SaleController implements Initializable {
             }
             else {
 
-                getLoadDataIni();
+
             }
         });
 
@@ -434,6 +434,7 @@ public class SaleController implements Initializable {
 
 
     private void getReport(List<Sale>saleList)  {
+        
 
 
         String url = "E:\\Java Projects\\src\\main\\resources\\report\\saleinvoice.jrxml ";
